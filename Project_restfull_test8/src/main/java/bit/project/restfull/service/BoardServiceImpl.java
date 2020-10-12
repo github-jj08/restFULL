@@ -207,4 +207,18 @@ public class BoardServiceImpl implements BoardService{
 		mapper.insertBoardVO(boardVO);
 	}
 
+	//유저 > 자기가쓴 게시글 확인
+	@Override
+	public List<BoardVO> boardList(String member_id){
+		return mapper.boardList(member_id);
+	}
+
+	@Override
+	public List<BoardVO> qnaList(String member_id){
+		return mapper.qnaList(member_id);
+	}
+	@Override
+	public List<BoardVO> askList(String member_id){
+		return mapper.askList(member_id);
+	}
 }

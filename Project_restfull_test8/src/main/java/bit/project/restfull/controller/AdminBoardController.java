@@ -5,23 +5,35 @@ import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+
 import bit.project.restfull.service.AdminBoardService;
+import bit.project.restfull.service.BoardService;
+import bit.project.restfull.service.UserService;
 import bit.project.restfull.vo.AdminBoardVO;
+import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.DestinationVO;
 import bit.project.restfull.vo.GoodsVO;
+import bit.project.restfull.vo.PagingVO;
+import bit.project.restfull.vo.ResponseVO;
 import bit.project.restfull.vo.SidoguVO;
+import bit.project.restfull.vo.UserVO;
 import lombok.extern.log4j.Log4j;
 
 /**
@@ -34,14 +46,108 @@ public class AdminBoardController {
 
 
    @Autowired
+   private BoardService boardService;
+
+   @Autowired
+   private UserService userService;
+
+   @Autowired
    private AdminBoardService adboardService;
 
    
    
+   //////회원 관리///////
+   @PostMapping("/adminUpdate") // to modify user information by admin
+	public String adminUpdate(UserVO userVO, HttpSession session) {
+		log.info("to Modify user information");
+		
+		log.info(userVO.getMember_id());  
+		log.info(userVO.getEmail()); 
+		log.info(userVO.getPw());
+		log.info(userVO.getPhone()); 
+		log.info(userVO.getGrade_name());
+		
+		userService.adminModifyUser(userVO);
+		session.invalidate();
+		
+		return "admin/adminHome";
+	}
+   
+   @ResponseBody
+	@PostMapping("admin/userDeleteAdmin") // delete user account by admin
+	public String userDeleteAdmin(@RequestBody UserVO userVO, Authentication authentication, HttpServletRequest request) throws Exception{
+		Gson gson = new Gson();
+		
+		userService.userDelete(userVO);
+           
+           request.getSession().invalidate();  
+           return gson.toJson(new ResponseVO<>(200, "success"));
+   }
+	
+	@GetMapping("/userList") // to see user list with paging
+	public String userlist(PagingVO pagingVO, Model model
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		
+		int total = userService.countMember();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		pagingVO = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		model.addAttribute("paging", pagingVO);
+		model.addAttribute("restful_user", userService.userList(pagingVO));
+		return "admin/userList";
+	}
+	
+	@GetMapping("/content_view") // to see user detail information after list
+	public String content_view(UserVO userVO, BoardVO boardVO, Model model) {
+		
+		//유저 리스트 추출 함수
+		log.info("content_view");
+		String member_id = userVO.getMember_id();
+		log.info(member_id); // name
+		userVO = userService.getUserVO(member_id);
+		log.info(userVO);
+		
+		model.addAttribute("userDetail", userVO);
+		model.addAttribute("admin_board", boardService.boardList(member_id));
+		return "content_view";
+	}
+	
+	
+	@PostMapping("admin/boardDeleteAdmin") // 관리자 권한 게시글 삭제
+	public String boardDeleteAdmin(BoardVO boardVO, HttpSession session) throws Exception{
+		
+		//기존에 있던 delete와 똑같아서 파라미터 수정
+		boardService.deleteBoardVO(boardVO.getBoard_numbers());
+		
+		session.invalidate(); 
+		return "admin/adminHome";
+	}
+	
+	@GetMapping("/board_view")
+	public String content_view(BoardVO boardVO, Model model) {
+		log.info("board_view");
+		int board_numbers = boardVO.getBoard_numbers();
+		log.info(board_numbers); // name
+		boardVO = boardService.getBoardVO(board_numbers);
+		log.info(boardVO);
+		
+		model.addAttribute("boardDetail", boardVO);
+		return "board_view";
+	}
+   
+   
+   ////////웹사이트 관리////////////
    //공지사항 및 이벤트 관리 : 기본 url = /notice
    @RequestMapping(value = "/notice", method = RequestMethod.GET)
    public String noticeList() {
-      return "admin/noticeList";
+	   return "admin/noticeList";
    }
    
    @ResponseBody

@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -56,4 +57,16 @@ public interface BoardMapper{
 
 	List<BoardVO> getOthers(@Param("board_numbers") int board_numbers, @Param("location") String location);
 
+	// 유저 >본인 게시글 확인(by윤환)
+	@Select("select * from board where member_id = #{member_id} and boardlist_numbers = '1' order by board_numbers")
+	public List<BoardVO> boardList(String member_id);
+
+	// 유저 문의내역 확인
+	@Select("select * from board where member_id = #{member_id} and boardlist_numbers = '4' order by board_numbers")
+	public List<BoardVO> qnaList(String member_id);
+
+	// 유저 신고내역 확인
+	@Select("select * from board where member_id = #{member_id} and boardlist_numbers = '3' order by board_numbers")
+	public List<BoardVO> askList(String member_id);
+		
 }

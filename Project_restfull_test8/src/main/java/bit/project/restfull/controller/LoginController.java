@@ -75,13 +75,6 @@ public class LoginController {
 		
 	}
 	
-	@GetMapping("/userDeleteView") // 탈퇴 메인 페이지
-	public String userDeleteView() {
-		log.info("welcome userDeleteView!");
-		return "user/UserDeleteView";
-	}
-	
-	
 	@GetMapping("/login/accessDenied")
 	public String accessDenied() {
 		log.info("accessDenied...");
@@ -91,7 +84,6 @@ public class LoginController {
 	
 	@GetMapping("/user/userHome")
 	public void userHome() {
-		
 		log.info("user welcome");
 	}
 	
@@ -114,42 +106,6 @@ public class LoginController {
 		log.info("User List");
 		return "admin/userList";
 	}
-	
-	@ResponseBody
-	@PostMapping("user/userDelete") // 회원 탈퇴, DB에서 자료 삭제 / 탈퇴 실행 함수
-	public String userDelete(@RequestBody UserVO userVO, Authentication authentication, HttpServletRequest request) throws Exception{
-		Gson gson = new Gson();
-		CustomUser loginInfo = (CustomUser) authentication.getPrincipal();
-		boolean isValidPassword = passEncoder.matches(userVO.getPw(), loginInfo.getUser().getPw());
-		
-		log.info("isValidPassword:  "+isValidPassword);
-    	log.info("passEncoder:  "+passEncoder); 
-    	log.info(" userVo.getPw():  "+userVO.getPw());	
-    	log.info("loginInfo.getUser().getPw():  "+loginInfo.getUser().getPw()); 
-    	log.info(isValidPassword+"= passEncoder= . matches("+userVO.getPw()+","+ loginInfo.getUser().getPw()+")");
-    	
-    	if (isValidPassword) {
-            log.info(" : isValidPassword :  "+isValidPassword);
-            userVO.setMember_id(loginInfo.getUser().getMember_id());
-            userVO.setPw(loginInfo.getUser().getPw());
-            
-            log.info("loginInfo.getUser()  :  "+loginInfo.getUser()); 
-            log.info("loginInfo.getUser().getId()  :  "+loginInfo.getUser().getMember_id()); 
-            log.info("userVo  : "+userVO.getPw()); 
-            userservice.userDelete(userVO);
-            
-            request.getSession().invalidate();  
-            log.info("request.getSession().invalidate()");
-            return gson.toJson(new ResponseVO<>(200, "success"));
-        }
-
-        log.info("notValidPassword");
-        return gson.toJson(new ResponseVO<>(400, "fail"));
-		
-	}
-	
-	
-	
 	@ResponseBody
 	@GetMapping("/idCheck")
 	public String idCheck(@RequestParam("id") String id) {
@@ -172,21 +128,6 @@ public class LoginController {
 	    	}
 	
 	}
-	@PostMapping("/update")
-	public String userModify(UserVO userVO, HttpSession session) {
-		log.info("to Modify user information");
-		
-		log.info(userVO.getMember_id()); // test 
-		log.info(userVO.getEmail()); // 이거랑
-		log.info(userVO.getPw());
-		log.info(userVO.getPhone()); // 이거 에러
-		
-		userservice.modifyUser(userVO);
-		session.invalidate();
-		
-		return "redirect:/home";
-	}
-	
 	
 }
 

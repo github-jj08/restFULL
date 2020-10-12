@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import bit.project.restfull.vo.PagingVO;
 import bit.project.restfull.vo.UserVO;
 
 
@@ -31,9 +32,6 @@ public interface LoginMapper {
 	@Delete("delete from member where member_id = #{member_id}")
 	public void delMember(String member_id);
 	
-	@Select("select * from member order by member_id")
-	public List<UserVO> userList(UserVO userVO);
-	
 	/* 아이디 중복 체크 */
 	@Select("select count(*) from member where member_id = #{member_id}")
 	public int idChk(String member_id);
@@ -52,5 +50,8 @@ public interface LoginMapper {
 	
 	@Select("select count(*) from member")
 	public int countMember();
-	
+
+	@Select("SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM member ORDER BY member_id DESC) A )WHERE RN BETWEEN #{start} AND #{end}")
+	public List<UserVO> userList(PagingVO pagingVO);
+
 }

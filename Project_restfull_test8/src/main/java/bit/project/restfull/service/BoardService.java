@@ -45,4 +45,11 @@ public interface BoardService {
 	//½Å°í±Û
 	void writeBoardVO(BoardVO boardVO);
 
+	List<BoardVO> boardList(String member_id);
+
+	List<BoardVO> qnaList(String member_id);
+
+	List<BoardVO> askList(String member_id);
+
+
 }

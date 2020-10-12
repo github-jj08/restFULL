@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import bit.project.restfull.mapper.LoginMapper;
+import bit.project.restfull.vo.PagingVO;
 import bit.project.restfull.vo.UserVO;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -28,10 +29,6 @@ public class UserServiceImpl implements UserService {
 	@Inject
 	private LoginMapper loginMapper;
 
-	public List<UserVO> userList(UserVO userVO){
-		return loginMapper.userList(userVO);
-	}
-	
 	public void addUser(UserVO userVO){ 
 		
 		String pw = userVO.getPw(); 
@@ -75,6 +72,30 @@ public class UserServiceImpl implements UserService {
 	public int getUser(String member_id) {
 		return loginMapper.idChk(member_id);
 	}
+
+	@Override
+	public void adminModifyUser(UserVO userVO) {
+		String pw = userVO.getPw(); 
+		log.info(pw);
+		String encode = passEncoder.encode(pw);
 		
+		userVO.setPw(encode);
+		loginMapper.adminModifyUser(userVO);; 
+	}
+
+	@Override
+	public int countMember() {
+		return loginMapper.countMember();
+	}
+
+	@Override
+	public List<UserVO> userList(PagingVO pagingVO){
+		return loginMapper.userList(pagingVO);
+	}
+
+	@Override
+	public UserVO getUserVO(String member_id) {
+		return loginMapper.getUserVO(member_id);
+	}
 	
 }
