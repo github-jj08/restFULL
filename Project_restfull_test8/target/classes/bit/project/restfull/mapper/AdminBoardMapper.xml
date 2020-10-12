@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bit.project.restfull.mapper.AdminBoardMapper">
+	
+	<!-- 메인 게시판/게시글 기능 -->
+	<resultMap id="AttachmentVO" type="bit.project.restfull.vo.AttachmentVO" >
+		<id property="board_numbers" column="board_numbers"/>
+		<result property="filename" column="filename"/>
+		<result property="filedirectory" column="filedirectory"/>
+		<result property="filesize" column="filesize"/>
+	</resultMap>
+	
+	<resultMap id="BoardContents" type="bit.project.restfull.vo.AdminBoardVO">
+		<id property="board_numbers" column="board_numbers"/>	
+		<result property="title" column="title"/>
+		<result property="contents" column="contents"/>
+		<result property="hit" column="hit"/>
+		<result property="dates" column="dates"/>
+		<result property="member_id" column="member_id"/>
+		<result property="boardlist_numbers" column="boardlist_numbers"/>
+		<!-- name 컬럼명은 boardlist 테이블에 있는 name -->
+		<result property="boardlistName" column="name"/>
+		<collection property="attachmentVO" javaType="bit.project.restfull.vo.AttachmentVO" resultMap="AttachmentVO"></collection>
+	</resultMap>
+
+	<!-- 메인 게시글 게시판 그룹 번호가 1이라고 했을때, 검색어를 기준으로 메인 게시글 전체를 불러오는 쿼리 -->
+  	<select id="getList" resultMap="BoardContents">
+	<![CDATA[
+		select b.*, l.*, a.* from board b, BOARDLIST l, attachment a
+			where b.board_numbers = a.board_numbers
+				and b.boardlist_numbers = l.boardlist_numbers
+                and l.boardlist_numbers = #{boardlist_numbers}
+	]]>
+	</select>
+	
+	<!-- 메인 게시글 출력 -->
+ 	<select id="getBoardVO" resultType="bit.project.restfull.vo.AdminBoardVO">
+	<![CDATA[
+		select * from board where board_numbers = #{board_numbers} 
+	]]>
+	</select>
+	
+	<!-- 메인 게시글의 첨부파일 출력 -->
+	<select id="getBoardAttachmentVO" resultType="bit.project.restfull.vo.AttachmentVO">
+	<![CDATA[
+		select a.* from board b, attachment a
+			where b.board_numbers = a.board_numbers
+				and b.board_numbers = #{board_numbers} 
+	]]>
+	</select>
+
+	<!-- 게시글 작성 -->	
+	<insert id="insertBoardVO" parameterType="bit.project.restfull.vo.AdminBoardVO">
+	<![CDATA[
+		INSERT INTO BOARD (board_numbers, TITLE, CONTENTS, HIT, DATES, MEMBER_ID,BOARDLIST_NUMBERS) VALUES (BOARD_SEQ.NEXTVAL, #{title}, #{contents}, 0, sysdate, #{member_id},#{boardlist_numbers})
+	]]>
+	</insert>
+	
+	<!-- 게시글의 첨부파일 작성 -->
+	<insert id="insertAttachmentVO" parameterType="bit.project.restfull.vo.AttachmentVO">
+	<selectKey keyProperty="board_numbers" order="BEFORE" resultType="int">
+		SELECT BOARD_SEQ.CURRVAL AS board_numbers FROM DUAL
+	</selectKey>
+	<![CDATA[
+		insert into ATTACHMENT (FILENAME, board_numbers, FILEDIRECTORY,FILESIZE) values (#{fileName}, #{board_numbers}, #{fileDirectory},#{fileSize})
+	]]>
+	</insert>
+	
+	<!-- 게시글 수정 : 글내용 수정 -->
+	<update id="updateBoardVO">
+		update board set title = #{title}, contents = #{contents} where board_numbers = #{board_numbers}
+	</update>
+	
+	<!-- 게시글 삭제 - attachment테이블에서 board_numbers에 대한 종속 삭제 기능 설정해둬서 첨부파일이 자동으로 삭제됨 -->
+	<delete id="deleteBoardVO">
+	<![CDATA[
+		delete from board where board_numbers = #{board_numbers}
+	]]>
+	</delete>
+	
+	<!-- 게시글 조회수 올리기 -->
+	<update id="upHit">
+	<![CDATA[
+		update board set hit = hit + 1 where board_numbers = #{board_numbers}
+	]]>
+	</update>
+	
+	
+	<!-- 지역번호 목록 (가나다순) -->
+	<select id="sigunguList" resultType="bit.project.restfull.vo.SidoguVO">
+	<![CDATA[
+		select * from sidogu where sidocode = #{sidocode} order by sidocode asc
+	]]>
+	</select>
+	
+	<!-- 여행지 목록 -->
+	<resultMap id="SidoguVO" type="bit.project.restfull.vo.SidoguVO" >
+		<id property="sigungu_code" column="sigungu_code"/>
+		<result property="sigunguname" column="sigunguname"/>
+		<result property="sidocode" column="sidocode"/>
+		<result property="sidoname" column="sidoname"/>
+	</resultMap>
+	
+	<resultMap id="DestinationContents" type="bit.project.restfull.vo.DestinationVO">
+		<id property="destination_name" column="destination_name"/>	
+		<result property="jibunaddress" column="jibunaddress"/>
+		<result property="doroaddress" column="doroaddress"/>
+		<result property="details" column="details"/>
+		<result property="lat" column="lat"/>
+		<result property="lng" column="lng"/>
+		<result property="sigungu_code" column="sigungu_code"/>
+		<result property="filter_numbers" column="filter_numbers"/>
+		<result property="location" column="location"/>
+		<association property="sidoguVO" javaType="bit.project.restfull.vo.SidoguVO" resultMap="SidoguVO"></association>
+	</resultMap>
+	
+	<select id="getDestList" resultMap="DestinationContents">
+	<![CDATA[
+		select * from destination d, sidogu s
+		where d.sigungu_code = s.sigungu_code 
+		order by s.sidocode asc, s.sigunguname asc, d.destination_name asc
+	]]>
+	</select>
+	
+	<!-- 여행지 등록 -->
+	<insert id="insertDestVO" parameterType="bit.project.restfull.vo.DestinationVO">
+	<![CDATA[
+		INSERT INTO DESTINATION (destination_name, jibunaddress, doroaddress, details, lat, lng, sigungu_code) VALUES (#{destination_name}, #{jibunaddress}, #{doroaddress}, #{details}, #{lat}, #{lng}, #{sigungu_code})
+	]]>
+	</insert>
+
+	<!-- 여행지 보기 -->
+ 	<select id="getDestVO" resultMap="DestinationContents">
+	<![CDATA[
+		select * from destination d, sidogu s where d.sigungu_code = s.sigungu_code and d.destination_name = #{destination_name} 
+	]]>
+	</select>
+
+	<!-- 여행지 수정 -->
+	<update id="updateDestVO">
+		update DESTINATION set jibunaddress = #{jibunaddress}, doroaddress = #{doroaddress}, details = #{details}, lat = #{lat}, lng = #{lng}, sigungu_code = #{sigungu_code} where destination_name = #{destination_name}
+	</update> 
+	
+	<!-- 여행지 삭제 -->
+	<delete id="deleteDestVO">
+	<![CDATA[
+		delete from DESTINATION where destination_name = #{destination_name}
+	]]>
+	</delete>
+	
+	<!-- 상품 목록 -->
+	<select id="getGoodsList" resultType="bit.project.restfull.vo.GoodsVO">
+	<![CDATA[
+		select * from goods where destination_name = #{destination_name} 
+	]]>
+	</select>
+	
+	<!-- 상품 등록 -->
+	<insert id="insertGoodsVO" parameterType="bit.project.restfull.vo.GoodsVO">
+	<![CDATA[
+		insert INTO goods (GOODS_NUMBERS,DESTINATION_NAME,NAME,PRICE,AMOUNT,STATUS,SELLSTART,SELLEND,SELLER) 
+			VALUES (goods_seq.nextval,#{destination_name}, #{name}, #{price},#{amount},#{status},#{sellstart},#{sellend},#{seller})
+	]]>
+	</insert>
+
+	<!-- 상품 보기 -->
+ 	<select id="getGoodsVO" resultType="bit.project.restfull.vo.GoodsVO">
+	<![CDATA[
+		select * from goods where GOODS_NUMBERS = #{goods_numbers} 
+	]]>
+	</select>
+
+	<!-- 상품 수정 -->
+	<update id="updateGoodsVO">
+		update goods set 
+		DESTINATION_NAME=#{destination_name},NAME=#{name},PRICE=#{price},AMOUNT=#{amount},STATUS=#{status},SELLSTART=#{sellstart},SELLEND=#{sellend},SELLER=#{seller} 
+	</update> 
+	
+	<!-- 상품 삭제 -->
+	<delete id="deleteGoodsVO">
+	<![CDATA[
+		delete from goods where GOODS_NUMBERS = #{goods_numbers}
+	]]>
+	</delete>
+	
+	<!-- 시군구 코드 - 여행지 목록 -->
+	<select id="getDests" parameterType="int" resultType="bit.project.restfull.vo.DestinationVO">
+	<![CDATA[
+		select * from destination where sigungu_code = #{sigungu_code}
+	]]>
+	</select>
+	
+	<!-- 여행코스 관련 상품 목록 -->
+	<select id="getRGoods"  resultType="bit.project.restfull.vo.GoodsVO">
+	<![CDATA[
+		select * from goods where destination_name in
+	]]>
+		<foreach collection="array" item="item" open="(" close=")" separator=",">
+		 #{item}
+		</foreach>
+	</select>
+</mapper>
