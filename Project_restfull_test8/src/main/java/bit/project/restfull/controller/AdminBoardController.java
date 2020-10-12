@@ -84,7 +84,7 @@ public class AdminBoardController {
            return gson.toJson(new ResponseVO<>(200, "success"));
    }
 	
-	@GetMapping("admin/userList") // to see user list with paging
+	@GetMapping("/userList") // to see user list with paging
 	public String userlist(PagingVO pagingVO, Model model
 			, @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
@@ -130,18 +130,6 @@ public class AdminBoardController {
 		return "admin/adminHome";
 	}
 	
-	@GetMapping("/board_view")
-	public String content_view(BoardVO boardVO, Model model) {
-		log.info("board_view");
-		int board_numbers = boardVO.getBoard_numbers();
-		log.info(board_numbers); // name
-		boardVO = boardService.getBoardVO(board_numbers);
-		log.info(boardVO);
-		
-		model.addAttribute("boardDetail", boardVO);
-		return "board_view";
-	}
-   
    
    ////////웹사이트 관리////////////
    //공지사항 및 이벤트 관리 : 기본 url = /notice
@@ -339,5 +327,24 @@ public class AdminBoardController {
       log.info("삭제 성공");
       String encodedParam = URLEncoder.encode(destination_name, "UTF-8");
       return "redirect:/admin/board/dest/content_view?destination_name=" + encodedParam;
+   }
+   
+   //회원의 문의 및 신고에 대한 답변 작성 : admin/board/qnas
+   @GetMapping("/qnas")
+   public String qnas(@PathVariable(name="destination_name") String destination_name, int goods_numbers, Model model) throws UnsupportedEncodingException {
+      adboardService.deleteGoodsVO(goods_numbers);
+      log.info("qnas");
+      String encodedParam = URLEncoder.encode(destination_name, "UTF-8");
+      return "redirect:/admin/board/dest/content_view?destination_name=" + encodedParam;
+   }
+   
+   @ResponseBody
+   @GetMapping("/qnas/{boardlist_numbers}")
+   public List<AdminBoardVO> ajaxQnAsList(@PathVariable(value="boardlist_numbers") int boardlist_numbers, Model model) {
+      log.info("boardlist_numbers : " + boardlist_numbers);
+      //boardlist_numbers에 해당하는 게시글들을 불러옴
+      List<AdminBoardVO> noticelist = adboardService.getList(boardlist_numbers);
+      model.addAttribute("noticelist", noticelist);
+      return noticelist;
    }
 }

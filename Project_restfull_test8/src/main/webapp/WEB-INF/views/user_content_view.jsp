@@ -95,7 +95,6 @@
 <body>
 <h4><a href="admin/adminHome">관리자 메인으로 돌아가기</a></h4>
 	<table width="400" cellpadding="0" cellspacing="0" border="1">
-	
 			<tr>
 				<td> 이름 </td>
 				<td><input type="text" id="name" name="name" value="${userDetail.name}"></td>
@@ -165,7 +164,7 @@
 		<c:forEach items="${admin_board}" var="admin_board">
 		<tr>
 			<td>${admin_board.board_numbers}</td>
-			<td><a href="board_view?board_numbers=${admin_board.board_numbers}">${admin_board.title}</a></td>
+			<td><a href="${pageContext.request.contextPath}/content_view?board_numbers=${admin_board.board_numbers}">${admin_board.title}</a></td>
 			<td>${admin_board.member_id}</td>
 			<td>${admin_board.dates}</td>
 		</tr>
@@ -177,7 +176,7 @@
 <script>
 function adminUserDelete() {
 			$.ajax({
-				url : "/restFull/admin/userDeleteAdmin",
+				url : "/restfull/admin/userDeleteAdmin",
 				async: true,
 				type : "POST",
 				dataType : "text json",
@@ -189,7 +188,7 @@ function adminUserDelete() {
 					const isSuccess = data.statusCode === 200;
 					if(isSuccess){
 						alert("회원 탈퇴 성공");
-						location.href = "/restFull/admin/adminHome";
+						location.href = "/restfull/admin/adminHome";
 					}else{
 						alert("비밀번호를 다시 입력해 주세요");
 					}

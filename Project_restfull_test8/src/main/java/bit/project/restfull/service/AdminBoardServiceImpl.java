@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +41,8 @@ import bit.project.restfull.vo.GoodsVO;
 import bit.project.restfull.vo.LikesVO;
 import bit.project.restfull.vo.SidoguVO;
 import lombok.extern.log4j.Log4j;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
 
 /**
  * Handles requests for the application home page.
@@ -73,6 +76,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	public void writeBoardVO(MultipartFile[] uploadfiles, AdminBoardVO boardVO) {
         //1.글작성
 		mapper.insertBoardVO(boardVO);
+		int bNum = boardVO.getBoard_numbers();
 		log.info("insertBoardVO() completed");
 		
 		//2. 파일 업로드
@@ -81,28 +85,59 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 
 		Map<String,Object>fileMap = new HashMap<String,Object>();
         
-        for(MultipartFile multipartFile : uploadfiles) {
-        	
-            try {
-            	//프로젝트 폴더 내에 저장. 사진 파일명 중복 방지를 위한 이름 재생성
-            	UUID uuid = UUID.randomUUID();	//랜덤 문자열 생성
-        		String fileName = uuid + "_" + multipartFile.getOriginalFilename();
-
-                int fileSize = (int) multipartFile.getSize();	
-                String fileDirectory = attach_path + fileName;
-                
-                log.info("저장된 이름 :"+ fileName);
-                File saveFile = new File(root_path+attach_path,fileName); // 실제로 저장할 폴더 이름 + 저장할 파일 이름으로 저장할 파일 객체를 생성함
-                
-                //저장 경로를 DB에 등록
-                fileMap.put("fileDirectory", fileDirectory);
-                fileMap.put("fileName", fileName);
-                fileMap.put("fileSize", fileSize);
-                System.out.println("fileMap :"+fileMap);
-                
-                multipartFile.transferTo(saveFile);
-                
-                mapper.insertAttachmentVO(fileMap);
+		for(int i = 0; i<uploadfiles.length; i++) {
+	        	 try {
+             	//프로젝트 폴더 내에 저장. 사진 파일명 중복 방지를 위한 이름 재생성
+             	UUID uuid = UUID.randomUUID();	//랜덤 문자열 생성
+         		String fileName = uuid + "_" + uploadfiles[i].getOriginalFilename();
+         		
+                 //첫번째 요소에 대해서만 썸네일을 생성함
+         		if(i == 0) {
+         		
+ 	        		File target = new File(root_path+attach_path, fileName);
+ 	       		  	FileCopyUtils.copy(uploadfiles[i].getBytes(), target);
+ 	       		  	
+ 	       		  	String thumbFileName = "THUMB_" + fileName;
+ 	       		    File image = new File(root_path+attach_path,fileName);
+ 	
+ 	       		    String thumbDir = File.separator + "thumbnails" + File.separator + thumbFileName;
+ 	       		    File thumbnail = new File(root_path + attach_path + thumbDir);
+ 	
+ 	       		    log.info("thumbDir = " + thumbDir);
+ 	       		    
+ 	       		    if (image.exists()) {
+ 		       		    thumbnail.getParentFile().mkdirs();
+ 		       		    
+ 		       		    Thumbnails.of(image).crop(Positions.CENTER).size(200, 200).keepAspectRatio(true).toFile(thumbnail);
+ 	       		    }
+ 	       		    
+ 	       		    int fileSize = (int) uploadfiles[i].getSize();	
+ 	                String fileDirectory = attach_path + fileName;
+ 	                
+ 	       		    fileMap.put("fileDirectory", fileDirectory);
+ 	                fileMap.put("fileName", fileName);
+ 	                fileMap.put("fileSize", fileSize);
+ 	                System.out.println("fileMap :"+fileMap);
+ 	                uploadfiles[i].transferTo(image);
+ 	                
+ 	                mapper.insertAttachmentVO(fileMap);
+ 	       		    mapper.updateBoardThumbImg(bNum, attach_path + thumbDir);
+ 	                
+         		} else {
+         			//첫번째 요소가 아니라면 그냥 저장
+ 	        		int fileSize = (int) uploadfiles[i].getSize();	
+ 	                String fileDirectory = attach_path + fileName;
+ 	                log.info("저장된 이름 :"+ fileName);
+ 	                
+ 	                File saveFile = new File(root_path+attach_path,fileName); // 실제로 저장할 폴더 이름 + 저장할 파일 이름으로 저장할 파일 객체를 생성함
+ 	                //저장 경로를 DB에 등록
+ 	                fileMap.put("fileDirectory", fileDirectory);
+ 	                fileMap.put("fileName", fileName);
+ 	                fileMap.put("fileSize", fileSize);
+ 	                System.out.println("fileMap :"+fileMap);
+ 	                uploadfiles[i].transferTo(saveFile);
+ 	                mapper.insertAttachmentVO(fileMap);
+ 	            }
             }
             catch(Exception e){
                 log.error("Error while uploading", e);

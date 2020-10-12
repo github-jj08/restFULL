@@ -22,13 +22,15 @@
 		<result property="boardlist_numbers" column="boardlist_numbers"/>
 		<!-- name 컬럼명은 boardlist 테이블에 있는 name -->
 		<result property="boardlistName" column="name"/>
+		<result property="filterName" column="name"/>
+		<result property="thumbnail" column="thumbnail"/>
 		<collection property="attachmentVO" javaType="bit.project.restfull.vo.AttachmentVO" resultMap="AttachmentVO"></collection>
 	</resultMap>
 
 	<!-- 메인 게시글 게시판 그룹 번호가 1이라고 했을때, 검색어를 기준으로 메인 게시글 전체를 불러오는 쿼리 -->
   	<select id="getList" resultMap="BoardContents">
 	<![CDATA[
-		select b.*, l.*, a.* from board b, BOARDLIST l, attachment a
+		select b.*, l.*, f.*, a.* from board b, boardlist l, filter f, attachment a
 			where b.board_numbers = a.board_numbers
 				and b.boardlist_numbers = l.boardlist_numbers
                 and l.boardlist_numbers = #{boardlist_numbers}
@@ -57,6 +59,13 @@
 		INSERT INTO BOARD (board_numbers, TITLE, CONTENTS, HIT, DATES, MEMBER_ID,BOARDLIST_NUMBERS) VALUES (BOARD_SEQ.NEXTVAL, #{title}, #{contents}, 0, sysdate, #{member_id},#{boardlist_numbers})
 	]]>
 	</insert>
+	
+	<!-- 게시글 썸네일 삽입 -->	
+	<update id="updateBoardThumbImg">
+	<![CDATA[
+		update board set thumbnail=#{thumbnail} where board_numbers = #{board_numbers}
+	]]>
+	</update>
 	
 	<!-- 게시글의 첨부파일 작성 -->
 	<insert id="insertAttachmentVO" parameterType="bit.project.restfull.vo.AttachmentVO">

@@ -33,7 +33,7 @@
 	<input type="hidden" name="member_id" value="${modify_view.member_id}"/>
 	<input type="hidden" name="boardlist_numbers" value="<c:out value='1'/>">
 	<input type="hidden" name="filter_numbers" value="<c:out value='1'/>">
-	<input type="hidden" name="board_count" value="${modify_view.board_count}"/>
+	<input type="hidden" name="board_numbers" value="${modify_view.board_numbers}"/>
 	<!-- write Data -->
 	사진 데이터는 수정이 불가능합니다.
 		 <div id="photo-view">

@@ -194,8 +194,7 @@ public class BoardController {
 	}
 	
 	//${pageContext.request.contextPath}/report
-	//신고기능(수정해야됨)
-	
+	//신고기능
 	@ResponseBody
 	@RequestMapping(value="/report", method= RequestMethod.POST)
 	public void report(BoardVO boardVO) {

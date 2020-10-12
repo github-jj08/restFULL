@@ -13,9 +13,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <style>
-  #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-  #sortable li { margin:10px 10px 10px 10px ; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px;  background-color:#8A93C0;}
-  #sortable li span { position: absolute; margin-left: -1.3em; }
+  .sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  .sortable li { margin:10px 10px 10px 10px ; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px;  background-color:#8A93C0;}
+  .sortable li span { position: absolute; margin-left: -1.3em; }
   input { border: none 0; margin : 0 auto; border:1px; background-color:#8A93C2;}
   
   .choice-menu {
@@ -24,13 +24,21 @@
         display: inline-block;
         overflow: auto; 
   }
+  
+ 	.course-1day{
+ 		width:200px;
+ 		height:300px;
+ 		background-color:green;
+ 		border:1px solid black;
+ 		display:inline-block;
+ 	}
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
   $( function() {
-    $( "#sortable" ).sortable();
-    $( "#sortable" ).disableSelection();
+    $( ".sortable" ).sortable();
+    $( ".sortable" ).disableSelection();
   });
   </script>
 </head>
@@ -67,7 +75,7 @@
 	
 	<div id="myCourse">
 		<div class="course-1day">
-			<ol id="sortable">
+			<ol class="sortable">
 			</ol>
 		</div>
 	</div>
@@ -127,14 +135,14 @@
 	$(function(){
 		$("#blank-btn").click(function(){
 			console.log("blank");
-			$("#sortable").append('<li class="ui-state-default"><div><input type="text" name="course" maxlength="300"/><span><input type="button" class="delete-btn" value="x"></span></div></li>');
+			$(".sortable").append('<li class="ui-state-default"><div><input type="text" name="course" maxlength="300"/><span><input type="button" class="delete-btn" value="x"></span></div></li>');
   		});
 		
 		$("#dayplus-btn").click(function(){
 			console.log("dayplus-btn");
 			var idx = $(this).index();
 			$('.course-1day').eq(idx).remove();
-			$("#myCourse").append('<div class="course-1day"><ol id="sortable"></ol></div>');
+			$("#myCourse").append('<div class="course-1day"><ol class="sortable"></ol></div>');
 		});
 	});
 	
@@ -192,7 +200,7 @@
 		var trav = $(this).text();
 		console.log(trav);
 		
-		$("#sortable").append('<li class="ui-state-default"><div><input type="text" name="course" value="'+trav+'" readonly/><span><input type="button" class="delete-btn" value="x"></span></div></li>');
+		$(".sortable").append('<li class="ui-state-default"><div><input type="text" name="course" value="'+trav+'" readonly/><span><input type="button" class="delete-btn" value="x"></span></div></li>');
 
 	});
 		

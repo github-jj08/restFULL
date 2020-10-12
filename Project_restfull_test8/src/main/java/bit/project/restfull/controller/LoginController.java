@@ -101,11 +101,6 @@ public class LoginController {
 	}
 	
 	
-	@GetMapping("/admin/userList")
-	public String userlist() {
-		log.info("User List");
-		return "admin/userList";
-	}
 	@ResponseBody
 	@GetMapping("/idCheck")
 	public String idCheck(@RequestParam("id") String id) {

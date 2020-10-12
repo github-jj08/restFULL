@@ -72,5 +72,8 @@ public interface AdminBoardMapper{
 	List<DestinationVO> getDests(int sigungu_code);
 	//관련 상품출력
 	List<GoodsVO> getRGoods(String[] destinations);
-	
+
+	//썸네일 이미지 업데이트
+	void updateBoardThumbImg(@Param("board_numbers") int board_numbers, @Param("thumbnail")String thumbnail);
+
 }

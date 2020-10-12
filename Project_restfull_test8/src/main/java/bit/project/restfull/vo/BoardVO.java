@@ -27,6 +27,4 @@ public class BoardVO {
 	//private AttachmentVO attachmentVO;	//Ã·ºÎÆÄÀÏ Á¤º¸ °´Ã¼
 	private String thumbnail;
 	
-	
-	
 }
