@@ -37,7 +37,6 @@ public class UserServiceImpl implements UserService {
 		  
 		userVO.setPw(encode);
 		loginMapper.insertUser(userVO); 
-		loginMapper.insertAuthority(userVO);
 	} 
 	
 	public void modifyUser(UserVO userVO) {

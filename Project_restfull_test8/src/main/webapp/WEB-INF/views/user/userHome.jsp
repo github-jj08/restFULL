@@ -13,7 +13,7 @@
 
 <h1>사용자 페이지 입니다.</h1>
 
-<h3>[<a href="<c:url value="/home" />">홈으로 돌아가기.</a>]</h3>
+<h3>[<a href="<c:url value="/" />">홈으로 돌아가기.</a>]</h3>
 
 <p>[<a href="<c:url value="/userDeleteView" />">회원탈퇴</a>]</p>
 <p>[<a href="<c:url value="/userModify" />">개인정보 수정</a>]</p>

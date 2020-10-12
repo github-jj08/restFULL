@@ -62,7 +62,7 @@ pageEncoding="UTF-8"%>
 	</head>
 	<body>
 	
-	<h4>[<a href="<c:url value="/home" />">홈으로 돌아가기</a>]</h4>
+	<h4>[<a href="<c:url value="/" />">홈으로 돌아가기</a>]</h4>
 	<section id="container">
 				<div class="form-group has-feedback">
 				<sec:authentication var="principal" property="principal"/>

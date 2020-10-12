@@ -131,7 +131,7 @@ public class UserController {
 	}
 	
 	@GetMapping("user/content_view2") // 게시글 리스트 - > 자세히 보기
-	public String content_view2(UserVO userVO, BoardVO boardVO, Model model) {
+	public String content_view_detail(UserVO userVO, BoardVO boardVO, Model model) {
 		log.info("board_view");
 		int board_numbers = boardVO.getBoard_numbers();
 		log.info(board_numbers); // name
@@ -139,7 +139,7 @@ public class UserController {
 		log.info(boardVO);
 		
 		model.addAttribute("userBoardDetail", boardVO);
-		return "content_view2";
+		return "content_view_detail";
 	}
 
 	@GetMapping("user/qnaList") // 마이페이지 - 문의하기 리스트

@@ -84,7 +84,7 @@ public class AdminBoardController {
            return gson.toJson(new ResponseVO<>(200, "success"));
    }
 	
-	@GetMapping("/userList") // to see user list with paging
+	@GetMapping("admin/userList") // to see user list with paging
 	public String userlist(PagingVO pagingVO, Model model
 			, @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
@@ -104,8 +104,8 @@ public class AdminBoardController {
 		return "admin/userList";
 	}
 	
-	@GetMapping("/content_view") // to see user detail information after list
-	public String content_view(UserVO userVO, BoardVO boardVO, Model model) {
+	@GetMapping("/user_content_view") // to see user detail information after list
+	public String user_content_view(UserVO userVO, BoardVO boardVO, Model model) {
 		
 		//유저 리스트 추출 함수
 		log.info("content_view");
@@ -116,7 +116,7 @@ public class AdminBoardController {
 		
 		model.addAttribute("userDetail", userVO);
 		model.addAttribute("admin_board", boardService.boardList(member_id));
-		return "content_view";
+		return "user_content_view";
 	}
 	
 	

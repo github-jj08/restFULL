@@ -95,7 +95,7 @@ public class BoardController {
 		model.addAttribute("filelist", boardService.getBoardAttachmentVO(board_no));
 		model.addAttribute("others", boardService.getOtherBoardVO(board_no, location));
 		
-		return "content_view2";
+		return "content_view";
 	}
 	
 

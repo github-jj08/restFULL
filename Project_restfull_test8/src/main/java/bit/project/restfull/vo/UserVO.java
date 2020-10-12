@@ -20,9 +20,10 @@ public class UserVO {
 	private String email;
 	private int enabled;
 	private String grade_name;
+	private String authority_name;
 	
 	public UserVO() {
-		this("member_id", "pw", "name", "birth", "gender", "phone", "email", 1, "¶Ñ¹÷ÀÌ");
+		this("member_id", "pw", "name", "birth", "gender", "phone", "email", 1, "¶Ñ¹÷ÀÌ", "ROLE_USER");
 	}	
 	
 	public String getAuthorities() {

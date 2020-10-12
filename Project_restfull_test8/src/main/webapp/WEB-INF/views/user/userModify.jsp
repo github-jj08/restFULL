@@ -87,7 +87,7 @@
 
 <h1>사용자 페이지 입니다.</h1>
 
-<h3>[<a href="<c:url value="/home" />">홈으로 돌아가기.</a>]</h3>
+<h3>[<a href="<c:url value="/" />">홈으로 돌아가기.</a>]</h3>
 
 <sec:authentication var="principal" property="principal"/>
 <p>Principal : <sec:authentication property="principal.user"/></p>
@@ -141,7 +141,7 @@
 
   <tr>
    <td colspan="2">
-    <a href="/board/home" id="home"><button type="button" class="button3">돌아가기</button></a>
+    <a href="/" id="home"><button type="button" class="button3">돌아가기</button></a>
     <button type="submit" class="button3" >수정완료</button>
     <button class="cencle btn btn-danger" type="button" id="cancel">취소</button>
    </td>

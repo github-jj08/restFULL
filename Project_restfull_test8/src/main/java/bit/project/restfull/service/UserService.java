@@ -20,6 +20,7 @@ public interface UserService {
 	public void adminModifyUser(UserVO userVO);
 	
 	public int countMember();
+	
 	public List<UserVO> userList(PagingVO pagingVO);
 
 	public UserVO getUserVO(String member_id);
