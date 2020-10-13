@@ -22,9 +22,9 @@
 <body>
 
 <form action="admin/boardDeleteAdmin" id="modifyForm" method="post">
+			<input type="hidden" name="board_numbers" value="${boardDetail.board_numbers}">
 	<table width="400" cellpadding="0" cellspacing="0" border="1" readOnly>
 	
-			<input type="hidden" name="name" value="${boardDetail.board_numbers}">
 			
 			<tr>
 				<td> 글 번호 </td>

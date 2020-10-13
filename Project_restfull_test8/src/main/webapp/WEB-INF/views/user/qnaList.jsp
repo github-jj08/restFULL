@@ -15,15 +15,16 @@
 			<td>게시글 제목</td>
 			<td>게시 날짜</td>
 		</tr>
-		<c:forEach items="${userBoard}" var="userBoard">
+		<c:forEach items="${userQna}" var="userBoard">
 		<tr>
 			<td>${userBoard.board_numbers}</td>
-			<td><a href="content_view_ask?board_numbers=${userBoard.board_numbers}">${userBoard.title}</a></td>
+			<td><a href="content_view_qna?board_numbers=${userBoard.board_numbers}">${userBoard.title}</a></td>
 			<td>${userBoard.dates}</td>
 		</tr>
 		</c:forEach>
 	</table>
 	
+	<h3>[<a href="ask">문의글 작성하기</a>]</h3>
 	<h3>[<a href="userHome">돌아가기</a>]</h3>
 	
 </body>

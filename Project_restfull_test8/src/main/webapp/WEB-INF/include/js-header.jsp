@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +27,7 @@
             <div class="container">          
                 
              	<div class="ht-right">
-	             	<c:if test="${member_id eq null}">
+	             	 <c:if test="${member_id eq null}">
 		           		<sec:authorize access="isAnonymous()">
 		                    <button type="button" class="login-panel">
 		                   		 <a href="${pageContext.request.contextPath}/login">로그인</a>  
@@ -35,10 +36,10 @@
 		             </c:if>
 	             
 		             <c:if test = "${member_id ne null}">
-						<input type="hidden" name="member_id" value="${user.member_id}"/>
-							<div class="showloign"></div>
-								<strong>${principal.user.sns_nickname}</strong>님 환영합니다.
-			              		 <a href="<c:url value="/user/userHome" />">🏠‍💁‍♀️‍🙋‍♀️💁‍♂️💒
+						<input type="hidden" name="member_id" value="<sec:authentication property="principal.user.member_id"/>"/>
+							<div class="showloign">
+								<strong><sec:authentication property="principal.user.member_id"></sec:authentication></strong>님 환영합니다.
+			              		<a href="<c:url value="/user/userHome" />">🏠‍💁‍♀️‍🙋‍♀️💁‍♂️💒</a>
 			              		<form action = "${pageContext.request.contextPath}/kakaologout" method="post">
 									<button type="submit" name="submit" id="kakaosubmit">로그아웃</button>
 								</form>
