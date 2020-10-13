@@ -68,5 +68,5 @@ public interface BoardMapper{
 	// 유저 신고내역 확인
 	@Select("select * from board where member_id = #{member_id} and boardlist_numbers = '3' order by board_numbers")
 	public List<BoardVO> askList(String member_id);
-		
+		 
 }
