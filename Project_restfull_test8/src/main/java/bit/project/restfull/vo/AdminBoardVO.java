@@ -22,7 +22,6 @@ public class AdminBoardVO {
 	private String member_id;
 	private int boardlist_numbers;
 	private String boardlistName;
-	private String filterName;
 	private AttachmentVO attachmentVO;	
 	private String thumbnail;
 	

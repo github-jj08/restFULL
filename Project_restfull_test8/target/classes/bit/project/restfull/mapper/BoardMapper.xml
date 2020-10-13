@@ -33,6 +33,7 @@
 		<result property="member_id" column="member_id"/>
 		<result property="boardlist_numbers" column="boardlist_numbers"/>
 		<result property="filter_numbers" column="filter_numbers"/>
+		<result property="filterName" column="name"/>
 		<result property="location" column="location"/>
 		<result property="thumbnail" column="thumbnail"/>
 		<association property="destinationVO" javaType="bit.project.restfull.vo.DestinationVO" resultMap="DestinationVO"></association>
@@ -48,11 +49,6 @@
 				and b.location like '%'||#{searchWord}||'%'
 	]]>
 	</select>
-<!-- 			select b.*, d.*, a.* from board b, destination d, attachment a
-			where b.board_numbers = a.board_numbers
-				and b.location = d.destination_name
-				and boardlist_numbers = #{boardlist_numbers}
-				and b.location like '%'||#{searchWord}||'%' -->
 	<!-- 메인 게시글 출력 -->
  	<select id="getBoardVO" resultType="bit.project.restfull.vo.BoardVO">
 	<![CDATA[

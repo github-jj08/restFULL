@@ -22,7 +22,6 @@
 		<result property="boardlist_numbers" column="boardlist_numbers"/>
 		<!-- name 컬럼명은 boardlist 테이블에 있는 name -->
 		<result property="boardlistName" column="name"/>
-		<result property="filterName" column="name"/>
 		<result property="thumbnail" column="thumbnail"/>
 		<collection property="attachmentVO" javaType="bit.project.restfull.vo.AttachmentVO" resultMap="AttachmentVO"></collection>
 	</resultMap>
@@ -30,9 +29,39 @@
 	<!-- 메인 게시글 게시판 그룹 번호가 1이라고 했을때, 검색어를 기준으로 메인 게시글 전체를 불러오는 쿼리 -->
   	<select id="getList" resultMap="BoardContents">
 	<![CDATA[
-		select b.*, l.*, f.*, a.* from board b, boardlist l, filter f, attachment a
+		select b.*, l.*, a.* from board b, boardlist l, attachment a
 			where b.board_numbers = a.board_numbers
 				and b.boardlist_numbers = l.boardlist_numbers
+                and l.boardlist_numbers = #{boardlist_numbers}
+	]]>
+	</select>
+	
+	<resultMap id="BoardVO" type="bit.project.restfull.vo.BoardVO">
+		<id property="board_numbers" column="board_numbers"/>	
+		<result property="title" column="title"/>
+		<result property="contents" column="contents"/>
+		<result property="hit" column="hit"/>
+		<result property="dates" column="dates"/>
+		<result property="member_id" column="member_id"/>
+		<result property="boardlist_numbers" column="boardlist_numbers"/>
+		<result property="boardName" column="boardName"/>
+		<result property="filter_numbers" column="filter_numbers"/>
+		<!-- name 컬럼명은 boardlist 테이블에 있는 name -->
+		<result property="filterName" column="filterName"/>
+		<result property="thumbnail" column="thumbnail"/>
+	</resultMap>
+	
+	<!-- 필터가 있을 경우 다음의 getList를 호출 -->
+  	<select id="getFilterList" resultMap="BoardVO">
+	<![CDATA[
+		select b.*,
+		l.boardlist_numbers as boardlist_numbers,
+		l.name as boardName,
+		f.filter_numbers as filter_numbers,
+		f.name as filterName
+		from board b, boardlist l, filter f
+			where b.boardlist_numbers = l.boardlist_numbers
+                and b.filter_numbers = f.filter_numbers
                 and l.boardlist_numbers = #{boardlist_numbers}
 	]]>
 	</select>

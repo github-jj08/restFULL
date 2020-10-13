@@ -31,7 +31,7 @@ import lombok.extern.log4j.Log4j;
  */
 public interface AdminBoardMapper{
 	//게시글 목록 출력
-	List<AdminBoardVO> getList(@Param("boardlist_numbers")int boardlist_numbers);
+	List<AdminBoardVO> getList(int boardlist_numbers);
 	
 	//메인 게시글 출력(content_view)
 	AdminBoardVO getBoardVO(int board_numbers);
@@ -76,4 +76,7 @@ public interface AdminBoardMapper{
 	//썸네일 이미지 업데이트
 	void updateBoardThumbImg(@Param("board_numbers") int board_numbers, @Param("thumbnail")String thumbnail);
 
+	//필터있는 게시판 리스트 뽑기
+	List<AdminBoardVO> getFilterList(int boardlist_numbers);
+	
 }

@@ -21,7 +21,9 @@ public class BoardVO {
 	private Timestamp dates;
 	private String member_id;
 	private int boardlist_numbers;
+	private String boardName;
 	private int filter_numbers;
+	private String filterName;
 	private String location;
 	private DestinationVO destinationVO;		//여행지 주소 정보 객체 locationVO의 location_name = location
 	//private AttachmentVO attachmentVO;	//첨부파일 정보 객체

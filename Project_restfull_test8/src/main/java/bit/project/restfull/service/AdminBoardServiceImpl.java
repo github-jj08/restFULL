@@ -224,4 +224,9 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	public List<GoodsVO> getRGoods(String[] destinations) {
 		return mapper.getRGoods(destinations);
 	}
+
+	@Override
+	public List<AdminBoardVO> getFilterList(int boardlist_numbers) {
+		return mapper.getFilterList(boardlist_numbers);
+	}
 }

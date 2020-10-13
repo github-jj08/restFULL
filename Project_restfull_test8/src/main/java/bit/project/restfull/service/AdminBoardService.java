@@ -45,4 +45,7 @@ public interface AdminBoardService {
 	List<DestinationVO> getDestList(int sigungu_code);
 	//관련 상품목록 Read
 	List<GoodsVO> getRGoods(String[] destinations);
+
+	//필터게시판뽑기
+	List<AdminBoardVO> getFilterList(int boardlist_numbers);
 }
