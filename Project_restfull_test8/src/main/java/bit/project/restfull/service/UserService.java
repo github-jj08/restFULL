@@ -2,6 +2,8 @@ package bit.project.restfull.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import bit.project.restfull.vo.PagingVO;
 import bit.project.restfull.vo.UserVO;
 
@@ -24,5 +26,13 @@ public interface UserService {
 	public List<UserVO> userList(PagingVO pagingVO);
 
 	public UserVO getUserVO(String member_id);
+	
+public String findID(HttpServletResponse response, String email) throws Exception;
+	
+	public void sendMail(UserVO userVO, String dic);
+	
+	public int idChk(String member_id);
+
+	public void findPW(HttpServletResponse response, UserVO userVO) throws Exception;
 	
 }

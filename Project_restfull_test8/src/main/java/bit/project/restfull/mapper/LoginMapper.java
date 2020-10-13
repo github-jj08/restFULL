@@ -50,5 +50,13 @@ public interface LoginMapper {
 
 	@Select("SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM member ORDER BY member_id DESC) A )WHERE RN BETWEEN #{start} AND #{end}")
 	public List<UserVO> userList(PagingVO pagingVO);
+	
+	// 아이디 찾기
+		@Select("select member_id from member where email = #{email}")
+		public String findID(String email);
+			
+		// 비밀번호 찾기
+		@Update("update member set pw = #{pw} where member_id = #{member_id}")
+		public void findPW(UserVO userVO);
 
 }

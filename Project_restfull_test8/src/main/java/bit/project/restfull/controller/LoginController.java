@@ -2,6 +2,7 @@ package bit.project.restfull.controller;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
@@ -9,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -122,6 +124,30 @@ public class LoginController {
 	    		return gson.toJson(new ResponseVO<>(400, "fail"));
 	    	}
 	
+	}
+	
+	@GetMapping("/findID")
+	public String findID() {
+		System.out.println("access to find id page");
+		return "login/findID";
+	}
+	
+	@GetMapping("/findPW")
+	public String findPW() {
+		System.out.println("access to find pw page");
+		return "login/findPW";
+	}
+	
+	@PostMapping("doFind_ID")
+	public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
+		md.addAttribute("id", userservice.findID(response, email));
+		return "login/findIdResult";
+	}
+	
+	@PostMapping("doFind_PW")
+	public void find_PW(@ModelAttribute UserVO userVO, HttpServletResponse response) throws Exception{
+		System.out.println(userVO.getMember_id());
+		userservice.findPW(response, userVO);
 	}
 	
 }
