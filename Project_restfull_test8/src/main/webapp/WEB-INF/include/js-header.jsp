@@ -2,9 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> <!-- 시큐리티 전용 태그 -->
-<%@taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +15,6 @@
 </head>
 
 <body>
-
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -27,35 +23,33 @@
     <!-- Header Section Begin -->
     <header class="header-section">
         <div class="header-top">
-            <div class="container">
-                <div class="ht-right">
+            <div class="container">          
                 
-				<sec:authorize access="isAnonymous()">
-	                <button type="button" class="login-panel">
-	                 <a href="${pageContext.request.contextPath}/login">로그인</a>  
-                 </button>
-                </sec:authorize>
-                
-                
-				<sec:authorize access="isAuthenticated()">
-				<sec:authentication var="principal" property="principal"/>
-					<c:if test="${ principal.user.member_id != null }">
-						<input type="hidden" name="member_id" value="${principal.user.member_id}"/>
-					</c:if>
-					환영합니다. <strong>${principal.user.name}</strong> 님 
-					<br/>
-					[<a href="<c:url value="/user/userHome" />">마이페이지</a>]
-					<br/>
-					<c:if test="${principal.user.name == 'ADMIN'}">
-					[<a href="<c:url value="/admin/adminHome" />">관리자 홈</a>]
-					</c:if>
-					
-					<form:form action="${pageContext.request.contextPath}/logout" method="POST">
-					    <input type="submit" value="로그아웃" />
-					</form:form>
-					
-				</sec:authorize>
-                </div>
+             	<div class="ht-right">
+	             	<c:if test="${member_id eq null}">
+		           		<sec:authorize access="isAnonymous()">
+		                    <button type="button" class="login-panel">
+		                   		 <a href="${pageContext.request.contextPath}/login">로그인</a>  
+		                 	</button>
+		                </sec:authorize>
+		             </c:if>
+	             
+		             <c:if test = "${member_id ne null}">
+						<input type="hidden" name="member_id" value="${user.member_id}"/>
+							<div class="showloign"></div>
+								<strong>${principal.user.sns_nickname}</strong>님 환영합니다.
+			              		 <a href="<c:url value="/user/userHome" />">🏠‍💁‍♀️‍🙋‍♀️💁‍♂️💒
+			              		<form action = "${pageContext.request.contextPath}/kakaologout" method="post">
+									<button type="submit" name="submit" id="kakaosubmit">로그아웃</button>
+								</form>
+							</div>
+			          </c:if>
+		          
+			          <c:if test="${principal.user.name == 'ADMIN'}">
+			              [<a href="<c:url value="/admin/adminHome" />">관리자 홈</a>]
+			          </c:if>
+
+               	</div>  
             </div>
          </div>
          
@@ -103,16 +97,14 @@
                             </div>
                         </div>
                          <div class="col-lg-6 col-md-6 offset-lg-1 search-top">
+                           <form name="searchform" method="post" action="#">
                                 <div class="advanced-search">
-	                                <div class="input-group">
-	                                	<form action="${pageContext.request.contextPath}/search" method="GET">
-	                                		<!-- 메인 게시글 검색. 메인 게시글 게시판 번호 = 1 -->
-	                                		<input type="hidden" name="boardlist_numbers" value="<c:out value='1'/>">
-		                                    <input type="text"  name="searchWord" placeholder="어느 지역으로 여행을 가시나요?">
-		                                    <button id="search" type="submit"><i class="ti-search"></i></button>
-	                                    </form>
-	                                </div>
+                                    <div class="input-group">
+                                        <input type="text" id="searchbox" placeholder="어느 지역으로 여행을 가시나요?">
+                                        <button type="submit" id="submit" value="검색"><i class="ti-search"></i></button>
+                                    </div>
                                 </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -124,7 +116,7 @@
                     <ul>
                         <li class="active"><a href="./rs-mainpage.jsp">Home</a></li>
                         <li><a href="${pageContext.request.contextPath}/write_view">글작성</a></li>
-                        <li><a href="${pageContext.request.contextPath}/travelcourse">여행코스작성</a></li>
+                        <li><a href="#">여행코스작성</a></li>
                         <li><a href="./rs-Servicecenter.jsp">공지사항</a></li>
                         <li><a href="#">이벤트</a></li>
                         <li><a href="./rs-Servicecenter_faq.jsp">자주하는질문</a></li>
@@ -135,15 +127,5 @@
             </div>
         </div>
     </header>
-    <%--       <c:url value="/login" var="loginUrl" />
-      <p>"${loginUrl}"</p>
-      <form:form name="f" action="${loginUrl}" method="POST"> 
-    <c:if test="${param.error != null}">
-        <p>아이디와 비밀번호가 잘못되었습니다.</p>
-    </c:if>
-    <c:if test="${param.logout != null}">
-        <p>로그아웃 하였습니다.</p>
-    </c:if>  
- --%>
 </body>
 </html>

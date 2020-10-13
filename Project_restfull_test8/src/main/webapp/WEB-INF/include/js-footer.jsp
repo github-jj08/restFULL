@@ -10,7 +10,7 @@
     <meta name="keywords" content="Fashi, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>RestFuLL | 메인페이지</title>
+    <title></title>
     <%@ include file="/WEB-INF/include/plugins.jspf"%>
 </head>
 
