@@ -49,23 +49,23 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	//ÀÎµ¦½º ÆäÀÌÁö
+	//ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index() {
 		log.info("index");
 		return "rs-mainpage";
 	}
 	
-	//°Ë»ö °á°ú ÆäÀÌÁö
+	//ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@GetMapping("/search")
 	public String search(@RequestParam(value="boardlist_numbers") int boardlist_numbers, @RequestParam(value="searchWord") String searchWord, Model model) {
 		log.info("searchWord : " + searchWord);
-		//°Ë»ö¾î¿¡ ÇØ´çÇÏ´Â °Ô½Ã±ÛµéÀ» ºÒ·¯¿È
+		//ï¿½Ë»ï¿½ï¿½î¿¡ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½Ô½Ã±Ûµï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½
 		List<BoardVO> boardlist = boardService.getList(boardlist_numbers, searchWord);
 		model.addAttribute("searchWord", searchWord);
 		model.addAttribute("boardlist", boardlist);
 		
-		log.info(searchWord + " ¿¡ ´ëÇÑ °Ë»ö°á°ú return ¼ö : " + boardlist.size());
+		log.info(searchWord + " ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ return ï¿½ï¿½ : " + boardlist.size());
 		return "searchResult";
 	}
 	
@@ -73,12 +73,12 @@ public class BoardController {
 	@GetMapping("/search/{searchWord}")
 	public List<BoardVO> ajaxSearch(@PathVariable(value="boardlist_numbers") int boardlist_numbers, @PathVariable(value="searchWord") String searchWord) throws UnsupportedEncodingException {
 		log.info("searchWord : " + searchWord);
-		//°Ë»ö¾î¸¦ url¿¡ Æ÷ÇÔ½ÃÄ×À¸´Ï ASCII·Î ÇÑ±ÛÀÌ ÀÎÄÚµùµÇ¼­ ³Ñ¾î¿À¹Ç·Î, °Ë»ö¾î¸¦ ´Ù½Ã µðÄÚµùÇØÁÜ
+		//ï¿½Ë»ï¿½ï¿½î¸¦ urlï¿½ï¿½ ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ASCIIï¿½ï¿½ ï¿½Ñ±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½Ç¼ï¿½ ï¿½Ñ¾ï¿½ï¿½ï¿½Ç·ï¿½, ï¿½Ë»ï¿½ï¿½î¸¦ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
 		searchWord = URLDecoder.decode(searchWord, "UTF-8");
 		
-		//°Ë»ö¾î¿¡ ÇØ´çÇÏ´Â °Ô½Ã±ÛµéÀ» ºÒ·¯¿È
+		//ï¿½Ë»ï¿½ï¿½î¿¡ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½Ô½Ã±Ûµï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½
 		List<BoardVO> boardlist = boardService.getList(boardlist_numbers, searchWord);
-		log.info(searchWord + " ¿¡ ´ëÇÑ °Ë»ö°á°ú return ¼ö : " + boardlist.size());
+		log.info(searchWord + " ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ return ï¿½ï¿½ : " + boardlist.size());
 		return boardlist;
 	}
 	
@@ -87,10 +87,10 @@ public class BoardController {
 	public String content_view(String board_numbers, Model model) {
 		log.info("content_view");
 		int board_no = Integer.parseInt(board_numbers);
-		log.info("°Ô½Ã±Û view È£Ãâ; °Ô½Ã±Û ¹øÈ£ = " + board_no);
+		log.info("ï¿½Ô½Ã±ï¿½ view È£ï¿½ï¿½; ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È£ = " + board_no);
 		BoardVO vo = boardService.getBoardVO(board_no);
 		String location = vo.getLocation();
-		//ÇØ´ç ¿©ÇàÁö¿¡ ´ëÇÑ ´Ù¸¥ °ü·Ã °Ô½Ã±ÛµéÀ» »Ì±â À§ÇØ locationÁ¤º¸¸¦ ³Ñ°Ü¾ßÇÔ
+		//ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã±Ûµï¿½ï¿½ï¿½ ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½ locationï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ°Ü¾ï¿½ï¿½ï¿½
 		model.addAttribute("content_view",vo);
 		model.addAttribute("filelist", boardService.getBoardAttachmentVO(board_no));
 		model.addAttribute("others", boardService.getOtherBoardVO(board_no, location));
@@ -115,7 +115,7 @@ public class BoardController {
 		return "redirect:/";
 	}
 	
-	//ÁÁ¾Æ¿ä ±â´É
+	//ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ï¿½
 	@ResponseBody
 	@RequestMapping(value="/board/likeCheck", method = {RequestMethod.GET, RequestMethod.POST})
 	public int likeCheck(LikesVO likesVO) {
@@ -124,17 +124,17 @@ public class BoardController {
 		return result;
 	}
 	
-	//ÁÁ¾Æ¿ä ¼ö ¾÷µ¥ÀÌÆ®
+	//ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 	@ResponseBody
 	@RequestMapping(value="/board/likeUpdate", method = {RequestMethod.GET, RequestMethod.POST})
 	public void likeUpdate(LikesVO likesVO) {
 		log.info("likeUpdate");
-		log.info("Á¶¾Æ¿© ±Û ¹øÈ£ : " + likesVO.getBoard_numbers());
-		log.info("Á¶¾Æ¿© ¾ÆÀÌµð : " + likesVO.getMember_id());
+		log.info("ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ ï¿½ï¿½È£ : " + likesVO.getBoard_numbers());
+		log.info("ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ : " + likesVO.getMember_id());
 		boardService.likeUpdate(likesVO);
 	}
 	
-	//ÁÁ¾Æ¿ä ¼ö °Ë»ö
+	//ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ ï¿½Ë»ï¿½
 	@ResponseBody
 	@RequestMapping(value="/board/likeCount", method = {RequestMethod.GET, RequestMethod.POST})
 	public int likeCount(int board_numbers) {
@@ -142,7 +142,7 @@ public class BoardController {
 		return like_count;
 	}
 
-	//¼öÁ¤ ±â´É modify_view ÆäÀÌÁö È£Ãâ
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ modify_view ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modify(int board_numbers, Model model) {
 		model.addAttribute("modify_view", boardService.getBoardVO(board_numbers));
@@ -151,12 +151,12 @@ public class BoardController {
 		return "modify_view";
 	}
 	
-	//¼öÁ¤ ±â´É ¼öÇà
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modify(BoardVO boardVO) {
 		log.info("modify()");
 		boardService.modifyBoardVO(boardVO);
-		log.info("±Û¹øÈ£ - " + boardVO.getBoard_numbers());
+		log.info("ï¿½Û¹ï¿½È£ - " + boardVO.getBoard_numbers());
 		return "redirect:/content_view?board_numbers="+ boardVO.getBoard_numbers();
 	}
 	
@@ -165,13 +165,13 @@ public class BoardController {
 	public String delete(BoardVO boardVO, Model model) {
 		
 		boardService.deleteBoardVO(boardVO.getBoard_numbers());
-		log.info("»èÁ¦ ¼º°ø");
+		log.info("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		return "redirect:/";
 	}
 	
 
-	//´ñ±Û ±â´É
-	//´ñ±Û ¸ñ·Ï
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@ResponseBody
 	@RequestMapping(value="/getComments/{board_numbers}", method= RequestMethod.POST)
 	public List<CommentVO> getComments(@PathVariable int board_numbers){
@@ -179,14 +179,14 @@ public class BoardController {
 		return commentlist;
 	}
 	
-	//´ñ±Û ÀÛ¼º
+	//ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 	@ResponseBody
 	@RequestMapping(value="/addComments", method= RequestMethod.POST)
 	public void writeComment(CommentVO commentVO){
 		boardService.writeComment(commentVO);
 	}
 	
-	//´ñ±Û »èÁ¦
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@ResponseBody
 	@RequestMapping(value="/delComments", method= RequestMethod.POST)
 	public void delComment(int comments_numbers){
@@ -194,7 +194,7 @@ public class BoardController {
 	}
 	
 	//${pageContext.request.contextPath}/report
-	//½Å°í±â´É
+	//ï¿½Å°ï¿½ï¿½ï¿½
 	@ResponseBody
 	@RequestMapping(value="/report", method= RequestMethod.POST)
 	public void report(BoardVO boardVO) {
@@ -205,7 +205,7 @@ public class BoardController {
 		log.info(boardVO.getMember_id());
 		
 		boardService.writeBoardVO(boardVO);
-		log.info("½Å°í ¼º°ø");
+		log.info("ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		
 	}	 
 	
