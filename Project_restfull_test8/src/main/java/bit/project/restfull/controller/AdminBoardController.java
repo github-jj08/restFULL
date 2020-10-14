@@ -323,7 +323,7 @@ public class AdminBoardController {
       return "admin/goods_modify_view";
    }
    
-   //4-2. 수정 기능 수행 (수정해야함 모든 상품이 똑같이 바뀌는 문제 있음 - 1014 6:04 by여진)
+   //4-2. 수정 기능 수행
    @RequestMapping(value = "/dest/goods/modify", method = RequestMethod.POST)
    public String goodsModify(GoodsVO goodsVO) {
       log.info("modify()");
@@ -334,7 +334,7 @@ public class AdminBoardController {
       return "redirect:/admin/dest/goods/content_view?goods_numbers="+ goodsVO.getGoods_numbers();
    }         
    
-   //5. 상품 삭제 (아직 테스트 안함 - 1014 6:05 by 여진)
+   //5. 상품 삭제
    @GetMapping("/dest/{destination_name}/goods/delete")
    public String goodsDelete(@PathVariable(name="destination_name") String destination_name, int goods_numbers, Model model) throws UnsupportedEncodingException {
       adboardService.deleteGoodsVO(goods_numbers);

@@ -212,8 +212,11 @@
 
 	<!-- 상품 수정 -->
 	<update id="updateGoodsVO">
+	<![CDATA[
 		update goods set 
 		DESTINATION_NAME=#{destination_name},NAME=#{name},PRICE=#{price},AMOUNT=#{amount},STATUS=#{status},SELLSTART=#{sellstart},SELLEND=#{sellend},SELLER=#{seller} 
+		where GOODS_NUMBERS = #{goods_numbers} 
+	]]>
 	</update> 
 	
 	<!-- 상품 삭제 -->
