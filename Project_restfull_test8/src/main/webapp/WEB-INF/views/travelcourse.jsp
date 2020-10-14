@@ -23,6 +23,10 @@
         height: 500px;
         display: inline-block;
         overflow: auto; 
+        cursor:pointer;
+  }
+  .sido-choice, .sigungu-choice, .trav-btn {
+      	
   }
   
  	.course-1day{
@@ -44,57 +48,73 @@
 </head>
 	<body>
 	<%@ include file="/WEB-INF/include/js-header.jsp"%>
-		
-	<div class="row">
-		<div class="col-sm-3">
-			<div id ="mybtns">
-				<h2>sido</h2>
-				<div id="sido" class="choice-menu">
-					<div class="sido-choice" value="11">서울/경기</div>
-					<div class="sido-choice" value="28">인천</div>
-					<div class="sido-choice" value="42">강원</div>
-					<div class="sido-choice" value="43">충북</div>
-					<div class="sido-choice" value="44">충남/대전</div>
-					<div class="sido-choice" value="47">경북/대구</div>
-					<div class="sido-choice" value="48">경남/부산/울산</div>
-					<div class="sido-choice" value="45">전북</div>
-					<div class="sido-choice" value="46">전남/광주</div>
-					<div class="sido-choice" value="50">제주</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-4 col-sm-2"></div>
+				<div class="col-xs-4 col-sm-2">
+					<div id ="mybtns">
+						<h2>sido</h2>
+						<div id="sido" class="choice-menu">
+							<div class="sido-choice" value="11" 
+		                         onMouseover="this.style.background='skyblue';" onMouseout="this.style.background='white';">서울/경기</div>
+							<div class="sido-choice" value="28"
+		                         onMouseover="this.style.background='skyblue';" onMouseout="this.style.background='white';">인천</div>
+							<div class="sido-choice" value="42"
+		                         onMouseover="this.style.background='skyblue';" onMouseout="this.style.background='white';">강원</div>
+							<div class="sido-choice" value="43"
+		                         onMouseover="this.style.background='skyblue';" onMouseout="this.style.background='white';">충북</div>
+							<div class="sido-choice" value="44"
+		                         onMouseover="this.style.background='skyblue';" onMouseout="this.style.background='white';">충남/대전</div>
+							<div class="sido-choice" value="47"
+		                         onMouseover="this.style.background='skyblue';" onMouseout="this.style.background='white';">경북/대구</div>
+							<div class="sido-choice" value="48"
+		                         onMouseover="this.style.background='skyblue';" onMouseout="this.style.background='white';">경남/부산/울산</div>
+							<div class="sido-choice" value="45"
+		                         onMouseover="this.style.background='skyblue';" onMouseout="this.style.background='white';">전북</div>
+							<div class="sido-choice" value="46"
+		                         onMouseover="this.style.background='skyblue';" onMouseout="this.style.background='white';">전남/광주</div>
+							<div class="sido-choice" value="50"
+		                         onMouseover="this.style.background='skyblue';" onMouseout="this.style.background='white';">제주</div>
+						</div>
+					</div>
+				</div> 
+				<div class="col-sm-1"></div>
+				<div class="col-xs-4 col-sm-2">
+					<h2>sigungu</h2>
+					<div id="sigungu" class="choice-menu">
+					
+					</div>
+					
 				</div>
-			</div>
-		</div>
-		<div class="col-sm-3">
-			<h2>sigungu</h2>
-			<div id="sigungu" class="choice-menu">
-			
-			</div>
-			
-		</div>
-		<div class="col-sm-3">
-			<h2>여행지목록</h2>
-			<div id="travel-destinations"  class="choice-menu">
-			
-			</div>
-		</div>
-		<div class="col-sm-3">
-				<hr/>
-				<h2>여행코스등록</h2>
-				<button type="button" id="blank-btn" value="공백칸 추가">공백칸 추가</button>
-				<button type="button" id="dayplus-btn" value="날짜 추가">날짜 추가</button>
-				
-				
-				<div id="myCourse">
-					<div class="course-1day">
-						<ol class="sortable">
-						</ol>
+				<div class="col-sm-1"></div>
+				<div class="col-sm-3">
+					<h2>여행지목록</h2>
+					<div id="travel-destinations"  class="choice-menu">
+					
 					</div>
 				</div>
-					<button type="button" id="complete-btn" value="확인">확인</button>
-					<hr/>
-					<div id="goodsList"></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4 col-sm-2"></div>
+				<div class="col-sm-6">
+						<hr/>
+						<h2>여행코스등록</h2>
+						<button type="button" id="blank-btn" value="공백칸 추가">공백칸 추가</button>
+						<button type="button" id="dayplus-btn" value="날짜 추가">날짜 추가</button>
+						
+						
+						<div id="myCourse">
+							<div class="course-1day" style="position: relative;">
+								<ol class="sortable">
+								</ol>
+							</div>
+						</div>
+							<button type="button" id="complete-btn" value="확인">확인</button>
+							<hr/>
+							<div id="goodsList">goodsList</div>
+				</div>
+			</div>
 		</div>
-	</div>
-		
 			
 			
 			
@@ -103,7 +123,7 @@
 			
 			
 			
-			
+			<!-- @@@@@@@@시군구 가져오는 곳@@@@@@@@ -->
 			<script>
 				$(function(){
 					$(".sido-choice").click(function(){
@@ -120,7 +140,7 @@
 				         	//옵션 초기화 
 				          	$('#sigungu').empty();
 				            $(result).each(function(){		
-				           		$('#sigungu').append('<div class="sigungu-choice" value="'+this.sigungu_code+'">'+this.sigunguname+'</div>');
+				           		$('#sigungu').append('<div class="sigungu-choice"  value="'+this.sigungu_code+'"  onMouseover="this.style.background='+'\'skyblue\''+';" onMouseout="this.style.background='+'\'white\''+';">'+this.sigunguname+'</div>');
 				      		})
 						}
 					});	//ajax end
@@ -128,7 +148,9 @@
 					});
 					
 				});
+				<!-- @@@@@@@@시군구 가져오는 곳  끝@@@@@@@@-->
 				
+				<!-- @@@@@@@@여행지 목록 가져오는 곳@@@@@@@@ -->
 				$(document).on("click",".sigungu-choice",function(){  
 						var sigungu_code = $(this).attr("value");
 												
@@ -142,40 +164,60 @@
 					         	//옵션 초기화
 					          	$('#travel-destinations').empty();
 					            $(result).each(function(){		
-					           		$('#travel-destinations').append('<div class="trav-btn" value="'+this.destination_name+'">'+this.destination_name+'</option>');
+					           		$('#travel-destinations').append('<div class="trav-btn" value="'+this.destination_name+'"  onMouseover="this.style.background='+'\'skyblue\''+';" onMouseout="this.style.background='+'\'white\''+';">'+this.destination_name+'</option>');
 					      		})
 							}
 						});	//ajax end
 						
 					});
+				<!--@@@@@@@@여행지 목록 가져오는 곳 끝@@@@@@@@-->
 			</script>
 		
+		
+		
+		
+		
+		
 			<script>
+				
+				/*공백추가 버튼 누르는 곳!!! */
 				$(function(){
 					$("#blank-btn").click(function(){
 						console.log("blank");
 						$(".sortable").append('<li class="ui-state-default"><div><input type="text" name="course" maxlength="300"/><span><input type="button" class="delete-btn" value="x"></span></div></li>');
 			  		});
+				
 					
+				/* 날짜 추가버튼 누르는 곳!!!!!!! */
 					$("#dayplus-btn").click(function(){
 						console.log("dayplus-btn");
 						var idx = $(this).index();
 						$('.course-1day').eq(idx).remove();
-						$("#myCourse").append('<div class="course-1day"><ol class="sortable"></ol></div>');
+						$("#myCourse").append('<div class="course-1day" style="position: relative; left:10px; top: 10px; z-index: 1;"><ol class="sortable"></ol></div>');
 					});
 				});
 				
+				
+				
+				/* 확인버튼 누르는 곳!!!! */
 				$(document).on("click","#complete-btn",function(){  
 						console.log("complete");
 						var length= $('input[name="course"]').length;
-						console.log(length);
+						console.log("length="+length);
 						var myCourse = new Array();
 						
 						for(var i =0;i<length;i++){
 							myCourse.push($('input[name="course"]').eq(i).val());
 						}
-						console.log(myCourse);
-						$("#goodsList").append('<h2>관련 상품 목록</h2>');
+						console.log("myCourse="+myCourse);
+						var clickCount=0;
+						if(clickCount==0){
+							clickCount++;
+							console.log("goodsList 실행")
+							$("#goodsList").append('<h2>관련 상품 목록</h2>');
+						}else{
+							console.log("goodsList")
+						}
 						
 						//보기 편하게 하려고 htmls로 짬
 						$.ajax
@@ -208,11 +250,15 @@
 						//select * from goods where destination_name in ('용인 에버랜드','샘플 여행지1');
 			  	});
 				
+				
+				/* 추가된 칸 지우는 곳!!! */
 				$(document).on("click",".delete-btn",function(){  
 					console.log("delete");
 					var li = $(this).parent().parent().parent();	//==li태그
 					li.remove();
 				});
+				
+				
 				
 				$(document).on("click",".trav-btn",function(){  
 					var trav = $(this).text();
