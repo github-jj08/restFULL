@@ -1,5 +1,6 @@
 package bit.project.restfull.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
@@ -92,20 +94,6 @@ public class UserController {
 		
 	}
 	
-	@GetMapping("user/ask") // 마이페이지 - 문의하기
-	public String userAskWrite(UserVO userVO, BoardVO boardVO, Model model) {
-		
-		log.info("User welcome");
-		
-		log.info("user board list");
-		String member_id = userVO.getMember_id();
-		log.info("user member_id : "+member_id); // name
-		userVO = userService.getUserVO(member_id);
-		log.info(userVO);
-		
-		model.addAttribute("askDetail", boardService.boardList(member_id));
-		return "user/notYet";
-	}
 	
 	@PostMapping("user/boardDeleteUser") // 마이페이지 - 유저 본인 게시글 삭제
 	public String boardDeleteuser(BoardVO boardVO, HttpSession session) throws Exception{
@@ -116,7 +104,7 @@ public class UserController {
 		return "user/userHome";
 	}
 	
-	@GetMapping("user/boardList") // 마이페이지 - 게시글 확인
+	@GetMapping("user/myList") // 마이페이지 - 내 게시글 list
 	public String boardListView(BoardVO boardVO, UserVO userVO, Model model) {
 		
 		log.info("user board list");
@@ -130,7 +118,7 @@ public class UserController {
 		return "user/boardList";
 	}
 	
-	@GetMapping("user/content_view2") // 게시글 리스트 - > 자세히 보기
+	@GetMapping("user/content_view") // 내 게시글 list - > 자세히 보기
 	public String content_view_detail(UserVO userVO, BoardVO boardVO, Model model) {
 		log.info("board_view");
 		int board_numbers = boardVO.getBoard_numbers();
@@ -138,8 +126,8 @@ public class UserController {
 		boardVO = boardService.getBoardVO(board_numbers);
 		log.info(boardVO);
 		
-		model.addAttribute("userBoardDetail", boardVO);
-		return "content_view_detail";
+		model.addAttribute("content_view", boardVO);
+		return "content_view";
 	}
 
 	@GetMapping("user/qnaList") // 마이페이지 - 문의하기 리스트
@@ -153,44 +141,55 @@ public class UserController {
 		
 		model.addAttribute("userQna", boardService.qnaList(member_id));
 		
-		return "user/QnaList";
+		return "user/qnaList";
+	}
+	//수정예정
+	@GetMapping("user/ask") // 마이페이지 - 문의글 작성 페이지
+	public String userQnAWrite_view() {
+		return "write_view_qna";
+	}
+	
+	@PostMapping("user/ask_write") // 마이페이지 - 문의글 작성
+	public String userQnaWrite(UserVO userVO, @RequestParam(value="file") MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException {
+		String member_id = userVO.getMember_id();
+		log.info("user member_id : "+member_id); // name
+		boardService.writeBoardVO(uploadfiles, boardVO);
+		log.info("문의글 작성");
+		return "redirect:qnaList?member_id=" + member_id;
 	}
 	
 	@GetMapping("user/content_view_qna") // 문의하기 -> 자세히 보기
-	public String content_view_qna(UserVO userVO, BoardVO boardVO, Model model) {
+	public String content_view_qna(UserVO userVO,BoardVO boardVO, Model model) {
 		log.info("board_view");
 		int board_numbers = boardVO.getBoard_numbers();
 		log.info(board_numbers); // name
 		boardVO = boardService.getBoardVO(board_numbers);
 		log.info(boardVO);
 		
-		model.addAttribute("userQnADetail", boardVO);
+		model.addAttribute("content_view", boardVO);
 		return "content_view_qna";
 	}
 	
-	@GetMapping("user/askList") // 마이페이지 - 신고하기 리스트
-	public String askListView(BoardVO boardVO, UserVO userVO, Model model) {
-		
+	@GetMapping("user/reportList") // 마이페이지 - 신고리스트 페이지
+	public String reportListView(UserVO userVO, BoardVO boardVO, Model model) {
 		log.info("user board list");
 		String member_id = userVO.getMember_id();
 		log.info("user member_id : "+member_id); // name
 		userVO = userService.getUserVO(member_id);
 		log.info(userVO);
-		
-		model.addAttribute("userAsk", boardService.askList(member_id));
-		
-		return "user/AskList";
+		model.addAttribute("userReports", boardService.askList(member_id));
+		return "user/reportList";
 	}
 	
-	@GetMapping("user/content_view_ask") // 신고내역 -> 자세히 보기
-	public String content_view_ask(UserVO userVO, BoardVO boardVO, Model model) {
+	@GetMapping("user/content_view_rep") // 신고내역 -> 자세히 보기
+	public String content_view_ask(UserVO userVO,BoardVO boardVO, Model model) {
 		log.info("board_view");
 		int board_numbers = boardVO.getBoard_numbers();
 		log.info(board_numbers); // name
 		boardVO = boardService.getBoardVO(board_numbers);
 		log.info(boardVO);
 		
-		model.addAttribute("userAskDetail", boardVO);
+		model.addAttribute("content_view", boardVO);
 		return "content_view_ask";
 	}
 	

@@ -33,7 +33,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class TravelCourseController {
 
-	//¿©ÇàÁö °ü·Ã ¸Ş¼Òµå°¡ adminBoardService¿¡ ÀÌ¹Ì Á¸ÀçÇÏ¹Ç·Î admin¼­ºñ½º¿¡ ÀÖ´Â °Å °®´Ù¾¸
+	//ì—¬í–‰ì§€ ê´€ë ¨ ë©”ì†Œë“œê°€ adminBoardServiceì— ì´ë¯¸ ì¡´ì¬í•˜ë¯€ë¡œ adminì„œë¹„ìŠ¤ì— ìˆëŠ” ê±° ê°–ë‹¤ì”€
 
    @Autowired
    private AdminBoardService adboardService;
@@ -48,7 +48,7 @@ public class TravelCourseController {
    @GetMapping("/getSigunguCode/{sidoCode}")
    public List<SidoguVO> getSigunguCode(@PathVariable(value="sidoCode") int sidoCode) {
       log.info("sidoCode : " + sidoCode);
-      //sidoNum¿¡ ÇØ´çÇÏ´Â Áö¿ªÄÚµåµéÀ» ºÒ·¯¿È
+      //sidoNumì— í•´ë‹¹í•˜ëŠ” ì§€ì—­ì½”ë“œë“¤ì„ ë¶ˆëŸ¬ì˜´
       List<SidoguVO> optionList = adboardService.getOptionList(sidoCode);
       return optionList;
    }
@@ -57,7 +57,7 @@ public class TravelCourseController {
    @GetMapping("/getDest/{sigungu_code}")
    public List<DestinationVO> getDests(@PathVariable(value="sigungu_code") int sigungu_code) {
       log.info("sigungu_code : " + sigungu_code);
-      //sigungu_code¿¡ ÇØ´çÇÏ´Â ¿©ÇàÁöµéÀ» ºÒ·¯¿È(±âÁ¸ adboardService¿¡ sigungu_code¸¦ ¹Ş¾Æ ¸ñ·ÏÀ» Ãâ·ÂÇÏ´Â »õ·Î¿î ¸Ş¼Òµå Ãß°¡)
+      //sigungu_codeì— í•´ë‹¹í•˜ëŠ” ì—¬í–‰ì§€ë“¤ì„ ë¶ˆëŸ¬ì˜´(ê¸°ì¡´ adboardServiceì— sigungu_codeë¥¼ ë°›ì•„ ëª©ë¡ì„ ì¶œë ¥í•˜ëŠ” ìƒˆë¡œìš´ ë©”ì†Œë“œ ì¶”ê°€)
       List<DestinationVO> destlist = adboardService.getDestList(sigungu_code); //select * from destination where sigungu_code = 11110;
       return destlist;
    }
@@ -69,10 +69,9 @@ public class TravelCourseController {
       String[] destinations = req.getParameterValues("myCourse[]");
       log.info(destinations.length);
       for(int i=0;i<destinations.length;i++) {
-    	  log.info("¿©ÇàÁö ¸ñ·Ï ? " + destinations[i]);
+    	  log.info("ì—¬í–‰ì§€ ëª©ë¡ ? " + destinations[i]);
       }
       List<GoodsVO> goodslist = adboardService.getRGoods(destinations);
-      //°ü·Ã »óÇ° ¸ñ·ÏÀ» µ¹·ÁÁà¾ßÇÔ ¤Ğ¤Ğ ¿©±â ¾îÄÉÇÒÁö°í¹Î
       return goodslist;
    }
 }

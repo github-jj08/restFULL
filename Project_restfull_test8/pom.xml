@@ -31,6 +31,13 @@
 		    <version>11.2.0.3</version>
 		</dependency>
 		
+		<!-- 메일 관련 api -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.2</version>
+		</dependency>
+		
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -260,6 +267,7 @@
 			<version>2.5</version>
 		</dependency>
 		
+		<!-- 썸네일 관련 라이브러리 -->
 		<dependency>
 		  <groupId>net.coobird</groupId>
 		  <artifactId>thumbnailator</artifactId>
@@ -270,6 +278,14 @@
 			<groupId>org.imgscalr</groupId> 
 			<artifactId>imgscalr-lib</artifactId> 
 			<version>4.2</version> 
+		</dependency>
+		
+		
+		<!-- 메일 관련 api -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.2</version>
 		</dependency>
 		
 	</dependencies>

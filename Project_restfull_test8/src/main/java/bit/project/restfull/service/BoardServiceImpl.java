@@ -46,45 +46,45 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Override
 	public List<BoardVO> getList(int boardlist_numbers, String searchWord) {
-		log.info("boardServicImpl-getList(°Ô½Ã±Û ¸ñ·Ï È£Ãâ): " + searchWord);
+		log.info("boardServicImpl-getList(ê²Œì‹œê¸€ ëª©ë¡ í˜¸ì¶œ): " + searchWord);
 		return mapper.getList(boardlist_numbers, searchWord);
 	}
 
 	@Override
 	public BoardVO getBoardVO(int board_numbers) {
-		log.info("boardServicImpl-getBoardVO(°Ô½Ã±Û È£Ãâ): " + board_numbers);
+		log.info("boardServicImpl-getBoardVO(ê²Œì‹œê¸€ í˜¸ì¶œ): " + board_numbers);
 		mapper.upHit(board_numbers);
 		return mapper.getBoardVO(board_numbers);
 	}
 	
 	@Override
 	public List<AttachmentVO> getBoardAttachmentVO(int board_numbers) {
-		log.info("boardServicImpl-getBoardVO(°Ô½Ã±Û È£Ãâ): " + board_numbers);
+		log.info("boardServicImpl-getBoardVO(ê²Œì‹œê¸€ í˜¸ì¶œ): " + board_numbers);
 		return mapper.getBoardAttachmentVO(board_numbers);
 	}
 
 	@Override
 	public void writeBoardVO(MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException {
-		//0.ÆÄÀÏ°æ·Î
+		//0.íŒŒì¼ê²½ë¡œ
 		String root_path = "C:/Users/hoora/Desktop";
 		String attach_path = "/resources/upload/";
 
-		//1.±ÛÀÛ¼º
+		//1.ê¸€ì‘ì„±
 		mapper.insertBoardVO(boardVO);
 		int bNum = boardVO.getBoard_numbers();
-		log.info("insertBoardVO() completed. ±Û¹øÈ£´Â " + bNum);
+		log.info("insertBoardVO() completed. ê¸€ë²ˆí˜¸ëŠ” " + bNum);
 		
 		 
-		//2. ÆÄÀÏ ¾÷·Îµå
+		//2. íŒŒì¼ ì—…ë¡œë“œ
 		Map<String,Object>fileMap = new HashMap<String,Object>();
         
         for(int i = 0; i<uploadfiles.length; i++) {
             try {
-            	//ÇÁ·ÎÁ§Æ® Æú´õ ³»¿¡ ÀúÀå. »çÁø ÆÄÀÏ¸í Áßº¹ ¹æÁö¸¦ À§ÇÑ ÀÌ¸§ Àç»ı¼º
-            	UUID uuid = UUID.randomUUID();	//·£´ı ¹®ÀÚ¿­ »ı¼º
+            	//í”„ë¡œì íŠ¸ í´ë” ë‚´ì— ì €ì¥. ì‚¬ì§„ íŒŒì¼ëª… ì¤‘ë³µ ë°©ì§€ë¥¼ ìœ„í•œ ì´ë¦„ ì¬ìƒì„±
+            	UUID uuid = UUID.randomUUID();	//ëœë¤ ë¬¸ìì—´ ìƒì„±
         		String fileName = uuid + "_" + uploadfiles[i].getOriginalFilename();
         		
-                //Ã¹¹øÂ° ¿ä¼Ò¿¡ ´ëÇØ¼­¸¸ ½æ³×ÀÏÀ» »ı¼ºÇÔ
+                //ì²«ë²ˆì§¸ ìš”ì†Œì— ëŒ€í•´ì„œë§Œ ì¸ë„¤ì¼ì„ ìƒì„±í•¨
         		if(i == 0) {
         		
 	        		File target = new File(root_path+attach_path, fileName);
@@ -117,13 +117,13 @@ public class BoardServiceImpl implements BoardService{
 	       		    mapper.updateBoardThumbImg(bNum, attach_path + thumbDir);
 	                
         		} else {
-        			//Ã¹¹øÂ° ¿ä¼Ò°¡ ¾Æ´Ï¶ó¸é ±×³É ÀúÀå
+        			//ì²«ë²ˆì§¸ ìš”ì†Œê°€ ì•„ë‹ˆë¼ë©´ ê·¸ëƒ¥ ì €ì¥
 	        		int fileSize = (int) uploadfiles[i].getSize();	
 	                String fileDirectory = attach_path + fileName;
-	                log.info("ÀúÀåµÈ ÀÌ¸§ :"+ fileName);
+	                log.info("ì €ì¥ëœ ì´ë¦„ :"+ fileName);
 	                
-	                File saveFile = new File(root_path+attach_path,fileName); // ½ÇÁ¦·Î ÀúÀåÇÒ Æú´õ ÀÌ¸§ + ÀúÀåÇÒ ÆÄÀÏ ÀÌ¸§À¸·Î ÀúÀåÇÒ ÆÄÀÏ °´Ã¼¸¦ »ı¼ºÇÔ
-	                //ÀúÀå °æ·Î¸¦ DB¿¡ µî·Ï
+	                File saveFile = new File(root_path+attach_path,fileName); // ì‹¤ì œë¡œ ì €ì¥í•  í´ë” ì´ë¦„ + ì €ì¥í•  íŒŒì¼ ì´ë¦„ìœ¼ë¡œ ì €ì¥í•  íŒŒì¼ ê°ì²´ë¥¼ ìƒì„±í•¨
+	                //ì €ì¥ ê²½ë¡œë¥¼ DBì— ë“±ë¡
 	                fileMap.put("fileDirectory", fileDirectory);
 	                fileMap.put("fileName", fileName);
 	                fileMap.put("fileSize", fileSize);
@@ -150,34 +150,34 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 
-	//ÁÁ¾Æ¿ä ±â´É (1) ÁÁ¾Æ¿ä »óÅÂ ¾÷µ¥ÀÌÆ®
+	//ì¢‹ì•„ìš” ê¸°ëŠ¥ (1) ì¢‹ì•„ìš” ìƒíƒœ ì—…ë°ì´íŠ¸
 	@Override
 	public void likeUpdate(LikesVO likesVO){
-		log.info("¼­ºñ½º´Ü Á¶¾Æ¿ä ±â´É " );
-		//ÁÁ¾Æ¿ä »óÅÂ Ã¼Å© ÇÔ¼ö È£Ãâ
+		log.info("ì„œë¹„ìŠ¤ë‹¨ ì¡°ì•„ìš” ê¸°ëŠ¥ " );
+		//ì¢‹ì•„ìš” ìƒíƒœ ì²´í¬ í•¨ìˆ˜ í˜¸ì¶œ
 		int result = likeCheck(likesVO);
 		
-		if(result == 0){ // ÁÁ¾Æ¿ä¸¦ ´©¸£Áö ¾ÊÀ¸¸é 0
+		if(result == 0){ // ì¢‹ì•„ìš”ë¥¼ ëˆ„ë¥´ì§€ ì•Šìœ¼ë©´ 0
 			mapper.likeInsert(likesVO);
 		}else{ 
 			mapper.likeDelete(likesVO);
 		}
 	}
 	
-	//ÁÁ¾Æ¿ä ±â´É (2) °¹¼ö ¼¼±â
+	//ì¢‹ì•„ìš” ê¸°ëŠ¥ (2) ê°¯ìˆ˜ ì„¸ê¸°
 	@Override
 	public int likeCount(int board_numbers) {
 		return mapper.likeCount(board_numbers);
 	}
 
-	//ÁÁ¾Æ¿ä ±â´É (3) ÁÁ¾Æ¿ä »óÅÂ Ã¼Å©
+	//ì¢‹ì•„ìš” ê¸°ëŠ¥ (3) ì¢‹ì•„ìš” ìƒíƒœ ì²´í¬
 	@Override
 	public int likeCheck(LikesVO likesVO) {
 		int result = mapper.likeCheck(likesVO);
 		return result;
 	}
 
-	//´ñ±Û ±â´É
+	//ëŒ“ê¸€ ê¸°ëŠ¥
 	@Override
 	public void writeComment(CommentVO commentVO) {
 		String cts = commentVO.getContents();
@@ -200,14 +200,14 @@ public class BoardServiceImpl implements BoardService{
 		return mapper.getOthers(board_numbers, location);
 	}
 
-	//½Å°í±â´É
+	//ì‹ ê³ ê¸°ëŠ¥
 	@Override
 	public void writeBoardVO(BoardVO boardVO) {
 		boardVO.setLocation("");
 		mapper.insertBoardVO(boardVO);
 	}
 
-	//À¯Àú > ÀÚ±â°¡¾´ °Ô½Ã±Û È®ÀÎ
+	//ìœ ì € > ìê¸°ê°€ì“´ ê²Œì‹œê¸€ í™•ì¸
 	@Override
 	public List<BoardVO> boardList(String member_id){
 		return mapper.boardList(member_id);
