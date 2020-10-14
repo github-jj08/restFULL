@@ -16,12 +16,12 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/admin/board/dest/content_view?destination_name=${content_view.destination_name}">여행지정보로 돌아가기</a>
+<a href="${pageContext.request.contextPath}/admin/dest/content_view?destination_name=${content_view.destination_name}">여행지정보로 돌아가기</a>
             
             <input type="hidden" name="goods_numbers" value="${content_view.goods_numbers}">
             <div class="container">
             <a class="dropdown-item" href="modify?goods_numbers=${content_view.goods_numbers}">수정</a>
-            <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/board/dest/${content_view.destination_name}/goods/delete?goods_numbers=${content_view.goods_numbers}">삭제</a>
+            <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/dest/${content_view.destination_name}/goods/delete?goods_numbers=${content_view.goods_numbers}">삭제</a>
             
                <h4>상품 정보</h4><hr/>
                <div class="board-contents">
@@ -34,20 +34,8 @@
                   상품 판매 상태 : <span>${content_view.status}</span><br/>
                   상품 판매 시작일 : <span>${content_view.sellstart}</span><br/>
                   상품 판매 종료일 : <span>${content_view.sellend}</span><br/>
-               </div>
                <hr/>
-
-                        <td>${vo.destination_name}</td>
-                        <td><a href="content_view?goods_numbers=${vo.goods_numbers}">${vo.name}</td>
-                        <td>${vo.seller}</td>
-                        <td>${vo.price}</td>
-                        <td>${vo.amount}</td>
-                        <td>${vo.status}</td>
-                        <td>${vo.sellstart}</td>
-                        <td>${vo.sellend}</td>
-                  
                </div>
-            </div>
    
 </body>
 </html>

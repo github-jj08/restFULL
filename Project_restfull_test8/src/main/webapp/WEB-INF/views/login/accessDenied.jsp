@@ -13,6 +13,6 @@
 
 <h1>에러 페이지 입니다.</h1>
 
-<h3>[<a href="<c:url value="/home" />"> 돌아가 </a>]</h3>
+<h3>[<a href="<c:url value="/" />"> 돌아가 </a>]</h3>
 </body>
 </html>

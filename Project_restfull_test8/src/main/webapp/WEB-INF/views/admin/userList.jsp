@@ -26,7 +26,8 @@
 			<option value="20"
 				<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄 보기</option>
 		</select>
-	</div> <!-- 옵션선택 끝 -->
+	</div> 
+	<!-- 옵션선택 끝 -->
 	<table width="500" cellpadding="0" cellspacing="0" border="1">
 		<tr>
 			<td>회원 아이디</td>
@@ -38,10 +39,6 @@
 			<td><a href="user_content_view?member_id=${restful_user.member_id}">${restful_user.member_id}</a></td>
 			<td>${restful_user.name}</td>
 			<td>${restful_user.birth}</td>
-			<%-- <td>
-				<c:forEach begin="1" end="${dto.bIndent}">-</c:forEach>
-				<c:forEach begin="1" end="12">-</c:forEach>
-				<a href="content_view?board_count=${restful.board_count}">${restful.title}</a></td> --%>
 		</tr>
 		</c:forEach>
 	</table>
@@ -63,7 +60,7 @@
 			<a href="userList?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
 		</c:if>
 </div>
-	<h3><a href="adminHome"/>돌아가기</h3>
+	<h3><a href="adminHome">돌아가기</a></h3>
 	
 </body>
 </html>

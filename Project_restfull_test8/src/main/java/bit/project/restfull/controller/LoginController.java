@@ -63,7 +63,7 @@ public class LoginController {
 		
 		log.info("join");
 		
-		return "member/join";
+		return "rs-registerConfirm";
 	}
 
 	
@@ -85,15 +85,15 @@ public class LoginController {
 
 	
 	@GetMapping("/user/userHome")
-	public void userHome() {
+	public String userHome() {
 		log.info("user welcome");
+		return "user/userHome";
 	}
 	
 	@GetMapping("/admin/adminHome")
-	public void adminHome() {
-		
+	public String adminHome() {
 		log.info("admin welcome");
-		
+		return "admin/adminHome";
 	}
 	
 	@GetMapping("/admin/userModify")

@@ -29,18 +29,6 @@
 <body>
 
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
-
-    <%--       <c:url value="/login" var="loginUrl" />
-      <p>"${loginUrl}"</p>
-      <form:form name="f" action="${loginUrl}" method="POST"> 
-    <c:if test="${param.error != null}">
-        <p>아이디와 비밀번호가 잘못되었습니다.</p>
-    </c:if>
-    <c:if test="${param.logout != null}">
-        <p>로그아웃 하였습니다.</p>
-    </c:if>  
- --%>
- 
     <!-- Login Section Begin -->
     <div class="register-login-section spad">
         <div class="container">
@@ -48,26 +36,43 @@
                 <div class="col-lg-4 offset-lg-4">
                     <div class="login-form">
                         <h2>Login</h2>
-                        <form action="#">
+                        <!-- 로그인 검사 -->
+                        <c:url value="/login" var="loginUrl" />
+                        <form:form name="f" action="${loginUrl}" method="POST"> 
+                        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+                                <c:if test="${param.error != null}">
+							        <p>아이디와 비밀번호가 잘못되었습니다.</p>
+							    </c:if>
+							    <c:if test="${param.logout != null}">
+							        <p>로그아웃 하였습니다.</p>
+							    </c:if>  
+							<!-- id/pw 입력창 -->
                             <div class="group-input">
-                                <label for="username">아이디</label>
-                                <input type="text" id="member_id" name="member_id">
+                            	<label for="id">아이디</label>
+     							<input type="id" class="form-control" id="member_id" placeholder="아이디를 입력해주세요" name="member_id">
                             </div>
                             <div class="group-input">
-                                <label for="pass">비밀번호</label>
-                                <input type="password" id="pw" name="pw">
+                           		<label for="pwd">비밀번호 (Password):</label>
+     					 		<input type="password" class="form-control" id="pw" placeholder="비밀번호를 입력해주세요" name="pw">
                             </div>
                             <div class="group-input gi-check">
                                 <div class="gi-more">
-                                    <a id="find_Id_btn"><b>ID찾기</b></a> <a id="find_Pw_btn"><b>PW찾기</b></a>
+                                    <a id="find_Id_btn"><button type="button">ID찾기</button></a> 
+                                    <a id="find_Pw_btn"><button type="button">PW찾기</button></a>
                                 </div>
                             </div>
-                            <button type="submit" class="site-btn login-btn"><a href="<c:url value="join"/>">로그인</a></button>
-                        </form>
-                        <div class="switch-login">
-                            <a href="./rs-registerConfirm.jsp" class="or-login">회원가입</a>
-                        </div>
+                            
+    					<div class="form-group">        
+                  			<div class=" col-md-4 aaa align-self-auto">
+                       			<button type="submit" class="site-btn login-btn">로그인</button>
+                            </div>
+                		</div>
+                     </form:form> <!-- login form end -->
+                     <div class="switch-login">
+                        <a href="${pageContext.request.contextPath}/join" class="or-login">회원가입</a>
+                     </div>
                         
+                        <!-- 여기부터는 안건드림 -->
                         <!-- 소셜로그인 start -->
                         <div class="social_login">
                         	<!-- 카카오로그인 버튼 -->

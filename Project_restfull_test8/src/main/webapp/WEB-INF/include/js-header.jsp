@@ -27,29 +27,28 @@
             <div class="container">          
                 
              	<div class="ht-right">
-	             	 <c:if test="${member_id eq null}">
-		           		<sec:authorize access="isAnonymous()">
-		                    <button type="button" class="login-panel">
-		                   		 <a href="${pageContext.request.contextPath}/login">로그인</a>  
-		                 	</button>
-		                </sec:authorize>
-		             </c:if>
-	             
-		             <c:if test = "${member_id ne null}">
+		           	<sec:authorize access="isAnonymous()">
+		                <button type="button" class="login-panel">
+		                   	<a href="${pageContext.request.contextPath}/login">로그인</a>  
+		                </button>
+		            </sec:authorize>
+	             	
+	             	<sec:authorize access="isAuthenticated()">
+	             		<sec:authentication var="principal" property="principal"/>
 						<input type="hidden" name="member_id" value="<sec:authentication property="principal.user.member_id"/>"/>
-							<div class="showloign">
-								<strong><sec:authentication property="principal.user.member_id"></sec:authentication></strong>님 환영합니다.
-			              		<a href="<c:url value="/user/userHome" />">🏠‍💁‍♀️‍🙋‍♀️💁‍♂️💒</a>
-			              		<form action = "${pageContext.request.contextPath}/kakaologout" method="post">
-									<button type="submit" name="submit" id="kakaosubmit">로그아웃</button>
-								</form>
-							</div>
-			          </c:if>
+						<div class="showloign">
+							<strong><sec:authentication property="principal.user.member_id"></sec:authentication></strong>님 환영합니다.
+			              	<a href="<c:url value="/user/userHome" />">🏠‍💁‍♀️‍🙋‍♀️💁‍♂️💒</a>
+						</div>
 		          
-			          <c:if test="${principal.user.name == 'ADMIN'}">
-			              [<a href="<c:url value="/admin/adminHome" />">관리자 홈</a>]
-			          </c:if>
-
+			          	<c:if test="${principal.user.authority_name == 'ROLE_ADMIN'}">
+			            	[<a href="${pageContext.request.contextPath}/admin/adminHome">관리자 홈</a>]
+			         	</c:if>
+			         	
+			         	<form action = "${pageContext.request.contextPath}/kakaologout" method="post">
+							<button type="submit" name="submit" id="kakaosubmit">로그아웃</button>
+						</form>
+					</sec:authorize>
                	</div>  
             </div>
          </div>

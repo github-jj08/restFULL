@@ -2,10 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>  
-<!-- view 부분이다 -->
 <!DOCTYPE html>
-
-
 <html>
    <head>
       <meta charset="UTF-8">
@@ -93,8 +90,9 @@
     </script>
 </head>
 <body>
-<h4><a href="admin/adminHome">관리자 메인으로 돌아가기</a></h4>
+	<h4><a href="${pageContext.request.contextPath}/admin/adminHome">관리자 메인으로 돌아가기</a></h4>
 	<table width="400" cellpadding="0" cellspacing="0" border="1">
+		<form method="POST" action="adminUpdate">
 			<tr>
 				<td> 이름 </td>
 				<td><input type="text" id="name" name="name" value="${userDetail.name}"></td>
@@ -126,7 +124,7 @@
 			<tr>
 				<td> 회원등급 </td>
 				<td>
-				<select type="text" id="grade_name" name="grade_name" value="${userDetail.grade_name}">
+				<select type="text" id="grade_name" name="grade_name">
 				<option> 뚜벅이 </option>
         		<option> 자전거 </option>
         		<option> 기차 </option>
@@ -134,23 +132,31 @@
 				</select>
 				</td>
 			</tr>
-			
+			<script>
+				var grade = "<c:out value='${userDetail.grade_name}'/>";
+				$("#grade_name").val(grade).attr("selected", "selected");
+			</script>
 			<tr>
 				<td> 회원 권한 </td>
 				<td>
-				<select type="text" id="authority_name" name="authority_name" value="${userDetail.authority_name}">
+				<select type="text" id="authority_name" name="authority_name">
 				<option> ROLE_USER </option>
         		<option> ROLE_ADMIN </option>
         		</select>
         		</td>
 			</tr>
-			
+			<script>
+				var authority = "<c:out value='${userDetail.authority_name}'/>";
+				$("#authority_name").val(authority).attr("selected", "selected");
+			</script>
 			<tr>
-				<td colspan="2"> <input type="submit" value="수정"> &nbsp;&nbsp; 
-				<a href="userList">유저 목록보기</a> &nbsp;&nbsp; 
+				<td colspan="2"> 
+				<input type="submit" value="수정"> &nbsp;&nbsp; 
+				<a href="${pageContext.request.contextPath}/admin/userList">유저 목록보기</a> &nbsp;&nbsp; 
 				<button class="btn btn-default" onclick="adminUserDelete()">회원 삭제</button> 
+				</td>
 			</tr>
-		
+		</form>	
 	</table>
 	<p> </p>
 	
@@ -164,7 +170,7 @@
 		<c:forEach items="${admin_board}" var="admin_board">
 		<tr>
 			<td>${admin_board.board_numbers}</td>
-			<td><a href="${pageContext.request.contextPath}/content_view?board_numbers=${admin_board.board_numbers}">${admin_board.title}</a></td>
+			<td><a href="${pageContext.request.contextPath}/admin/boardView?board_numbers=${admin_board.board_numbers}">${admin_board.title}</a></td>
 			<td>${admin_board.member_id}</td>
 			<td>${admin_board.dates}</td>
 		</tr>
@@ -174,7 +180,13 @@
 	
 </body>
 <script>
+
 function adminUserDelete() {
+
+	var yn = confirm("회원을 탈퇴시키시겠습니까?");
+	
+	if(yn){
+		
 			$.ajax({
 				url : "/restfull/admin/userDeleteAdmin",
 				async: true,
@@ -187,8 +199,8 @@ function adminUserDelete() {
 					console.log(data);
 					const isSuccess = data.statusCode === 200;
 					if(isSuccess){
-						alert("회원 탈퇴 성공");
-						location.href = "/restfull/admin/adminHome";
+						alert("회원이 탈퇴되었습니다.");
+						location.href = "/restfull/admin/userList";
 					}else{
 						alert("비밀번호를 다시 입력해 주세요");
 					}
@@ -197,7 +209,9 @@ function adminUserDelete() {
 					alert("알수 없는 에러 발생");
 				}
 			})
-
+	}else{
+		alert("회원 탈퇴가 취소되었습니다.");
 	}
+}
 	</script>
 </html>

@@ -23,7 +23,7 @@
 </head>
 <body>
 
-         <form method="post" action="${pageContext.request.contextPath}/admin/board/dest/goods/write">
+         <form method="post" action="${pageContext.request.contextPath}/admin/dest/goods/write">
             여행지명 : ${destination_name}
             <input type="hidden" name="destination_name" id="destination_name" value="${destination_name}"/>
             <hr/>

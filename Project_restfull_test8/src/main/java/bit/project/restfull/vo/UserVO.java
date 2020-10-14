@@ -23,7 +23,7 @@ public class UserVO {
 	private String authority_name;
 	
 	public UserVO() {
-		this("member_id", "pw", "name", "birth", "gender", "phone", "email", 1, "¶Ñ¹÷ÀÌ", "ROLE_USER");
+		this("member_id", "pw", "name", "birth", "gender", "phone", "email", 1, "ëšœë²…ì´", "ROLE_USER");
 	}	
 	
 	public String getAuthorities() {

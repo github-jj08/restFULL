@@ -27,7 +27,7 @@
 </head>
 <body>
 
-<form action="<%=request.getContextPath() %>/admin/board/notice/write" method="post" enctype="multipart/form-data">
+<form action="<%=request.getContextPath() %>/admin/notice/write" method="post" enctype="multipart/form-data">
 	<!-- hidden -->
 	<sec:authentication var="principal" property="principal" />
 	<input type="hidden" name="member_id" value="${principal.user.member_id}"/>

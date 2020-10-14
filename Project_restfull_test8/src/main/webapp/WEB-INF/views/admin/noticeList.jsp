@@ -25,7 +25,7 @@
 			<td>조회수</td>
 		</tr>
 	</table>
-		<a href="${pageContext.request.contextPath}/admin/board/notice/write_view">글 작성</a>
+		<a href="${pageContext.request.contextPath}/admin/notice/write_view">글 작성</a>
 	<script>
 	$(function(){ 
 			
@@ -34,7 +34,7 @@
 			var boardlist = $("#boardlist_numbers option:selected").val();
 	        
 			$.ajax({
-				url: "${pageContext.request.contextPath}/admin/board/notice/" + boardlist,
+				url: "${pageContext.request.contextPath}/admin/notice/" + boardlist,
 	            type: "GET",
 	            dataType:"json",
 	            success: function (result) {
@@ -63,7 +63,7 @@
 	                $(result).each(function(){			                    			                    
 	                    htmls += '<tr>';
 	                    htmls += '<td>'+ this.boardlistName + '</td>';
-	                    htmls += '<td><a href="${pageContext.request.contextPath}/admin/board/notice/content_view?board_numbers=' + this.board_numbers + '">' + this.title + '</a></td>';
+	                    htmls += '<td><a href="${pageContext.request.contextPath}/admin/notice/content_view?board_numbers=' + this.board_numbers + '">' + this.title + '</a></td>';
 		                htmls += '<td>'+ this.member_id + '</td>';
 		                htmls += '<td>'+ this.dates + '</td>';
 	                    htmls += '<td>'+ this.hit + '</td>';	

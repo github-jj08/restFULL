@@ -57,6 +57,7 @@
 			<!-- 메인 컨텐츠  -->
 			<div class="contentswrapper">
 				<input type="hidden" name="board_numbers" value="${content_view.board_numbers}">
+				<input type="hidden" name="boardlist_numbers" value="${content_view.boardlist_numbers}">
 				<div id="leftbox" style="float:left; width:50%;">
 					<div id="photo-view">
 						<!-- 사진들 -->
@@ -101,10 +102,38 @@
 						     
 						    </button>
 						    <div class="dropdown-menu">
-						      <a class="dropdown-item" href="modify?board_numbers=${content_view.board_numbers}">수정</a>
-						      <a class="dropdown-item active" href="delete?board_numbers=${content_view.board_numbers}">삭제</a>
-						      <a class="dropdown-item disabled" href="#">신고</a>
+						      <a class="dropdown-item" id="modify" href="modify?board_numbers=${content_view.board_numbers}">수정</a>
+						      <a class="dropdown-item" id="delete">삭제</a>
+						      <a class="dropdown-item" id="report" href="#DecModal" data-toggle="modal" >신고</a>
 						    </div>
+						    
+						    <script>
+						    	$("#delete").on("click", function(){
+						    		var board_numbers = $('input[name=board_numbers]').val()
+						    		var boardlist_numbers = $('input[name=boardlist_numbers]').val();
+						    		var yn = confirm("게시글을 삭제하시겠습니까?");
+						    		if(yn){
+						    			
+						    				$.ajax({
+						    					url : "/restfull/admin/notice/delete",
+						    					async: true,
+						    					type : "GET",
+						    					data : {
+						    						"board_numbers" : board_numbers
+						    					},
+						    					success: function() {
+						    							alert("게시글이 삭제되었습니다.");
+						    							location.href = "/restfull/admin/notice";
+						    					},
+						    					error: function() {
+						    						alert("알수 없는 에러 발생");
+						    					}
+						    				})
+						    		}else{
+						    			alert("게시글 삭제가 취소되었습니다.");
+						    		}
+						    	});
+						    </script>
 						  </div>
 					</div>
 					

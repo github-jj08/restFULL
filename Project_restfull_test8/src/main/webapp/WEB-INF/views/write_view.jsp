@@ -30,7 +30,7 @@
 <form action="<%=request.getContextPath() %>/write" method="post" enctype="multipart/form-data">
 	<!-- hidden -->
 	<sec:authentication var="principal" property="principal" />
-	<input type="hidden" name="member_id" value="${principal.user.member_id}"/>
+	<input type="hidden" name="member_id" value="<sec:authentication property="principal.user.member_id"/>"/>
 	<input type="hidden" name="boardlist_numbers" value="<c:out value='1'/>">
 	<input type="hidden" name="filter_numbers" value="<c:out value='1'/>">
 	

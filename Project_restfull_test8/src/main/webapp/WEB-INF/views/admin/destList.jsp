@@ -28,7 +28,7 @@
 			<td>0</td>
 		</tr>
 		</c:forEach>
-		<a href="${pageContext.request.contextPath}/admin/board/dest/write_view">여행지 등록</a>
+		<a href="${pageContext.request.contextPath}/admin/dest/write_view">여행지 등록</a>
 	</table>
 	
 </body>
