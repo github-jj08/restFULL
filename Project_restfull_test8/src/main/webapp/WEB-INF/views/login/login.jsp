@@ -12,6 +12,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>RestFuLL | 로그인</title>
     <%@ include file="/WEB-INF/include/plugins.jspf"%>
+    
+    <script>
+ 		$(function(){
+ 			$("#find_Id_btn").click(function(){
+ 				location.href ='findID';
+ 			});
+ 			$("#find_Pw_btn").click(function(){
+ 				location.href ='findPW';
+ 			});
+ 			
+ 		})
+ 	</script>
 </head>
 
 <body>
@@ -47,7 +59,7 @@
                             </div>
                             <div class="group-input gi-check">
                                 <div class="gi-more">
-                                    <a href="#" class="forget-pass">ID/ PW 찾기</a>
+                                    <a id="find_Id_btn"><b>ID찾기</b></a> <a id="find_Pw_btn"><b>PW찾기</b></a>
                                 </div>
                             </div>
                             <button type="submit" class="site-btn login-btn"><a href="<c:url value="join"/>">로그인</a></button>

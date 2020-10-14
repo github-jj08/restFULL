@@ -163,7 +163,11 @@ public class UserServiceImpl implements UserService {
 		// Mail Server 설정
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.gmail.com";
+<<<<<<< HEAD
 		String hostSMTPid = "justicia0310@gmail.com";
+=======
+		String hostSMTPid = "@gmail.com";
+>>>>>>> branch 'develop' of https://github.com/github-jj08/restfull_test8.git
 		String hostSMTPpwd = ""; //여기만 채우고 돌리자 (비번 넣어주는곳)
 
 		// 보내는 사람 EMail, 제목, 내용

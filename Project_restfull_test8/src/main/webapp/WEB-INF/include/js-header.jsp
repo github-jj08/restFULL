@@ -117,7 +117,7 @@
                     <ul>
                         <li class="active"><a href="./rs-mainpage.jsp">Home</a></li>
                         <li><a href="${pageContext.request.contextPath}/write_view">글작성</a></li>
-                        <li><a href="#">여행코스작성</a></li>
+                        <li><a href="travelcourse">여행코스작성</a></li>
                         <li><a href="./rs-Servicecenter.jsp">공지사항</a></li>
                         <li><a href="#">이벤트</a></li>
                         <li><a href="./rs-Servicecenter_faq.jsp">자주하는질문</a></li>
