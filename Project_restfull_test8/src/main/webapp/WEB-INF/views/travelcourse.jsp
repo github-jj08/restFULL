@@ -221,7 +221,7 @@
 						
 						//보기 편하게 하려고 htmls로 짬
 						$.ajax
-						({
+						({ 
 							url: "${pageContext.request.contextPath}/myTravelCourse",
 				            type: "POST",
 				            data: {
