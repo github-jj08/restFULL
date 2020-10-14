@@ -32,6 +32,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @Controller
 @AllArgsConstructor
+//로그인 관련 기능
 public class LoginController {
 	
 	private UserService userservice;
@@ -57,13 +58,20 @@ public class LoginController {
 		return "redirect:/";
 	}
 	
-	// 회원가입
+	//회원가입 약관
 	@GetMapping("/join") // 회원가입 창 이동
 	public String user() {
 		
 		log.info("join");
 		
 		return "rs-registerConfirm";
+	}
+	
+	//회원가입 창
+	@PostMapping("/register")
+	public String register() {
+		log.info("약관동의 O");
+		return "rs-register";
 	}
 
 	
@@ -138,13 +146,13 @@ public class LoginController {
 		return "login/findPW";
 	}
 	
-	@PostMapping("doFind_ID")
+	@PostMapping("/doFind_ID")
 	public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
 		md.addAttribute("id", userservice.findID(response, email));
 		return "login/findIdResult";
 	}
 	
-	@PostMapping("doFind_PW")
+	@PostMapping("/doFind_PW")
 	public void find_PW(@ModelAttribute UserVO userVO, HttpServletResponse response) throws Exception{
 		System.out.println(userVO.getMember_id());
 		userservice.findPW(response, userVO);
