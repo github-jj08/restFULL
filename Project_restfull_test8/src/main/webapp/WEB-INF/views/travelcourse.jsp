@@ -38,8 +38,7 @@
  		position: relative; 
  		margin-top: 5px;
  		margin-left: 1px;
- 		overflow: auto;"
- 	}
+  	}
  	
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -205,7 +204,7 @@
 					$("#dayplus-btn").click(function(){
 						console.log("dayplus-btn");
 						var idx = $(this).index();
-						$('.course-1day').eq(idx).remove();
+						$('.course-1day').eq(idx);
 						$("#myCourse").append('<div class="course-1day" style="position: relative; overflow: auto;"><ol class="sortable"></ol></div>');
 					});
 				});
