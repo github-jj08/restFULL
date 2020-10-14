@@ -104,7 +104,7 @@ public class UserController {
 		return "user/userHome";
 	}
 	
-	@GetMapping("user/boardList") // 마이페이지 - 내 게시글 list
+	@GetMapping("user/myList") // 마이페이지 - 내 게시글 list
 	public String boardListView(BoardVO boardVO, UserVO userVO, Model model) {
 		
 		log.info("user board list");
@@ -118,7 +118,7 @@ public class UserController {
 		return "user/boardList";
 	}
 	
-	@GetMapping("user/content_view2") // 내 게시글 list - > 자세히 보기
+	@GetMapping("user/content_view") // 내 게시글 list - > 자세히 보기
 	public String content_view_detail(UserVO userVO, BoardVO boardVO, Model model) {
 		log.info("board_view");
 		int board_numbers = boardVO.getBoard_numbers();
@@ -126,8 +126,8 @@ public class UserController {
 		boardVO = boardService.getBoardVO(board_numbers);
 		log.info(boardVO);
 		
-		model.addAttribute("userBoardDetail", boardVO);
-		return "content_view_detail";
+		model.addAttribute("content_view", boardVO);
+		return "content_view";
 	}
 
 	@GetMapping("user/qnaList") // 마이페이지 - 문의하기 리스트

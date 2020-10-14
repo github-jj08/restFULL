@@ -17,9 +17,9 @@
 
 <p>[<a href="<c:url value="/userDeleteView" />">회원탈퇴</a>]</p>
 <p>[<a href="<c:url value="/userModify" />">개인정보 수정</a>]</p>
-<p>[<a href="boardList?member_id=<sec:authentication property="principal.user.member_id"/>">내 게시글 보기</a>]</p>
+<p>[<a href="myList?member_id=<sec:authentication property="principal.user.member_id"/>">내 게시글 보기</a>]</p>
 <p>[<a href="qnaList?member_id=<sec:authentication property="principal.user.member_id"/>">내 문의내역 보기</a>]</p>
-<p>[<a href="reportList?member_id=<sec:authentication property="principal.user.member_id"/>">내 신고내역 보기</a>]</p>
+<p>[<a href="reportList?member_id=<sec:authentication property="principal.user.member_id"/>">신고내역 보기</a>]</p>
 
 
 <sec:authentication var="principal" property="principal"/>
