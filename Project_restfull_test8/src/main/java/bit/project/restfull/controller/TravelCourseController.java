@@ -72,10 +72,6 @@ public class TravelCourseController {
     	  log.info("여행지 목록 ? " + destinations[i]);
       }
       List<GoodsVO> goodslist = adboardService.getRGoods(destinations);
-<<<<<<< HEAD
-=======
-      //관련 상품 목록을 돌려줘야함 ㅠㅠ 여기 어케할지고민
->>>>>>> branch 'develop' of https://github.com/github-jj08/restfull_test8.git
       return goodslist;
    }
 }

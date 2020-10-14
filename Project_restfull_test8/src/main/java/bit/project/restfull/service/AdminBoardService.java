@@ -16,16 +16,16 @@ public interface AdminBoardService {
 
 	List<AdminBoardVO> getList(int boardlist_numbers);
 	
-	//°ü¸®ÀÚ±Û
+	//ê´€ë¦¬ìê¸€
 	AdminBoardVO getBoardVO(int board_numbers);
 	List<AttachmentVO> getBoardAttachmentVO(int board_numbers);
 	
-	//°ü¸®ÀÚ±Û CRUD
+	//ê´€ë¦¬ìê¸€ CRUD
 	void writeBoardVO(MultipartFile[] uploadfiles, AdminBoardVO boardVO);
 	void modifyBoardVO(AdminBoardVO boardVO);
 	void deleteBoardVO(int board_numbers);
 
-	//¿©ÇàÁö CRUD
+	//ì—¬í–‰ì§€ CRUD
 	List<DestinationVO> getDestList();
 	DestinationVO getDestVO(String destination_name);
 	void writeDestVO(DestinationVO destinationVO);
@@ -34,18 +34,18 @@ public interface AdminBoardService {
 
 	List<SidoguVO> getOptionList(int sicoCode);
 	
-	//»óÇ° CRUD
+	//ìƒí’ˆ CRUD
 	List<GoodsVO> getGoodsList(String destination_name);
 	GoodsVO getGoodsVO(int goods_numbers);
 	void writeGoodsVO(GoodsVO goodsVO);
 	void modifyGoodsVO(GoodsVO goodsVO);
 	void deleteGoodsVO(int goods_numbers);
 
-	//¿©ÇàÁö Read - ¿©ÇàÄÚ½ºÂ¥±â¿¡¼­ »ç¿ëÇÔ
+	//ì—¬í–‰ì§€ Read - ì—¬í–‰ì½”ìŠ¤ì§œê¸°ì—ì„œ ì‚¬ìš©í•¨
 	List<DestinationVO> getDestList(int sigungu_code);
-	//°ü·Ã »óÇ°¸ñ·Ï Read
+	//ê´€ë ¨ ìƒí’ˆëª©ë¡ Read
 	List<GoodsVO> getRGoods(String[] destinations);
 
-	//ÇÊÅÍ°Ô½ÃÆÇ»Ì±â
+	//í•„í„°ê²Œì‹œíŒë½‘ê¸°
 	List<AdminBoardVO> getFilterList(int boardlist_numbers);
 }

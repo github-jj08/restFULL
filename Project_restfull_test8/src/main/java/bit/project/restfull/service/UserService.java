@@ -27,11 +27,7 @@ public interface UserService {
 
 	public UserVO getUserVO(String member_id);
 	
-<<<<<<< HEAD
 	public String findID(HttpServletResponse response, String email) throws Exception;
-=======
-public String findID(HttpServletResponse response, String email) throws Exception;
->>>>>>> branch 'develop' of https://github.com/github-jj08/restfull_test8.git
 	
 	public void sendMail(UserVO userVO, String dic);
 	

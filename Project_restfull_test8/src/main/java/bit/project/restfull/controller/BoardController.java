@@ -49,23 +49,23 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	//�ε��� ������
+	//인덱스 페이지
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index() {
 		log.info("index");
 		return "rs-mainpage";
 	}
 	
-	//�˻� ��� ������
+	//검색 결과 페이지
 	@GetMapping("/search")
 	public String search(@RequestParam(value="boardlist_numbers") int boardlist_numbers, @RequestParam(value="searchWord") String searchWord, Model model) {
 		log.info("searchWord : " + searchWord);
-		//�˻�� �ش��ϴ� �Խñ۵��� �ҷ���
+		//검색어에 해당하는 게시글들을 불러옴
 		List<BoardVO> boardlist = boardService.getList(boardlist_numbers, searchWord);
 		model.addAttribute("searchWord", searchWord);
 		model.addAttribute("boardlist", boardlist);
 		
-		log.info(searchWord + " �� ���� �˻���� return �� : " + boardlist.size());
+		log.info(searchWord + " 에 대한 검색결과 return 수 : " + boardlist.size());
 		return "searchResult";
 	}
 	
@@ -73,12 +73,12 @@ public class BoardController {
 	@GetMapping("/search/{searchWord}")
 	public List<BoardVO> ajaxSearch(@PathVariable(value="boardlist_numbers") int boardlist_numbers, @PathVariable(value="searchWord") String searchWord) throws UnsupportedEncodingException {
 		log.info("searchWord : " + searchWord);
-		//�˻�� url�� ���Խ������� ASCII�� �ѱ��� ���ڵ��Ǽ� �Ѿ���Ƿ�, �˻�� �ٽ� ���ڵ�����
+		//검색어를 url에 포함시켰으니 ASCII로 한글이 인코딩되서 넘어오므로, 검색어를 다시 디코딩해줌
 		searchWord = URLDecoder.decode(searchWord, "UTF-8");
 		
-		//�˻�� �ش��ϴ� �Խñ۵��� �ҷ���
+		//검색어에 해당하는 게시글들을 불러옴
 		List<BoardVO> boardlist = boardService.getList(boardlist_numbers, searchWord);
-		log.info(searchWord + " �� ���� �˻���� return �� : " + boardlist.size());
+		log.info(searchWord + " 에 대한 검색결과 return 수 : " + boardlist.size());
 		return boardlist;
 	}
 	
@@ -90,7 +90,7 @@ public class BoardController {
 		log.info("�Խñ� view ȣ��; �Խñ� ��ȣ = " + board_no);
 		BoardVO vo = boardService.getBoardVO(board_no);
 		String location = vo.getLocation();
-		//�ش� �������� ���� �ٸ� ���� �Խñ۵��� �̱� ���� location������ �Ѱܾ���
+		//해당 여행지에 대한 다른 관련 게시글들을 뽑기 위해 location정보를 넘겨야함
 		model.addAttribute("content_view",vo);
 		model.addAttribute("filelist", boardService.getBoardAttachmentVO(board_no));
 		model.addAttribute("others", boardService.getOtherBoardVO(board_no, location));
@@ -115,7 +115,7 @@ public class BoardController {
 		return "redirect:/";
 	}
 	
-	//���ƿ� ���
+	//좋아요 기능
 	@ResponseBody
 	@RequestMapping(value="/board/likeCheck", method = {RequestMethod.GET, RequestMethod.POST})
 	public int likeCheck(LikesVO likesVO) {
@@ -124,17 +124,17 @@ public class BoardController {
 		return result;
 	}
 	
-	//���ƿ� �� ������Ʈ
+	//좋아요 수 업데이트
 	@ResponseBody
 	@RequestMapping(value="/board/likeUpdate", method = {RequestMethod.GET, RequestMethod.POST})
 	public void likeUpdate(LikesVO likesVO) {
 		log.info("likeUpdate");
-		log.info("���ƿ� �� ��ȣ : " + likesVO.getBoard_numbers());
-		log.info("���ƿ� ���̵� : " + likesVO.getMember_id());
+		log.info("조아여 글 번호 : " + likesVO.getBoard_numbers());
+		log.info("조아여 아이디 : " + likesVO.getMember_id());
 		boardService.likeUpdate(likesVO);
 	}
 	
-	//���ƿ� �� �˻�
+	//좋아요 수 검색
 	@ResponseBody
 	@RequestMapping(value="/board/likeCount", method = {RequestMethod.GET, RequestMethod.POST})
 	public int likeCount(int board_numbers) {
@@ -142,7 +142,7 @@ public class BoardController {
 		return like_count;
 	}
 
-	//���� ��� modify_view ������ ȣ��
+	//수정 기능 modify_view 페이지 호출
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modify(int board_numbers, Model model) {
 		model.addAttribute("modify_view", boardService.getBoardVO(board_numbers));
@@ -151,12 +151,12 @@ public class BoardController {
 		return "modify_view";
 	}
 	
-	//���� ��� ����
+	//수정 기능 수행
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modify(BoardVO boardVO) {
 		log.info("modify()");
 		boardService.modifyBoardVO(boardVO);
-		log.info("�۹�ȣ - " + boardVO.getBoard_numbers());
+		log.info("글번호  - " + boardVO.getBoard_numbers());
 		return "redirect:/content_view?board_numbers="+ boardVO.getBoard_numbers();
 	}
 	
@@ -165,48 +165,48 @@ public class BoardController {
 	public String delete(BoardVO boardVO, Model model) {
 		
 		boardService.deleteBoardVO(boardVO.getBoard_numbers());
-		log.info("���� ����");
+		log.info("삭제 성공");
 		return "redirect:/";
 	}
 	
 
-	//��� ���
-	//��� ���
-	@ResponseBody
-	@RequestMapping(value="/getComments/{board_numbers}", method= RequestMethod.POST)
-	public List<CommentVO> getComments(@PathVariable int board_numbers){
-		List<CommentVO> commentlist = boardService.commentList(board_numbers);
-		return commentlist;
-	}
-	
-	//��� �ۼ�
-	@ResponseBody
-	@RequestMapping(value="/addComments", method= RequestMethod.POST)
-	public void writeComment(CommentVO commentVO){
-		boardService.writeComment(commentVO);
-	}
-	
-	//��� ����
-	@ResponseBody
-	@RequestMapping(value="/delComments", method= RequestMethod.POST)
-	public void delComment(int comments_numbers){
-		boardService.delComment(comments_numbers);
-	}
-	
-	//${pageContext.request.contextPath}/report
-	//�Ű���
-	@ResponseBody
-	@RequestMapping(value="/report", method= RequestMethod.POST)
-	public void report(BoardVO boardVO) {
-		log.info(boardVO.getBoardlist_numbers());
-		log.info(boardVO.getTitle());
-		log.info(boardVO.getContents());
-		log.info(boardVO.getFilter_numbers());
-		log.info(boardVO.getMember_id());
+	//댓글 기능
+		//댓글 목록
+		@ResponseBody
+		@RequestMapping(value="/getComments/{board_numbers}", method= RequestMethod.POST)
+		public List<CommentVO> getComments(@PathVariable int board_numbers){
+			List<CommentVO> commentlist = boardService.commentList(board_numbers);
+			return commentlist;
+		}
 		
-		boardService.writeBoardVO(boardVO);
-		log.info("�Ű� ����");
+		//댓글 작성
+		@ResponseBody
+		@RequestMapping(value="/addComments", method= RequestMethod.POST)
+		public void writeComment(CommentVO commentVO){
+			boardService.writeComment(commentVO);
+		}
 		
-	}	 
+		//댓글 삭제
+		@ResponseBody
+		@RequestMapping(value="/delComments", method= RequestMethod.POST)
+		public void delComment(int comments_numbers){
+			boardService.delComment(comments_numbers);
+		}
+		
+		//${pageContext.request.contextPath}/report
+		//신고기능
+		@ResponseBody
+		@RequestMapping(value="/report", method= RequestMethod.POST)
+		public void report(BoardVO boardVO) {
+			log.info(boardVO.getBoardlist_numbers());
+			log.info(boardVO.getTitle());
+			log.info(boardVO.getContents());
+			log.info(boardVO.getFilter_numbers());
+			log.info(boardVO.getMember_id());
+			
+			boardService.writeBoardVO(boardVO);
+			log.info("신고 성공");
+			
+		}	 
 	
 }

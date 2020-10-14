@@ -32,11 +32,11 @@
 		</dependency>
 		
 		<!-- 메일 관련 api -->
-	<dependency>
-		<groupId>org.apache.commons</groupId>
-		<artifactId>commons-email</artifactId>
-		<version>1.2</version>
-	</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.2</version>
+		</dependency>
 		
 		<!-- Spring -->
 		<dependency>

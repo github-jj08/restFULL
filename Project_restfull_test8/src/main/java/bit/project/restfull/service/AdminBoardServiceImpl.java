@@ -61,25 +61,25 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 
 	@Override
 	public AdminBoardVO getBoardVO(int board_numbers) {
-		log.info("boardServicImpl-getBoardVO(°Ô½Ã±Û È£Ãâ): " + board_numbers);
+		log.info("boardServicImpl-getBoardVO(ê²Œì‹œê¸€ í˜¸ì¶œ): " + board_numbers);
 		mapper.upHit(board_numbers);
 		return mapper.getBoardVO(board_numbers);
 	}
 	
 	@Override
 	public List<AttachmentVO> getBoardAttachmentVO(int board_numbers) {
-		log.info("boardServicImpl-getBoardVO(°Ô½Ã±Û È£Ãâ): " + board_numbers);
+		log.info("boardServicImpl-getBoardVO(ê²Œì‹œê¸€ í˜¸ì¶œ): " + board_numbers);
 		return mapper.getBoardAttachmentVO(board_numbers);
 	}
 
 	@Override
 	public void writeBoardVO(MultipartFile[] uploadfiles, AdminBoardVO boardVO) {
-        //1.±ÛÀÛ¼º
+        //1.ê¸€ì‘ì„±
 		mapper.insertBoardVO(boardVO);
 		int bNum = boardVO.getBoard_numbers();
 		log.info("insertBoardVO() completed");
 		
-		//2. ÆÄÀÏ ¾÷·Îµå
+		//2. íŒŒì¼ ì—…ë¡œë“œ
 		String root_path = "C:/Users/bit/Desktop";
 		String attach_path = "/resources/upload/";
 
@@ -87,11 +87,11 @@ public class AdminBoardServiceImpl implements AdminBoardService {
         
 		for(int i = 0; i<uploadfiles.length; i++) {
 	        	 try {
-             	//ÇÁ·ÎÁ§Æ® Æú´õ ³»¿¡ ÀúÀå. »çÁø ÆÄÀÏ¸í Áßº¹ ¹æÁö¸¦ À§ÇÑ ÀÌ¸§ Àç»ı¼º
-             	UUID uuid = UUID.randomUUID();	//·£´ı ¹®ÀÚ¿­ »ı¼º
+             	//í”„ë¡œì íŠ¸ í´ë” ë‚´ì— ì €ì¥. ì‚¬ì§„ íŒŒì¼ëª… ì¤‘ë³µ ë°©ì§€ë¥¼ ìœ„í•œ ì´ë¦„ ì¬ìƒì„±
+             	UUID uuid = UUID.randomUUID();	//ëœë¤ ë¬¸ìì—´ ìƒì„±
          		String fileName = uuid + "_" + uploadfiles[i].getOriginalFilename();
          		
-                 //Ã¹¹øÂ° ¿ä¼Ò¿¡ ´ëÇØ¼­¸¸ ½æ³×ÀÏÀ» »ı¼ºÇÔ
+                 //ì²«ë²ˆì§¸ ìš”ì†Œì— ëŒ€í•´ì„œë§Œ ì¸ë„¤ì¼ì„ ìƒì„±í•¨
          		if(i == 0) {
          		
  	        		File target = new File(root_path+attach_path, fileName);
@@ -124,13 +124,13 @@ public class AdminBoardServiceImpl implements AdminBoardService {
  	       		    mapper.updateBoardThumbImg(bNum, attach_path + thumbDir);
  	                
          		} else {
-         			//Ã¹¹øÂ° ¿ä¼Ò°¡ ¾Æ´Ï¶ó¸é ±×³É ÀúÀå
+         			//ì²«ë²ˆì§¸ ìš”ì†Œê°€ ì•„ë‹ˆë¼ë©´ ê·¸ëƒ¥ ì €ì¥
  	        		int fileSize = (int) uploadfiles[i].getSize();	
  	                String fileDirectory = attach_path + fileName;
- 	                log.info("ÀúÀåµÈ ÀÌ¸§ :"+ fileName);
+ 	                log.info("ì €ì¥ëœ ì´ë¦„ :"+ fileName);
  	                
- 	                File saveFile = new File(root_path+attach_path,fileName); // ½ÇÁ¦·Î ÀúÀåÇÒ Æú´õ ÀÌ¸§ + ÀúÀåÇÒ ÆÄÀÏ ÀÌ¸§À¸·Î ÀúÀåÇÒ ÆÄÀÏ °´Ã¼¸¦ »ı¼ºÇÔ
- 	                //ÀúÀå °æ·Î¸¦ DB¿¡ µî·Ï
+ 	                File saveFile = new File(root_path+attach_path,fileName); // ì‹¤ì œë¡œ ì €ì¥í•  í´ë” ì´ë¦„ + ì €ì¥í•  íŒŒì¼ ì´ë¦„ìœ¼ë¡œ ì €ì¥í•  íŒŒì¼ ê°ì²´ë¥¼ ìƒì„±í•¨
+ 	                //ì €ì¥ ê²½ë¡œë¥¼ DBì— ë“±ë¡
  	                fileMap.put("fileDirectory", fileDirectory);
  	                fileMap.put("fileName", fileName);
  	                fileMap.put("fileSize", fileSize);
@@ -157,13 +157,13 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	}
 
 	
-	// ¿©ÇàÁö µî·ÏÀ» À§ÇÑ µå·Ó´Ù¿î ¿É¼Ç ¼¼ÆÃ
+	// ì—¬í–‰ì§€ ë“±ë¡ì„ ìœ„í•œ ë“œë¡­ë‹¤ìš´ ì˜µì…˜ ì„¸íŒ…
 	@Override
 	public List<SidoguVO> getOptionList(int sidoCode) {
 		return mapper.sigunguList(sidoCode);
 	}
 	
-	// ¿©ÇàÁö µî·Ï
+	// ì—¬í–‰ì§€ ë“±ë¡
 	@Override
 	public List<DestinationVO> getDestList() {
 		return mapper.getDestList();
@@ -189,13 +189,13 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		mapper.deleteDestVO(destination_name);
 	}
 	
-	//¿©ÇàÁö °ü·Ã »óÇ° ¸ñ·Ï
+	//ì—¬í–‰ì§€ ê´€ë ¨ ìƒí’ˆ ëª©ë¡
 	@Override
 	public List<GoodsVO> getGoodsList(String destination_name) {
 		return mapper.getGoodsList(destination_name);
 	}
 	
-	//»óÇ° CRUD
+	//ìƒí’ˆ CRUD
 	@Override
 	public GoodsVO getGoodsVO(int goods_numbers) {
 		return mapper.getGoodsVO(goods_numbers);

@@ -108,7 +108,7 @@ public class UserServiceImpl implements UserService {
 		
 		if (id == null) {
 			out.println("<script>");
-			out.println("alert('°¡ÀÔµÈ ¾ÆÀÌµğ°¡ ¾ø½À´Ï´Ù.');");
+			out.println("alert('ê°€ì…ëœ ì•„ì´ë””ê°€ ì—†ìŠµë‹ˆë‹¤.');");
 			out.println("history.go(-1);");
 			out.println("</script>");
 			out.close();
@@ -123,18 +123,18 @@ public class UserServiceImpl implements UserService {
 	public void findPW(HttpServletResponse response, UserVO userVO) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		// ¾ÆÀÌµğ°¡ ¾øÀ¸¸é
+		// ì•„ì´ë””ê°€ ì—†ìœ¼ë©´
 		
 		if(loginMapper.idChk(userVO.getMember_id()) == 0) {
-			out.print("¾ÆÀÌµğ°¡ ¾ø½À´Ï´Ù.");
+			out.print("ì•„ì´ë””ê°€ ì—†ìŠµë‹ˆë‹¤.");
 			out.close();
 		}
-		// °¡ÀÔ¿¡ »ç¿ëÇÑ ÀÌ¸ŞÀÏÀÌ ¾Æ´Ï¸é
+		// ê°€ì…ì— ì‚¬ìš©í•œ ì´ë©”ì¼ì´ ì•„ë‹ˆë©´
 		else if(!userVO.getEmail().equals(loginMapper.readUser(userVO.getMember_id()).getEmail())) {
-			out.print("Àß¸øµÈ ÀÌ¸ŞÀÏ ÀÔ´Ï´Ù.");
+			out.print("ì˜ëª»ëœ ì´ë©”ì¼ ì…ë‹ˆë‹¤.");
 			out.close();
 		}else {
-			// ÀÓ½Ã ºñ¹Ğ¹øÈ£ »ı¼º
+			// ì„ì‹œ ë¹„ë°€ë²ˆí˜¸ ìƒì„±
 			String pw = "";
 			for (int i = 0; i < 12; i++) {
 				pw += (char) ((Math.random() * 26) + 97);
@@ -143,16 +143,16 @@ public class UserServiceImpl implements UserService {
 			userVO.setPw(pw);
 			System.out.println(pw);
 			sendMail(userVO, "findPW");
-			// ºñ¹Ğ¹øÈ£ º¯°æ
+			// ë¹„ë°€ë²ˆí˜¸ ë³€ê²½
 			
 			String encode = passEncoder.encode(pw);
 			
 			userVO.setPw(encode);
 			
 			loginMapper.findPW(userVO);
-			// ºñ¹Ğ¹øÈ£ º¯°æ ¸ŞÀÏ ¹ß¼Û
+			// ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ ë©”ì¼ ë°œì†¡
 			
-			out.print("ÀÌ¸ŞÀÏ·Î ÀÓ½Ã ºñ¹Ğ¹øÈ£¸¦ ¹ß¼ÛÇÏ¿´½À´Ï´Ù.");
+			out.print("ì´ë©”ì¼ë¡œ ì„ì‹œ ë¹„ë°€ë²ˆí˜¸ë¥¼ ë°œì†¡í•˜ì˜€ìŠµë‹ˆë‹¤.");
 			out.close();
 		}
 	}
@@ -160,31 +160,27 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void sendMail(UserVO userVO, String div) {
-		// Mail Server ¼³Á¤
+		// Mail Server ì„¤ì •
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.gmail.com";
-<<<<<<< HEAD
 		String hostSMTPid = "justicia0310@gmail.com";
-=======
-		String hostSMTPid = "@gmail.com";
->>>>>>> branch 'develop' of https://github.com/github-jj08/restfull_test8.git
-		String hostSMTPpwd = ""; //¿©±â¸¸ Ã¤¿ì°í µ¹¸®ÀÚ (ºñ¹ø ³Ö¾îÁÖ´Â°÷)
+		String hostSMTPpwd = ""; //ì—¬ê¸°ë§Œ ì±„ìš°ê³  ëŒë¦¬ì (ë¹„ë²ˆ ë„£ì–´ì£¼ëŠ”ê³³)
 
-		// º¸³»´Â »ç¶÷ EMail, Á¦¸ñ, ³»¿ë
+		// ë³´ë‚´ëŠ” ì‚¬ëŒ EMail, ì œëª©, ë‚´ìš©
 		String fromEmail = "restFullAdmin@gmail.com";
-		String fromName = "RestFull °ü¸®ÀÚ";
+		String fromName = "RestFull ê´€ë¦¬ì";
 		String subject = "";
 		String msg = "";
 		
 		if(div.equals("findPW")) {
-			subject = "RestFull ·Î±×ÀÎ ÀÓ½Ã ºñ¹Ğ¹øÈ£ ÀÔ´Ï´Ù.";
+			subject = "RestFull ë¡œê·¸ì¸ ì„ì‹œ ë¹„ë°€ë²ˆí˜¸ ì…ë‹ˆë‹¤.";
 			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
 			msg += "<h3 style='color: blue;'>";
-			msg += userVO.getMember_id() + "´ÔÀÇ ÀÓ½Ã ºñ¹Ğ¹øÈ£ ÀÔ´Ï´Ù. ºñ¹Ğ¹øÈ£¸¦ º¯°æÇÏ¿© »ç¿ëÇÏ¼¼¿ä.</h3>";
-			msg += "<p>ÀÓ½Ã ºñ¹Ğ¹øÈ£ : ";
+			msg += userVO.getMember_id() + "ë‹˜ì˜ ì„ì‹œ ë¹„ë°€ë²ˆí˜¸ ì…ë‹ˆë‹¤. ë¹„ë°€ë²ˆí˜¸ë¥¼ ë³€ê²½í•˜ì—¬ ì‚¬ìš©í•˜ì„¸ìš”.</h3>";
+			msg += "<p>ì„ì‹œ ë¹„ë°€ë²ˆí˜¸ : ";
 			msg += userVO.getPw() + "</p></div>";
 		}
-		// ¹Ş´Â »ç¶÷ E-Mail ÁÖ¼Ò
+		// ë°›ëŠ” ì‚¬ëŒ E-Mail ì£¼ì†Œ
 		String mail = userVO.getEmail();
 		try {
 			HtmlEmail email = new HtmlEmail();
@@ -202,7 +198,7 @@ public class UserServiceImpl implements UserService {
 			email.setHtmlMsg(msg);
 			email.send();
 		} catch (Exception e) {
-			System.out.println("¸ŞÀÏ¹ß¼Û ½ÇÆĞ : " + e);
+			System.out.println("ë©”ì¼ë°œì†¡ ì‹¤íŒ¨ : " + e);
 		}
 	}
 
