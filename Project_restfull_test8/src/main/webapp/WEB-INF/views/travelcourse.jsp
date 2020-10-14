@@ -20,7 +20,7 @@
   
   .choice-menu {
   		width: 200px;
-        height: 500px;
+        height: 250px;
         display: inline-block;
         overflow: auto; 
         cursor:pointer;
@@ -35,14 +35,19 @@
  		background-color:green;
  		border:1px solid black;
  		display:inline-block;
+ 		position: relative; 
+ 		margin-top: 5px;
+ 		margin-left: 1px;
+ 		overflow: auto;"
  	}
+ 	
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
   $( function() {
     $( ".sortable" ).sortable();
-    $( ".sortable" ).disableSelection();
+    $( ".sortable" ).disableSelection(); /* 드래그 해서 순서 변경 가능하게  */
   });
   </script>
 </head>
@@ -96,16 +101,17 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-4 col-sm-2"></div>
-				<div class="col-sm-6">
+				<div class="col-sm-10">
 						<hr/>
 						<h2>여행코스등록</h2>
 						<button type="button" id="blank-btn" value="공백칸 추가">공백칸 추가</button>
 						<button type="button" id="dayplus-btn" value="날짜 추가">날짜 추가</button>
 						
 						
-						<div id="myCourse">
-							<div class="course-1day" style="position: relative;">
+						<div id="myCourse" >
+							<div class="course-1day"  style="position: relative; overflow: auto;">
 								<ol class="sortable">
+								
 								</ol>
 							</div>
 						</div>
@@ -115,6 +121,13 @@
 				</div>
 			</div>
 		</div>
+		
+		
+		
+		
+<!-- <!--  --> --><!-- <!--  --> --><!-- <!--  --> --><!-- <!--  --> --><!-- <!--  --> --><!-- <!--  --> --><!-- <!--  --> -->
+<!-- <!--  --> --><!-- <!--  --> --><!-- <!--  --> --><!-- <!--  --> --><!-- <!--  --> --><!-- <!--  --> --><!-- <!--  --> -->
+<!-- <!--  --> --><!-- <!--  --> --><!-- <!--  --> --><!-- <!--  --> --><!-- <!--  --> --><!-- <!--  --> --><!-- <!--  --> -->
 			
 			
 			
@@ -122,8 +135,7 @@
 			
 			
 			
-			
-			<!-- @@@@@@@@시군구 가져오는 곳@@@@@@@@ -->
+			<!-- 시군구 가져오는 곳 -->
 			<script>
 				$(function(){
 					$(".sido-choice").click(function(){
@@ -148,9 +160,9 @@
 					});
 					
 				});
-				<!-- @@@@@@@@시군구 가져오는 곳  끝@@@@@@@@-->
+				/* 시군구 가져오는 곳  끝 */
 				
-				<!-- @@@@@@@@여행지 목록 가져오는 곳@@@@@@@@ -->
+				/* 여행지 목록 가져오는 곳 */
 				$(document).on("click",".sigungu-choice",function(){  
 						var sigungu_code = $(this).attr("value");
 												
@@ -162,15 +174,15 @@
 					        dataType:"json",
 					        success: function (result) {
 					         	//옵션 초기화
-					          	$('#travel-destinations').empty();
+					          	$('#travel-destinations').empty();           /* 기존 내용을 비우고 */
 					            $(result).each(function(){		
-					           		$('#travel-destinations').append('<div class="trav-btn" value="'+this.destination_name+'"  onMouseover="this.style.background='+'\'skyblue\''+';" onMouseout="this.style.background='+'\'white\''+';">'+this.destination_name+'</option>');
+					           		$('#travel-destinations').append('<div class="trav-btn" value="'+this.destination_name+'"  onMouseover="this.style.background='+'\'skyblue\''+';" onMouseout="this.style.background='+'\'white\''+';">'+this.destination_name+'</div>');
 					      		})
 							}
 						});	//ajax end
 						
 					});
-				<!--@@@@@@@@여행지 목록 가져오는 곳 끝@@@@@@@@-->
+					/* 여행지 목록 가져오는 곳 끝 */
 			</script>
 		
 		
@@ -184,7 +196,8 @@
 				$(function(){
 					$("#blank-btn").click(function(){
 						console.log("blank");
-						$(".sortable").append('<li class="ui-state-default"><div><input type="text" name="course" maxlength="300"/><span><input type="button" class="delete-btn" value="x"></span></div></li>');
+						$(".sortable").append('<li class="ui-state-default"><div><input type="text" name="course" maxlength="300"/><span><input type="button" class="delete-btn" value="x"></span></div></li>'); 
+						
 			  		});
 				
 					
@@ -193,7 +206,7 @@
 						console.log("dayplus-btn");
 						var idx = $(this).index();
 						$('.course-1day').eq(idx).remove();
-						$("#myCourse").append('<div class="course-1day" style="position: relative; left:10px; top: 10px; z-index: 1;"><ol class="sortable"></ol></div>');
+						$("#myCourse").append('<div class="course-1day" style="position: relative; overflow: auto;"><ol class="sortable"></ol></div>');
 					});
 				});
 				
