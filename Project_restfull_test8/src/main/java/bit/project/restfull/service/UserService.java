@@ -27,7 +27,7 @@ public interface UserService {
 
 	public UserVO getUserVO(String member_id);
 	
-public String findID(HttpServletResponse response, String email) throws Exception;
+	public String findID(HttpServletResponse response, String email) throws Exception;
 	
 	public void sendMail(UserVO userVO, String dic);
 	

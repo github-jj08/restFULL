@@ -31,7 +31,7 @@
 
 	<h3>[<a href="<c:url value="/user/userHome" />">유저 마이페이지</a>]</h3>
 	
-	<c:if test="${principal.user.name == 'ADMIN'}">
+	<c:if test="${principal.user.AUTHORITY_NAME == 'ROLE_ADMIN'}">
 	<h3>[<a href="<c:url value="/admin/adminHome" />">관리자 홈</a>]</h3>
 	</c:if>
 	
