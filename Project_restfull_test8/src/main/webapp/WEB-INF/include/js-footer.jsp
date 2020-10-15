@@ -5,13 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Fashi Template">
-    <meta name="keywords" content="Fashi, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title></title>
-    <%@ include file="/WEB-INF/include/plugins.jspf"%>
 </head>
 
 <body>
@@ -22,7 +15,7 @@
                 <div class="col-lg-3">
                     <div class="footer-left">
                         <div class="footer-logo">
-                            <a href="#"><img src="resources/img/LOGOsmall.png" alt=""></a>
+                            <a href="#"><img src="${pageContext.request.contextPath}/resources/img/LOGOsmall.png" alt=""></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>
@@ -68,7 +61,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> 2020 
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </div>
                         <div class="payment-pic">
-                            <img src="resources/img/payment-method.png" alt="">
+                            <img src="${pageContext.request.contextPath}/resources/img/payment-method.png" alt="">
                         </div>
                     </div>
                 </div>

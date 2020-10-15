@@ -22,7 +22,7 @@
     <!-- Hero Section Begin -->
     <section class="hero-section">
         <div class="hero-items owl-carousel">
-            <div class="single-hero-items set-bg" data-setbg="resources/img/KR_15.jpg">
+            <div class="single-hero-items set-bg" data-setbg="/resources/img/KR_15.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
@@ -34,16 +34,16 @@
                 </div>
             </div>
 
-            <div class="single-hero-items set-bg" data-setbg="resources/img/KR_1.jpg">
+            <div class="single-hero-items set-bg" data-setbg="/resources/img/KR_1.jpg">
             </div>
 
-            <div class="single-hero-items set-bg" data-setbg="resources/img/KR_3.jpg">
+            <div class="single-hero-items set-bg" data-setbg="/resources/img/KR_3.jpg">
             </div>
 
-            <div class="single-hero-items set-bg" data-setbg="resources/img/KR_4.jpg">
+            <div class="single-hero-items set-bg" data-setbg="/resources/img/KR_4.jpg">
             </div>
 
-            <div class="single-hero-items set-bg" data-setbg="resources/img/KR_8.jpg">
+            <div class="single-hero-items set-bg" data-setbg="/resources/img/KR_8.jpg">
             </div>
 
         </div>

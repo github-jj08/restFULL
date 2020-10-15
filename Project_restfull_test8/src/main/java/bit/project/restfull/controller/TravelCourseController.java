@@ -39,7 +39,7 @@ public class TravelCourseController {
    @Autowired
    private AdminBoardService adboardService;
    
-   @GetMapping("/travelcourse")
+   @GetMapping("/courseMake")
    public String travelCourse() {
 	   return "travelcourse";
    }
@@ -74,5 +74,15 @@ public class TravelCourseController {
       }
       List<GoodsVO> goodslist = adboardService.getRGoods(destinations);
       return goodslist;
+   }
+   
+   
+   //결제 기능페이지에서 상품 view로 이동(관리자가 보는 상품 view와 다름)
+   @GetMapping("/goods/content_view")
+   public String goodsContent_view(String goods_numbers, Model model) {
+      log.info("content_view");
+      int goodsNum = Integer.parseInt(goods_numbers);
+      model.addAttribute("content_view",adboardService.getGoodsVO(goodsNum));
+      return "goods_content_view";
    }
 }

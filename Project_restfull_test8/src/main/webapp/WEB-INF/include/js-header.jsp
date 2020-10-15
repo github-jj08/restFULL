@@ -12,10 +12,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>RestFuLL | 메인페이지</title>
-    <%@ include file="/WEB-INF/include/plugins.jspf"%>
 </head>
 
 <body>
+
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -91,8 +91,8 @@
                     <div class="row">
                         <div class="col-lg-2 col-md-2">
                             <div class="logo">
-                                <a href="./rs-mainpage.jsp">
-                                    <img src="resources/img/LOGOsmall.png" alt="">
+                                <a href="/">
+                                    <img src="${pageContext.request.contextPath}/resources/img/LOGOsmall.png" alt="">
                                 </a>
                             </div>
                         </div>
@@ -114,9 +114,9 @@
             <div class="container">
                 <nav class="nav-menu mobile-menu">
                     <ul>
-                        <li class="active"><a href="./rs-mainpage.jsp">Home</a></li>
+                        <li class="active"><a href="/">Home</a></li>
                         <li><a href="${pageContext.request.contextPath}/write_view">글작성</a></li>
-                        <li><a href="travelcourse">여행코스작성</a></li>
+                        <li><a href="${pageContext.request.contextPath}/travel/courseMake">여행코스작성</a></li>
                         <li><a href="./rs-Servicecenter.jsp">공지사항</a></li>
                         <li><a href="#">이벤트</a></li>
                         <li><a href="./rs-Servicecenter_faq.jsp">자주하는질문</a></li>
