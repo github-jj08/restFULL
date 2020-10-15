@@ -21,11 +21,12 @@
 				margin: 0;
 				padding: 0;
 				width: 60%;
+				
 			}
 			
 			.sortable li {
 				margin: 10px 10px 10px 10px;
-				padding: 0.4em;
+				padding: 0;
 				padding-left: 1.5em;
 				font-size: 1.4em;
 				height: 18px;
@@ -33,8 +34,7 @@
 			}
 			
 			.sortable li span {
-				position: absolute;
-				margin-left: -1.3em;
+				position: relative;
 			}
 			
 			input {
@@ -61,7 +61,7 @@
 			}
 			
 			.course-1day {
-				width: 200px;
+				width: 350px;
 				height: 300px;
 				background-color: skyblue;
 				border: 1px solid black;
@@ -71,11 +71,13 @@
 				border-radius: .25em;
 				text-align: center;
 			}
+			.delete-btn {
+			background-color: red;
+			}
 			
 			#myCourse {
-				width: 1000px;
-				height: 350px;
-				overflow-x: scroll;
+				width: 100px;
+				height: 325px;
 				white-space: nowrap;
 			}
 			</style>
@@ -92,8 +94,7 @@
 			<%@ include file="/WEB-INF/include/js-header.jsp"%>
 			<div class="container">
 				<div class="row">
-					<div class="col-xs-4 col-sm-2"></div>
-					<div class="col-xs-4 col-sm-2">
+					<div class="col-xs-4 col-sm-2" style="margin-right: 15px;">
 						<div id="mybtns">
 							<h2>sido</h2>
 							<div id="sido" class="choice-menu">
@@ -130,42 +131,39 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-1"></div>
-					<div class="col-xs-4 col-sm-2">
+					<div class="col-xs-4 col-sm-2" style="margin-right: 15px;">
 						<h2>sigungu</h2>
 						<div id="sigungu" class="choice-menu"></div>
 		
 					</div>
-					<div class="col-sm-1"></div>
-					<div class="col-sm-3">
+					<div class="col-sm-3" style="margin-right: 15px;">
 						<h2>여행지목록</h2>
 						<div id="travel-destinations" class="choice-menu"></div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-4 col-sm-2"></div>
-					<div class="col-sm-10">
-						<hr />
+					<div class="col-xs-4 col-sm-4" >
+						
+						
 						<h2>여행코스등록</h2>
-						<button type="button" id="blank-btn" class="travel">빈칸추가</button>
-		
-		
 						<div id="myCourse">
-							<div id="course-group">
-								<div class="course">
-									<div id="day1" class="course-1day">
-										<ol class="sortable">
-		
-										</ol>
-									</div>
+							<div class="course">
+								<div id="day1" class="course-1day" style="overflow: auto;">
+									<ol class="sortable">
+	
+									</ol>
 								</div>
 							</div>
 						</div>
 						<button type="button" id="complete-btn" value="확인">확인</button>
-						<hr />
+						<button type="button" id="blank-btn" class="travel">빈칸추가</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-1"></div>
+					<div class="col-sm-10">
 						<div id="goodsList"></div>
 					</div>
 				</div>
+			</div>
 		
 		
 		
@@ -257,10 +255,9 @@
 										}
 										console.log(myCourse);
 										$("#goodsList").append('<h2>관련 상품 목록</h2>');
-		
+							
 										//보기 편하게 하려고 htmls로 짬
-										$
-												.ajax({
+										$.ajax({
 													url : "${pageContext.request.contextPath}/myTravelCourse",
 													type : "POST",
 													data : {
@@ -289,7 +286,7 @@
 																						+ '</span>  |  ';
 																				htmls += '재고수량 - <span>'
 																						+ this.amount
-																						+ '</span>';
+																						+ '</span><br>';
 																			}); //each end
 														}
 														$("#goodsList").append(htmls);
@@ -303,7 +300,22 @@
 		
 					//여행지 추가 제한갯수(count 할 때 쓰임)
 					var limit = 5;
+					
+					//여행지 or 공백칸 버튼 눌렀을 때 여행지 갯수 count
+					$(document).on("click", ".travel", function() {
+						count++;
+						console.log(count);
 		
+						if (count > limit) {
+							alert("여행일정은 최대 " + limit + "개까지 추가가 가능합니다.");
+							$(".sortable").children().last().remove();/* 자식 마지막 삭제 */
+							count--;
+							console.log(count);
+						}
+		
+					});
+					
+					
 					//공백칸 추가 버튼을 눌러서 여행코스에 추가
 					$(function() {
 						$("#blank-btn")
@@ -312,7 +324,7 @@
 											console.log("blank");
 											$(".sortable")
 													.append(
-															'<li class="ui-state-default"><div><input type="text" name="course" maxlength="300"/><span><input type="button" class="delete-btn" value="x"></span></div></li>');
+															'<li class="ui-state-default" style="background-color: green; width: 10px; height: 35px"><div><input type="text" name="course" maxlength="300"/><span><input type="button" class="delete-btn" value="x"></span></div></li>');
 										});
 		
 					});
@@ -333,181 +345,15 @@
 									".trav-btn",
 									function() {
 										var trav = $(this).text();
-										console.log(trav);
+										console.log("trav: "+trav);
 										$(".sortable")
 												.append(
-														'<li class="ui-state-default"><div><input type="text" name="course" value="'+trav+'" readonly/><span><input type="button" class="delete-btn" value="x"></span></div></li>');
+														'<li class="ui-state-default" style="background-color: red; width: 10px; height: 35px"><div><input type="text" name="course" value="'+trav+'" readonly/><span style=""><input type="button" class="delete-btn"  value="x"></span></div></li>');
 		
 									});
 		
-					//여행지 or 공백칸 버튼 눌렀을 때 여행지 갯수 count
-					$(document).on("click", ".travel", function() {
-						count++;
-						console.log(count);
-		
-						if (count > limit) {
-							alert("여행일정은 최대 " + limit + "개까지 추가가 가능합니다.");
-							$(".sortable").children().last().remove();
-							count--;
-							console.log(count);
-						}
-		
-					});
+					
 				</script>
 				<%@ include file="/WEB-INF/include/js-footer.jsp"%>
 		</body>
 </html>
-
-
-
-
-
-		<!--  이전 코드
-			<script>
-				
-				/*
-				//공백추가 버튼 누르는 곳!!! 1015일까지 사용
-				$(function(){
-					$("#blank-btn").click(function(){
-						console.log("blank");
-						$(".sortable").append('<li class="ui-state-default"><div><input type="text" name="course" maxlength="300"/><span><input type="button" class="delete-btn" value="x"></span></div></li>'); 
-						
-			  		});
-				*/
-					 
-				
-					//여행지 추가 count
-				    var count = 0;
-
-				    //여행지 추가 제한갯수(count 할 때 쓰임)
-				    var limit = 5;
-
-				    
-				    //여행지 버튼을 눌러서 여행코스에 추가
-				    $(document).on("click",".trav-btn",function(){
-				        var trav = $(this).text();
-				        console.log(trav);
-				        $(".sortable").append('<li class="ui-state-default"><div><input type="text" name="course" value="'+trav+'" readonly/><span><input type="button" class="delete-btn" value="x"></span></div></li>');
-
-				    });
-				    
-				    //공백칸 추가 버튼을 눌러서 여행코스에 추가
-				    $(function(){
-				        $("#blank-btn").click(function(){
-				            console.log("blank");
-				            $(".sortable").append('<li class="ui-state-default"><div><input type="text" name="course" maxlength="300"/><span><input type="button" class="delete-btn" value="x"></span></div></li>');
-				        });
-
-				    });
-				    
-				    //여행지 or 공백칸 버튼 눌렀을 때 여행지 갯수 count
-				    $(document).on("click",".travel",function(){
-				        count++;
-				        console.log(count);
-
-				        if(count > limit){
-				            alert("여행일정은 최대 " + limit + "개까지 추가가 가능합니다.");
-				            $(".sortable").children().last().remove();
-				            count--;
-				            console.log(count);
-				        }
-
-				    });
-				    
-				    //추가한 여행지를 삭제함
-				    $(document).on("click",".delete-btn",function(){
-				        console.log("delete");
-				        var li = $(this).parent().parent().parent();   //==li태그
-				        li.remove();
-				        count--;
-				        console.log(count);
-				    });
-				    
-				    
-				/* 	
-				// 날짜 추가버튼 누르는 곳!!!!!!! 
-					$("#dayplus-btn").click(function(){
-						console.log("dayplus-btn");
-						var idx = $(this).index();
-						$('.course-1day').eq(idx);
-						$("#myCourse").append('<div class="course-1day" style="position: relative; overflow: auto;"><ol class="sortable"></ol></div>');
-					});
-				});
-				 */
-				
-				
-				/* 확인버튼 누르는 곳!!!! */
-				$(document).on("click","#complete-btn",function(){  
-						console.log("complete");
-						var length= $('input[name="course"]').length;
-						console.log("length="+length);
-						var myCourse = new Array();
-						
-						for(var i =0;i<length;i++){
-							myCourse.push($('input[name="course"]').eq(i).val());
-						}
-						console.log("myCourse="+myCourse);
-						var clickCount=0;
-						if(clickCount==0){
-							clickCount++;
-							console.log("goodsList 실행")
-							$("#goodsList").append('<h2>관련 상품 목록</h2>');
-						}else{
-							console.log("goodsList")
-						}
-						
-						//보기 편하게 하려고 htmls로 짬
-						$.ajax
-						({
-							url: "${pageContext.request.contextPath}/myTravelCourse",
-				            type: "POST",
-				            data: {
-				            	"myCourse" : myCourse,
-				            },
-				            dataType:"json",
-				            success: function (result) {
-				             	console.log("성공");	
-								var htmls="";
-								if(result.length < 1){
-									htmls += "관련상품이 없습니다.";
-								} else {
-						            $(result).each(function(){			                    			                    
-						            	htmls += '여행지명 - <span>'+ this.destination_name + '</span>  |  ';
-						                htmls += '상품명 - <span><a href="${pageContext.request.contextPath}/goods/content_view?goods_numbers=' + this.goods_numbers + '">' + this.name + '</a></span>  |  ';
-							            htmls += '상품 가격 - <span>'+ this.price + '</span>  |  ';
-							            htmls += '재고수량 - <span>'+ this.amount + '</span>';
-						            	});	//each end
-								}
-								
-								
-								
-								
-								$("#goodsList").append(htmls);
-						   }//success end
-					    }); //ajax end
-				
-						
-						//상품 뽑는 쿼리문 : 
-						//select * from goods where destination_name in ('용인 에버랜드','샘플 여행지1');
-			  	});
-				
-				
-				/* 추가된 칸 지우는 곳!!! */
-				$(document).on("click",".delete-btn",function(){  
-					console.log("delete");
-					var li = $(this).parent().parent().parent();	//==li태그
-					li.remove();
-				});
-				
-				
-				
-				$(document).on("click",".trav-btn",function(){  
-					var trav = $(this).text();
-					console.log(trav);
-					
-					$(".sortable").append('<li class="ui-state-default"><div><input type="text" name="course" value="'+trav+'" readonly/><span><input type="button" class="delete-btn" value="x"></span></div></li>');
-			
-				});
-					
-			</script>
--->
