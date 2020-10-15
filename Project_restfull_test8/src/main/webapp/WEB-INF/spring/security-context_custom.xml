@@ -11,10 +11,12 @@
     
     <mvc:annotation-driven />
     <!-- 검사 URL -->
+    <http pattern="/resources/**" security="none"></http>
+
     <http auto-config="true" use-expressions="true">
         <intercept-url pattern="/user/**" access="hasAnyRole('USER, ADMIN')" />
 		<intercept-url pattern="/**" access="permitAll" />
-		        
+
         <form-login login-page="/login"
                     default-target-url="/"
                     authentication-failure-url="/login?error"

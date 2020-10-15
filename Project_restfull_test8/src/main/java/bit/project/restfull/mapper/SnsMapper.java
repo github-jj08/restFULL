@@ -10,13 +10,14 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import bit.project.restfull.vo.SnsVO;
+import bit.project.restfull.vo.UserVO;
 
 
 @Mapper
 public interface SnsMapper {
-	
-	@Insert("insert into member(member_id) values(#{member_id})")
-	public void insertID(String member_id);
+	//nicknameì¶”ê°€ (name)
+	@Insert("insert into member(member_id, pw, name, grade_name, authority_name) values(#{member_id}, #{pw}, #{name}, #{grade_name}, #{authority_name})")
+	public void insertID(UserVO userVO);
 
 	@Insert("insert into SNS(member_id, sns_id, sns_type, sns_nickname) values(#{member_id}, #{sns_id}, #{sns_type}, #{sns_nickname})")
 	public void insertSns(SnsVO snsVO);
@@ -32,7 +33,7 @@ public interface SnsMapper {
 	 * userList(UserVO userVO);
 	 */ 
 	
-	 // ¾ÆÀÌµð Áßº¹ Ã¼Å©
+	 // ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½ Ã¼Å©
 		/*
 		 * @Select("select count(*) from SNS where member_id = #{member_id}") 
 		 * public int idChk(String member_id);

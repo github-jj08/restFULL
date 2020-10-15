@@ -7,9 +7,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>사용자 홈</title>
+    <%@ include file="/WEB-INF/include/plugins.jspf"%>
 </head>
 
 <body>
+
+<%@ include file="/WEB-INF/include/js-header.jsp"%>
 
 <h1>사용자 페이지 입니다.</h1>
 
@@ -28,6 +31,6 @@
 <p>사용자 연락처 : <sec:authentication property="principal.user.phone"/></p>
 
 
-
+<%@ include file="/WEB-INF/include/js-footer.jsp"%>
 </body>
 </html>

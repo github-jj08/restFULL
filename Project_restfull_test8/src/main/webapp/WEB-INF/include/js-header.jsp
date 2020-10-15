@@ -2,6 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
+<%@ page import="org.springframework.security.core.Authentication" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,11 +18,10 @@
     <%@ include file="/WEB-INF/include/plugins.jspf"%>
 </head>
 
+
+
+
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
 
     <!-- Header Section Begin -->
     <header class="header-section">
@@ -33,22 +36,29 @@
 		                 	</button>
 		                </sec:authorize>
 		             </c:if>
-	             
-		             <c:if test = "${member_id ne null}">
-						<input type="hidden" name="member_id" value="${user.member_id}"/>
-							<div class="showloign"></div>
-								<strong>${principal.user.sns_nickname}</strong>님 환영합니다.
-			              		 <a href="<c:url value="/user/userHome" />">🏠‍💁‍♀️‍🙋‍♀️💁‍♂️💒
-			              		<form action = "${pageContext.request.contextPath}/kakaologout" method="post">
-									<button type="submit" name="submit" id="kakaosubmit">로그아웃</button>
-								</form>
-							</div>
-			          </c:if>
-		          
-			          <c:if test="${principal.user.name == 'ADMIN'}">
+		             
+		             
+	             	 <sec:authorize access="isAuthenticated()">
+						<div class="showloign">
+ 	             			<sec:authentication var="principal" property="principal"/>
+	             			
+								<strong>${principal.user.member_id}</strong>님 환영합니다.
+					            <a href="<c:url value="/user/userHome" />">🏠‍💁‍♀️‍🙋‍♀️💁‍♂️💒</a>	 
+								<form:form action="${pageContext.request.contextPath}/logout" method="POST">
+									<input type="submit" id="kakaosubmit" value="로그아웃" />
+								</form:form> 
+							
+						</div>	
+						
+						
+		          		<!-- 관리자모드 -->
+			          <c:if test="${principal.user.authority_name == 'ROLE_ADMIN'}">
 			              [<a href="<c:url value="/admin/adminHome" />">관리자 홈</a>]
+			              	<form:form action="${pageContext.request.contextPath}/logout" method="POST">
+								<input type="submit" value="로그아웃" />
+							</form:form> 
 			          </c:if>
-
+			        </sec:authorize>
                	</div>  
             </div>
          </div>
@@ -91,7 +101,7 @@
                     <div class="row">
                         <div class="col-lg-2 col-md-2">
                             <div class="logo">
-                                <a href="./rs-mainpage.jsp">
+                                <a href="${pageContext.request.contextPath}/">
                                     <img src="resources/img/LOGOsmall.png" alt="">
                                 </a>
                             </div>
@@ -114,7 +124,7 @@
             <div class="container">
                 <nav class="nav-menu mobile-menu">
                     <ul>
-                        <li class="active"><a href="./rs-mainpage.jsp">Home</a></li>
+                        <li class="active"><a href="${pageContext.request.contextPath}/">Home</a></li>
                         <li><a href="${pageContext.request.contextPath}/write_view">글작성</a></li>
                         <li><a href="#">여행코스작성</a></li>
                         <li><a href="./rs-Servicecenter.jsp">공지사항</a></li>

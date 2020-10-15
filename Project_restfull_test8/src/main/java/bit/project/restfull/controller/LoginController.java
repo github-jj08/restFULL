@@ -45,15 +45,15 @@ public class LoginController {
 	}
 	
 	//로그아웃.
-	@RequestMapping(value = "/logout")
-	public String logout(HttpSession session) throws Exception{
-		
-		log.info("/member/logout");
-		//세션 객체는  HttpServletRequest (login안에있음.) 여기서 가져옴
-		session.invalidate();// 메모리 날리는 대상 (가비지 콜렉터 )에게
-	
-		return "redirect:/";
-	}
+	/*
+	 * @RequestMapping(value = "/logout") public String logout(HttpSession session)
+	 * throws Exception{
+	 * 
+	 * log.info("/member/logout"); //세션 객체는 HttpServletRequest (login안에있음.) 여기서 가져옴
+	 * session.invalidate();// 메모리 날리는 대상 (가비지 콜렉터 )에게
+	 * 
+	 * return "redirect:/"; }
+	 */
 	
 	// 회원가입
 	@GetMapping("/join") // 회원가입 창 이동

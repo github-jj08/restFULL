@@ -20,7 +20,6 @@
 4.  Hero Section
 5.  Banner Section
 6.  Deal Of The Week
-7.  Latest Blog
 8.  Logo Carousel
 9.  Contact
 10.  Footer
@@ -200,69 +199,7 @@ ol {
 	cursor: pointer;
 }
 
-/* Preloder */
 
-#preloder {
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	z-index: 999999;
-	background: #000;
-}
-
-.loader {
-	width: 40px;
-	height: 40px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-top: -13px;
-	margin-left: -13px;
-	border-radius: 60px;
-	animation: loader 0.8s linear infinite;
-	-webkit-animation: loader 0.8s linear infinite;
-}
-
-@keyframes loader {
-	0% {
-		-webkit-transform: rotate(0deg);
-		transform: rotate(0deg);
-		border: 4px solid #f44336;
-		border-left-color: transparent;
-	}
-	50% {
-		-webkit-transform: rotate(180deg);
-		transform: rotate(180deg);
-		border: 4px solid #673ab7;
-		border-left-color: transparent;
-	}
-	100% {
-		-webkit-transform: rotate(360deg);
-		transform: rotate(360deg);
-		border: 4px solid #f44336;
-		border-left-color: transparent;
-	}
-}
-
-@-webkit-keyframes loader {
-	0% {
-		-webkit-transform: rotate(0deg);
-		border: 4px solid #f44336;
-		border-left-color: transparent;
-	}
-	50% {
-		-webkit-transform: rotate(180deg);
-		border: 4px solid #673ab7;
-		border-left-color: transparent;
-	}
-	100% {
-		-webkit-transform: rotate(360deg);
-		border: 4px solid #f44336;
-		border-left-color: transparent;
-	}
-}
 
 /*---------------------
   Header
@@ -778,7 +715,7 @@ ol {
 	position: absolute;
 	right: -18px;
 	top: 0px;
-	content: "�뼳";
+	content: "占쎈설";
 	font-family: "FontAwesome";
 	font-size: 16px;
 	color: #b2b2b2;
@@ -2779,7 +2716,7 @@ ol {
 
 .faq-accordin .card-heading a:after,
 .faq-accordin .card-heading>a.active[aria-expanded=false]:after {
-	content: "🔻";
+	content: "�윍�";
 	font-family: "FontAwesome";
 	font-size: 14px;
 	color: #404040;
@@ -2796,7 +2733,7 @@ ol {
 
 .faq-accordin .card-heading a[aria-expanded=true]:after,
 .faq-accordin .card-heading>a.active:after {
-	content: "🔻";
+	content: "�윍�";
 	font-family: "FontAwesome";
 	float: left;
 	font-size: 13px;
@@ -2805,7 +2742,7 @@ ol {
 }
 
 /*---------------------
-	약관동의창
+	�빟愿��룞�쓽李�
 ---------------------*/
 
 
@@ -2939,14 +2876,19 @@ ol {
 
 
 .register-form .home-btn {
-    width: 100%;
+    width: 49%;
 	letter-spacing: 2px;
 	margin-top: 35px;
     background-color:#8a93c0;
     border-color:#8a93c0;
+    
     }
+    
+ .register-form .home-btn a {
+ 	color:white;
+ }
 
-/*생년월일 드롭다운*/
+/*생년월일*/
 .register-form .group-input .bd {
     font-weight: 200;
     margin-bottom:5px;
@@ -2954,20 +2896,21 @@ ol {
 }
 
 
-/*핸드폰번호*/
-.register-form #con-mobilenum {
-    width: 65%;
+/*회원가입 핸드폰 인증 요청*/
+.register-form .group-input .mbnum .con-mobilenum {
+    width: 68%;
     margin-top:10px;
 }
-.register-form .con-btn {
+.register-form .group-input .mbnum .con-btn {
     width:30%;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     background-color:#8a93c0;
     border-color:#8a93c0;
     color: white;
     padding: 5px 0;
-    float: right;   
+    float: right;
     margin-top:10px;
+    font-size:13px;
 }
 
 /*성별*/
@@ -2985,8 +2928,8 @@ ol {
     margin : 10px 0;
     
 }
-/*아이디 중복확인*/
-.register-form .group-input #username {
+/*회원가입 아이디 중복환인 버튼*/
+.register-form .group-input #member_id {
     width: 68%;
 }
 .register-form .group-input .con-id {
@@ -3224,6 +3167,11 @@ ol {
 	.header-top .ht-right .login-panel {
 		padding-left: 10px;
 	}
+
+	.inner-header .logo {
+        width:120px;
+        height:60px;;
+    }
 
 	.inner-header .advanced-search .category-btn {
 		max-width: 40%;

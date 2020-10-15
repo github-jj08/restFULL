@@ -18,16 +18,8 @@
 
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
 
-    <%--       <c:url value="/login" var="loginUrl" />
-      <p>"${loginUrl}"</p>
-      <form:form name="f" action="${loginUrl}" method="POST"> 
-    <c:if test="${param.error != null}">
-        <p>아이디와 비밀번호가 잘못되었습니다.</p>
-    </c:if>
-    <c:if test="${param.logout != null}">
-        <p>로그아웃 하였습니다.</p>
-    </c:if>  
- --%>
+
+ 
  
     <!-- Login Section Begin -->
     <div class="register-login-section spad">
@@ -36,7 +28,13 @@
                 <div class="col-lg-4 offset-lg-4">
                     <div class="login-form">
                         <h2>Login</h2>
-                        <form action="#">
+                        
+                        <c:url value="/login" var="loginUrl" />
+                       <%--  <form action="${pageContext.request.contextPath}/" method="post"> --%>
+                        <form:form name="f" action="${loginUrl}" method="POST"> 
+						    <c:if test="${param.error != null}">
+						        <p>아이디와 비밀번호가 잘못되었습니다.</p>
+						    </c:if> 
                             <div class="group-input">
                                 <label for="username">아이디</label>
                                 <input type="text" id="member_id" name="member_id">
@@ -50,12 +48,13 @@
                                     <a href="#" class="forget-pass">ID/ PW 찾기</a>
                                 </div>
                             </div>
-                            <button type="submit" class="site-btn login-btn"><a href="<c:url value="join"/>">로그인</a></button>
-                        </form>
-                        <div class="switch-login">
-                            <a href="./rs-registerConfirm.jsp" class="or-login">회원가입</a>
-                        </div>
+                            <button type="submit" class="site-btn login-btn">로그인</a></button>
+                        </form:form>
                         
+                        
+                        <div class="switch-login">
+                            <a href="${pageContext.request.contextPath}/register" class="or-login">회원가입</a>
+                        </div>
                         <!-- 소셜로그인 start -->
                         <div class="social_login">
                         	<!-- 카카오로그인 버튼 -->
@@ -67,6 +66,7 @@
 	       					<!-- 네이버 로그인버튼 -->
 	       					
                         </div>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
                      </div>
                 </div>
             </div>

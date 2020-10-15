@@ -19,6 +19,7 @@ import com.google.gson.JsonParser;
 import bit.project.restfull.mapper.LoginMapper;
 import bit.project.restfull.mapper.SnsMapper;
 import bit.project.restfull.vo.SnsVO;
+import bit.project.restfull.vo.UserVO;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -34,7 +35,7 @@ public class KakaoService {
 	@Autowired
 	private SnsMapper snsMapper;
 	
-	/* ÅäÅ« °ª ¾ò±â */
+	/* ï¿½ï¿½Å« ï¿½ï¿½ ï¿½ï¿½ï¿½ */
 	public String getAccessToken(String authorize_code) {
 		String access_Token = "";
 		String refresh_Token = "";
@@ -44,25 +45,25 @@ public class KakaoService {
 			URL url = new URL(reqURL);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-			// POST ¿äÃ»À» À§ÇØ ±âº»°ªÀÌ falseÀÎ setDoOutputÀ» true·Î
+			// POST ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½âº»ï¿½ï¿½ï¿½ï¿½ falseï¿½ï¿½ setDoOutputï¿½ï¿½ trueï¿½ï¿½
 			conn.setRequestMethod("POST");
 			conn.setDoOutput(true);
 
-			// POST ¿äÃ»¿¡ ÇÊ¿ä·Î ¿ä±¸ÇÏ´Â ÆÄ¶ó¹ÌÅÍ ½ºÆ®¸²À» ÅëÇØ Àü¼Û
+			// POST ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ ï¿½ä±¸ï¿½Ï´ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
-			sb.append("&client_id=8c8d010971d8629ec3188f9ed097f73b"); // º»ÀÎÀÌ ¹ß±Ş¹ŞÀº key
-			sb.append("&redirect_uri=http://localhost:8282/restfull/kakaologin"); // º»ÀÎÀÌ ¼³Á¤ÇØ ³õÀº °æ·Î
+			sb.append("&client_id=8c8d010971d8629ec3188f9ed097f73b"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß±Ş¹ï¿½ï¿½ï¿½ key
+			sb.append("&redirect_uri=http://localhost:8282/restfull/kakaologin"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
 			bw.flush();
 
-			// °á°ú ÄÚµå°¡ 200ÀÌ¶ó¸é ¼º°ø
+			// ï¿½ï¿½ï¿½ ï¿½Úµå°¡ 200ï¿½Ì¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			int responseCode = conn.getResponseCode();
 			log.info("responseCode : " + responseCode);
 
-			// ¿äÃ»À» ÅëÇØ ¾òÀº JSONÅ¸ÀÔÀÇ Response ¸Ş¼¼Áö ÀĞ¾î¿À±â
+			// ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ JSONÅ¸ï¿½ï¿½ï¿½ï¿½ Response ï¿½Ş¼ï¿½ï¿½ï¿½ ï¿½Ğ¾ï¿½ï¿½ï¿½ï¿½
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String line = "";
 			String result = "";
@@ -72,7 +73,7 @@ public class KakaoService {
 			}
 			log.info("response body : " + result);
 
-			// Gson ¶óÀÌºê·¯¸®¿¡ Æ÷ÇÔµÈ Å¬·¡½º·Î JSONÆÄ½Ì °´Ã¼ »ı¼º
+			// Gson ï¿½ï¿½ï¿½Ìºê·¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ôµï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ JSONï¿½Ä½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 			JsonParser parser = new JsonParser();
 			JsonElement element = parser.parse(result);
 
@@ -92,10 +93,10 @@ public class KakaoService {
 	}
 
 	
-	/* Ä«Ä«¿À À¯Àú Á¤º¸°ª ÃßÃâ */ 
+	/* Ä«Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */ 
 	  public HashMap<String, String> getUserInfo (String access_Token) {
 
-          //    ¿äÃ»ÇÏ´Â Å¬¶óÀÌ¾ğÆ®¸¶´Ù °¡Áø Á¤º¸°¡ ´Ù¸¦ ¼ö ÀÖ±â¿¡ HashMapÅ¸ÀÔÀ¸·Î ¼±¾ğ
+          // 
           HashMap<String, String> userInfo = new HashMap<>();
           String reqURL = "https://kapi.kakao.com/v2/user/me";
           try {
@@ -103,7 +104,7 @@ public class KakaoService {
               HttpURLConnection conn = (HttpURLConnection) url.openConnection();
               conn.setRequestMethod("POST");
 
-              //    ¿äÃ»¿¡ ÇÊ¿äÇÑ Header¿¡ Æ÷ÇÔµÉ ³»¿ë
+              //    ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ Headerï¿½ï¿½ ï¿½ï¿½ï¿½Ôµï¿½ ï¿½ï¿½ï¿½ï¿½
               conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 
               
@@ -153,38 +154,50 @@ public class KakaoService {
 		  
 		  SnsVO snsVO = new SnsVO();
 		  
+		  UserVO userVO = new UserVO();
+		  
 		  log.info(userInfo.get("sns_id")+"@k");
 		  log.info(userInfo.get("sns_id"));
 		  log.info(userInfo.get("sns_nickname"));
+
+		  
+		  //insertIDë¶€ë¶„
+		  userVO.setMember_id(userInfo.get("sns_id")+"@k");
+		  userVO.setPw("null");
+		  userVO.setName(userInfo.get("sns_nickname"));
+		  userVO.setGrade_name("ëšœë²…ì´");
+		  userVO.setAuthority_name("ROLE_USER");
+		  
+		  
+		  log.info(userVO.getPw());
+		  log.info(userVO.getAuthority_name());
+		  log.info(userVO.getAuthorities());
 		  
 		  snsVO.setMember_id(userInfo.get("sns_id")+"@k");
 		  snsVO.setSns_id(userInfo.get("sns_id"));
 		  snsVO.setSns_type("Kakao");
 		  snsVO.setSns_nickname(userInfo.get("sns_nickname"));
 		  
-		  log.info(snsVO.getMember_id());  //½Äº°ÀÚ Å° + @k
-		  log.info(snsVO.getSns_id());		//½Äº°ÀÚ Å°
+		  log.info(snsVO.getMember_id());  //ì‹ë³„í‚¤ + @k
+		  log.info(snsVO.getSns_id());		//ì‹ë³„í‚¤
 		  log.info(snsVO.getSns_type());	
-		  log.info(snsVO.getSns_nickname());	//ÀÌ¸§
+		  log.info(snsVO.getSns_nickname());	//ì´ë¦„
+		  
+
 		  
 		  String member_id = snsVO.getMember_id();
-		  
-		  
-		  
+		   
 		  if(loginMapper.idChk(member_id)== 0) {
-			  
-		  	  snsMapper.insertID(snsVO.getMember_id());
+		  	  snsMapper.insertID(userVO);
 			  snsMapper.insertSns(snsVO);
+			  log.info("ì¹´ì¹´ì˜¤ ê°’ ë„£ê¸° ì„±ê³µ");
 		  }else {
-			  log.info("member_id :" + member_id + "´Â ÀÌ¹Ì °¡ÀÔµÇ¾î ÀÖ½À´Ï´Ù.");
+			  log.info("member_id :" + member_id + "ì´ë¯¸ ìˆìŒ.");
 		  }
 
 		  
 	  }
 	  
-
-
-
 	  public void kakaoLogout(String access_Token) {
 		    String reqURL = "https://kapi.kakao.com/v1/user/logout";
 		    try {
