@@ -13,6 +13,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    <%@ include file="/WEB-INF/include/plugins.jspf"%>
    <style>
          .sortable {
             list-style-type: none;
@@ -320,10 +321,10 @@
 	                        dataType:"json",
 	                        success: function (result) {
 	                            console.log("성공");   
-	                        var htmls="";
+	                       		var htmls="";
 	                        if(result.length < 1){
 	                            $("#goods-box").empty();
-	                           	htmls += '<tr><td style="100%">관련상품이 없습니다.</td></tr>';
+	                           	htmls += '<tr><td colspan="5" style="100%">관련상품이 없습니다.</td></tr>';
 	                        } else {
 	                           	$(result).each(function(){        
 	                           		$("#goods-box").empty();
@@ -434,11 +435,16 @@
 				                                m_redirect_url : 'http://localhost:8282/restfull/' + '주문처리 이후 이동할 페이지',
 				                            }, function(rsp) {
 				                                if ( rsp.success ) {
+				                                	//여기부터 수정해야함 ( db에 저장할 데이터 수집 )
 				                                    var msg = '결제가 완료되었습니다.';
 				                                    msg += '고유ID : ' + rsp.imp_uid;
 				                                    msg += '상점 거래ID : ' + rsp.merchant_uid;
 				                                    msg += '결제 금액 : ' + rsp.paid_amount;
 				                                    msg += '카드 승인번호 : ' + rsp.apply_num;
+				                                    msg += '결제일시 : ' + rsp.paid_at;
+				                                    msg += '매출전표 url : ' + rsp.receipt_url;
+				                                    msg += '결제 상태 : ' + rsp.status;
+				                                    
 				                                }
 				                                else {
 				                                    var msg = '결제에 실패하였습니다. 에러내용 : ' + rsp.error_msg
@@ -456,6 +462,5 @@
 	   
 	
 			<%@ include file="/WEB-INF/include/js-footer.jsp"%>
-		</div>
 	</body>
 </html>
