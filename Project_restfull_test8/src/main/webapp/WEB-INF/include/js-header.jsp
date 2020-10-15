@@ -46,7 +46,7 @@
 					<br/>
 					[<a href="<c:url value="/user/userHome" />">마이페이지</a>]
 					<br/>
-					<c:if test="${principal.user.athority_name == 'ROLE_ADMIN'}">
+					<c:if test="${principal.user.authority_name == 'ROLE_ADMIN'}">
 						[<a href="<c:url value="/admin/adminHome" />">관리자 홈</a>]
 					</c:if>
 					

@@ -13,99 +13,162 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-  <style>
-  .sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-  .sortable li { margin:10px 10px 10px 10px ; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px;  background-color:#8A93C0;}
-  .sortable li span { position: absolute; margin-left: -1.3em; }
-  input { border: none 0; margin : 0 auto; border:1px; background-color:#8A93C2;}
-  
-  .col-sm-3{
-  	display: inline-block;
-  }
-  .choice-menu {
-  		width: 200px;
-        height: 500px;
-        display: inline-block;
-        overflow: auto; 
-  }
-  
- .course-1day{
- 		width:200px;
- 		height:300px;
- 		background-color:green;
- 		border:1px solid black;
- 		display:inline-block;
- }
-  </style>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $( function() {
-    $( ".sortable" ).sortable();
-    $( ".sortable" ).disableSelection();
-  });
-  </script>
-  <%@ include file="/WEB-INF/include/plugins.jspf"%>
-</head>
-<body>
-	<%@ include file="/WEB-INF/include/js-header.jsp"%>
-	<div id="courseWrapper" class="container wrapper">
-		<div class="row">
-			<div class="col-sm-3">
-				<div id ="mybtns">
-					<h2>sido</h2>
-					<div id="sido" class="choice-menu">
-						<div class="sido-choice" value="11">서울/경기</div>
-						<div class="sido-choice" value="28">인천</div>
-						<div class="sido-choice" value="42">강원</div>
-						<div class="sido-choice" value="43">충북</div>
-						<div class="sido-choice" value="44">충남/대전</div>
-						<div class="sido-choice" value="47">경북/대구</div>
-						<div class="sido-choice" value="48">경남/부산/울산</div>
-						<div class="sido-choice" value="45">전북</div>
-						<div class="sido-choice" value="46">전남/광주</div>
-						<div class="sido-choice" value="50">제주</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-3">
-				<h2>sigungu</h2>
-				<div id="sigungu" class="choice-menu">
-				
-				</div>
-				
-			</div>
-			<div class="col-sm-3">
-				<h2>여행지목록</h2>
-				<div id="travel-destinations"  class="choice-menu">
-				
-				</div>
-			</div>
-			<div class="col-sm-3">
-					<h2>여행코스등록</h2>
-					<button type="button" id="blank-btn" value="공백칸 추가">공백칸 추가</button>
-					
-			           <div id="myCourse">
-			                    <div id="course-group">
-			                        <div class="course">
-			                            <div id="day1" class="course-1day" >
-			                                <ol class="sortable">
-			
-			                                </ol>
-			                            </div>
-			                        </div>
-			                    </div>
-			            </div>
-						<button type="button" id="complete-btn" value="확인">확인</button>
-						 
-						
-			</div>
-			<div id="myCourse-goods" style="padding-top:50px; padding-bottom:50px; width:100%">
-				<hr/>
-				<div id="goodsList">
-				</div>
-			</div>
-		</div>
+   <style>
+         .sortable {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 60%;
+            
+         }
+         
+         .sortable li {
+            margin: 10px 10px 10px 10px;
+            padding: 0;
+            padding-left: 1.5em;
+            font-size: 1.4em;
+            height: 18px;
+            background-color: #8A93C0;
+         }
+         
+         .sortable li span {
+            position: relative;
+         }
+         
+         input {
+            border: none 0;
+            margin: 0 auto;
+            border: 1px;
+            background-color: #8A93C2;
+         }
+         
+         .choice-menu {
+            width: 200px;
+            height: 250px;
+            display: inline-block;
+            overflow: auto;
+            cursor: pointer;
+         }
+         
+         .sido-choice, .sigungu-choice, .trav-btn {
+            
+         }
+         
+         .course {
+            text-align: center;
+         }
+         
+         .course-1day {
+            width: 350px;
+            height: 300px;
+            background-color: skyblue;
+            border: 1px solid black;
+            display: inline-block;
+            cursor: pointer;
+            margin: 5px;
+            border-radius: .25em;
+            text-align: center;
+         }
+         .delete-btn {
+         background-color: red;
+         }
+         
+         #myCourse {
+            width: 100px;
+            height: 325px;
+            white-space: nowrap;
+         }
+         </style>
+         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+         <script>
+            $(function() {
+               $(".sortable").sortable();
+               $(".sortable").disableSelection(); /* 드래그 해서 순서 변경 가능하게  */
+            });
+         </script>
+      </head>
+      <body>
+         <%@ include file="/WEB-INF/include/js-header.jsp"%>
+         <div class="container">
+            <div class="row">
+               <div class="col-xs-4 col-sm-2" style="margin-right: 15px;">
+                  <div id="mybtns">
+                     <h2>sido</h2>
+                     <div id="sido" class="choice-menu">
+                        <div class="sido-choice" value="11"
+                           onMouseover="this.style.background='skyblue';"
+                           onMouseout="this.style.background='white';">서울/경기</div>
+                        <div class="sido-choice" value="28"
+                           onMouseover="this.style.background='skyblue';"
+                           onMouseout="this.style.background='white';">인천</div>
+                        <div class="sido-choice" value="42"
+                           onMouseover="this.style.background='skyblue';"
+                           onMouseout="this.style.background='white';">강원</div>
+                        <div class="sido-choice" value="43"
+                           onMouseover="this.style.background='skyblue';"
+                           onMouseout="this.style.background='white';">충북</div>
+                        <div class="sido-choice" value="44"
+                           onMouseover="this.style.background='skyblue';"
+                           onMouseout="this.style.background='white';">충남/대전</div>
+                        <div class="sido-choice" value="47"
+                           onMouseover="this.style.background='skyblue';"
+                           onMouseout="this.style.background='white';">경북/대구</div>
+                        <div class="sido-choice" value="48"
+                           onMouseover="this.style.background='skyblue';"
+                           onMouseout="this.style.background='white';">경남/부산/울산</div>
+                        <div class="sido-choice" value="45"
+                           onMouseover="this.style.background='skyblue';"
+                           onMouseout="this.style.background='white';">전북</div>
+                        <div class="sido-choice" value="46"
+                           onMouseover="this.style.background='skyblue';"
+                           onMouseout="this.style.background='white';">전남/광주</div>
+                        <div class="sido-choice" value="50"
+                           onMouseover="this.style.background='skyblue';"
+                           onMouseout="this.style.background='white';">제주</div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xs-4 col-sm-2" style="margin-right: 15px;">
+                  <h2>sigungu</h2>
+                  <div id="sigungu" class="choice-menu"></div>
+      
+               </div>
+               <div class="col-sm-3" style="margin-right: 15px;">
+                  <h2>여행지목록</h2>
+                  <div id="travel-destinations" class="choice-menu"></div>
+               </div>
+               <div class="col-xs-4 col-sm-4" >
+                  
+                  
+                  <h2>여행코스등록</h2>
+                  <div id="myCourse">
+                     <div class="course">
+                        <div id="day1" class="course-1day" style="overflow: auto;">
+                           <ol class="sortable">
+   
+                           </ol>
+                        </div>
+                     </div>
+                  </div>
+                  <button type="button" id="complete-btn" value="확인">확인</button>
+                  <button type="button" id="blank-btn" class="travel">빈칸추가</button>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-sm-1"></div>
+               <div class="col-sm-10">
+                  <div id="goodsList"></div>
+               </div>
+            </div>
+         </div>
+      
+      
+      
+      
+      <!-------------------------------------------------------------------------------------------->
+            <!-- 시군구 가져오는 곳 -->
+
 				<script>
 					$(function(){
 						$(".sido-choice").click(function(){
@@ -321,13 +384,34 @@
 			                            	alert("상품을 선택하세요.");
 			                            	console.log("상품번호에 부합하는 상품이 없었음")
 				                        } else {
-				                        	var totalPrice = 0;
 				                        	
-				                           	$(result).each(function(){    
-				                           		console.log(this.name);
-				                           		totalPrice += this.price;
+				                        	//주문 정보 생성
+				                        	var totalPrice = 0,
+				                        		productName = '',
+				                        		productLength = 1;
+				                        	
+				                        	var buyer_name = $('input[name="name"]').val();
+				                        	var buyer_email = $('input[name="email"]').val();
+				                        	var buyer_tel = $('input[name="phone"]').val();
+				                        	
+				                        	$(result).each(function (index, item) {
+				                                console.log(item.name);
+				                           		totalPrice += item.price;
+				                           		
+				                           		//반환된 0번째 상품을 메인 상품명으로 지정
+				                           		if(index == 0){
+				                           			productName = item.name;
+				                           		}else{
+				                           			productLength++;
+				                           		}
+				                           		
 				                           	});
 				                           	
+				                        	//상품명 생성
+				                        	if(productLength > 1){
+				                        		productName = productName + " 외 "+ productLength + "건";
+				                        	}
+				                        	
 				                           	console.log("총 가격 = " + totalPrice);
 				                           	
 				                           	
@@ -335,19 +419,19 @@
 				                           	var IMP = window.IMP;
 				                            var code = "iamport";  // FIXME: 가맹점 식별코드
 				                            IMP.init(code);
-
+				                            
 				                            // 결제요청
 				                            IMP.request_pay({
 				                                // name과 amount만 있어도 결제 진행가능
 				                                pg : 'html5_inicis', // pg 사 선택
 				                                pay_method : 'card',
 				                                merchant_uid : 'merchant_' + new Date().getTime(),
-				                                name : '주문명:결제테스트',
+				                                name : productName,
 				                                amount : totalPrice,
-				                                buyer_email : 'iamport@siot.do',
-				                                buyer_name : '구매자이름',
-				                                buyer_tel : '010-1234-5678',
-				                                m_redirect_url : 'http://localhost:8282/restfull/user/userHome'
+				                                buyer_email : buyer_email,
+				                                buyer_name : buyer_name,
+				                                buyer_tel : buyer_tel,
+				                                m_redirect_url : 'http://localhost:8282/restfull/' + '주문처리 이후 이동할 페이지',
 				                            }, function(rsp) {
 				                                if ( rsp.success ) {
 				                                    var msg = '결제가 완료되었습니다.';
