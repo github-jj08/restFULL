@@ -148,59 +148,59 @@ public class AdminBoardController {
       return noticelist;
    }
    
-   //content_view
-   @GetMapping("/notice/content_view")
-   public String content_view(String board_numbers, Model model) {
-      log.info("content_view");
-      int board_no = Integer.parseInt(board_numbers);
-      log.info("게시글 view 호출; 게시글 번호 = " + board_no);
-      model.addAttribute("content_view",adboardService.getBoardVO(board_no));
-      model.addAttribute("filelist", adboardService.getBoardAttachmentVO(board_no));
-      return "admin/notice_content_view";
-   }
-   
-
-   //write_view
-   @GetMapping("/notice/write_view")
-   public String write_view() {
-      log.info("write_view ");
-      
-      return "admin/notice_write_view";
-   }
-   
-   @RequestMapping(value="/notice/write", method = {RequestMethod.GET, RequestMethod.POST})
-   public String write(HttpServletRequest request, @RequestParam(value="file") MultipartFile[] uploadfiles, AdminBoardVO boardVO) {
-      log.info("write");
-      adboardService.writeBoardVO(uploadfiles, boardVO);
-      log.info("service.uploadFile(uploadFiles);");
-      return "redirect:/admin/board/notice";
-   }
-
-   //수정 기능 modify_view 페이지 호출
-   @RequestMapping(value = "/notice/modify", method = RequestMethod.GET)
-   public String modify(int board_numbers, Model model) {
-      model.addAttribute("modify_view", adboardService.getBoardVO(board_numbers));
-      model.addAttribute("filelist", adboardService.getBoardAttachmentVO(board_numbers));
-      
-      return "admin/notice_modify_view";
-   }
-   
-   //수정 기능 수행
-   @RequestMapping(value = "/notice/modify", method = RequestMethod.POST)
-   public String modify(AdminBoardVO boardVO) {
-      log.info("modify()");
-      adboardService.modifyBoardVO(boardVO);
-      log.info("글번호 - " + boardVO.getBoard_numbers());
-      return "redirect:/admin/board/notice/content_view?board_numbers="+ boardVO.getBoard_numbers();
-   }
-   
-   //delete?bId=${content_view.bId}
-   @GetMapping("/notice/delete")
-   public String delete(AdminBoardVO boardVO, Model model) {
-      adboardService.deleteBoardVO(boardVO.getBoard_numbers());
-      log.info("삭제 성공");
-      return "redirect:/admin/board/notice";
-   }
+	/*
+	 * //content_view
+	 * 
+	 * @GetMapping("/notice/content_view") public String content_view(String
+	 * board_numbers, Model model) { log.info("content_view"); int board_no =
+	 * Integer.parseInt(board_numbers); log.info("게시글 view 호출; 게시글 번호 = " +
+	 * board_no);
+	 * model.addAttribute("content_view",adboardService.getBoardVO(board_no));
+	 * model.addAttribute("filelist",
+	 * adboardService.getBoardAttachmentVO(board_no)); return
+	 * "admin/notice_content_view"; }
+	 * 
+	 * 
+	 * //write_view
+	 * 
+	 * @GetMapping("/notice/write_view") public String write_view() {
+	 * log.info("write_view ");
+	 * 
+	 * return "admin/notice_write_view"; }
+	 * 
+	 * @RequestMapping(value="/notice/write", method = {RequestMethod.GET,
+	 * RequestMethod.POST}) public String write(HttpServletRequest
+	 * request, @RequestParam(value="file") MultipartFile[] uploadfiles,
+	 * AdminBoardVO boardVO) { log.info("write");
+	 * adboardService.writeBoardVO(uploadfiles, boardVO);
+	 * log.info("service.uploadFile(uploadFiles);"); return
+	 * "redirect:/admin/board/notice"; }
+	 * 
+	 * //수정 기능 modify_view 페이지 호출
+	 * 
+	 * @RequestMapping(value = "/notice/modify", method = RequestMethod.GET) public
+	 * String modify(int board_numbers, Model model) {
+	 * model.addAttribute("modify_view", adboardService.getBoardVO(board_numbers));
+	 * model.addAttribute("filelist",
+	 * adboardService.getBoardAttachmentVO(board_numbers));
+	 * 
+	 * return "admin/notice_modify_view"; }
+	 * 
+	 * //수정 기능 수행
+	 * 
+	 * @RequestMapping(value = "/notice/modify", method = RequestMethod.POST) public
+	 * String modify(AdminBoardVO boardVO) { log.info("modify()");
+	 * adboardService.modifyBoardVO(boardVO); log.info("글번호 - " +
+	 * boardVO.getBoard_numbers()); return
+	 * "redirect:/admin/board/notice/content_view?board_numbers="+
+	 * boardVO.getBoard_numbers(); }
+	 * 
+	 * //delete?bId=${content_view.bId}
+	 * 
+	 * @GetMapping("/notice/delete") public String delete(AdminBoardVO boardVO,
+	 * Model model) { adboardService.deleteBoardVO(boardVO.getBoard_numbers());
+	 * log.info("삭제 성공"); return "redirect:/admin/board/notice"; }
+	 */
    
    
    //////////////////////////////////////
