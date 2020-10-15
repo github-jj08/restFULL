@@ -15,7 +15,7 @@
                 <div class="col-lg-3">
                     <div class="footer-left">
                         <div class="footer-logo">
-                            <a href="#"><img src="${pageContext.request.contextPath}/resources/img/LOGOsmall.png" alt=""></a>
+                            <a href="#"><img src="resources/img/LOGOsmall.png" alt=""></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>
@@ -61,7 +61,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> 2020 
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </div>
                         <div class="payment-pic">
-                            <img src="${pageContext.request.contextPath}/resources/img/payment-method.png" alt="">
+                            <img src="resources/img/payment-method.png" alt="">
                         </div>
                     </div>
                 </div>

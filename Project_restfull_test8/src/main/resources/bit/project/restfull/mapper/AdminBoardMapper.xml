@@ -242,4 +242,14 @@
 		 #{item}
 		</foreach>
 	</select>
+	
+	<!-- 특정상품 번호에 해당하는 구매예정 상품 목록 -->
+	<select id="myGoods"  resultType="bit.project.restfull.vo.GoodsVO">
+	<![CDATA[
+		select * from goods where goods_numbers in
+	]]>
+		<foreach collection="array" item="item" open="(" close=")" separator=",">
+		 #{item}
+		</foreach>
+	</select>
 </mapper>

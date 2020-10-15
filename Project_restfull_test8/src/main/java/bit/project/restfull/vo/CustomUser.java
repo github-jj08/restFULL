@@ -26,11 +26,8 @@ public class CustomUser extends User {
 	}
 	
 	public CustomUser(UserVO uservo) {
-		
 		super(uservo.getMember_id(), uservo.getPw(), Collections.singletonList(new SimpleGrantedAuthority(uservo.getAuthorities())));
-		
 		this.user = uservo;
-		
 	}
 	
 }

@@ -55,7 +55,7 @@ public class BoardController {
 	public String write_view() {
 		log.info("write_view ");
 		
-		return "write_view";
+		return "user/write_view";
 	}
 	
 	@RequestMapping(value="/write", method = {RequestMethod.GET, RequestMethod.POST})

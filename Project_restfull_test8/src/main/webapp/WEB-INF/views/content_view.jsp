@@ -215,7 +215,7 @@
 
 												function likeCheck(){ 
 													$.ajax({
-													url: "${pageContext.request.contextPath}/board/likeCheck",
+													url: "${pageContext.request.contextPath}/user/board/likeCheck",
 									                type: "POST",
 									                dataType:"json",
 									                data: {
@@ -236,7 +236,7 @@
 												// 추천버튼 클릭시(추천 추가 또는 추천 제거)
 												$("#like_update").click(function(){
 													$.ajax({
-														url: "${pageContext.request.contextPath}/board/likeUpdate",
+														url: "${pageContext.request.contextPath}/user/board/likeUpdate",
 										                type: "POST",
 										                data: {
 										                    "board_numbers": board_numbers,
@@ -364,7 +364,7 @@
 							              //신고글의 제목으로 신고대상글 번호를 넘김
 							              //신고글의 구분(음란성/홍보/기타)를 필터번호로 넘김
 							         $.ajax({
-											url: "${pageContext.request.contextPath}/report",
+											url: "${pageContext.request.contextPath}/user/report",
 							                type: "POST",
 							                data: {
 							                    "title":reportnum,
@@ -500,7 +500,7 @@
 									
 									console.log("삭제 대상 : " + comments_numbers);
 										$.ajax({
-											url: "${pageContext.request.contextPath}/delComments",
+											url: "${pageContext.request.contextPath}/user/delComments",
 							                type: "POST",
 							                data: {
 							                    "comments_numbers": comments_numbers
@@ -524,7 +524,7 @@
 									console.log("contents : " + contents);
 									
 									$.ajax({
-										url: "${pageContext.request.contextPath}/addComments",
+										url: "${pageContext.request.contextPath}/user/addComments",
 						                type: "POST",
 						                data: {
 						                    "board_numbers": board_numbers,
