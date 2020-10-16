@@ -18,7 +18,7 @@ import lombok.extern.log4j.Log4j;
 public class CustomUser extends User {
 
 	private UserVO user;
-	/* principal.user < ¿ä °´Ã¼*/
+	/* principal.user < */
 	
 	public CustomUser(String userid, String password, Collection<? extends GrantedAuthority> authorities) {
 		super(userid, password, authorities);

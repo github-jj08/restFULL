@@ -25,8 +25,8 @@ public class BoardVO {
 	private int filter_numbers;
 	private String filterName;
 	private String location;
-	private DestinationVO destinationVO;		//여행지 주소 정보 객체 locationVO의 location_name = location
-	//private AttachmentVO attachmentVO;	//첨부파일 정보 객체
+	private DestinationVO destinationVO;		
+	//private AttachmentVO attachmentVO;	
 	private String thumbnail;
 	
 }

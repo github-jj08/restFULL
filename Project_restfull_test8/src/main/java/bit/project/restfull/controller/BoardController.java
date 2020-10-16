@@ -87,7 +87,7 @@ public class BoardController {
 	public String content_view(String board_numbers, Model model) {
 		log.info("content_view");
 		int board_no = Integer.parseInt(board_numbers);
-		log.info("�Խñ� view ȣ��; �Խñ� ��ȣ = " + board_no);
+		log.info("게시판 번호  = " + board_no);
 		BoardVO vo = boardService.getBoardVO(board_no);
 		String location = vo.getLocation();
 		//해당 여행지에 대한 다른 관련 게시글들을 뽑기 위해 location정보를 넘겨야함

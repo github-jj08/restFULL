@@ -172,7 +172,7 @@ public class LoginController {
 
 	// 입국심사
     @GetMapping("/kakaologin")
-    public String kakaoCallback(String code, HttpServletRequest request) throws Exception { //@ResponseBody data�� �������ִ� ��Ʈ�ѷ� �Լ�
+    public String kakaoCallback(String code, HttpServletRequest request) throws Exception { //@ResponseBody data
     	
     	Gson gson = new Gson();
     	RestTemplate rt = new RestTemplate();
@@ -209,15 +209,15 @@ public class LoginController {
     		    	
     	RestTemplate rt2 = new RestTemplate();
     	
-    	//HttpHeaders ������Ʈ ����
+    	//HttpHeaders 
     	HttpHeaders headers2 = new HttpHeaders();
     	headers2.add("Authorization", "Bearer " + oauthToken.getAccess_token());
 	    	headers2.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
     	
-    	//HttpHeader�� HttpBody�� �ϳ��� ������Ʈ�� ���
+    	//HttpHeader HttpBody
     	HttpEntity<MultiValueMap<String,String>> kakaoProfileRequest2 = new HttpEntity<>(headers2);
     	
-    	//Http ��û�ϱ� - post ������� - �׸��� response ������ ���� ����.
+    	//Http post response 
     	ResponseEntity<String> response2 = rt2.exchange(
     			"https://kapi.kakao.com/v2/user/me",
     			HttpMethod.POST,

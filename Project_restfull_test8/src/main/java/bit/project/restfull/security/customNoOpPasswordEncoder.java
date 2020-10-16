@@ -6,7 +6,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import lombok.extern.log4j.Log4j;
 @Log4j
 public class customNoOpPasswordEncoder implements PasswordEncoder{
-      // 암호화 안 했으니 날것 그래도집어넣음..
    
    @Override
    public String encode(CharSequence rawPassword) {
