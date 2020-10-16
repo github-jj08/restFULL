@@ -2,13 +2,24 @@ package bit.project.restfull.service;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.response.AccessToken;
@@ -23,21 +34,6 @@ import lombok.extern.log4j.Log4j;
 @NoArgsConstructor
 @Service
 public class PaymentService {
-	
-	@Inject
-	private PaymentMapper paymentMapper;
-	
-	public List<PaymentVO> getPayList(String destination_name){
-		return paymentMapper.getPayList(destination_name);
-		
-	}
-	public List<PaymentVO> getPayList2(){
-		return paymentMapper.getPayList2();
-		
-	}
-	
-	
-	
 
 	/*
 	 * 인증 API 
@@ -54,56 +50,62 @@ public class PaymentService {
 	 * 
 	 */
 	
-	
-	// /payments/complete
-	IamportClient client;
-		
-	private IamportClient getNaverTestClient() {
-		String test_api_key = "5978210787555892";
-		String test_api_secret = "9e75ulp4f9Wwj0i8MSHlKFA9PCTcuMYE15Kvr9AHixeCxwKkpsFa7fkWSd9m0711dLxEV7leEAQc6Bxv";
-			
-		return new IamportClient(test_api_key, test_api_secret);
-	}
-	
-	private IamportClient getBillingTestClient() {
-		String test_api_key = "7544324362787472";
-		String test_api_secret = "9frnPjLAQe3evvAaJl3xLOODfO3yBk7LAy9pRV0H93VEzwPjRSQDHFhWtku5EBRea1E1WEJ6IEKhbAA3";
-	
-		return new IamportClient(test_api_key, test_api_secret);
-	}
-		
-	public void setup() {
-		String test_api_key = "imp_apikey";
-		String test_api_secret = "ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f";
-		client = new IamportClient(test_api_key, test_api_secret);
-	}
-		
-	public void testGetToken() {
+	public String getToken(HttpServletRequest request, HttpServletResponse response, JsonObject json, String requestURL) {
+			 
+		String access_Token = "";
+
 		try {
-			IamportResponse<AccessToken> auth_response = client.getAuth();
+			URL url = new URL(requestURL);
+		    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		         
+		    //request 형식 설정
+		    conn.setRequestMethod("POST");
+		    //conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+		    conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+		         
+		    conn.setDoInput(true);
+		    conn.setDoOutput(true);
+			conn.setUseCaches(false);
+			conn.setDefaultUseCaches(false);
 				
-			assertNotNull(auth_response.getResponse());
-			assertNotNull(auth_response.getResponse().getToken());
-		} catch (IamportResponseException e) {
-			System.out.println(e.getMessage());
-				
-			switch(e.getHttpStatusCode()) {
-			case 401 :
-				//TODO
-				break;
-			case 500 :
-				//TODO
-				break;
-			}
+			//request
+		    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+		    
+		    bw.write(json.toString());
+		    bw.flush();
+		    bw.close();
+		    
+		    int responseCode = conn.getResponseCode();
+	        log.info("responseCode : " + responseCode);
+
+		    if (responseCode == 200) {
+			    //리턴된 결과 읽기
+			    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
+	            
+	            String inputline = null;
+	            String result = "";
+
+	            while((inputline = br.readLine()) != null){
+	            	result += inputline;
+	            }
+	            
+	            log.info("response body : " + result);
+	            
+	            ////////////////////////////
+	            JsonParser parser = new JsonParser();
+	            JsonElement element = parser.parse(result);
+
+	            
+	            access_Token = element.getAsJsonObject().get("access_token").getAsString();
+	            log.info("access_token : " + access_Token);
+	            br.close();
+	            bw.close();
+	        }
 		} catch (IOException e) {
-			//서버 연결 실패
-			e.printStackTrace();
-		}
-	}
-		
-		
-	
-	
+        	log.info("RestCall Fail : " + e.getMessage());
+	    }
+		return access_Token;
+    }
 	
 }
 

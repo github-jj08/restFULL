@@ -97,7 +97,7 @@
                     <div class="row">
                         <div class="col-lg-2 col-md-2">
                             <div class="logo">
-                                <a href="./rs-mainpage.jsp">
+                                <a href="${pageContext.request.contextPath}">
                                     <img src="resources/img/LOGOsmall.png" alt="">
                                 </a>
                             </div>
@@ -122,7 +122,7 @@
             <div class="container">
                 <nav class="nav-menu mobile-menu">
                     <ul>
-                        <li class="active"><a href="./rs-mainpage.jsp">Home</a></li>
+                        <li class="active"><a href="${pageContext.request.contextPath}">Home</a></li>
                         <li><a href="${pageContext.request.contextPath}/user/write_view">글작성</a></li>
                         <li><a href="${pageContext.request.contextPath}/travel">여행코스작성</a></li>
                         <li><a href="./rs-Servicecenter.jsp">공지사항</a></li>

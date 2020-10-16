@@ -13,7 +13,6 @@
     <!-- 검사 URL -->
     <http auto-config="true" use-expressions="true">
         <intercept-url pattern="/user/**" access="hasAnyRole('USER, ADMIN')" />
-        <intercept-url pattern="/pay/**" access="hasAnyRole('USER, ADMIN')" />
         <intercept-url pattern="/mypage/**" access="hasAnyRole('USER, ADMIN')" />
         <intercept-url pattern="/travel/**" access="hasAnyRole('USER, ADMIN')" />
         <intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />

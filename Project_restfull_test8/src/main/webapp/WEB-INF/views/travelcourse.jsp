@@ -435,24 +435,40 @@
 				                                m_redirect_url : 'http://localhost:8282/restfull/' + '주문처리 이후 이동할 페이지', // get 방식으로 짜야함(쿼리스트링으로 전달)
 				                            }, function(rsp) {
 				                                if ( rsp.success ) {
-				                                	//여기부터 수정해야함 ( db에 저장할 데이터 수집 )
-				                                    var msg = '결제가 완료되었습니다.';
-				                                    msg += '고유ID : ' + rsp.imp_uid;
-				                                    msg += '상점 거래ID : ' + rsp.merchant_uid;
-				                                    msg += '결제 금액 : ' + rsp.paid_amount;
-				                                    msg += '카드 승인번호 : ' + rsp.apply_num;
-				                                    msg += '결제일시 : ' + rsp.paid_at;
-				                                    msg += '매출전표 url : ' + rsp.receipt_url;
-				                                    msg += '결제 상태 : ' + rsp.status;
-				                                    
-				                                }
-				                                else {
-				                                    var msg = '결제에 실패하였습니다. 에러내용 : ' + rsp.error_msg
-				                                }
-				                                alert(msg);
-				                            });
+				                                	$.ajax({
+				                                		url: "/payments/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+				                                		type: 'POST',
+				                                		dataType: 'json',
+				                                		data: {
+				                            	    		"imp_uid" : rsp.imp_uid
+				                            	    		//기타 필요한 데이터가 있으면 추가 전달
+				                                		}
+				                                	}).done(function(data) {
+				                                		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+				                                		if ( everythings_fine ) {
+				                                			//여기부터 수정해야함 ( db에 저장할 데이터 수집 )
+						                                    var msg = '결제가 완료되었습니다.';
+						                                    msg += '고유ID : ' + rsp.imp_uid;
+						                                    msg += '상점 거래ID : ' + rsp.merchant_uid;
+						                                    msg += '결제 금액 : ' + rsp.paid_amount;
+						                                    msg += '결제일시 : ' + rsp.paid_at;
+						                                    msg += '매출전표 url : ' + rsp.receipt_url;
+						                                    msg += '결제 상태 : ' + rsp.status;
+						                                    
+				                                			alert(msg);
+				                                		} else {
+				                                			//[3] 아직 제대로 결제가 되지 않았습니다.
+				                                			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+				                                		}
+				                                	});
+				                                } else {
+				                                    var msg = '결제에 실패하였습니다.';
+				                                    msg += '에러내용 : ' + rsp.error_msg;
 
-			                     		}
+				                                    alert(msg);
+				                                }//if end
+				                            });//function end
+				                        }
 			                        }//success end
 			              	}); //ajax end     
 			              
