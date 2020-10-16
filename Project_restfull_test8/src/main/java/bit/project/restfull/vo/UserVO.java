@@ -1,11 +1,11 @@
 package bit.project.restfull.vo;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.log4j.Log4j;
 
-@Log4j
+@Builder
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,9 +21,11 @@ public class UserVO {
 	private int enabled;
 	private String grade_name;
 	private String authority_name;
+	private String login_type;
+	
 	
 	public UserVO() {
-		this("member_id", "pw", "name", "birth", "gender", "phone", "email", 1, "∂—π˜¿Ã", "ROLE_USER");
+		this("member_id", "pw", "name", "birth", "gender", "phone", "email", 1, "ÎöúÎ≤ÖÏù¥", "ROLE_USER", "normal");
 	}	
 	
 	public String getAuthorities() {

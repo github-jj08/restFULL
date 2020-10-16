@@ -1,6 +1,7 @@
 package bit.project.restfull.controller;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -23,7 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
-import bit.project.restfull.mapper.PaymentMapper;
 import bit.project.restfull.service.BoardService;
 import bit.project.restfull.service.UserService;
 import bit.project.restfull.vo.BoardVO;
@@ -48,8 +48,6 @@ public class UserController {
 	@Inject
     private BoardService boardService;
 	
-	@Inject
-    private PaymentMapper commentMapper;
 	
 	@Inject
     private BCryptPasswordEncoder passEncoder;
@@ -104,7 +102,7 @@ public class UserController {
 		return "user/userHome";
 	}
 	
-	@GetMapping("user/boardList") // 마이페이지 - 내 게시글 list
+	@GetMapping("user/myList") // 마이페이지 - 내 게시글 list
 	public String boardListView(BoardVO boardVO, UserVO userVO, Model model) {
 		
 		log.info("user board list");
@@ -118,7 +116,7 @@ public class UserController {
 		return "user/boardList";
 	}
 	
-	@GetMapping("user/content_view2") // 내 게시글 list - > 자세히 보기
+	@GetMapping("user/content_view") // 내 게시글 list - > 자세히 보기
 	public String content_view_detail(UserVO userVO, BoardVO boardVO, Model model) {
 		log.info("board_view");
 		int board_numbers = boardVO.getBoard_numbers();
@@ -126,8 +124,8 @@ public class UserController {
 		boardVO = boardService.getBoardVO(board_numbers);
 		log.info(boardVO);
 		
-		model.addAttribute("userBoardDetail", boardVO);
-		return "content_view_detail";
+		model.addAttribute("content_view", boardVO);
+		return "content_view";
 	}
 
 	@GetMapping("user/qnaList") // 마이페이지 - 문의하기 리스트
@@ -146,7 +144,7 @@ public class UserController {
 	//수정예정
 	@GetMapping("user/ask") // 마이페이지 - 문의글 작성 페이지
 	public String userQnAWrite_view() {
-		return "user/write_view_qna";
+		return "write_view_qna";
 	}
 	
 	@PostMapping("user/ask_write") // 마이페이지 - 문의글 작성
@@ -155,7 +153,7 @@ public class UserController {
 		log.info("user member_id : "+member_id); // name
 		boardService.writeBoardVO(uploadfiles, boardVO);
 		log.info("문의글 작성");
-		return "redirect:qnaList";
+		return "redirect:qnaList?member_id=" + member_id;
 	}
 	
 	@GetMapping("user/content_view_qna") // 문의하기 -> 자세히 보기
@@ -171,10 +169,9 @@ public class UserController {
 	}
 	
 	@GetMapping("user/reportList") // 마이페이지 - 신고리스트 페이지
-	public String reportListView(HttpSession session, UserVO userVO, BoardVO boardVO, Model model) {
+	public String reportListView(UserVO userVO, BoardVO boardVO, Model model) {
 		log.info("user board list");
 		String member_id = userVO.getMember_id();
-		log.info(session.getAttribute("member_id"));
 		log.info("user member_id : "+member_id); // name
 		userVO = userService.getUserVO(member_id);
 		log.info(userVO);

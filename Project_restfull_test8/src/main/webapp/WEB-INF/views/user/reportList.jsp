@@ -10,15 +10,16 @@
 </head>
 <body>
 	<table width="500" cellpadding="0" cellspacing="0" border="1">
+		<input type="hidden" name="member_id" value="${sessionScope.userId}"/>
 		<tr>
 			<td>글 번호</td>
 			<td>게시글 제목</td>
 			<td>게시 날짜</td>
 		</tr>
-		<c:forEach items="${userBoard}" var="userBoard">
+		<c:forEach items="${userReports}" var="userBoard">
 		<tr>
 			<td>${userBoard.board_numbers}</td>
-			<td><a href="content_view_qna?board_numbers=${userBoard.board_numbers}">${userBoard.title}</a></td>
+			<td><a href="content_view_rep?board_numbers=${userBoard.board_numbers}">${userBoard.title}</a></td>
 			<td>${userBoard.dates}</td>
 		</tr>
 		</c:forEach>

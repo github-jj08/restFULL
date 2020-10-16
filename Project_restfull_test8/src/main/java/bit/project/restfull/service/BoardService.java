@@ -16,33 +16,33 @@ import bit.project.restfull.vo.LikesVO;
 public interface BoardService {
 	List<BoardVO> getList(int boardlist_numbers, String searchWord);
 	
-	//¸ŞÀÎ °Ô½Ã±Û Ãâ·Â
+	//ë©”ì¸ ê²Œì‹œê¸€ ì¶œë ¥
 	BoardVO getBoardVO(int board_numbers);
 	List<AttachmentVO> getBoardAttachmentVO(int board_numbers);
 	
-	//±ÛÀÛ¼º
+	//ê¸€ì‘ì„±
 	void writeBoardVO(MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException;
 	
-	//±Û¼öÁ¤
+	//ê¸€ìˆ˜ì •
 	void modifyBoardVO(BoardVO boardVO);
 
-	//±Û»èÁ¦
+	//ê¸€ì‚­ì œ
 	void deleteBoardVO(int board_numbers);
 
-	//ÁÁ¾Æ¿ä ±â´É 
+	//ì¢‹ì•„ìš” ê¸°ëŠ¥ 
 	int likeCheck(LikesVO likesVO);
 	void likeUpdate(LikesVO likesVO);
 	int likeCount(int board_numbers);
 
-	//´ñ±Û ±â´É
+	//ëŒ“ê¸€ ê¸°ëŠ¥
 	public void writeComment(CommentVO commentVO);
 	public List<CommentVO> commentList(int board_numbers);
 	public void delComment(int comments_numbers);
 
-	//°ü·Ã °Ô½Ã±Û »Ì±â
+	//ê´€ë ¨ ê²Œì‹œê¸€ ë½‘ê¸°
 	List<BoardVO> getOtherBoardVO(int board_numbers, String location);
 
-	//½Å°í±Û
+	//ì‹ ê³ ê¸€
 	void writeBoardVO(BoardVO boardVO);
 
 	List<BoardVO> boardList(String member_id);

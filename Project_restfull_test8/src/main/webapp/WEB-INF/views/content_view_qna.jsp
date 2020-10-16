@@ -25,6 +25,32 @@
         height:50%;
      }
   
+     #myCarousel {
+        background-color: black;
+        width: 100%;
+        height: 500px;
+        text-align:center;
+        justify-content:center;
+     }
+   
+     .carousel-item,
+     .carousel-inner,
+   .carousel-inner img {
+      height: 100%;
+      width: auto;
+      text-align: center;
+   }
+   
+   .carousel-inner {
+      text-align: center;
+   }
+   
+   .likebutton, 
+   .btn dropdown-toggle {
+      background-color:#8A93C0;
+      color:white;
+   }
+   
   </style>
 </head>
 <body>
@@ -47,17 +73,14 @@
                <div>
                   <p>${content_view.contents}</p>
                </div>
-              <hr/>
+               
             <!-- 답변 글 작성칸 -->
                         <!-- 댓글 출력 -->
             <div id="rightbox"style="float:right">            
                <div>
                   <!-- 댓글 작성칸 -->
                   <div id="addMyComment">
-                 	 <c:if test="${ principal.user.member_id != null }">
-						<input type="hidden" name="member_id" value="${principal.user.member_id}"/>
-					</c:if>
-                     <span id="myId"><sec:authentication property="principal.user.member_id"/></span> :  
+                     <span id="myId">${principal.user.member_id}</span> :  
                      <input type="text" placeholder="댓글을 입력하세요" id="reply" name="reply"/>
                      <button id="addComment" type="button" value="입력">댓글작성</button> 
                   </div>
@@ -185,7 +208,10 @@
                                   },
                            });
                         });
-                        commentList(); // 처음 시작했을 때 실행되도록 해당 함수 호출
+                        
+                        
+
+                            commentList(); // 처음 시작했을 때 실행되도록 해당 함수 호출
                      });
                   </script>
                </div>

@@ -123,12 +123,12 @@ public class UserServiceImpl implements UserService {
 	public void findPW(HttpServletResponse response, UserVO userVO) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		
+		// 아이디가 없으면
 		if(loginMapper.idChk(userVO.getMember_id()) == 0) {
 			out.print("아이디가 없습니다.");
 			out.close();
 		}
-		// 이메일 비교
+		// 가입에 사용한 이메일이 아니면
 		else if(!userVO.getEmail().equals(loginMapper.readUser(userVO.getMember_id()).getEmail())) {
 			out.print("잘못된 이메일 입니다.");
 			out.close();
@@ -142,16 +142,14 @@ public class UserServiceImpl implements UserService {
 			userVO.setPw(pw);
 			System.out.println(pw);
 			sendMail(userVO, "findPW");
-			// 암호화전 비밀번호 전송
-			
+			// 비밀번호 변경
 			String encode = passEncoder.encode(pw);
 			
 			userVO.setPw(encode);
 			
 			loginMapper.findPW(userVO);
-			// 암호화된 임시 비밀번호 업데이트
-			
-			out.print("임시 비밀번호가 전송되었습니다.");
+			// 비밀번호 변경 메일 발송
+			out.print("이메일로 임시 비밀번호를 발송하였습니다.");
 			out.close();
 		}
 	}
@@ -159,27 +157,27 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void sendMail(UserVO userVO, String div) {
-		// Mail Server
+		// Mail Server 설정
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.gmail.com";
 		String hostSMTPid = "justicia0310@gmail.com";
-		String hostSMTPpwd = ""; // 구글 앱 로그인 비밀번호
+		String hostSMTPpwd = ""; //여기만 채우고 돌리자 (비번 넣어주는곳)
 
-		// 전송하는 이메일 정보
+		// 보내는 사람 EMail, 제목, 내용
 		String fromEmail = "restFullAdmin@gmail.com";
 		String fromName = "RestFull 관리자";
 		String subject = "";
 		String msg = "";
 		
 		if(div.equals("findPW")) {
-			subject = "RestFull 임시 비밀번호 입니다.";
+			subject = "RestFull 로그인 임시 비밀번호 입니다.";
 			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
 			msg += "<h3 style='color: blue;'>";
 			msg += userVO.getMember_id() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
 			msg += "<p>임시 비밀번호 : ";
 			msg += userVO.getPw() + "</p></div>";
 		}
-
+		// 받는 사람 E-Mail 주소
 		String mail = userVO.getEmail();
 		try {
 			HtmlEmail email = new HtmlEmail();
@@ -197,13 +195,18 @@ public class UserServiceImpl implements UserService {
 			email.setHtmlMsg(msg);
 			email.send();
 		} catch (Exception e) {
-			System.out.println("메일전송 실패 : " + e);
+			System.out.println("메일발송 실패 : " + e);
 		}
 	}
 
 	@Override
 	public int idChk(String member_id) {
 		return loginMapper.idChk(member_id);
+	}
+	
+	@Override
+	public UserVO getUserByIdandAutho(String id, String login_type) {
+		return loginMapper.KreadUserByIdandAutho(id, login_type);
 	}
 	
 }

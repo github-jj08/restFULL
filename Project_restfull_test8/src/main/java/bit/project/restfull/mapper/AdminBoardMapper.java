@@ -30,53 +30,53 @@ import lombok.extern.log4j.Log4j;
  * Handles requests for the application home page.
  */
 public interface AdminBoardMapper{
-	//°Ô½Ã±Û ¸ñ·Ï Ãâ·Â
+	//ê²Œì‹œê¸€ ëª©ë¡ ì¶œë ¥
 	List<AdminBoardVO> getList(int boardlist_numbers);
 	
-	//¸ŞÀÎ °Ô½Ã±Û Ãâ·Â(content_view)
+	//ë©”ì¸ ê²Œì‹œê¸€ ì¶œë ¥(content_view)
 	AdminBoardVO getBoardVO(int board_numbers);
 	List<AttachmentVO> getBoardAttachmentVO(int board_numbers);
 
-	//Á¶È¸¼ö
+	//ì¡°íšŒìˆ˜
 	void upHit(int board_numbers);
 	
-	//±ÛÀÛ¼º(Ã·ºÎÆÄÀÏ Å×ÀÌºí+°Ô½ÃÆÇ Å×ÀÌºí)
+	//ê¸€ì‘ì„±(ì²¨ë¶€íŒŒì¼ í…Œì´ë¸”+ê²Œì‹œíŒ í…Œì´ë¸”)
 	void insertBoardVO(AdminBoardVO boardVO);
 	void insertAttachmentVO(Map<String, Object> fileMap);
 
-	//±Û¼öÁ¤(°Ô½ÃÆÇ Å×ÀÌºí)
+	//ê¸€ìˆ˜ì •(ê²Œì‹œíŒ í…Œì´ë¸”)
 	void updateBoardVO(AdminBoardVO boardVO);
 	
-	//±Û»èÁ¦(°Ô½ÃÆÇÅ×ÀÌºí)
+	//ê¸€ì‚­ì œ(ê²Œì‹œíŒí…Œì´ë¸”)
 	void deleteBoardVO(int board_numbers);
 
-	//¿©ÇàÁö ¸ñ·Ï Ãâ·Â
+	//ì—¬í–‰ì§€ ëª©ë¡ ì¶œë ¥
 	List<DestinationVO> getDestList();
 	DestinationVO getDestVO(String destination_name);
 	void insertDestVO(DestinationVO destinationVO);
 	void updateDestVO(DestinationVO destinationVO);
 	void deleteDestVO(String destination_name);
 		
-	//Áö¿ª ¹øÈ£ ¸ñ·Ï Ãâ·Â
+	//ì§€ì—­ ë²ˆí˜¸ ëª©ë¡ ì¶œë ¥
 	List<SidoguVO> sigunguList(int sidocode);
 	
-	//»óÇ° ¸ñ·Ï Ãâ·Â
+	//ìƒí’ˆ ëª©ë¡ ì¶œë ¥
 	List<GoodsVO> getGoodsList(String destination_name);
 	GoodsVO getGoodsVO(int goods_numbers);
 	void insertGoodsVO(GoodsVO goodsVO);
 	void updateGoodsVO(GoodsVO goodsVO);
 	void deleteGoodsVO(int goods_numbers);
 
-	//¿©ÇàÄÚ½ºÂ¥±â°ü·Ã
-	//¿©ÇàÁö ¸ñ·ÏÃâ·Â(½Ã±º±¸ ÄÚµå¸¦ ¹Ş¾Æ ÇØ´ç ½Ã±º±¸ ÄÚµå¿¡ ¸Â´Â ¿©ÇàÁö¸¸ Ãâ·ÂÇÔ. À§ÀÇ getDestList´Â ¸ğµç ¿©ÇàÁö¸¦ Ãâ·ÂÇÔ.)
+	//ì—¬í–‰ì½”ìŠ¤ì§œê¸°ê´€ë ¨
+	//ì—¬í–‰ì§€ ëª©ë¡ì¶œë ¥(ì‹œêµ°êµ¬ ì½”ë“œë¥¼ ë°›ì•„ í•´ë‹¹ ì‹œêµ°êµ¬ ì½”ë“œì— ë§ëŠ” ì—¬í–‰ì§€ë§Œ ì¶œë ¥í•¨. ìœ„ì˜ getDestListëŠ” ëª¨ë“  ì—¬í–‰ì§€ë¥¼ ì¶œë ¥í•¨.)
 	List<DestinationVO> getDests(int sigungu_code);
-	//°ü·Ã »óÇ°Ãâ·Â
+	//ê´€ë ¨ ìƒí’ˆì¶œë ¥
 	List<GoodsVO> getRGoods(String[] destinations);
 
-	//½æ³×ÀÏ ÀÌ¹ÌÁö ¾÷µ¥ÀÌÆ®
+	//ì¸ë„¤ì¼ ì´ë¯¸ì§€ ì—…ë°ì´íŠ¸
 	void updateBoardThumbImg(@Param("board_numbers") int board_numbers, @Param("thumbnail")String thumbnail);
 
-	//ÇÊÅÍÀÖ´Â °Ô½ÃÆÇ ¸®½ºÆ® »Ì±â
+	//í•„í„°ìˆëŠ” ê²Œì‹œíŒ ë¦¬ìŠ¤íŠ¸ ë½‘ê¸°
 	List<AdminBoardVO> getFilterList(int boardlist_numbers);
 	
 }

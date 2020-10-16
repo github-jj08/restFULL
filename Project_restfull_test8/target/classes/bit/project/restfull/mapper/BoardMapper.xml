@@ -68,7 +68,7 @@
 	<!-- 게시글 작성 -->	
 	<insert id="insertBoardVO" parameterType="bit.project.restfull.vo.BoardVO">
 	<![CDATA[
-		INSERT INTO BOARD (board_numbers, TITLE, CONTENTS, HIT, DATES, MEMBER_ID,BOARDLIST_NUMBERS,FILTER_NUMBERS,LOCATION) VALUES (BOARD_SEQ.NEXTVAL, #{title}, #{contents}, 0, sysdate, #{member_id},#{boardlist_numbers}, #{filter_numbers},#{location})
+		INSERT INTO BOARD (board_numbers, TITLE, CONTENTS, HIT, DATES, MEMBER_ID,BOARDLIST_NUMBERS,FILTER_NUMBERS,LOCATION) VALUES (BOARD_SEQ.NEXTVAL, #{title}, #{contents}, 0, sysdate, #{member_id},#{boardlist_numbers}, #{filter_numbers},#{location,jdbcType=VARCHAR})
 	]]>
 	<selectKey keyProperty="board_numbers" resultType="int" order="AFTER">
 		SELECT BOARD_SEQ.CURRVAL FROM DUAL

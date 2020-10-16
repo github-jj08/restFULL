@@ -46,7 +46,7 @@
 	<%@ include file="/WEB-INF/include/js-header.jsp"%>
 		
 	<div class="row">
-		<div class="col-sm-4">
+		<div class="col-sm-3">
 			<div id ="mybtns">
 				<h2>sido</h2>
 				<div id="sido" class="choice-menu">
@@ -63,17 +63,20 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-4">
+		<div class="col-sm-3">
 			<h2>sigungu</h2>
 			<div id="sigungu" class="choice-menu">
 			
 			</div>
-			<	h2>여행지목록</h2>
+			
+		</div>
+		<div class="col-sm-3">
+			<h2>여행지목록</h2>
 			<div id="travel-destinations"  class="choice-menu">
 			
 			</div>
 		</div>
-		<div class="col-sm-4">
+		<div class="col-sm-3">
 				<hr/>
 				<h2>여행코스등록</h2>
 				<button type="button" id="blank-btn" value="공백칸 추가">공백칸 추가</button>
@@ -114,7 +117,7 @@
 				        type: "GET",
 				        dataType:"json",
 				        success: function (result) {
-				         	//옵션 초기화
+				         	//옵션 초기화 
 				          	$('#sigungu').empty();
 				            $(result).each(function(){		
 				           		$('#sigungu').append('<div class="sigungu-choice" value="'+this.sigungu_code+'">'+this.sigunguname+'</div>');
@@ -172,9 +175,6 @@
 							myCourse.push($('input[name="course"]').eq(i).val());
 						}
 						console.log(myCourse);
-						.empty()
-						.remove();
-						
 						$("#goodsList").append('<h2>관련 상품 목록</h2>');
 						
 						//보기 편하게 하려고 htmls로 짬

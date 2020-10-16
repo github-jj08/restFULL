@@ -26,30 +26,30 @@ import lombok.extern.log4j.Log4j;
  * Handles requests for the application home page.
  */
 public interface BoardMapper{
-	//°Ô½Ã±Û ¸ñ·Ï Ãâ·Â
+	//ê²Œì‹œê¸€ ëª©ë¡ ì¶œë ¥
 	List<BoardVO> getList(@Param("boardlist_numbers")int boardlist_numbers, @Param("searchWord") String searchWord);
 	
-	//¸ŞÀÎ °Ô½Ã±Û Ãâ·Â(content_view)
+	//ë©”ì¸ ê²Œì‹œê¸€ ì¶œë ¥(content_view)
 	BoardVO getBoardVO(int board_numbers);
 	List<AttachmentVO> getBoardAttachmentVO(int board_numbers);
 
-	//Á¶È¸¼ö
+	//ì¡°íšŒìˆ˜
 	void upHit(int board_numbers);
 	
-	//±ÛÀÛ¼º(Ã·ºÎÆÄÀÏ Å×ÀÌºí+°Ô½ÃÆÇ Å×ÀÌºí)
+	//ê¸€ì‘ì„±(ì²¨ë¶€íŒŒì¼ í…Œì´ë¸”+ê²Œì‹œíŒ í…Œì´ë¸”)
 	int insertBoardVO(BoardVO boardVO);
 	void insertAttachmentVO(Map<String, Object> fileMap);
 
-	//½æ³×ÀÏ ÀÌ¹ÌÁö ¾÷µ¥ÀÌÆ®
+	//ì¸ë„¤ì¼ ì´ë¯¸ì§€ ì—…ë°ì´íŠ¸
 	void updateBoardThumbImg(@Param("board_numbers") int board_numbers, @Param("thumbnail")String thumbnail);
 
-	//±Û¼öÁ¤(°Ô½ÃÆÇ Å×ÀÌºí)
+	//ê¸€ìˆ˜ì •(ê²Œì‹œíŒ í…Œì´ë¸”)
 	void updateBoardVO(BoardVO boardVO);
 	
-	//±Û»èÁ¦(°Ô½ÃÆÇÅ×ÀÌºí)
+	//ê¸€ì‚­ì œ(ê²Œì‹œíŒí…Œì´ë¸”)
 	void deleteBoardVO(int board_numbers);
 	
-	//ÁÁ¾Æ¿ä ±â´É 
+	//ì¢‹ì•„ìš” ê¸°ëŠ¥ 
 	int likeCheck(LikesVO likesVO);
 	void likeInsert(LikesVO likesVO);
 	void likeDelete(LikesVO likesVO);
@@ -57,16 +57,16 @@ public interface BoardMapper{
 
 	List<BoardVO> getOthers(@Param("board_numbers") int board_numbers, @Param("location") String location);
 
-	// À¯Àú >º»ÀÎ °Ô½Ã±Û È®ÀÎ(byÀ±È¯)
+	// ìœ ì € >ë³¸ì¸ ê²Œì‹œê¸€ í™•ì¸(byìœ¤í™˜)
 	@Select("select * from board where member_id = #{member_id} and boardlist_numbers = '1' order by board_numbers")
 	public List<BoardVO> boardList(String member_id);
 
-	// À¯Àú ¹®ÀÇ³»¿ª È®ÀÎ
+	// ìœ ì € ë¬¸ì˜ë‚´ì—­ í™•ì¸
 	@Select("select * from board where member_id = #{member_id} and boardlist_numbers = '4' order by board_numbers")
 	public List<BoardVO> qnaList(String member_id);
 
-	// À¯Àú ½Å°í³»¿ª È®ÀÎ
+	// ìœ ì € ì‹ ê³ ë‚´ì—­ í™•ì¸
 	@Select("select * from board where member_id = #{member_id} and boardlist_numbers = '3' order by board_numbers")
 	public List<BoardVO> askList(String member_id);
-		 
+		
 }
