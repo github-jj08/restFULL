@@ -432,7 +432,7 @@
 				                                buyer_email : buyer_email,
 				                                buyer_name : buyer_name,
 				                                buyer_tel : buyer_tel,
-				                                m_redirect_url : 'http://localhost:8282/restfull/' + '주문처리 이후 이동할 페이지',
+				                                m_redirect_url : 'http://localhost:8282/restfull/' + '주문처리 이후 이동할 페이지', // get 방식으로 짜야함(쿼리스트링으로 전달)
 				                            }, function(rsp) {
 				                                if ( rsp.success ) {
 				                                	//여기부터 수정해야함 ( db에 저장할 데이터 수집 )

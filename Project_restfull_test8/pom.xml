@@ -21,8 +21,14 @@
 	    	<id>oracle</id>
 	    	<url>http://www.datanucleus.org/downloads/maven2/</url>
 		</repository>
+		
+		<!-- 아임포트 -->
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
 	</repositories>	
-	
+		
 	<dependencies>
 		<!-- 오라클 JDBC 드라이버 -->
 		<dependency>
@@ -286,6 +292,13 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-email</artifactId>
 			<version>1.2</version>
+		</dependency>
+		
+		<!-- 아임포트 -->
+		<dependency>
+			<groupId>com.github.iamport</groupId>
+			<artifactId>iamport-rest-client-java</artifactId>
+			<version>0.2.11</version>
 		</dependency>
 		
 	</dependencies>
