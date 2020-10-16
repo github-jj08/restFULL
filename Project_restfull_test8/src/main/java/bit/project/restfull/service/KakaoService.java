@@ -9,7 +9,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonElement;
@@ -31,6 +34,8 @@ public class KakaoService {
 	@Autowired
 	private LoginMapper loginMapper;
 	
+	@Inject
+	private BCryptPasswordEncoder passEncoder; 
 	
 	@Autowired
 	private SnsMapper snsMapper;
@@ -163,7 +168,11 @@ public class KakaoService {
 		  
 		  //insertID부분
 		  userVO.setMember_id(userInfo.get("sns_id")+"@k");
-		  userVO.setPw("null");
+		  
+		  String pw = "null"; 
+		  String encode = passEncoder.encode(pw);
+		  userVO.setPw(encode);
+		  
 		  userVO.setName(userInfo.get("sns_nickname"));
 		  userVO.setGrade_name("뚜벅이");
 		  userVO.setAuthority_name("ROLE_USER");
@@ -185,7 +194,7 @@ public class KakaoService {
 		  
 
 		  
-		  String member_id = snsVO.getMember_id();
+		  String member_id = userVO.getMember_id();
 		   
 		  if(loginMapper.idChk(member_id)== 0) {
 		  	  snsMapper.insertID(userVO);

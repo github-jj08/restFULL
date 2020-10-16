@@ -42,12 +42,7 @@ public class KakaoController {
 	@Autowired
 	private KakaoService kakaoService;
 	
-	
-	/*
-	 * @RequestMapping("/login") public String home() { log.info("·Î±×ÀÎ ÆäÀÌÁö È£Ãâ");
-	 * return "login/rs-loginpage"; }
-	 */
-	
+
 	@RequestMapping("/kakaologin")
 	public String login(@RequestParam(value = "code", required = false) String code, HttpSession session) 
 	throws Exception{
@@ -63,12 +58,12 @@ public class KakaoController {
 		log.info("Controller : " + userInfo);
 		  
 		
-		// Å¬¶óÀÌ¾ðÆ®ÀÇ ¾ÆÀÌµð°¡ Á¸ÀçÇÒ ¶§ ¼¼¼Ç¿¡ ÇØ´ç ¾ÆÀÌµð¿Í ÅäÅ« µî·Ï 
+		// ì„¸ì…˜ ë„£ê¸°
 		session.setAttribute("member_id", userInfo.get("sns_id")+"@k");
 		session.setAttribute("access_Token", access_Token);
 		  	
 		 
-		log.info("kakao login ³¡");
+		log.info("kakao login");
 		
 		kakaoService.addSNS(userInfo);
 		  
@@ -85,7 +80,7 @@ public class KakaoController {
 		  session.removeAttribute("member_id");
 		  
 		  session.invalidate();
-		  log.info("Ä«Ä«¿À ·Î±×¾Æ¿ô ¼º°ø!");
+		  log.info("ì¹´ì¹´ì˜¤ ë¡œê·¸ì•„ì›ƒ");
 		  
 		  
 		  return "redirect:/"; 

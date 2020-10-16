@@ -22,4 +22,5 @@ public class SnsVO {
 	private String sns_nickname;
 	
 	
+	
 }

@@ -41,23 +41,20 @@
 	             	 <sec:authorize access="isAuthenticated()">
 						<div class="showloign">
  	             			<sec:authentication var="principal" property="principal"/>
-	             			
-								<strong>${principal.user.member_id}</strong>님 환영합니다.
-					            <a href="<c:url value="/user/userHome" />">🏠‍💁‍♀️‍🙋‍♀️💁‍♂️💒</a>	 
+	             				<c:if test="${principal.user.authority_name == 'ROLE_USER'}">
+									<strong>${principal.user.member_id}</strong>님 환영합니다.
+						            <a href="<c:url value="/user/userHome" />">🏠‍💁‍♀️‍🙋‍♀️💁‍♂️💒</a>	
+					            </c:if>
+					            
+					            <c:if test="${principal.user.authority_name == 'ROLE_ADMIN'}">
+			            		  <a href="<c:url value="/admin/adminHome" />">👾관리자 홈👾</a>
+					            </c:if>
+					            
 								<form:form action="${pageContext.request.contextPath}/logout" method="POST">
-									<input type="submit" id="kakaosubmit" value="로그아웃" />
+									<input type="submit" id="logoutsubmit" value="로그아웃" />
 								</form:form> 
 							
 						</div>	
-						
-						
-		          		<!-- 관리자모드 -->
-			          <c:if test="${principal.user.authority_name == 'ROLE_ADMIN'}">
-			              [<a href="<c:url value="/admin/adminHome" />">관리자 홈</a>]
-			              	<form:form action="${pageContext.request.contextPath}/logout" method="POST">
-								<input type="submit" value="로그아웃" />
-							</form:form> 
-			          </c:if>
 			        </sec:authorize>
                	</div>  
             </div>
@@ -125,8 +122,8 @@
                 <nav class="nav-menu mobile-menu">
                     <ul>
                         <li class="active"><a href="${pageContext.request.contextPath}/">Home</a></li>
-                        <li><a href="${pageContext.request.contextPath}/write_view">글작성</a></li>
-                        <li><a href="#">여행코스작성</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/write_view">글작성</a></li>
+                        <li><a href="">여행코스작성</a></li>
                         <li><a href="./rs-Servicecenter.jsp">공지사항</a></li>
                         <li><a href="#">이벤트</a></li>
                         <li><a href="./rs-Servicecenter_faq.jsp">자주하는질문</a></li>

@@ -26,26 +26,64 @@
 		</style>
 </head>
 <body>
+<%@ include file="/WEB-INF/include/js-header.jsp"%>
 
-<form action="<%=request.getContextPath() %>/write" method="post" enctype="multipart/form-data">
-	<!-- hidden -->
-	<sec:authentication var="principal" property="principal" />
-	<input type="hidden" name="member_id" value="${principal.user.member_id}"/>
-	<input type="hidden" name="boardlist_numbers" value="<c:out value='1'/>">
-	<input type="hidden" name="filter_numbers" value="<c:out value='1'/>">
+
+
+<!-- <글쓰기 부분> -->
+
+    <section class="blog-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="blog-details-inner">
+                        <div class="blog-detail-title">
+							<form action="<%=request.getContextPath() %>/write" method="post" enctype="multipart/form-data" class="writeform">
+								<!-- hidden -->
+								<sec:authentication var="principal" property="principal" />
+								<input type="hidden" name="member_id" value="${principal.user.member_id}"/>
+								<input type="hidden" name="boardlist_numbers" value="<c:out value='1'/>">
+								<input type="hidden" name="filter_numbers" value="<c:out value='1'/>">
+								
+								<!-- write Data -->
+								<div class="group-input">
+									<label for="picturech">사진 선택 </label>
+									<div class="writepic">
+									    <input type="file" class="uploadfile" id="fileupload" name="file" multiple="multiple" /> 
+                                    </div>
+								</div>
+								
+								
+								<div class="group-input">
+									<label for="title">제목 </label>
+									<div class="writetitle">
+									    <input type="text" name="title" class="write_tilte">
+                                    </div>
+								</div>
+								
+								<div class="group-input">
+									<label for="contents">내용 </label>
+									<div class="writecontentx">
+									    <textarea rows="10" cols="50" name="contents" class="write_content" placeholder="최대 500자 까지 작성 가능합니다." maxlength="500"></textarea>
+									</div>
+								</div>
+								
+								<div class="group-input">
+									<label for="location">대표위치 검색 :</label>
+									<input type="text" class="write_loc" name="location">
+								</div>
+								
+								
+								<input type="submit" class="site-btn write-btn" value="글 게시"/>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 	
-	<!-- write Data -->
-	<input type="file" id="fileupload" name="file" multiple="multiple" /> 
-	<hr>
 	
-	제목 : <input type="text" name="title">
-	<hr/>
-	내용 : <textarea rows="10" cols="50" name="contents" placeholder="최대 500자 까지 작성 가능합니다." maxlength="500">
-	</textarea>
-	<hr/>
-	대표위치 검색 : <input type="text" name="location">
-	<hr/>
-	<input type="submit" id="submit" value="완료" style="position:absolute;"/>
-</form>
+<%@ include file="/WEB-INF/include/js-footer.jsp"%>
 </body>
 </html>
