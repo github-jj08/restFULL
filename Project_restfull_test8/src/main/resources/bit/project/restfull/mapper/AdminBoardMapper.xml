@@ -212,8 +212,11 @@
 
 	<!-- 상품 수정 -->
 	<update id="updateGoodsVO">
+	<![CDATA[
 		update goods set 
 		DESTINATION_NAME=#{destination_name},NAME=#{name},PRICE=#{price},AMOUNT=#{amount},STATUS=#{status},SELLSTART=#{sellstart},SELLEND=#{sellend},SELLER=#{seller} 
+		where GOODS_NUMBERS = #{goods_numbers} 
+	]]>
 	</update> 
 	
 	<!-- 상품 삭제 -->
@@ -234,6 +237,16 @@
 	<select id="getRGoods"  resultType="bit.project.restfull.vo.GoodsVO">
 	<![CDATA[
 		select * from goods where destination_name in
+	]]>
+		<foreach collection="array" item="item" open="(" close=")" separator=",">
+		 #{item}
+		</foreach>
+	</select>
+	
+	<!-- 특정상품 번호에 해당하는 구매예정 상품 목록 -->
+	<select id="myGoods"  resultType="bit.project.restfull.vo.GoodsVO">
+	<![CDATA[
+		select * from goods where goods_numbers in
 	]]>
 		<foreach collection="array" item="item" open="(" close=")" separator=",">
 		 #{item}

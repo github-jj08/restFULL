@@ -215,7 +215,7 @@
 
 												function likeCheck(){ 
 													$.ajax({
-													url: "${pageContext.request.contextPath}/user/board/likeCheck",
+													url: "${pageContext.request.contextPath}/board/likeCheck",
 									                type: "POST",
 									                dataType:"json",
 									                data: {
@@ -236,7 +236,7 @@
 												// 추천버튼 클릭시(추천 추가 또는 추천 제거)
 												$("#like_update").click(function(){
 													$.ajax({
-														url: "${pageContext.request.contextPath}/user/board/likeUpdate",
+														url: "${pageContext.request.contextPath}/board/likeUpdate",
 										                type: "POST",
 										                data: {
 										                    "board_numbers": board_numbers,
@@ -277,11 +277,39 @@
 						     
 						    </button>
 						    <div class="dropdown-menu">
-						      <a class="dropdown-item" href="modify?board_numbers=${content_view.board_numbers}">수정</a>
-						      <a class="dropdown-item" href="delete?board_numbers=${content_view.board_numbers}">삭제</a>
-						      <a class="dropdown-item" href="#DecModal" data-toggle="modal" >신고</a>
+						      <a class="dropdown-item" id="modify" href="modify?board_numbers=${content_view.board_numbers}">수정</a>
+						      <a class="dropdown-item" id="delete">삭제</a>
+						      <a class="dropdown-item" id="report" href="#DecModal" data-toggle="modal" >신고</a>
 						    </div>
-						    
+						    <script>
+						    	$("#delete").on("click", function(){
+						    		var member_id = '<c:out value="${content_view.member_id}"/>';
+						    		var board_numbers = $('input[name=board_numbers]').val()
+						    		console.log("삭제합니다 : " + board_numbers);
+						    		
+						    		var yn = confirm("게시글을 삭제하시겠습니까?");
+						    		if(yn){
+						    			
+						    				$.ajax({
+						    					url : "/restfull/admin/boardDeleteAdmin",
+						    					async: true,
+						    					type : "GET",
+						    					data : {
+						    						"board_numbers" : board_numbers
+						    					},
+						    					success: function() {
+						    							alert("게시글이 삭제되었습니다.");
+						    							location.href = "/restfull/admin/user_content_view?member_id="+member_id;
+						    					},
+						    					error: function() {
+						    						alert("알수 없는 에러 발생");
+						    					}
+						    				})
+						    		}else{
+						    			alert("게시글 삭제가 취소되었습니다.");
+						    		}
+						    	});
+						    </script>
 							<!-- Modal -->
 							<div id="DecModal" class="modal fade" role="dialog">  <!-- fade는 투명 효과 -->
 							  <div class="modal-dialog">
@@ -364,7 +392,7 @@
 							              //신고글의 제목으로 신고대상글 번호를 넘김
 							              //신고글의 구분(음란성/홍보/기타)를 필터번호로 넘김
 							         $.ajax({
-											url: "${pageContext.request.contextPath}/user/report",
+											url: "${pageContext.request.contextPath}/report",
 							                type: "POST",
 							                data: {
 							                    "title":reportnum,
@@ -500,7 +528,7 @@
 									
 									console.log("삭제 대상 : " + comments_numbers);
 										$.ajax({
-											url: "${pageContext.request.contextPath}/user/delComments",
+											url: "${pageContext.request.contextPath}/delComments",
 							                type: "POST",
 							                data: {
 							                    "comments_numbers": comments_numbers
@@ -524,7 +552,7 @@
 									console.log("contents : " + contents);
 									
 									$.ajax({
-										url: "${pageContext.request.contextPath}/user/addComments",
+										url: "${pageContext.request.contextPath}/addComments",
 						                type: "POST",
 						                data: {
 						                    "board_numbers": board_numbers,

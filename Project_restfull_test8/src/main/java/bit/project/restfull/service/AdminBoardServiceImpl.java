@@ -229,4 +229,9 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	public List<AdminBoardVO> getFilterList(int boardlist_numbers) {
 		return mapper.getFilterList(boardlist_numbers);
 	}
+
+	@Override
+	public List<GoodsVO> myGoods(String[] goodsList) {
+		return mapper.myGoods(goodsList);
+	}
 }

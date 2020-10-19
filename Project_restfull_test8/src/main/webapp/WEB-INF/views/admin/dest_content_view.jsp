@@ -16,7 +16,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/admin/board/dest/">여행지 목록으로 돌아가기</a>
+<a href="${pageContext.request.contextPath}/admin/dest">여행지 목록으로 돌아가기</a>
 
             <div class="container">
             <a class="dropdown-item" href="modify?destination_name=${content_view.destination_name}">수정</a>

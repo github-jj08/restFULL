@@ -30,7 +30,6 @@
 	</style>
 </head>
 <body>
-
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
 	<!-- 게시글 목록 -->
 	<div class="container contents">

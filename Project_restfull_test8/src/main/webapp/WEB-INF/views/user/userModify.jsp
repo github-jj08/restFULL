@@ -112,14 +112,14 @@
   <tr>
    <td>패스워드</td>
    <td>
-    <input type="password"  id="pw" name="pw" placeholder="패스워드(8자 이상)" /><br />
+    <input type="password"  id="pw" name="pw" placeholder="패스워드 입력(8자 이상)"/><br />
    </td>
   </tr>
 
   <tr>
    <td>패스워드 확인</td>
    <td>
-    <input type="password"  id="pw2" name="password_chk" placeholder="패스워드 확인(6-8자)"/><br />
+    <input type="password"  id="pw2" name="password_chk" placeholder="패스워드 확인(8자 이상)" /><br />
    </td>
   </tr>
 
@@ -130,26 +130,23 @@
   <tr>
 
    <td>휴대폰</td>
-   <td><input type="text" id="phone" name="phone" placeholder="PHONE" required onkeypress="onlyNumber()"/></td>
+   <td><input type="text" id="phone" name="phone" placeholder="PHONE" value="<sec:authentication property="principal.user.phone"/>" required onkeypress="onlyNumber()"/></td>
   </tr>
   
   <tr>
    <td>이메일</td>
-   <td><input type="email" class="form-control" id="email" placeholder="EMAIL" name="email" /><br/>
+   <td><input type="email" class="form-control" id="email" placeholder="EMAIL" name="email" value="<sec:authentication property="principal.user.email"/>"/><br/>
    </td>
   </tr>
 
   <tr>
    <td colspan="2">
-    <a href="/" id="home"><button type="button" class="button3">돌아가기</button></a>
+    <a href="userHome" id="home"><button type="button" class="button3">돌아가기</button></a>
     <button type="submit" class="button3" >수정완료</button>
-    <button class="cencle btn btn-danger" type="button" id="cancel">취소</button>
    </td>
   </tr>
-
  </table>
  </form:form>
-
  </fieldset>
 
 </body>

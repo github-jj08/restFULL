@@ -74,25 +74,10 @@
                   <p>${content_view.contents}</p>
                </div>
                
-            <!-- 답변 글 작성칸 -->
-                        <!-- 댓글 출력 -->
+            <!-- 답변 글 -->
             <div id="rightbox"style="float:right">            
                <div>
-                  <!-- 댓글 작성칸 -->
-                  <div id="addMyComment">
-                     <span id="myId">${principal.user.member_id}</span> :  
-                     <input type="text" placeholder="댓글을 입력하세요" id="reply" name="reply"/>
-                     <button id="addComment" type="button" value="입력">댓글작성</button> 
-                  </div>
-                  
-                  <!-- 댓글 list -->
                   <div id="commentlist">
-                     <!-- 사용자 프로필 사진 or 사용자 아이디 -->
-                     <div>
-                     
-                     </div>
-                     
-                     <!-- 댓글 -->
                      <div id="reply">
                         <section class="replyForm">
                            <table id="list-table">
@@ -106,7 +91,6 @@
                         var board_numbers = ${content_view.board_numbers};
                         var member_id = $('#myId').text();
                         
-                        console.log("댓글쓰기 board_numbers - " + board_numbers);
                         console.log("member_id : " + member_id);
                         
                         //댓글 목록 출력(문서 로딩되자마자 실행)
@@ -159,58 +143,9 @@
                                 }
 
                                 $("#list-table").append(htmls);
-                                  }
+                                }
                            });
                         };
-
-                        
-                        $(document).on("click", "button[name='delete']",function(){
-                           
-                           console.log("delete 버튼 클릭");
-                           var comments_numbers = $(this).val();
-                           
-                           console.log("삭제 대상 : " + comments_numbers);
-                              $.ajax({
-                                 url: "${pageContext.request.contextPath}/delComments",
-                                     type: "POST",
-                                     data: {
-                                         "comments_numbers": comments_numbers
-                                     },
-                                     success: function () {
-                                        commentList();
-                                        console.log("성공");
-                                     },
-
-                              })
-                        });
-
-                        
-                        //댓글 작성 버튼 클릭 시
-                        $("#addComment").click(function(){
-                           var contents = $('#reply').val();
-
-                           console.log("댓글쓰기 board_numbers - " + board_numbers);
-                           console.log("member_id : " + member_id);
-                           
-                           console.log("contents : " + contents);
-                           
-                           $.ajax({
-                              url: "${pageContext.request.contextPath}/addComments",
-                                  type: "POST",
-                                  data: {
-                                      "board_numbers": board_numbers,
-                                      "member_id": member_id,
-                                      "contents":contents
-                                  },
-                                  success: function () {
-                                     commentList();
-                                     $('input[name=reply]').val('');
-                                  },
-                           });
-                        });
-                        
-                        
-
                             commentList(); // 처음 시작했을 때 실행되도록 해당 함수 호출
                      });
                   </script>

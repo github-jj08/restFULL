@@ -79,4 +79,7 @@ public interface AdminBoardMapper{
 	//필터있는 게시판 리스트 뽑기
 	List<AdminBoardVO> getFilterList(int boardlist_numbers);
 	
+	//특정 상품정보출력
+	List<GoodsVO> myGoods(String[] goodsList);
+	
 }

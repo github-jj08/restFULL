@@ -237,7 +237,7 @@
 									
 									console.log("가져오는지 확인 sidoCode : " + sidoCode);								    
 									$.ajax({
-										url: "${pageContext.request.contextPath}/admin/board/dest/getSigunguCode/" + sidoCode,
+										url: "${pageContext.request.contextPath}/admin/dest/getSigunguCode/" + sidoCode,
 								        type: "GET",
 								        dataType:"json",
 								        success: function (result) {

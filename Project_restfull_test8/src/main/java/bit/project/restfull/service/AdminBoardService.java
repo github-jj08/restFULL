@@ -48,4 +48,7 @@ public interface AdminBoardService {
 
 	//필터게시판뽑기
 	List<AdminBoardVO> getFilterList(int boardlist_numbers);
+	
+	//구매할 상품목록 Read
+	List<GoodsVO> myGoods(String[] goodsList);
 }
