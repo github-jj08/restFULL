@@ -31,6 +31,7 @@ import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.DestinationVO;
 import bit.project.restfull.vo.GoodsVO;
 import bit.project.restfull.vo.PagingVO;
+import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.ResponseVO;
 import bit.project.restfull.vo.SidoguVO;
 import bit.project.restfull.vo.UserVO;
@@ -378,5 +379,24 @@ public class AdminBoardController {
       model.addAttribute("filelist", adboardService.getBoardAttachmentVO(board_no));
       return "admin/qna_content_view";
    }
-   
+
+//	수정예정!!!!!
+//   /* 상품 주문내역 관리 */
+//   //1. 주문받은 모든 상품 리스트
+//   @GetMapping("/paymentList") 
+//   public String paymentList() {
+//	   List<RequestVO> list = adboardService.getPaymentList();
+//	   model.addAttribute("list", list);
+//	   return "user/paymentList";
+//	}
+//	
+//   //2. id별로 조회 결제내역
+//   @GetMapping("/goods_view") 
+//   public String user_goodsView(String goods_numbers, Model model) {
+//	   log.info("content_view");
+//	   int goodsNum = Integer.parseInt(goods_numbers);
+//	   model.addAttribute("content_view",adboardService.getGoodsVO(goodsNum));
+//	   return "user/goods_content_view";
+//   }
+//   
 }
