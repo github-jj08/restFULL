@@ -64,6 +64,7 @@ public class AdminBoardController {
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
 		
 		int total = userService.countMember();
+		// 유저 숫자세기
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
 			cntPerPage = "5";
