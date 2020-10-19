@@ -3503,3 +3503,159 @@ ol {
     padding-top: 15px;
 }
 
+
+/*-----------------
+글 보여지는 부분
+--------------------*/    
+
+.write-section {
+	margin-top:50px;
+}
+ /* 사진 부분 */
+.leftbox .photo-view {
+        background-color: #8A93C0;
+        border : 1px;
+        width:100%;
+        height:500px;
+     }
+  
+.leftbox .photo-view #myCarousel {
+        background-color: black;
+        width: 100%;
+        height: 450px;
+        text-align:center;
+        justify-content:center;
+     }
+     
+.leftbox .photo-view #myCarousel .carousel-inner {
+      height: 100%;
+      width: auto;
+      text-align: center;
+}   
+
+ .leftbox .photo-view #myCarousel .carousel-item,
+ .leftbox .photo-view #myCarousel .carousel-inner img {
+      height: 100%;
+      width: auto;
+      text-align: center;
+}
+/* 좋아요&드롭다운 부분 */
+.leftbox .photo-view .wrapper {
+    width:100%;
+    height:20px;
+}
+
+/* 좋아요 버튼 */
+.leftbox .photo-view .wrapper .likeanddrop #like-button {
+    padding-top:11px;
+    background-color:#8a93c0;
+    color:white;
+    border:none;
+    font-size:25px;
+}
+
+/* 드롭다운 버튼 */
+.leftbox .photo-view .dropdown {
+    position: relative;
+    display:inline-block;
+    float:right;
+}
+
+.leftbox .photo-view .dropdown .dropbtn {
+    background-color: #8a93c0;
+    line-height:45px;
+    color:white;
+    font-size:20px;
+    border:none;
+    cursor:pointer;
+}
+
+.leftbox .photo-view .dropdown .dropdown-content {
+    display:none;
+    position:absolute;
+    background: #8a93c0;
+    opacity: 0.6;
+    z-index: 1;
+    
+}
+
+.leftbox .photo-view .dropdown .dropdown-content a {
+    color: black;
+    text-decoration: none;
+    display:block;
+}
+
+
+
+
+
+
+
+
+
+/*--------------
+    신고 모달창
+------------------*/
+#DecModal .modal-content .modal-header {
+    background-color:#8a93c0;
+ 
+}
+
+#DecModal .modal-content .modal-header h4{
+    font-weight:800;
+    color: white;
+    text-align: center;
+}
+
+#DecModal .modal-content .modal-header button {
+    color: white;
+}
+
+#DecModal .modal-body {
+    float:left;
+    height: 300px;
+    width:100%;
+}
+
+#DecModal .modal-body .mb-title {
+    margin-bottom:10px;
+    
+}
+#DecModal .modal-body .mb-title b {
+    font-size: 17px;
+}
+
+#DecModal .modal-body .mb-title #title {
+    margin-left:10px;  
+    
+}
+#DecModal .modal-body .mb-reason {
+    margin: 5px 0;
+}
+
+#DecModal .modal-body .mb-reason b {
+    font-size: 17px;   
+}
+
+#DecModal .modal-body .mb-reason input{ 
+    margin-right: 4px;
+}
+
+#DecModal .modal-body .mb-reason label {
+    margin-right:15px;   
+}
+
+#DecModal .modal-body .other-reason #reasontext{
+    width:100%;
+    height: 150px;
+}
+
+#DecModal .modal-footer button{
+    font-size:20px;
+    font-weight:900;
+    text-align:center;
+    float:right;
+}
+
+
+

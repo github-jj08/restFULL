@@ -55,6 +55,8 @@ public class HomeController {
 		return "rs-mainpage";
 	}
 	
+	
+	
 	//검색 결과 페이지
 	@GetMapping("/search")
 	public String search(@RequestParam(value="boardlist_numbers") int boardlist_numbers, @RequestParam(value="searchWord") String searchWord, Model model) {

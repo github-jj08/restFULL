@@ -1,83 +1,87 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
+	<title>RestFuLL | VIEW </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- 하트아이콘,,, -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
 </head>
 <body>
-<%@ include file="/WEB-INF/include/js-header.jsp"%>   
-	   
-	            
-<!-- 메인 컨텐츠  -->
-<section class="write-section spad">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-8 order-lg-1">
-				<input type="hidden" name="board_numbers" value="${content_view.board_numbers}">
-				<div class="leftbox">
-					<div class="photo-view">
-					
-						<!-- 사진들 -->
-						<div id="myCarousel" class="carousel slide" data-ride="carousel">
-							<!-- Indicators -->
-						    <ul class="carousel-indicators"> </ul>
-						     
-						    <!-- Wrapper for slides -->
-						    <div class="carousel-inner"> </div>
-						     
-						    <!-- Controls -->
-						    <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-						       <span class="carousel-control-prev-icon"></span>
-						    </a>
-						    <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-						       <span class="carousel-control-next-icon"></span>
-						    </a>
-						</div>
-						 <!--------------------------
-                        	 Carousel 스크립트 start
-                         ----------------------------->
-						<script>
-							$(function(){  
-								var filelist = new Array();
-								
-								<c:forEach items="${filelist}" var="file">
-									var json = new Object();
-									json.filedirectory = "${file.filedirectory}";
-									filelist.push(json);
-								</c:forEach>
-								
-								console.log("filelist : " + filelist);
-								
-						    	for(var i=0 ; i< filelist.length ; i++) {
-							       $('<div class="carousel-item"><img src="'+filelist[i].filedirectory+'" width=\"460\" height=\"345\""></div>').appendTo('.carousel-inner');
-							       $('<li data-target="#myCarousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
-							     	}
-							     $('.carousel-item').first().addClass('active');
-							     $('.carousel-indicators>li').first().addClass('active');
-							     $('#myCarousel').carousel();
-							});
-						</script>
-						 <!--------------------------
-                        	 Carousel 스크립트 end
-                         ----------------------------->
-						
-						
-						
-						<div class="wrapper">
-							<div class="likeanddrop">
+	<%@ include file="/WEB-INF/include/js-header.jsp"%>  
+	
+	          
+<!-- <글쓰기 부분> -->
 
-								
-								 <!--------------------------
-		                        		좋아요 버튼 start
-		                         ----------------------------->
+<!-- Write Section Begin -->
+<section class="write-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 order-lg-1">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12">
+                       <input type="hidden" name="board_numbers" value="${content_view.board_numbers}">
+                        <div class="leftbox">
+                            <div class="photo-view">
+                                <!-- 사진들 -->
+                                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                    <!-- Indicators -->
+                                    <ul class="carousel-indicators"> </ul>
+
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner"> </div>
+
+                                    <!-- Controls -->
+                                    <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+                                        <span class="carousel-control-prev-icon"></span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+                                        <span class="carousel-control-next-icon"></span>
+                                    </a>
+                                </div>
+                                
+                                <!--------------------------
+                                    Carousel 스크립트 start
+                                ----------------------------->
+                                <script>
+                                    $(function(){  
+                                        var filelist = new Array();
+
+                                        <c:forEach items="${filelist}" var="file">
+                                            var json = new Object();
+                                            json.filedirectory = "${file.filedirectory}";
+                                            filelist.push(json);
+                                        </c:forEach>
+
+                                        console.log("filelist : " + filelist);
+
+                                        for(var i=0 ; i< filelist.length ; i++) {
+                                           $('<div class="carousel-item"><img src="'+filelist[i].filedirectory+'" width=\"460\" height=\"345\""></div>').appendTo('.carousel-inner');
+                                           $('<li data-target="#myCarousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
+                                            }
+                                         $('.carousel-item').first().addClass('active');
+                                         $('.carousel-indicators>li').first().addClass('active');
+                                         $('#myCarousel').carousel();
+                                    });
+                                </script>
+                                
+                                 <!--------------------------
+                                    Carousel 스크립트 end
+                                ----------------------------->
+						
+						
+						
+						
+						
+						<div class="dropdown">
+							<div>
+								<div>
 									<sec:authorize access="isAnonymous()">
 	            						<button type="button" name="loginNeed">
 										<i id="like-button" class="fa fa-heart-o"></i>
@@ -99,18 +103,20 @@
 											<input type="hidden" name="member_id" value="${principal.user.member_id}"/>
 										</c:if>
 										<button type="button" id="like_update">
-											<i id="like-button" class="fa fa-heart-o"></i>
+										<i id="like-button" class="fa fa-heart-o"></i>
 										</button>
-										<span class="like_count"></span>
+											 <span class="like_count"></span>
 										<script>
 											$(function(){
 												var board_numbers = $('input[name=board_numbers]').val();
 												var member_id = $('input[name=member_id]').val();
+
 												console.log("board_numbers : " + board_numbers);
 												console.log("member_id : " + member_id);
+
 												function likeCheck(){ 
 													$.ajax({
-													url: "${pageContext.request.contextPath}/user/board/likeCheck",
+													url: "${pageContext.request.contextPath}/board/likeCheck",
 									                type: "POST",
 									                dataType:"json",
 									                data: {
@@ -147,7 +153,7 @@
 												// 게시글 추천수
 											    function likeCount() {
 													$.ajax({
-														url: "${pageContext.request.contextPath}/board/likeCount",
+														url: "${pageContext.request.contextPath}/user/board/likeCount",
 										                type: "POST",
 										                data: {
 										                    "board_numbers": board_numbers
@@ -165,146 +171,137 @@
 											</script>
 									</sec:authorize>
 								</div>
+							</div>
 							
-							
-							 <!--------------------------
-		                        	좋아요 버튼  end
-		                     ----------------------------->
-							
-								<div class="dropdown">
-							 		<button type="button" class="btn dropdown" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							  		  ...
-							 		</button>
-								    <div class="dropdown-menu">
-								      <a class="dropdown-item" href="modify?board_numbers=${content_view.board_numbers}">수정</a>
-								      <a class="dropdown-item" href="delete?board_numbers=${content_view.board_numbers}">삭제</a>
-								      <a class="dropdown-item" href="#DecModal" data-toggle="modal">신고</a>
-								    </div>
-							
-								</div>
+							<div class="dropdown">
+						    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+						     
+						    </button>
+						    <div class="dropdown-menu">
+						      <a class="dropdown-item" href="modify?board_numbers=${content_view.board_numbers}">수정</a>
+						      <a class="dropdown-item" href="delete?board_numbers=${content_view.board_numbers}">삭제</a>
+						      <a class="dropdown-item" href="#DecModal" data-toggle="modal" >신고</a>
+						    </div>
 						    
-								<!-- 신고 Modal -->
-								<div id="DecModal" class="modal fade" role="dialog">  <!-- fade는 투명 효과 -->
-								  <div class="modal-dialog">
-								
-								    <!-- Modal content-->
-								    <div class="modal-content">
-								      <div class="modal-header">
-								       	<h4>신고작성창</h4>
-								        <button type="button" class="close" data-dismiss="modal">x</button>
-								        </div>
-								        
-								      <div class="modal-body">
-								         <div class="mb-title">
-								          <input type="hidden" name="boardlist_numbers" id="boardlist_numbers" value="3"/>
-								          <input type="hidden" name="member_id" id="member_id" value="${principal.user.member_id}">
-								          <input type="hidden" name="report_numbers" id="report_numbers"value="${content_view.board_numbers}">
-								            <b>신고 대상글 :</b><input type="text" name="title" id="title" value="${content_view.title}" readonly>
-								         </div>
-								           <hr/>
-								         <div class="mb-reason">
-								            <b>신고 사유</b>
-								               <br/>    
-								                <input type="radio" name="report_reason" value="11" checked ><label for="r1">음란성</label>
-								                <input type="radio" name="report_reason" value="12" ><label for="r2">홍보 및 허위</label>
-								                <input type="radio" name="report_reason" value="13" ><label for="r3">기타</label>    
-								               <div class="other-reason">
-								                  <textarea name="report_reason" id="reasontext" placeholder="기타사유를 입력해주세요."  maxlength="500">
-								                  </textarea>
-								               </div>
-								            
-								          </div>  
-								         <!--기타 클릭시 텍스트 입력 가능 script-->
-								         <script>
-								          $(document).ready(function(){
-								
-								  			function reasonchecked(){
-												
-								                console.log("check된 버튼 : " + $("input[name=report_reason]:checked").val());
-								                if($("input[name=report_reason]:checked").val() == "13"){
-								                    $("textarea[name=report_reason]").attr("disabled",false);
-								                    // radio 버튼의 value 값이 13(기타)이라면 활성화
-								
-								                }else{
-								                    // radio 버튼의 value 값이 그 외라면 비활성화
-								                	$("textarea[name=report_reason]").attr("disabled",true);
-								                }
-											}
-								        	  
-								            // 라디오버튼 클릭시 이벤트 발생
-								            $("input:radio[name=report_reason]").click(function(){
-								            	$("textarea[name=report_reason]").val('');
-								            	reasonchecked();
-								            });
-								            
-								            reasonchecked();
-								        });
-								          </script>
-								
-								      </div>
-								      
-								      <!-- Modal footer -->
-								      <div class="modal-footer">
-								        <button type="button" id="finish" class="btn btn-default" data-dismiss="modal">신고</button>
-								      </div>
-								      
-								      <script>
-								      $("#finish").click(function(e){
-								         e.preventDefault();
-								
-								         var boardlist = $("#boardlist_numbers").val();
-								         var memberid = $("#member_id").val();
-								         var reportnum = $("#report_numbers").val();
-								         var reasonNum = $("input[name=report_reason]:checked").val();
-								         var reasonText = $("#reasontext").val();
-								         
-								         console.log(boardlist);
-								         console.log(memberid);
-								         console.log(reportnum);
-								         console.log(reasonNum);
-								         console.log(reasonText);
-								              //신고글의 제목으로 신고대상글 번호를 넘김
-								              //신고글의 구분(음란성/홍보/기타)를 필터번호로 넘김
-								         $.ajax({
-												url: "${pageContext.request.contextPath}/user/report",
-								                type: "POST",
-								                data: {
-								                    "title":reportnum,
-								                	"contents" : reasonText,
-								                    "member_id": memberid,
-								                    "boardlist_numbers": boardlist,
-								                    "filter_numbers" : reasonNum,	
-								                },
-								                success: function () {
-								                	alert("신고가 완료되었습니다.");
-								                },
-											}); 
-								      	});
-								      
-								      
-								      </script>
-								    </div>
-								  </div>
-								</div>	  
-						  	</div>
-						</div>
+							<!-- Modal -->
+							<div id="DecModal" class="modal fade" role="dialog">  <!-- fade는 투명 효과 -->
+							  <div class="modal-dialog">
+							
+							    <!-- Modal content-->
+							    <div class="modal-content">
+							      <div class="modal-header">
+							       <h4>신고작성창</h4>
+							        <button type="button" class="close" data-dismiss="modal">x</button>
+							        </div>
+							        
+							      <div class="modal-body">
+							         <div class="mb-title">
+							          <input type="hidden" name="boardlist_numbers" id="boardlist_numbers" value="3"/>
+							          <input type="hidden" name="member_id" id="member_id" value="${principal.user.member_id}">
+							          <input type="hidden" name="report_numbers" id="report_numbers"value="${content_view.board_numbers}">
+							            <b>신고 대상글 :</b><input type="text" name="title" id="title" value="${content_view.title}" readonly>
+							         </div>
+							           <hr/>
+							         <div class="mb-reason">
+							            <b>신고 사유</b>
+							               <br/>    
+							                <input type="radio" name="report_reason" value="11" checked ><label for="r1">음란성</label>
+							                <input type="radio" name="report_reason" value="12" ><label for="r2">홍보 및 허위</label>
+							                <input type="radio" name="report_reason" value="13" ><label for="r3">기타</label>    
+							               <div class="other-reason">
+							                  <textarea name="report_reason" id="reasontext" placeholder="기타사유를 입력해주세요."  maxlength="500">
+							                  </textarea>
+							               </div>
+							            
+							          </div>  
+							         <!--기타 클릭시 텍스트 입력 가능 script-->
+							         <script>
+							          $(document).ready(function(){
+							
+							  			function reasonchecked(){
+											
+							                console.log("check된 버튼 : " + $("input[name=report_reason]:checked").val());
+							                if($("input[name=report_reason]:checked").val() == "13"){
+							                    $("textarea[name=report_reason]").attr("disabled",false);
+							                    // radio 버튼의 value 값이 13(기타)이라면 활성화
+							
+							                }else{
+							                    // radio 버튼의 value 값이 그 외라면 비활성화
+							                	$("textarea[name=report_reason]").attr("disabled",true);
+							                }
+										}
+							        	  
+							            // 라디오버튼 클릭시 이벤트 발생
+							            $("input:radio[name=report_reason]").click(function(){
+							            	$("textarea[name=report_reason]").val('');
+							            	reasonchecked();
+							            });
+							            
+							            reasonchecked();
+							        });
+							          </script>
+							
+							      </div>
+							      <!-- Modal footer -->
+							      <div class="modal-footer">
+							        <button type="button" id="finish" class="btn btn-default" data-dismiss="modal">신고</button>
+							      </div>
+							      
+							      <script>
+							      $("#finish").click(function(e){
+							         e.preventDefault();
+							
+							         var boardlist = $("#boardlist_numbers").val();
+							         var memberid = $("#member_id").val();
+							         var reportnum = $("#report_numbers").val();
+							         var reasonNum = $("input[name=report_reason]:checked").val();
+							         var reasonText = $("#reasontext").val();
+							         
+							         console.log(boardlist);
+							         console.log(memberid);
+							         console.log(reportnum);
+							         console.log(reasonNum);
+							         console.log(reasonText);
+							              //신고글의 제목으로 신고대상글 번호를 넘김
+							              //신고글의 구분(음란성/홍보/기타)를 필터번호로 넘김
+							         $.ajax({
+											url: "${pageContext.request.contextPath}/report",
+							                type: "POST",
+							                data: {
+							                    "title":reportnum,
+							                	"contents" : reasonText,
+							                    "member_id": memberid,
+							                    "boardlist_numbers": boardlist,
+							                    "filter_numbers" : reasonNum,	
+							                },
+							                success: function () {
+							                	alert("신고가 완료되었습니다.");
+							                },
+										}); 
+							      	});
+							      
+							      
+							      </script>
+							    </div>
+							
+							  </div>
+							</div>
+
+							  
+							  
+							  
+						  </div>
 					</div>
 					
-						<div class="board-contents">
-							<h2><p>${content_view.title}</p></h2>
-							<p>${content_view.member_id}</p>
-							<p>${content_view.dates}</p>
-							<p>${content_view.hit}</p>
-							<p>${content_view.contents}</p>
-						</div>
+					<div class="board-contents">
+						<h2><p>${content_view.title}</p></h2>
+						<p>${content_view.member_id}</p>
+						<p>${content_view.dates}</p>
+						<p>${content_view.hit}</p>
+						<p>${content_view.contents}</p>
 					</div>
 				</div>
-			</div>
-		</section>
-				
-				
-				
-					<%-- <!-- 중간 구분선 -->		
+					<!-- 중간 구분선 -->		
 			 		<div style="width:5%; height:100%; border-left:3px solid purple;position: absolute;left: 50%;margin-left: -3px;">
 					</div>
 
@@ -353,12 +350,14 @@
 					                	//html삽입 : 표시될 데이터 - 아이디,댓글내용,작성일,삭제버튼,[히든]댓글번호
 					                	var htmls="";
 					                	$("#list-table").html("");	
+
 					        			$("<tr>" , {
 					        				html : "<td>" + "아이디" + "</td>"+  // 컬럼명들
 					        						"<td>" + "댓글내용" + "</td>"+
 					        						"<td>" + "작성일" + "</td>"+
 					        						"<td>" + "삭제버튼+댓글번호[히든]" + "</td>"			
 					        			}).appendTo("#list-table") // 이것을 테이블에붙임
+
 					        			if(result.length < 1){
 					        				htmls.push("등록된 댓글이 없습니다.");
 					        			} else {
@@ -374,6 +373,7 @@
 						        	                   	htmls += '<button type="button" name="comment-modify" value="'+item.comments_numbers+'">수정</button></td>';
 						        	                   	htmls += '</tr>';
 						        	                    
+
 					                            	} else {
 					                            		//아니라면 그냥 출력
 						                            	htmls += '<tr>';
@@ -385,11 +385,14 @@
 					                            	}
 					        	                    			                    		                   
 					                        	});	//each end
+
 					        			}
+
 					        			$("#list-table").append(htmls);
 					                	}
 									});
 								};
+
 								
 								$(document).on("click", "button[name='delete']",function(){
 									
@@ -398,7 +401,7 @@
 									
 									console.log("삭제 대상 : " + comments_numbers);
 										$.ajax({
-											url: "${pageContext.request.contextPath}/user/delComments",
+											url: "${pageContext.request.contextPath}/delComments",
 							                type: "POST",
 							                data: {
 							                    "comments_numbers": comments_numbers
@@ -407,19 +410,22 @@
 							                	commentList();
 							                	console.log("성공");
 							                },
+
 										})
 								});
+
 								
 								//댓글 작성 버튼 클릭 시
 								$("#addComment").click(function(){
 									var contents = $('#reply').val();
+
 									console.log("댓글쓰기 board_numbers - " + board_numbers);
 									console.log("member_id : " + member_id);
 									
 									console.log("contents : " + contents);
 									
 									$.ajax({
-										url: "${pageContext.request.contextPath}/user/addComments",
+										url: "${pageContext.request.contextPath}/addComments",
 						                type: "POST",
 						                data: {
 						                    "board_numbers": board_numbers,
@@ -433,15 +439,16 @@
 								});
 								
 								
+
 			                	commentList(); // 처음 시작했을 때 실행되도록 해당 함수 호출
 							});
 						</script>
 					</div>
 				</div>
 				
-			</div> --%>
+			</div>
 			
-<%--  			<!-- 아래쪽에 다른 게시글들을 출력함 -->
+ 			<!-- 아래쪽에 다른 게시글들을 출력함 -->
 			<div class="container contents">
 				<div class="row">
 				<!-- 게시물 list -->
@@ -461,7 +468,7 @@
 							</c:forEach>
 					</div>
 				</div>
-			</div> --%>
+			</div>
 	<%@ include file="/WEB-INF/include/js-footer.jsp"%>
 </body>
 </html>
