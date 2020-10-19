@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -42,6 +43,7 @@ import bit.project.restfull.vo.GoodsVO;
 import bit.project.restfull.vo.LikesVO;
 import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.SidoguVO;
+import bit.project.restfull.vo.TravelVO;
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
@@ -304,5 +306,28 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		}
 		log.info("총 합계 금액 : " + prices);
 		return prices;
+	}
+
+	@Override
+	public void insertTravelCourse(String member_id, String[] destinations) {
+		List<TravelVO> myCourse = new ArrayList<TravelVO>();
+
+		long millis = System.currentTimeMillis();
+		String tcUiqueNum = "travel_course_" + millis;
+		
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy년MM월dd일");
+		String tcAlias = format1.format(millis) + "의 여행코스";
+		
+
+		for(int i = 0; i<destinations.length; i++) {
+			TravelVO vo = new TravelVO(); 
+			vo.setMember_id(member_id);
+			vo.setContents(destinations[i]);
+			vo.setTcAlias(tcAlias);
+			vo.setTcUiqueNum(tcUiqueNum);
+			myCourse.add(vo);
+		}
+		
+		mapper.insertTravelCourse(myCourse);
 	}
 }

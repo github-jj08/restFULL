@@ -25,6 +25,7 @@ import bit.project.restfull.vo.GoodsVO;
 import bit.project.restfull.vo.LikesVO;
 import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.SidoguVO;
+import bit.project.restfull.vo.TravelVO;
 import lombok.extern.log4j.Log4j;
 
 /**
@@ -88,5 +89,8 @@ public interface AdminBoardMapper{
 	List<RequestVO> getRequests(String request_numbers);
 
 	void updateRequests(@Param("imp_uid")String imp_uid,@Param("merchant_uid")String merchant_uid);
+
+	//여행코스 등록
+	void insertTravelCourse(List<TravelVO> myCourse);
 	
 }

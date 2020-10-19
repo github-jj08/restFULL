@@ -309,12 +309,29 @@
 		update request set imp_uid = #{imp_uid} where merchant_uid =#{merchant_uid}
 	]]>
 	</update> 
-	<!-- 
-	상품 삭제
-	<delete id="deleteGoodsVO">
-	<![CDATA[
-		delete from goods where GOODS_NUMBERS = #{goods_numbers}
-	]]>
-	</delete> -->
+
+	<!-- 여행코스 등록 -->
+	<insert id="insertTravelCourse" parameterType="java.util.List" > 
+		<foreach item="item" index="index" collection="list" separator=" " open="INSERT ALL " close="SELECT * FROM DUAL">
+			into TRAVEL 
+			(
+				TRAVEL_NUMBERS,
+				MEMBER_ID,
+				CONTENTS,
+				TCALIAS,
+				DATES,
+				TCUNIQUENUM
+			) values
+			(
+				travel_seq.nextval,
+				#{item.member_id},
+				#{item.contents},
+				#{item.tcAlias},
+				sysdate,
+				#{item.tcUiqueNum}
+			) 
+		</foreach>
+	</insert>
 	
+
 </mapper>

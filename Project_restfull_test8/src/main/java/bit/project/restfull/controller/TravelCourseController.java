@@ -30,6 +30,7 @@ import bit.project.restfull.vo.DestinationVO;
 import bit.project.restfull.vo.GoodsVO;
 import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.SidoguVO;
+import bit.project.restfull.vo.TravelVO;
 import lombok.extern.log4j.Log4j;
 
 /**
@@ -71,15 +72,17 @@ public class TravelCourseController {
    //여행코스 등록
    @ResponseBody
    @PostMapping("travel/myTravelCourse")
-   public List<GoodsVO> addTravelCourse(HttpServletRequest req) {
+   public void addTravelCourse(HttpServletRequest req) {
 	   log.info("addTravelCourse");
+	   String member_id = req.getParameter("member_id");
 	   String[] destinations = req.getParameterValues("myCourse[]");
-	   log.info(destinations.length);
+	   log.info("member_id = " + member_id);
+	   log.info("destinations.length = " + destinations.length);
 	   for(int i=0;i<destinations.length;i++) {
 		   log.info("여행지 목록 ? " + destinations[i]);
 	   }
-	   List<GoodsVO> goodslist = adboardService.getRGoods(destinations);
-	   return goodslist;
+	   
+	   adboardService.insertTravelCourse(member_id,destinations);
    }
    
    //여행지관련 상품 get
