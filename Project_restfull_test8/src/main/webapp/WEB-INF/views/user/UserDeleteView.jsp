@@ -19,7 +19,7 @@ pageEncoding="UTF-8"%>
 		// 취소
 		$("#cancel").on("click", function(){
 
-			location.href = "/board/home";
+			location.href = "/restfull/";
 
 		});
 
@@ -31,7 +31,7 @@ pageEncoding="UTF-8"%>
 			}
 			
 			$.ajax({
-				url : "/board/user/userDelete",
+				url : "user/userDelete",
 				async: true,
 				type : "POST",
 				dataType : "text json",
@@ -43,7 +43,7 @@ pageEncoding="UTF-8"%>
 					const isSuccess = data.statusCode === 200;
 					if(isSuccess){
 						alert("회원 탈퇴 성공");
-						location.href = "/board/home";
+						location.href = "/restfull/";
 					}else{
 						alert("비밀번호를 다시 입력해 주세요");
 					}
@@ -67,7 +67,7 @@ pageEncoding="UTF-8"%>
 				<div class="form-group has-feedback">
 				<sec:authentication var="principal" property="principal"/>
 					<label class="control-label" for="userId">아이디</label>
-					<input class="form-control" type="text" name="member_id" value="<sec:authentication property="principal.user.member_id"/>"/>
+					<input class="form-control" type="text" name="member_id" value="<sec:authentication property="principal.user.member_id"/>" readonly/>
 				</div>
 				<div class="form-group has-feedback">
 					<label class="control-label" for="userPass">비밀번호</label>
@@ -75,7 +75,7 @@ pageEncoding="UTF-8"%>
 				</div>
 				<div class="form-group has-feedback">
 					<label class="control-label" for="userName">성명</label>
-					<input class="form-control" type="text" id="name" value="<sec:authentication property="principal.user.name"/>" readonly="readonly"/>
+					<input class="form-control" type="text" id="name" value="<sec:authentication property="principal.user.name"/>" readonly/>
 				</div>
 				<div class="form-group has-feedback">
 					<button class="btn btn-success" type="submit" id="submit">회원탈퇴</button>

@@ -59,12 +59,11 @@ public class LoginController {
 	private CustomUserDetailsService customuserdetailsService;
 	
 	//로그인
-	@GetMapping(value = "/login")
-	public String loginForm() {
-		
-		log.info("ToLogin");
-		return "login/login";
-	}
+	/*
+	 * @GetMapping(value = "/login") public String loginForm() {
+	 * 
+	 * log.info("ToLogin"); return "login/login"; }
+	 */
 	
 	//로그아웃.
 	@RequestMapping(value = "/logout")

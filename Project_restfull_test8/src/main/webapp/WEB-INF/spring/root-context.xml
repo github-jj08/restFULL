@@ -25,5 +25,7 @@
 	
 	<mybatis-spring:scan base-package="bit.project.restfull.mapper"/>
 	
+	<bean id="naverLoginBO" class="bit.project.restfull.controller.NaverLoginBO" />
+	
 </beans>
 	

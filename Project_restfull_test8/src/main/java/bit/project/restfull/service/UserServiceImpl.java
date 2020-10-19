@@ -31,7 +31,8 @@ public class UserServiceImpl implements UserService {
 	private BCryptPasswordEncoder passEncoder; 
 	@Inject
 	private LoginMapper loginMapper;
-
+	
+	@Override
 	public void addUser(UserVO userVO){ 
 		
 		String pw = userVO.getPw(); 
@@ -42,6 +43,7 @@ public class UserServiceImpl implements UserService {
 		loginMapper.insertUser(userVO); 
 	} 
 	
+	@Override
 	public void modifyUser(UserVO userVO) {
 		
 		String pw = userVO.getPw(); 
@@ -56,7 +58,7 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	 
-	
+	@Override
 	public void userDelete(UserVO userVO) {
 		
 		String member_id = userVO.getMember_id();
@@ -65,12 +67,13 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
-	
+	@Override
 	public String getEncodePassword(String pw) {
 		log.info("pw"+pw);
 		return passEncoder.encode(pw);
 	}
 	
+	@Override
 	public int getUser(String member_id) {
 		return loginMapper.idChk(member_id);
 	}

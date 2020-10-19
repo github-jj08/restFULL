@@ -80,8 +80,8 @@ public class AdminBoardController {
 		
 		userService.userDelete(userVO);
            
-           request.getSession().invalidate();  
-           return gson.toJson(new ResponseVO<>(200, "success"));
+        request.getSession().invalidate();  
+        return gson.toJson(new ResponseVO<>(200, "success"));
    }
 	
 	@GetMapping("/userList") // to see user list with paging

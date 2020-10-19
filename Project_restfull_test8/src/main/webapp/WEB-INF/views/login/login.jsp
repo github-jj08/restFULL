@@ -48,7 +48,8 @@
                 <div class="col-lg-4 offset-lg-4">
                     <div class="login-form">
                         <h2>Login</h2>
-                        <form action="#">
+                        <c:url value="/login" var="loginUrl" />
+							<form:form name="f" action="${loginUrl}" method="POST">
                             <div class="group-input">
                                 <label for="username">아이디</label>
                                 <input type="text" id="member_id" name="member_id">
@@ -62,8 +63,8 @@
                                     <a id="find_Id_btn"><b>ID찾기</b></a> <a id="find_Pw_btn"><b>PW찾기</b></a>
                                 </div>
                             </div>
-                            <button type="submit" class="site-btn login-btn"><a href="<c:url value="join"/>">로그인</a></button>
-                        </form>
+                            <button type="submit" class="site-btn login-btn">로그인</a></button>
+                        </form:form>
                         <div class="switch-login">
                             <a href="./rs-registerConfirm.jsp" class="or-login">회원가입</a>
                         </div>
@@ -79,6 +80,12 @@
                             </a>
                         </div>
 	       					<!-- 네이버 로그인버튼 -->
+								<div id="naver_id_login" style="text-align: center">
+									<a href="${url}"> <img width="223"
+										src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
+										<br />
+										URL : ${url }
+								</div>
 	       					
                         </div>
                      </div>
