@@ -21,7 +21,6 @@ import com.google.gson.JsonParser;
 
 import bit.project.restfull.mapper.LoginMapper;
 import bit.project.restfull.mapper.SnsMapper;
-import bit.project.restfull.vo.SnsVO;
 import bit.project.restfull.vo.UserVO;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -40,7 +39,6 @@ public class KakaoService {
 	@Autowired
 	private SnsMapper snsMapper;
 	
-	/* ��ū �� ��� */
 	public String getAccessToken(String authorize_code) {
 		String access_Token = "";
 		String refresh_Token = "";
@@ -50,11 +48,9 @@ public class KakaoService {
 			URL url = new URL(reqURL);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-			// POST ��û�� ���� �⺻���� false�� setDoOutput�� true��
 			conn.setRequestMethod("POST");
 			conn.setDoOutput(true);
 
-			// POST ��û�� �ʿ�� �䱸�ϴ� �Ķ���� ��Ʈ���� ���� ����
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
@@ -64,11 +60,9 @@ public class KakaoService {
 			bw.write(sb.toString());
 			bw.flush();
 
-			// ��� �ڵ尡 200�̶�� ����
 			int responseCode = conn.getResponseCode();
 			log.info("responseCode : " + responseCode);
 
-			// ��û�� ���� ���� JSONŸ���� Response �޼��� �о����
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String line = "";
 			String result = "";
@@ -78,7 +72,6 @@ public class KakaoService {
 			}
 			log.info("response body : " + result);
 
-			// Gson ���̺귯���� ���Ե� Ŭ������ JSON�Ľ� ��ü ����
 			JsonParser parser = new JsonParser();
 			JsonElement element = parser.parse(result);
 
@@ -156,9 +149,6 @@ public class KakaoService {
 	  
 	  
 	  public void addSNS(HashMap<String, String> userInfo) {
-		  
-		  SnsVO snsVO = new SnsVO();
-		  
 		  UserVO userVO = new UserVO();
 		  
 		  log.info(userInfo.get("sns_id")+"@k");
@@ -182,23 +172,10 @@ public class KakaoService {
 		  log.info(userVO.getAuthority_name());
 		  log.info(userVO.getAuthorities());
 		  
-		  snsVO.setMember_id(userInfo.get("sns_id")+"@k");
-		  snsVO.setSns_id(userInfo.get("sns_id"));
-		  snsVO.setSns_type("Kakao");
-		  snsVO.setSns_nickname(userInfo.get("sns_nickname"));
-		  
-		  log.info(snsVO.getMember_id());  //식별키 + @k
-		  log.info(snsVO.getSns_id());		//식별키
-		  log.info(snsVO.getSns_type());	
-		  log.info(snsVO.getSns_nickname());	//이름
-		  
-
-		  
 		  String member_id = userVO.getMember_id();
 		   
 		  if(loginMapper.idChk(member_id)== 0) {
 		  	  snsMapper.insertID(userVO);
-			  snsMapper.insertSns(snsVO);
 			  log.info("카카오 값 넣기 성공");
 		  }else {
 			  log.info("member_id :" + member_id + "이미 있음.");

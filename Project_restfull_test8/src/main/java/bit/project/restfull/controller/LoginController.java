@@ -1,14 +1,21 @@
 package bit.project.restfull.controller;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,9 +23,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 
+import bit.project.restfull.security.CustomUserDetailsService;
 import bit.project.restfull.service.UserService;
 import bit.project.restfull.vo.CustomUser;
 import bit.project.restfull.vo.ResponseVO;
@@ -35,14 +47,24 @@ import lombok.extern.log4j.Log4j;
 //로그인 관련 기능
 public class LoginController {
 	
-	private UserService userservice;
 	@Inject
-    private BCryptPasswordEncoder passEncoder;
+    private NaverLoginBO naverLoginBO;
+	@Inject
+	private UserService userservice;
 	
 	//로그인
 	@GetMapping(value = "/login")
-	public String loginForm() {
-		
+	public String loginForm(Model model, HttpSession session) {
+		log.info("session : " + session);
+		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+		//https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
+		//redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
+	    log.info("네이버 url:" + naverAuthUrl);
+	    
+	    //네이버
+	    model.addAttribute("naverLoginUrl", naverAuthUrl);
+	    
 		log.info("ToLogin");
 		return "login/login";
 	}
@@ -158,6 +180,5 @@ public class LoginController {
 		userservice.findPW(response, userVO);
 	}
 	
+	
 }
-
-

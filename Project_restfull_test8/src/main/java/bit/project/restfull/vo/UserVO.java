@@ -1,6 +1,7 @@
 package bit.project.restfull.vo;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -9,6 +10,7 @@ import lombok.extern.log4j.Log4j;
 @Getter
 @Setter
 @AllArgsConstructor
+@Builder
 public class UserVO {
 
 	private String member_id;

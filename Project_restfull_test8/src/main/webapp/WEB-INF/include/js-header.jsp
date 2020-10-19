@@ -35,7 +35,7 @@
 						<div class="showloign">
  	             			<sec:authentication var="principal" property="principal"/>
 	             				<c:if test="${principal.user.authority_name == 'ROLE_USER'}">
-									<strong>${principal.user.member_id}</strong>님 환영합니다.
+									<strong>${principal.user.name}</strong>님 환영합니다.
 						            <a href="<c:url value="/user/userHome" />">🏠‍💁‍♀️‍🙋‍♀️💁‍♂️💒</a>	
 					            </c:if>
 					            
