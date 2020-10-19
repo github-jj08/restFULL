@@ -63,4 +63,7 @@ public interface AdminBoardService {
 
 	//합계금액 가져오기
 	int sumPrice(List<Map<String, Object>> paramData);
+
+//	//member_id에 해당하는 결제내역 출력(사용자기준)
+//	List<RequestVO> getPaymentList(String member_id);
 }
