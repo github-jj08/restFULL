@@ -82,7 +82,6 @@ public class PayController {
 	}
 
 	//크로스 도메인 발생할수도 있어서 동일한 도메인으로 처리하라는데 아직 이해 X
-	//아마 travelcourse 페이지 뽑은거랑 똑같은 url 매핑을 해줘야되는게 아닐까 생각
 	@ResponseBody
 	@PostMapping("/payments/complete")
 	public int paymentComplete(HttpServletRequest req) throws UnsupportedEncodingException {

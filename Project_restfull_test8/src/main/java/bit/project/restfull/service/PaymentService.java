@@ -184,7 +184,7 @@ public class PaymentService {
 		
 	} 
 	
-	// 아임포트 결제금액 변조는 방지하는 함수 
+	// 아임포트 결제금액 변조는 방지하는 함수 (사용안함)
 	public void setHackCheck(String amount,String mId,String token) { 
 		HttpClient client = HttpClientBuilder.create().build(); 
 		HttpPost post = new HttpPost(IMPORT_PREPARE_URL); 

@@ -39,8 +39,8 @@
 <h1>생성 미완료-결제구현 이후 생성예정(빨리빨리해라)</h1>
 <hr/>
 <p>[<a href="qnaList?member_id=<sec:authentication property="principal.user.member_id"/>">내 결제내역 보기</a>]</p>
-<p>[<a href="reportList?member_id=<sec:authentication property="principal.user.member_id"/>">내 여행코스 보기</a>]</p>
 <p>[<a href="reportList?member_id=<sec:authentication property="principal.user.member_id"/>">좋아요 한 글 목록</a>]</p>
+<p>[<a href="reportList?member_id=<sec:authentication property="principal.user.member_id"/>">내 여행코스 보기</a>]</p>
 
 
 
