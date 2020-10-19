@@ -68,7 +68,7 @@ public class TravelCourseController {
       return destlist;
    }
    
-   //여행코스 등록(미완)
+   //여행코스 등록
    @ResponseBody
    @PostMapping("travel/myTravelCourse")
    public List<GoodsVO> addTravelCourse(HttpServletRequest req) {

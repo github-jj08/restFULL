@@ -403,36 +403,37 @@
 		                  console.log("상품목록길이 : " + totalLength);
 		                  
 		                  //ajax로 넘길 json 배열 생성
-		                  var myGoodsArray = new Array();
+		                  var goodsArray = new Array();
 		                  
 		                  
 		                  var myLength = $('input[name="chk_goods"]:checked').length;
 		                  console.log("체크된것갯수: " + myLength);
 		                  //아무것도 등록하지 않았는데 확인을 눌렀을 경우 null값 들어가는 것 방지
 		                  if(myLength==0){
-		                	  myGoodsArray.push('');
+		                	  goodsArray.push('');
 		                  }else{
 			                  for(var i =0;i<myLength;i++){
-				                  var myGoods = new Object();
-				                  myGoods.member_id = $('input[name="member_id"]').val();
-			                	  myGoods.goods_numbers=$('input[name="chk_goods"]:checked').eq(i).val();
-			                      myGoods.count = $("select option:selected").eq(i).val();
-			                      myGoods.destination_name = $('input[name="destination_name"]').eq(i).val();
-			                      myGoodsArray.push(myGoods);
+				                  var goods = new Object();
+				                  goods.member_id = $('input[name="member_id"]').val();
+				                  goods.goods_numbers=$('input[name="chk_goods"]:checked').eq(i).val();
+				                  goods.count = $("select option:selected").eq(i).val();
+				                  goods.destination_name = $('input[name="destination_name"]').eq(i).val();
+			                      goodsArray.push(goods);
 			                  }
 			                  
 			              }
 			              
 		                  //체크한 상품의 상품번호
-			              console.log("myGoodsArray" + myGoodsArray);
-			              console.log("myGoodsArray" + JSON.stringify(myGoodsArray));
+			              console.log("myGoodsArray" + goodsArray);
+			              console.log("myGoodsArray" + JSON.stringify(goodsArray));
 			              
 		                  var member_id = $('input[name="member_id"]').val();
+		                  console.log(member_id);
 		                  //먼저 주문 정보에 등록함
 			              $.ajax({
 			                     url: "${pageContext.request.contextPath}/travel/getgoods",
 			                        type: "POST",
-			                        data: JSON.stringify(myGoodsArray),
+			                        data: JSON.stringify(goodsArray),
 			                        contentType: "application/json; charset=utf-8",
 			                        dataType:"json",
 			                        success: function (result) {

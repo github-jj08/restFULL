@@ -17,46 +17,39 @@
 </head>
 
 <body>
-
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
-
     <!-- Header Section Begin -->
     <header class="header-section">
         <div class="header-top">
             <div class="container">
                 <div class="ht-right">
-                
-				
-				<sec:authorize access="isAnonymous()">
-	                <button type="button" class="login-panel">
-	                 <a href="${pageContext.request.contextPath}/login">로그인</a>  
-                 </button>
-                </sec:authorize>
-                
-                
-				<sec:authorize access="isAuthenticated()">
-				<sec:authentication var="principal" property="principal"/>
-					<c:if test="${principal.user.member_id != null}">
-						<input type="hidden" name="member_id" value="${principal.user.member_id}"/>
-					</c:if>
-					환영합니다. <strong>${principal.user.name}</strong> 님 
-					<br/>
-					[<a href="<c:url value="/user/userHome" />">마이페이지</a>]
-					<br/>
-					<c:if test="${principal.user.authority_name == 'ROLE_ADMIN'}">
-						[<a href="<c:url value="/admin/adminHome" />">관리자 홈</a>]
-					</c:if>
-					
-					<input type="hidden" name="member_id" value="member_id"/> 
-					<form:form action="${pageContext.request.contextPath}/logout" method="POST">
-					    <input type="submit" value="로그아웃" />
-					</form:form>
-					
-				</sec:authorize>
-                </div>
+                <c:if test="${member_id eq null}">
+		           		<sec:authorize access="isAnonymous()">
+		                    <button type="button" class="login-panel">
+		                   		 <a href="${pageContext.request.contextPath}/login">로그인</a>  
+		                 	</button>
+		                </sec:authorize>
+		             </c:if>
+		             
+		             
+	             	 <sec:authorize access="isAuthenticated()">
+						<div class="showloign">
+ 	             			<sec:authentication var="principal" property="principal"/>
+	             				<c:if test="${principal.user.authority_name == 'ROLE_USER'}">
+									<strong>${principal.user.member_id}</strong>님 환영합니다.
+						            <a href="<c:url value="/user/userHome" />">🏠‍💁‍♀️‍🙋‍♀️💁‍♂️💒</a>	
+					            </c:if>
+					            
+					            <c:if test="${principal.user.authority_name == 'ROLE_ADMIN'}">
+			            		  <a href="<c:url value="/admin/adminHome" />">👾관리자 홈👾</a>
+					            </c:if>
+					            <input type="hidden" name="member_id" value="${principal.user.member_id}"/>
+								<form:form action="${pageContext.request.contextPath}/logout" method="POST">
+									<input type="submit" id="logoutsubmit" value="로그아웃" />
+								</form:form> 
+							
+						</div>	
+			        </sec:authorize>
+               	</div>  
             </div>
          </div>
          
@@ -104,21 +97,20 @@
                             </div>
                         </div>
                          <div class="col-lg-6 col-md-6 offset-lg-1 search-top">
+	                         <form action="${pageContext.request.contextPath}/search" name="searchform" method="GET">
                                 <div class="advanced-search">
 	                                <div class="input-group">
-	                                	<form action="${pageContext.request.contextPath}/search" method="GET">
 	                                		<!-- 메인 게시글 검색. 메인 게시글 게시판 번호 = 1 -->
 	                                		<input type="hidden" name="boardlist_numbers" value="<c:out value='1'/>">
 		                                    <input type="text"  name="searchWord" placeholder="어느 지역으로 여행을 가시나요?">
 		                                    <button id="search" type="submit"><i class="ti-search"></i></button>
-	                                    </form>
 	                                </div>
                                 </div>
-                        </div>
-                    </div>
-                </div>
-        </div>
-  
+	                        </form>
+	                    </div>
+    	            </div>
+        		</div>
+  		</div>
         <div class="nav-item">
             <div class="container">
                 <nav class="nav-menu mobile-menu">
@@ -128,23 +120,12 @@
                         <li><a href="${pageContext.request.contextPath}/travel/">여행코스작성</a></li>
                         <li><a href="./rs-Servicecenter.jsp">공지사항</a></li>
                         <li><a href="#">이벤트</a></li>
-                        <li><a href="./rs-Servicecenter_faq.jsp">자주하는질문</a></li>
-                        <!--<li><a href="#">로그인</a></li>-->
+                        <li><a href="./FAQ.jsp">자주하는질문</a></li>
                     </ul>
                 </nav>
                 <div id="mobile-menu-wrap"></div>
             </div>
         </div>
     </header>
-    <%--       <c:url value="/login" var="loginUrl" />
-      <p>"${loginUrl}"</p>
-      <form:form name="f" action="${loginUrl}" method="POST"> 
-    <c:if test="${param.error != null}">
-        <p>아이디와 비밀번호가 잘못되었습니다.</p>
-    </c:if>
-    <c:if test="${param.logout != null}">
-        <p>로그아웃 하였습니다.</p>
-    </c:if>  
- --%>
 </body>
 </html>

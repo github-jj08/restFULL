@@ -24,14 +24,19 @@
                     username-parameter="member_id"
                     password-parameter="pw" />
         
-         <logout logout-url="/logout"
+        <logout logout-url="/logout"
                 logout-success-url="/" /> 
+        
+        <!-- 중복 로그인방지 설정 -->
+	    <session-management invalid-session-url="/login">
+	        <concurrency-control max-sessions="1" expired-url="/login"/>
+	    </session-management>
                 
         <access-denied-handler error-page="/login/accessDenied" />
         <csrf disabled="true"></csrf>
     </http>
         
-     <beans:bean id="userDetailsService" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
+    <beans:bean id="userDetailsService" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
         <beans:property name="dataSource" ref="dataSource"/> <!-- 여기서 dateaSource는 공식이며 히카리 커넥션풀이다. -->
     </beans:bean>
     

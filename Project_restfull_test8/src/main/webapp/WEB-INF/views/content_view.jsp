@@ -134,7 +134,7 @@
   </style>
 </head>
 <body>
-	            
+	   <%@ include file="/WEB-INF/include/js-header.jsp"%>            
 			<!-- 메인 컨텐츠  -->
 			<div class="container">
 				<input type="hidden" name="board_numbers" value="${content_view.board_numbers}">
@@ -568,6 +568,6 @@
 					</div>
 				</div>
 			</div>
-	
+	<%@ include file="/WEB-INF/include/js-footer.jsp"%>
 </body>
 </html>

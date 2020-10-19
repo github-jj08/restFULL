@@ -129,7 +129,6 @@ public class BoardController {
 		boardService.delComment(comments_numbers);
 	}
 		
-	//${pageContext.request.contextPath}/report
 	//신고기능
 	@ResponseBody
 	@RequestMapping(value="/report", method= RequestMethod.POST)
