@@ -34,5 +34,6 @@ public interface UserService {
 	public int idChk(String member_id);
 
 	public void findPW(HttpServletResponse response, UserVO userVO) throws Exception;
-	
+
+	public UserVO getUserByIdandAutho(String id, String login_type);
 }

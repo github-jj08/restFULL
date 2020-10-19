@@ -61,7 +61,7 @@ public class UserController {
 	@GetMapping("/userDeleteView") 
 	public String userDeleteView() {
 		log.info("welcome userDeleteView!");
-		return "user/UserDeleteView";
+		return "user/userDeleteView";
 	}
 	
 	//2. 회원 탈퇴 기능 수행
