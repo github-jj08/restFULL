@@ -214,8 +214,8 @@ ol {
 
 .header-top .ht-right {
 	float: right;
-    padding-top: 15px;
-	padding-bottom: 15px;
+    padding-top: 10px;
+	padding-bottom: 5px;
 }
 
 .header-top .ht-right .login-panel{
@@ -253,7 +253,7 @@ ol {
 
 
  .inner-header {
-	padding-bottom:30px;
+	padding-bottom:15px;
 } 
 
 .
@@ -2265,13 +2265,49 @@ ol {
   Blog Details
 -----------------------*/
 
+/*wirte_view 페이지*/
+
+
 .blog-details {
-	padding-top: 72px;
-	padding-bottom: 80px;
+	padding-top: 70px;
+	padding-bottom: 70px;
+}
+
+/*사진 업로드 css*/
+.blog-detail-title .group-input .writepic .imgs_wrap {
+    border-style:double;
+    width:100%;
+    height:400px;
+    margin-bottom:50px;
+    margin-top:10px;
+    overflow:auto;
+}
+
+.blog-detail-title .group-input .writepic #preview img {
+   
+    height:200px;
+    
+}
+
+.blog-detail-title .group-input .writepic .preview-box {
+    border: 1px solid;
+    padding: 5px;
+    border-radius: 2px;
+    margin-bottom: 10px;
+}
+
+.blog-detail-title .group-input .writepic .preview-box a {
+    float:right;
+}
+
+
+
+.blog-detail-title .group-input .writecontentx textarea {
+    width:100%;
+    height: 250px;
 }
 
 .blog-details-inner .blog-detail-title {
-	
 	margin-bottom: 25px;
     
 }
@@ -2280,53 +2316,32 @@ ol {
     margin : 20px 5PX;
 }
 
+.blog-details-inner .blog-detail-title .writeform .group-input label{
+    font-size:20px;
+    font-weight:900;
+    
+}
+.blog-details-inner .blog-detail-title .writeform .group-input input {
+    height:40px;
+    width:100%;
+}
+
+
+.blog-details-inner .blog-detail-title .writeform .group-input 
+.writetitle {
+    margin-top:30px;
+}
+
 .blog-details-inner .blog-detail-title .writeform .write-btn {
     float:right;
     background-color:#8a93c0;
     border-style:none;
     margin-top: 20px;
+    border-radius: 8px;
 }
 
-/* .blog-details-inner .blog-detail-title p {
-	margin-bottom: 0;
-	font-size: 12px;
-	font-weight: 700;
-	text-transform: uppercase;
-	color: #e7ab3c;
-	letter-spacing: 2px;
-	line-height: 20px;
-	display: inline-block;
-	position: relative;
-}
+/*---------------------END---------------------*/
 
-.blog-details-inner .blog-detail-title p:before {
-	position: absolute;
-	left: -175px;
-	top: 8px;
-	height: 1px;
-	width: 125px;
-	background: #ebebeb;
-	content: "";
-}
-
-.blog-details-inner .blog-detail-title p:after {
-	position: absolute;
-	right: -175px;
-	top: 7px;
-	height: 1px;
-	width: 125px;
-	background: #ebebeb;
-	content: "";
-}
-
-.blog-details-inner .blog-detail-title p span {
-	color: #b2b2b2;
-	font-size: 14px;
-	font-weight: 400;
-	text-transform: capitalize;
-	letter-spacing: 0;
-}
- */
 .blog-details-inner .blog-large-pic img {
 	min-width: 100%;
 }

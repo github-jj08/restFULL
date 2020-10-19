@@ -1,19 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
+	<title>RestFuLL | VIEW </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <%@ include file="/WEB-INF/include/plugins.jspf"%>
   <!-- 하트아이콘,,, -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
@@ -134,7 +130,7 @@
   </style>
 </head>
 <body>
-	            
+	<%@ include file="/WEB-INF/include/js-header.jsp"%>            
 			<!-- 메인 컨텐츠  -->
 			<div class="container">
 				<input type="hidden" name="board_numbers" value="${content_view.board_numbers}">
@@ -236,7 +232,7 @@
 												// 추천버튼 클릭시(추천 추가 또는 추천 제거)
 												$("#like_update").click(function(){
 													$.ajax({
-														url: "${pageContext.request.contextPath}/board/likeUpdate",
+														url: "${pageContext.request.contextPath}/user/board/likeUpdate",
 										                type: "POST",
 										                data: {
 										                    "board_numbers": board_numbers,
@@ -252,7 +248,7 @@
 												// 게시글 추천수
 											    function likeCount() {
 													$.ajax({
-														url: "${pageContext.request.contextPath}/board/likeCount",
+														url: "${pageContext.request.contextPath}/user/board/likeCount",
 										                type: "POST",
 										                data: {
 										                    "board_numbers": board_numbers
@@ -568,6 +564,6 @@
 					</div>
 				</div>
 			</div>
-	
+	<%@ include file="/WEB-INF/include/js-footer.jsp"%>
 </body>
 </html>

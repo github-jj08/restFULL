@@ -42,80 +42,31 @@ import lombok.extern.log4j.Log4j;
  */
 @Controller
 @Log4j
+@RequestMapping("/user")
+//íšŒì›ê°€ì… ë° ë¡œê·¸ì¸ì´ í•„ìš”í•œ ì‚¬ìš©ì ê¸°ëŠ¥ë“¤
 public class BoardController {
 
-
-	
 	@Autowired
 	private BoardService boardService;
 	
-	//ÀÎµ¦½º ÆäÀÌÁö
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String index() {
-		log.info("index");
-		return "rs-mainpage";
-	}
 	
-	//°Ë»ö °á°ú ÆäÀÌÁö
-	@GetMapping("/search")
-	public String search(@RequestParam(value="boardlist_numbers") int boardlist_numbers, @RequestParam(value="searchWord") String searchWord, Model model) {
-		log.info("searchWord : " + searchWord);
-		//°Ë»ö¾î¿¡ ÇØ´çÇÏ´Â °Ô½Ã±ÛµéÀ» ºÒ·¯¿È
-		List<BoardVO> boardlist = boardService.getList(boardlist_numbers, searchWord);
-		model.addAttribute("searchWord", searchWord);
-		model.addAttribute("boardlist", boardlist);
-		
-		log.info(searchWord + " ¿¡ ´ëÇÑ °Ë»ö°á°ú return ¼ö : " + boardlist.size());
-		return "searchResult";
-	}
-	
-	@ResponseBody
-	@GetMapping("/search/{searchWord}")
-	public List<BoardVO> ajaxSearch(@PathVariable(value="boardlist_numbers") int boardlist_numbers, @PathVariable(value="searchWord") String searchWord) throws UnsupportedEncodingException {
-		log.info("searchWord : " + searchWord);
-		//°Ë»ö¾î¸¦ url¿¡ Æ÷ÇÔ½ÃÄ×À¸´Ï ASCII·Î ÇÑ±ÛÀÌ ÀÎÄÚµùµÇ¼­ ³Ñ¾î¿À¹Ç·Î, °Ë»ö¾î¸¦ ´Ù½Ã µğÄÚµùÇØÁÜ
-		searchWord = URLDecoder.decode(searchWord, "UTF-8");
-		
-		//°Ë»ö¾î¿¡ ÇØ´çÇÏ´Â °Ô½Ã±ÛµéÀ» ºÒ·¯¿È
-		List<BoardVO> boardlist = boardService.getList(boardlist_numbers, searchWord);
-		log.info(searchWord + " ¿¡ ´ëÇÑ °Ë»ö°á°ú return ¼ö : " + boardlist.size());
-		return boardlist;
-	}
-	
-	//content_view
-	@GetMapping("/content_view")
-	public String content_view(String board_numbers, Model model) {
-		log.info("content_view");
-		int board_no = Integer.parseInt(board_numbers);
-		log.info("°Ô½Ã±Û view È£Ãâ; °Ô½Ã±Û ¹øÈ£ = " + board_no);
-		BoardVO vo = boardService.getBoardVO(board_no);
-		String location = vo.getLocation();
-		//ÇØ´ç ¿©ÇàÁö¿¡ ´ëÇÑ ´Ù¸¥ °ü·Ã °Ô½Ã±ÛµéÀ» »Ì±â À§ÇØ locationÁ¤º¸¸¦ ³Ñ°Ü¾ßÇÔ
-		model.addAttribute("content_view",vo);
-		model.addAttribute("filelist", boardService.getBoardAttachmentVO(board_no));
-		model.addAttribute("others", boardService.getOtherBoardVO(board_no, location));
-		
-		return "content_view";
-	}
-	
-
 	//write_view
 	@GetMapping("/write_view")
 	public String write_view() {
 		log.info("write_view ");
 		
-		return "write_view";
+		return "user/write_view";
 	}
 	
 	@RequestMapping(value="/write", method = {RequestMethod.GET, RequestMethod.POST})
 	public String write(@RequestParam(value="file") MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException {
 		log.info("write");
-		boardService.writeBoardVO(uploadfiles, boardVO);
+		int board_numbers = boardService.writeBoardVO(uploadfiles, boardVO);
 		log.info("service.uploadFile(uploadFiles);");
-		return "redirect:/";
+		return "redirect:/content_view?board_numbers="+board_numbers;
 	}
 	
-	//ÁÁ¾Æ¿ä ±â´É
+	//ì¢‹ì•„ìš” ê¸°ëŠ¥
 	@ResponseBody
 	@RequestMapping(value="/board/likeCheck", method = {RequestMethod.GET, RequestMethod.POST})
 	public int likeCheck(LikesVO likesVO) {
@@ -124,25 +75,18 @@ public class BoardController {
 		return result;
 	}
 	
-	//ÁÁ¾Æ¿ä ¼ö ¾÷µ¥ÀÌÆ®
+	//ì¢‹ì•„ìš” ìˆ˜ ì—…ë°ì´íŠ¸
 	@ResponseBody
 	@RequestMapping(value="/board/likeUpdate", method = {RequestMethod.GET, RequestMethod.POST})
 	public void likeUpdate(LikesVO likesVO) {
 		log.info("likeUpdate");
-		log.info("Á¶¾Æ¿© ±Û ¹øÈ£ : " + likesVO.getBoard_numbers());
-		log.info("Á¶¾Æ¿© ¾ÆÀÌµğ : " + likesVO.getMember_id());
+		log.info("ì¡°ì•„ì—¬ ê¸€ ë²ˆí˜¸ : " + likesVO.getBoard_numbers());
+		log.info("ì¡°ì•„ì—¬ ì•„ì´ë”” : " + likesVO.getMember_id());
 		boardService.likeUpdate(likesVO);
 	}
 	
-	//ÁÁ¾Æ¿ä ¼ö °Ë»ö
-	@ResponseBody
-	@RequestMapping(value="/board/likeCount", method = {RequestMethod.GET, RequestMethod.POST})
-	public int likeCount(int board_numbers) {
-		int like_count = boardService.likeCount(board_numbers);
-		return like_count;
-	}
 
-	//¼öÁ¤ ±â´É modify_view ÆäÀÌÁö È£Ãâ
+	//ìˆ˜ì • ê¸°ëŠ¥ modify_view í˜ì´ì§€ í˜¸ì¶œ
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modify(int board_numbers, Model model) {
 		model.addAttribute("modify_view", boardService.getBoardVO(board_numbers));
@@ -151,12 +95,12 @@ public class BoardController {
 		return "modify_view";
 	}
 	
-	//¼öÁ¤ ±â´É ¼öÇà
+	//ìˆ˜ì • ê¸°ëŠ¥ ìˆ˜í–‰
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modify(BoardVO boardVO) {
 		log.info("modify()");
 		boardService.modifyBoardVO(boardVO);
-		log.info("±Û¹øÈ£ - " + boardVO.getBoard_numbers());
+		log.info("ê¸€ë²ˆí˜¸  - " + boardVO.getBoard_numbers());
 		return "redirect:/content_view?board_numbers="+ boardVO.getBoard_numbers();
 	}
 	
@@ -165,36 +109,28 @@ public class BoardController {
 	public String delete(BoardVO boardVO, Model model) {
 		
 		boardService.deleteBoardVO(boardVO.getBoard_numbers());
-		log.info("»èÁ¦ ¼º°ø");
+		log.info("ì‚­ì œ ì„±ê³µ");
 		return "redirect:/";
 	}
 	
 
-	//´ñ±Û ±â´É
-	//´ñ±Û ¸ñ·Ï
-	@ResponseBody
-	@RequestMapping(value="/getComments/{board_numbers}", method= RequestMethod.POST)
-	public List<CommentVO> getComments(@PathVariable int board_numbers){
-		List<CommentVO> commentlist = boardService.commentList(board_numbers);
-		return commentlist;
-	}
-	
-	//´ñ±Û ÀÛ¼º
+	//ëŒ“ê¸€ ê¸°ëŠ¥
+	//ëŒ“ê¸€ ì‘ì„±
 	@ResponseBody
 	@RequestMapping(value="/addComments", method= RequestMethod.POST)
 	public void writeComment(CommentVO commentVO){
 		boardService.writeComment(commentVO);
 	}
-	
-	//´ñ±Û »èÁ¦
+		
+	//ëŒ“ê¸€ ì‚­ì œ
 	@ResponseBody
 	@RequestMapping(value="/delComments", method= RequestMethod.POST)
 	public void delComment(int comments_numbers){
 		boardService.delComment(comments_numbers);
 	}
-	
+		
 	//${pageContext.request.contextPath}/report
-	//½Å°í±â´É
+	//ì‹ ê³ ê¸°ëŠ¥
 	@ResponseBody
 	@RequestMapping(value="/report", method= RequestMethod.POST)
 	public void report(BoardVO boardVO) {
@@ -203,10 +139,9 @@ public class BoardController {
 		log.info(boardVO.getContents());
 		log.info(boardVO.getFilter_numbers());
 		log.info(boardVO.getMember_id());
-		
+			
 		boardService.writeBoardVO(boardVO);
-		log.info("½Å°í ¼º°ø");
-		
+		log.info("ì‹ ê³  ì„±ê³µ");
+			
 	}	 
-	
 }

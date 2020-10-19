@@ -20,7 +20,7 @@ import bit.project.restfull.vo.UserVO;
 public interface LoginMapper {
 	
 	
-	@Insert("insert into member(member_id, pw, name, birth, gender, phone, email, enabled, grade_name, authority_name) values(#{member_id}, #{pw}, #{name}, #{birth}, #{gender}, #{phone}, #{email}, #{enabled}, #{grade_name}, #{authority_name})")
+	@Insert("insert into member(member_id, pw, name, birth, gender, phone, email, enabled, grade_name, authority_name, login_type) values(#{member_id}, #{pw}, #{name}, #{birth}, #{gender}, #{phone}, #{email}, #{enabled}, #{grade_name}, #{authority_name}, #{login_type})")
 	public void insertUser(UserVO userVO);
 
 	@Select("select * from member where member_id = #{member_id}")

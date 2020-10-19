@@ -15,7 +15,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>RestFuLL | 메인페이지</title>
-    <%@ include file="/WEB-INF/include/plugins.jspf"%>
 </head>
 
 
@@ -126,7 +125,7 @@
                         <li><a href="">여행코스작성</a></li>
                         <li><a href="./rs-Servicecenter.jsp">공지사항</a></li>
                         <li><a href="#">이벤트</a></li>
-                        <li><a href="./rs-Servicecenter_faq.jsp">자주하는질문</a></li>
+                        <li><a href="./FAQ.jsp">자주하는질문</a></li>
                         <!--<li><a href="#">로그인</a></li>-->
                     </ul>
                 </nav>

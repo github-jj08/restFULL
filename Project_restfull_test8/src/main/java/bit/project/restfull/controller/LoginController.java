@@ -39,7 +39,13 @@ public class LoginController {
     private BCryptPasswordEncoder passEncoder;
 	
 
-	
+	//로그인
+	@GetMapping(value = "/login")
+	public String loginForm() {
+		
+		log.info("ToLogin");
+		return "login/login";
+	}
 	
 	
 	
@@ -54,13 +60,24 @@ public class LoginController {
 	 * return "redirect:/"; }
 	 */
 	
+	// 회원가입약관동의창
+	@GetMapping("/register") // 회원가입 약관동의창 이동
+	public String confirm() {
+		
+		log.info("registerConfirm");
+		
+		return "member/registerConfirm";
+	}
+	
+	
+	
 	// 회원가입
 	@GetMapping("/join") // 회원가입 창 이동
 	public String user() {
 		
 		log.info("join");
 		
-		return "member/join";
+		return "member/register";
 	}
 
 	
@@ -70,7 +87,7 @@ public class LoginController {
 		
 		userservice.addUser(userVO);
 				
-		return "redirect:/login";
+		return "member/registerFinish";
 		
 	}
 	
@@ -82,14 +99,16 @@ public class LoginController {
 
 	
 	@GetMapping("/user/userHome")
-	public void userHome() {
+	public String userHome() {
 		log.info("user welcome");
+		return "user/userHome";
 	}
 	
 	@GetMapping("/admin/adminHome")
-	public void adminHome() {
+	public String adminHome() {
 		
 		log.info("admin welcome");
+		return "admin/adminHome";
 		
 	}
 	

@@ -6,7 +6,7 @@
 <html lang="ko">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>사용자 홈</title>
+    <title>RestFuLL | 사용자 홈</title>
     <%@ include file="/WEB-INF/include/plugins.jspf"%>
 </head>
 

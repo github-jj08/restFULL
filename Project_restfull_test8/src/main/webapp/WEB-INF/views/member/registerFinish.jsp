@@ -22,7 +22,7 @@
                     <div class="register-form">
                         <h2>가입완료</h2>
 							<button type="submit" class="site-btn home-btn"><a href="<c:url value="redirect:/"/>">홈으로</a></button>
-                            <button type="submit" class="site-btn home-btn"><a href="<c:url value="login"/>">로그인</a></button>    		
+                            <button type="submit" class="site-btn home-btn"><a href="<c:url value="redirect:/login"/>">로그인</a></button>    		
                    </div>
                 </div>
             </div>

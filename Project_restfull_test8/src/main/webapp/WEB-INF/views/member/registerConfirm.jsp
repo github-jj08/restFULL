@@ -66,7 +66,7 @@
                 <div class="col-lg-6 offset-lg-3">
                     <div class="join-form" >
                         <h2>약관동의</h2>
-                        <form action="${pageContext.request.contextPath}/join" id="terms_form" name="my_form" method="post">
+                        <form action="${pageContext.request.contextPath}/join" id="terms_form" name="my_form" method="get">
                             <ul class="join_box">
                                 <li class="checkBox check01">
                                     <ul class="clearfix">
