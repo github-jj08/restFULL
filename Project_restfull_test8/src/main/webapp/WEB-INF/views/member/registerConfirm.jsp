@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,15 +10,16 @@
     <meta name="keywords" content="Fashi, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>RestFuLL | 회원가입</title>
+    <title>RestFuLL | 약관동의</title>
     <%@ include file="/WEB-INF/include/plugins.jspf"%>
 </head>
+
 <body>
+
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
     
 <!--약관동의 체크박스 전체선택 전체해제--> 
 <script>
-
     
    function check_all() {
         var checkObjs = $("input[name='chk']");
@@ -31,28 +34,28 @@
     };
     
     
+/*필수 약관 동의 안할시 경고창*/
 </script>
     
-<!-- 필수 약관 동의 안할시 경고창 -->
-<script type="text/javascript">
+        <script type="text/javascript">
         $(document).ready(function(){
     
             $("#nextBtn").click(function(){    
                 if($("#check_1").is(":checked") == false){
                     alert("필수 약관에 동의 하셔야 다음 단계로 이동합니다.");
-                    return;
+                    return false;
                 }else if($("#check_2").is(":checked") == false){
                     alert("필수 약관에 동의 하셔야 다음 단계로 이동합니다.");
-                    return;
+                    return false;
                 }else if($("#check_3").is(":checked") == false){
                     alert("필수 약관에 동의 하셔야 다음 단계로 이동합니다.");
-                    return;
-                }else{
-                    $("#terms_form").submit();
+                    return false;
+                }else {
+                	$("#terms_form").submit();
                 }
             });    
         });
-</script>
+    </script>
 
     
     <!-- Register Confirm Section Begin -->
@@ -62,7 +65,7 @@
                 <div class="col-lg-6 offset-lg-3">
                     <div class="join-form" >
                         <h2>약관동의</h2>
-                        <form action="./rs-register.jsp" id="terms_form" name="my_form">
+                        <form action="${pageContext.request.contextPath}/join" id="terms_form" name="my_form" method="get">
                             <ul class="join_box">
                                 <li class="checkBox check01">
                                     <ul class="clearfix">
@@ -146,32 +149,9 @@
                                 </li>
                             </ul>
                             <ul class="footBtwrap clearfix">
-                                <li><button type="button" class="fpmgBt2" id="nextBtn">확인</button></li>
+                                <li><button type="submit" class="fpmgBt2" id="nextBtn">다음</button></li>
                             </ul>
                         </form>
-                        
-<!--                         Modal 
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">모든 약관에 동의 필수</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                   필수 항목에 동의해주세요.
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>-->
-     
-                        
-
                     </div>
                 </div>
             </div>

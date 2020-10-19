@@ -21,7 +21,7 @@ public interface BoardService {
 	List<AttachmentVO> getBoardAttachmentVO(int board_numbers);
 	
 	//글작성
-	void writeBoardVO(MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException;
+	int writeBoardVO(MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException;
 	
 	//글수정
 	void modifyBoardVO(BoardVO boardVO);

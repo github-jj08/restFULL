@@ -58,31 +58,31 @@ public class LoginController {
 		return "redirect:/";
 	}
 	
-	//회원가입 약관
-	@GetMapping("/join") // 회원가입 창 이동
-	public String user() {
-		
-		log.info("join");
-		
-		return "rs-registerConfirm";
+	// 회원가입 창 이동 - 회원가입 약관 동의창 페이지로 이동
+	@GetMapping("/register") 
+	public String registerConfirm() {
+		log.info("registerConfirm");
+	    return "member/registerConfirm";
 	}
-	
-	//회원가입 창
-	@PostMapping("/register")
-	public String register() {
-		log.info("약관동의 O");
-		return "rs-register";
+	   
+	// 회원가입 form 창
+	@GetMapping("/join")
+	public String registerPage() {
+	      
+		log.info("join");
+	      
+	    return "member/register";
 	}
 
-	
+	   
 	@PostMapping("/addUser") // 회원가입 데이터베이스 자료 올리기
 	public String adduser(UserVO userVO) {
 		log.info("post resister");
-		
-		userservice.addUser(userVO);
-				
-		return "redirect:/login";
-		
+	      
+	    userservice.addUser(userVO);
+	            
+	    return "member/registerFinish";
+	      
 	}
 	
 	@GetMapping("/login/accessDenied")

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +40,7 @@ import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.DestinationVO;
 import bit.project.restfull.vo.GoodsVO;
 import bit.project.restfull.vo.LikesVO;
+import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.SidoguVO;
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
@@ -233,5 +235,74 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	@Override
 	public List<GoodsVO> myGoods(String[] goodsList) {
 		return mapper.myGoods(goodsList);
+	}
+
+	@Override
+	public List<RequestVO> insertRequest(List<Map<String, Object>> paramData) {
+		List<RequestVO> requestList = new ArrayList<RequestVO>();
+		int length = paramData.size();
+		long merchant_num = System.currentTimeMillis();
+		String merchant_uid = "restfull_" + merchant_num;
+		//주문 row 생성
+		//주문예약번호, 주문일시,	결제번호,	회원_ID,	상품번호, 	여행지이름, 취소여부
+		for(int i=0; i<length; i++) {
+			//사용자가 티켓 매수를 2개 이상 선택했을 경우 중복 row를 생성해야함
+			int count = Integer.parseInt((String)paramData.get(i).get("count"));
+			if(count > 1) {
+				for(int j = 0; j < count; j++) {
+					RequestVO vo = new RequestVO();
+					UUID uuid = UUID.randomUUID();	//랜덤 문자열 생성
+					vo.setRequest_numbers("req_" + uuid);	//주문 예약번호
+					vo.setMerchant_uid(merchant_uid);		//주문번호
+					vo.setImp_uid(null);
+					vo.setMember_id((String)paramData.get(i).get("member_id"));	//주문자 아이디
+					vo.setGoods_numbers(Integer.parseInt((String)paramData.get(i).get("goods_numbers")));
+					vo.setDestination_name((String)paramData.get(i).get("destination_name"));
+					vo.setCancel(0);
+					requestList.add(vo);
+				}
+			} else {
+				RequestVO vo = new RequestVO();
+				UUID uuid = UUID.randomUUID();	//랜덤 문자열 생성
+				vo.setRequest_numbers("req_" + uuid);	//주문 예약번호
+				vo.setMerchant_uid(merchant_uid);		//주문번호
+				vo.setImp_uid(null);
+				vo.setMember_id((String)paramData.get(i).get("member_id"));	//주문자 아이디
+				vo.setGoods_numbers(Integer.parseInt((String)paramData.get(i).get("goods_numbers")));
+				vo.setDestination_name((String)paramData.get(i).get("destination_name"));
+				vo.setCancel(0);
+				requestList.add(vo);
+			}
+		}
+		
+		mapper.insertRequest(requestList);		
+		return getRequests(merchant_uid);
+	}
+	
+	@Override
+	public List<RequestVO> getRequests(String merchant_uid){
+		return mapper.getRequests(merchant_uid);
+	}
+
+	@Override
+	public void updateRequest(String imp_uid, String merchant_uid) {
+		mapper.updateRequests(imp_uid,merchant_uid);
+	}
+
+	@Override
+	public int sumPrice(List<Map<String, Object>> paramData) {
+		int prices = 0;
+		
+		for(int i=0;i<paramData.size();i++) {
+			log.info("상품 번호 목록 ? " + paramData.get(i).get("goods_numbers"));
+			int goods_numbers= Integer.parseInt((String) paramData.get(i).get("goods_numbers"));
+			int count = Integer.parseInt((String) paramData.get(i).get("count"));
+			GoodsVO vo = getGoodsVO(goods_numbers);
+			int price = vo.getPrice() * count;
+			log.info(goods_numbers + " * " + count + " = " + price);
+			prices += price;
+		}
+		log.info("총 합계 금액 : " + prices);
+		return prices;
 	}
 }

@@ -304,6 +304,7 @@
 		                  						+'<td style="width:50px">여행지명</td>'
 		    	                           		+'<td style="width:50px">상품명</td>'
 		    	                           		+'<td style="width:50px">상품가격</td>'
+		    	                           		+'<td style="width:50px">매수선택</td>'
 		    	                           		+'<td style="width:50px">재고수량</td>'
 		    	                           		+'</tr> </thead>'
 		    	                           		+'<tbody id="goods-box"> </tbody>'
@@ -329,23 +330,71 @@
 	                           	$(result).each(function(){        
 	                           		$("#goods-box").empty();
 	                           		htmls += '<tr><td style="width:5%"><input type="checkbox" name="chk_goods" value="'+this.goods_numbers+'"></td>';
-	                             	htmls += '<td style="width:50px">'+ this.destination_name + '</td>';
-	                                htmls += '<td style="width:50px"><a href="${pageContext.request.contextPath}/travel/goods/content_view?goods_numbers=' + this.goods_numbers + '" target="_blank">' + this.name + '</a></td>';
-	                                htmls += '<td style="width:50px">'+ this.price + '</td>';
-	                                htmls += '<td style="width:50px">'+ this.amount + '</td></tr>';
+	                             	htmls += '<td style="width:40px">'+ this.destination_name + '<input type="hidden" name="destination_name" value="'+this.destination_name+'"/> </td>';
+	                                htmls += '<td style="width:40px"><a href="${pageContext.request.contextPath}/travel/goods/content_view?goods_numbers=' + this.goods_numbers + '" target="_blank">' + this.name + '</a></td>';
+	                                htmls += '<td style="width:40px">'+ this.price + '</td>';
+	                                htmls += '<td style="width:40px">'
+	                                		 + '<select name="count">'
+	                                		 + '<c:forEach begin="1" end="10" var="i">'
+	                                         + 		'<option value="${i}">${i}</option>'
+											 + '</c:forEach></select>'
+											 + '</td>';	
+	                                htmls += '<td style="width:40px">'+ this.amount + '</td></tr>';	//상품 재고수량
 	                                
 	                            });   //each end
 	                        }
 	                        $("#goods-box").append(htmls);
-	                        $("#goods-box").append('<input type="button" id="buy" name="buy" value="구매하기"/>');
+							
+	                        $("#goodsList").append('<span><h1>총 구매금액</h1></span> <span id="totalPrice"> 0 </span><span><h1> 원  </h1></span>');
+	                        $("#goodsList").append('<input type="button" id="buy" name="buy" value="구매하기"/>');
 	                     }//success end
 	                   }); //ajax end
 	            
 	              	});//관련상품 불러오기 end
 	
+	              	/* 상품 금액 출력 관련 스크립트 */
+	              	/* 중복코드 맞는데 정리하기 너무 귀찮ㅇㅁㄱㅈㄷ뷰ㅠㅠ*/
+	              	$(document).on('change','input[name="chk_goods"], select[name="count"]',function(){ 
+		                var myGoodsArray = new Array();
+		                
+		                var myLength = $('input[name="chk_goods"]:checked').length;
+						console.log("체크된것갯수: " + myLength);
+		                
+						//아무것도 등록하지 않았는데 확인을 눌렀을 경우 null값 들어가는 것 방지
+		                if(myLength==0){
+		                	myGoodsArray.push('');
+		                }else{
+			                for(var i =0;i<myLength;i++){
+			                	var myGoods = new Object();
+			              		
+			                	myGoods.goods_numbers=$('input[name="chk_goods"]:checked').eq(i).val();
+			                    myGoods.count = $("select option:selected").eq(i).val();
+			                    myGoodsArray.push(myGoods);
+			                }
+		                }
+						
+	              		var prices = 0;
+	              		
+	              		$.ajax({
+                    		url: "${pageContext.request.contextPath}/payments/sumPrice", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+                    		type: "POST",
+	                        data: JSON.stringify(myGoodsArray),
+	                        contentType: "application/json; charset=utf-8",
+	                        dataType:"json",
+	                        success: function (result) {
+	                            console.log("성공"); 
+	                            console.log(result); 
+	    	              		//총금액 업데이트
+	    	              		$('#totalPrice').text('');//선초기화
+	    	              		$('#totalPrice').text(result);
+		                    }//success end
+	              		});//ajax end
+	              		
+	              	});
+	              	
+	              	
 	              
-	              
-		              /* 여행관련 상품 선택 및 구매 기능 스크립트 */
+		            /* 여행관련 상품 선택 및 구매 기능 스크립트 */
 	                $(document).on("click","#buy",function(){  
 		                  console.log("buy");
 		                  
@@ -353,55 +402,63 @@
 		                  var totalLength= $('input[name="chk_goods"]').length;
 		                  console.log("상품목록길이 : " + totalLength);
 		                  
-		                  //ajax로 넘길 배열 생성
-		                  var myGoods = new Array();
+		                  //ajax로 넘길 json 배열 생성
+		                  var myGoodsArray = new Array();
 		                  
 		                  
 		                  var myLength = $('input[name="chk_goods"]:checked').length;
 		                  console.log("체크된것갯수: " + myLength);
 		                  //아무것도 등록하지 않았는데 확인을 눌렀을 경우 null값 들어가는 것 방지
 		                  if(myLength==0){
-		                	  myGoods.push('');
+		                	  myGoodsArray.push('');
 		                  }else{
 			                  for(var i =0;i<myLength;i++){
-			                	  myGoods.push($('input[name="chk_goods"]:checked').eq(i).val());
+				                  var myGoods = new Object();
+				                  myGoods.member_id = $('input[name="member_id"]').val();
+			                	  myGoods.goods_numbers=$('input[name="chk_goods"]:checked').eq(i).val();
+			                      myGoods.count = $("select option:selected").eq(i).val();
+			                      myGoods.destination_name = $('input[name="destination_name"]').eq(i).val();
+			                      myGoodsArray.push(myGoods);
 			                  }
 			                  
 			              }
 			              
-			              console.log(myGoods);
+		                  //체크한 상품의 상품번호
+			              console.log("myGoodsArray" + myGoodsArray);
+			              console.log("myGoodsArray" + JSON.stringify(myGoodsArray));
 			              
-			              //구매요청하기 --> 컨트롤러에 아래 해당하는 url이 있어야함
+		                  var member_id = $('input[name="member_id"]').val();
+		                  //먼저 주문 정보에 등록함
 			              $.ajax({
 			                     url: "${pageContext.request.contextPath}/travel/getgoods",
 			                        type: "POST",
-			                        data: {
-			                           "myGoods" : myGoods,
-			                        },
+			                        data: JSON.stringify(myGoodsArray),
+			                        contentType: "application/json; charset=utf-8",
 			                        dataType:"json",
 			                        success: function (result) {
 			                            console.log("성공"); 
+			                            console.log(result); 
+			                            
 			                            if(result.length < 1){
 			                            	alert("상품을 선택하세요.");
 			                            	console.log("상품번호에 부합하는 상품이 없었음")
 				                        } else {
-				                        	
 				                        	//주문 정보 생성
 				                        	var totalPrice = 0,
-				                        		productName = '',
-				                        		productLength = 1;
+				                        		productLength = 0;
 				                        	
 				                        	var buyer_name = $('input[name="name"]').val();
 				                        	var buyer_email = $('input[name="email"]').val();
 				                        	var buyer_tel = $('input[name="phone"]').val();
-				                        	
+				                        	var merchant_id;
 				                        	$(result).each(function (index, item) {
-				                                console.log(item.name);
 				                           		totalPrice += item.price;
+					                        	console.log("주문번호는  " + item.merchant_uid);
+				                           		merchant_id = item.merchant_uid;
 				                           		
 				                           		//반환된 0번째 상품을 메인 상품명으로 지정
 				                           		if(index == 0){
-				                           			productName = item.name;
+				                           			productName = item.productName;
 				                           		}else{
 				                           			productLength++;
 				                           		}
@@ -415,7 +472,6 @@
 				                        	
 				                           	console.log("총 가격 = " + totalPrice);
 				                           	
-				                           	
 				                           	//결제 api 호출
 				                           	var IMP = window.IMP;
 				                            var code = "iamport";  // FIXME: 가맹점 식별코드
@@ -426,39 +482,46 @@
 				                                // name과 amount만 있어도 결제 진행가능
 				                                pg : 'html5_inicis', // pg 사 선택
 				                                pay_method : 'card',
-				                                merchant_uid : 'merchant_' + new Date().getTime(),
+				                                merchant_uid : merchant_id,
 				                                name : productName,
 				                                amount : totalPrice,
 				                                buyer_email : buyer_email,
 				                                buyer_name : buyer_name,
 				                                buyer_tel : buyer_tel,
-				                                m_redirect_url : 'http://localhost:8282/restfull/' + '주문처리 이후 이동할 페이지', // get 방식으로 짜야함(쿼리스트링으로 전달)
+				                                m_redirect_url : 'http://localhost:8282/restfull/',
+				                                // get 방식으로 짜야함(쿼리스트링으로 전달)
 				                            }, function(rsp) {
 				                                if ( rsp.success ) {
+				                                	console.log("성공!!");
 				                                	$.ajax({
-				                                		url: "/payments/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+				                                		url: "${pageContext.request.contextPath}/payments/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
 				                                		type: 'POST',
 				                                		dataType: 'json',
 				                                		data: {
-				                            	    		"imp_uid" : rsp.imp_uid
-				                            	    		//기타 필요한 데이터가 있으면 추가 전달
+				                            	    		"imp_uid" : rsp.imp_uid,
+				                            	    		"merchant_uid" : merchant_id,
+				                            	    		"totalPrice" : totalPrice
 				                                		}
 				                                	}).done(function(data) {
 				                                		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-				                                		if ( everythings_fine ) {
-				                                			//여기부터 수정해야함 ( db에 저장할 데이터 수집 )
+				                                		if ( data == 1 ) {
 						                                    var msg = '결제가 완료되었습니다.';
-						                                    msg += '고유ID : ' + rsp.imp_uid;
-						                                    msg += '상점 거래ID : ' + rsp.merchant_uid;
-						                                    msg += '결제 금액 : ' + rsp.paid_amount;
-						                                    msg += '결제일시 : ' + rsp.paid_at;
 						                                    msg += '매출전표 url : ' + rsp.receipt_url;
-						                                    msg += '결제 상태 : ' + rsp.status;
+				                                			
+						                                	$.ajax({
+						                                		url: "${pageContext.request.contextPath}/payments/confirmation", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+						                                		type: 'POST',
+						                                		dataType: 'json',
+						                                		data: {
+						                            	    		"imp_uid" : rsp.imp_uid,
+						                            	    		"merchant_uid" : merchant_id,
+						                                		}
+						                                	});
 						                                    
-				                                			alert(msg);
+						                                    alert(msg);
+						                                    location.href="${pageContext.request.contextPath}/travel/comfirm";
 				                                		} else {
-				                                			//[3] 아직 제대로 결제가 되지 않았습니다.
-				                                			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+				                                			alert("오류가 감지되어 결제가 되지 않았습니다.");
 				                                		}
 				                                	});
 				                                } else {

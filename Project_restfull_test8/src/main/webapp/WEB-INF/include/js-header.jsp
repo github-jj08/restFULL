@@ -50,6 +50,7 @@
 						[<a href="<c:url value="/admin/adminHome" />">관리자 홈</a>]
 					</c:if>
 					
+					<input type="hidden" name="member_id" value="member_id"/> 
 					<form:form action="${pageContext.request.contextPath}/logout" method="POST">
 					    <input type="submit" value="로그아웃" />
 					</form:form>
@@ -122,9 +123,9 @@
             <div class="container">
                 <nav class="nav-menu mobile-menu">
                     <ul>
-                        <li class="active"><a href="${pageContext.request.contextPath}">Home</a></li>
+                        <li class="active"><a href="${pageContext.request.contextPath}/">Home</a></li>
                         <li><a href="${pageContext.request.contextPath}/user/write_view">글작성</a></li>
-                        <li><a href="${pageContext.request.contextPath}/travel">여행코스작성</a></li>
+                        <li><a href="${pageContext.request.contextPath}/travel/">여행코스작성</a></li>
                         <li><a href="./rs-Servicecenter.jsp">공지사항</a></li>
                         <li><a href="#">이벤트</a></li>
                         <li><a href="./rs-Servicecenter_faq.jsp">자주하는질문</a></li>

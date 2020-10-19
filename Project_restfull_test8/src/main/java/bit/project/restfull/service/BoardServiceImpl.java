@@ -64,7 +64,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void writeBoardVO(MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException {
+	public int writeBoardVO(MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException {
 		//0.파일경로
 		String root_path = "C:/Users/hoora/Desktop";
 		String attach_path = "/resources/upload/";
@@ -136,7 +136,7 @@ public class BoardServiceImpl implements BoardService{
             }
             
 	    }
-
+        return bNum;
 	}
 	
 	@Override

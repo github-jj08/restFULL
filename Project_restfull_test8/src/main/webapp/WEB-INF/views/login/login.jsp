@@ -69,7 +69,7 @@
                 		</div>
                      </form:form> <!-- login form end -->
                      <div class="switch-login">
-                        <a href="${pageContext.request.contextPath}/join" class="or-login">회원가입</a>
+                        <a href="${pageContext.request.contextPath}/register" class="or-login">회원가입</a>
                      </div>
                         
                         <!-- 여기부터는 안건드림 -->
