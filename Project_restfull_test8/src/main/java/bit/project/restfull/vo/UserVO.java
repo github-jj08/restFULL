@@ -31,6 +31,10 @@ public class UserVO {
 	
 	public String getAuthorities() {
 		String authorities = "ROLE_USER";
+		
+		if(getName().trim().toUpperCase().equals("ADMIN"))
+			authorities = "ROLE_ADMIN";
+		
 		return authorities;
 	}
 }

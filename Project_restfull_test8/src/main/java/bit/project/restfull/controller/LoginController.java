@@ -110,6 +110,7 @@ public class LoginController {
 	@GetMapping("/login/accessDenied")
 	public String accessDenied() {
 		log.info("accessDenied...");
+		
 		return "login/accessDenied";
 	}
 
