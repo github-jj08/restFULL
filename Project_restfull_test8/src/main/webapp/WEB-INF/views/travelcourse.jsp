@@ -309,6 +309,8 @@
 		    	                           		+'</tr> </thead>'
 		    	                           		+'<tbody id="goods-box"> </tbody>'
 		                  						+'</table>');
+		                  $("#goodsList").append('<span><h1>총 구매금액</h1></span> <span id="totalPrice"> 0 </span><span><h1> 원  </h1></span>');
+	                      $("#goodsList").append('<input type="button" id="buy" name="buy" value="구매하기"/>');
 	                  }
 	                  
 	                  //보기 편하게 하려고 htmls로 짬
@@ -345,8 +347,6 @@
 	                        }
 	                        $("#goods-box").append(htmls);
 							
-	                        $("#goodsList").append('<span><h1>총 구매금액</h1></span> <span id="totalPrice"> 0 </span><span><h1> 원  </h1></span>');
-	                        $("#goodsList").append('<input type="button" id="buy" name="buy" value="구매하기"/>');
 	                     }//success end
 	                   }); //ajax end
 	            
@@ -363,6 +363,8 @@
 						//아무것도 등록하지 않았는데 확인을 눌렀을 경우 null값 들어가는 것 방지
 		                if(myLength==0){
 		                	myGoodsArray.push('');
+		                	$('#totalPrice').text('');//선초기화
+    	              		$('#totalPrice').text(0);
 		                }else{
 			                for(var i =0;i<myLength;i++){
 			                	var myGoods = new Object();
@@ -528,7 +530,6 @@
 				                                } else {
 				                                    var msg = '결제에 실패하였습니다.';
 				                                    msg += '에러내용 : ' + rsp.error_msg;
-
 				                                    alert(msg);
 				                                }//if end
 				                            });//function end
