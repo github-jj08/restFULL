@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import bit.project.restfull.vo.AttachmentVO;
 import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.LikesVO;
+import bit.project.restfull.vo.RequestVO;
 import lombok.extern.log4j.Log4j;
 
 /**
@@ -68,5 +69,13 @@ public interface BoardMapper{
 	// 유저 신고내역 확인
 	@Select("select * from board where member_id = #{member_id} and boardlist_numbers = '3' order by board_numbers")
 	public List<BoardVO> askList(String member_id);
+
+	//유저 > 결제내역 확인(by여진)
+	@Select("select r.*, g.name as productName from request r, goods g where r.goods_numbers = g.goods_numbers and r.member_id = #{member_id} order by dates desc, merchant_uid desc")
+	List<RequestVO> paymentList(String member_id);
+
+	//유저 > 내가 좋아요 누른 글들을 확인(by여진)
+	@Select("select b.* from likes l, board b where l.board_numbers = b.board_numbers and l.member_id = #{member_id}")
+	List<BoardVO> getLikeList(String member_id);
 		
 }

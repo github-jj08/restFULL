@@ -21,8 +21,14 @@
 	    	<id>oracle</id>
 	    	<url>http://www.datanucleus.org/downloads/maven2/</url>
 		</repository>
+		
+		<!-- 아임포트 -->
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
 	</repositories>	
-	
+		
 	<dependencies>
 		<!-- 오라클 JDBC 드라이버 -->
 		<dependency>
@@ -286,6 +292,40 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-email</artifactId>
 			<version>1.2</version>
+		</dependency>
+		
+		<!-- 아임포트 -->
+		<dependency>
+			<groupId>com.github.iamport</groupId>
+			<artifactId>iamport-rest-client-java</artifactId>
+			<version>0.2.11</version>
+		</dependency>
+		
+		<!-- api 호출용 http -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.4</version>
+		</dependency>
+		
+		<!-- naver -->
+		<dependency>
+			<groupId>com.github.scribejava</groupId>
+			<artifactId>scribejava-core</artifactId>
+			<version>2.8.1</version>
+		</dependency>
+		
+		<!-- 제이슨 파싱 -->
+		<dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>xerces</groupId>
+		    <artifactId>xercesImpl</artifactId>
+		    <version>2.9.1</version>
 		</dependency>
 		
 	</dependencies>

@@ -23,6 +23,7 @@ import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.DestinationVO;
 import bit.project.restfull.vo.GoodsVO;
 import bit.project.restfull.vo.LikesVO;
+import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.SidoguVO;
 import lombok.extern.log4j.Log4j;
 
@@ -81,5 +82,11 @@ public interface AdminBoardMapper{
 	
 	//특정 상품정보출력
 	List<GoodsVO> myGoods(String[] goodsList);
+
+	void insertRequest(List<RequestVO> requestList);
+
+	List<RequestVO> getRequests(String request_numbers);
+
+	void updateRequests(@Param("imp_uid")String imp_uid,@Param("merchant_uid")String merchant_uid);
 	
 }

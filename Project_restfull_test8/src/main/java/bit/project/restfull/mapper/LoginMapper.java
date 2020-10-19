@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,7 +21,7 @@ import bit.project.restfull.vo.UserVO;
 public interface LoginMapper {
 	
 	
-	@Insert("insert into member(member_id, pw, name, birth, gender, phone, email, enabled, grade_name, authority_name) values(#{member_id}, #{pw}, #{name}, #{birth}, #{gender}, #{phone}, #{email}, #{enabled}, #{grade_name}, #{authority_name})")
+	@Insert("insert into member(member_id, pw, name, birth, gender, phone, email, enabled, grade_name, authority_name, login_type) values(#{member_id}, #{pw}, #{name}, #{birth ,jdbcType=DATE}, #{gender}, #{phone}, #{email,jdbcType=VARCHAR}, #{enabled}, #{grade_name}, #{authority_name}, #{login_type})")
 	public void insertUser(UserVO userVO);
 
 	@Select("select * from member where member_id = #{member_id}")
@@ -41,7 +42,6 @@ public interface LoginMapper {
 	@Update("update member set pw = #{pw}, email = #{email}, phone = #{phone} where member_id = #{member_id}")
 	public void modifyUser(UserVO userVO);
 	
-	
 	@Select("select * from member where member_id = #{member_id}")
 	public UserVO getUserVO(String member_id);
 	
@@ -58,5 +58,14 @@ public interface LoginMapper {
 	// 비밀번호 찾기
 	@Update("update member set pw = #{pw} where member_id = #{member_id}")
 	public void findPW(UserVO userVO);
-
+	
+	//kakao & naver social login
+	@Select("select * from member where id = #{id}")
+	public UserVO KreadUser(String id);
+	
+	@Select("select * from member where login_Type = #{login_Type}")
+	public UserVO KreadUserLoginType(String login_Type);
+	
+	@Select("select * from member where member_id = #{member_id} and login_type = #{login_type}")
+	public UserVO KreadUserByIdandAutho(@Param("member_id")String member_id,@Param("login_type")String login_type);
 }

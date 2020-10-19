@@ -69,20 +69,25 @@
                 		</div>
                      </form:form> <!-- login form end -->
                      <div class="switch-login">
-                        <a href="${pageContext.request.contextPath}/join" class="or-login">회원가입</a>
+                        <a href="${pageContext.request.contextPath}/register" class="or-login">회원가입</a>
                      </div>
                         
-                        <!-- 여기부터는 안건드림 -->
                         <!-- 소셜로그인 start -->
                         <div class="social_login">
                         	<!-- 카카오로그인 버튼 -->
-                        	<div class="kakao_login">
-		                        <a href="https://kauth.kakao.com/oauth/authorize?client_id=8c8d010971d8629ec3188f9ed097f73b&redirect_uri=http://localhost:8282/restfull/kakaologin&response_type=code">
-		           				 	<img src="resources/img/kakao_login_medium_wide.png">
-		       					</a>
-	       					</div>
+                        	<div class="kakaobtn">
+	                            <a href="https://kauth.kakao.com/oauth/authorize?client_id=8c8d010971d8629ec3188f9ed097f73b&redirect_uri=http://localhost:8282/restfull/kakaologin&response_type=code" class="btn btn-warning btn-user btn-block">
+	                              	<img width="240" height="45"
+	                               	 	src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"/>
+	                            </a>
+                        	</div>
 	       					<!-- 네이버 로그인버튼 -->
-	       					
+	       					<div id="naver_id_login" style="text-align: center">
+								<a href="${naverLoginUrl}"> 
+									<img width="223"
+										src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" />
+								</a>
+							</div>
                         </div>
                      </div>
                 </div>

@@ -206,5 +206,9 @@ public class UserServiceImpl implements UserService {
 	public int idChk(String member_id) {
 		return loginMapper.idChk(member_id);
 	}
-	
+
+	@Override
+	public UserVO getUserByIdandAutho(String id, String login_type) {
+		return loginMapper.KreadUserByIdandAutho(id, login_type);
+	}
 }

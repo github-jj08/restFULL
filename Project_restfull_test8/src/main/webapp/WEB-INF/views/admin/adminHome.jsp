@@ -21,6 +21,7 @@
 <h3>[<a href="<c:url value="/admin/notice" />">공지사항 및 이벤트 관리</a>]</h3>
 <h3>[<a href="<c:url value="/admin/qnas" />">문의 및 신고 답변</a>]</h3>
 <h3>[<a href="<c:url value="/admin/dest" />">여행지 및 상품 관리</a>]</h3>
+<h3>[<a href="<c:url value="/admin/requestList" />">상품 주문내역 관리</a>]</h3>
 
 </body>
 </html>

@@ -1,6 +1,7 @@
 package bit.project.restfull.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,6 +11,7 @@ import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.DestinationVO;
 import bit.project.restfull.vo.GoodsVO;
 import bit.project.restfull.vo.LikesVO;
+import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.SidoguVO;
 
 public interface AdminBoardService {
@@ -51,4 +53,17 @@ public interface AdminBoardService {
 	
 	//구매할 상품목록 Read
 	List<GoodsVO> myGoods(String[] goodsList);
+
+	//주문정보를 insert하고 가져옴
+	List<RequestVO> insertRequest(List<Map<String, Object>> paramData);
+	List<RequestVO> getRequests(String merchant_uid);
+
+	//주문정보 update
+	void updateRequest(String imp_uid, String merchant_uid);
+
+	//합계금액 가져오기
+	int sumPrice(List<Map<String, Object>> paramData);
+
+//	//member_id에 해당하는 결제내역 출력(사용자기준)
+//	List<RequestVO> getPaymentList(String member_id);
 }

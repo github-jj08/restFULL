@@ -12,6 +12,7 @@ import bit.project.restfull.vo.AttachmentVO;
 import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.CommentVO;
 import bit.project.restfull.vo.LikesVO;
+import bit.project.restfull.vo.RequestVO;
 
 public interface BoardService {
 	List<BoardVO> getList(int boardlist_numbers, String searchWord);
@@ -21,7 +22,7 @@ public interface BoardService {
 	List<AttachmentVO> getBoardAttachmentVO(int board_numbers);
 	
 	//글작성
-	void writeBoardVO(MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException;
+	int writeBoardVO(MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException;
 	
 	//글수정
 	void modifyBoardVO(BoardVO boardVO);
@@ -51,5 +52,10 @@ public interface BoardService {
 
 	List<BoardVO> askList(String member_id);
 
+	//member_id에 해당하는 결제내역 출력(사용자기준)
+	List<RequestVO> getPaymentList(String member_id);
+	
+	//member_id에 해당하는 좋아요 글들을 출력(사용자기준)
+	List<BoardVO> getLikeList(String member_id);
 
 }

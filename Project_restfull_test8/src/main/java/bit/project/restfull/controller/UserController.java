@@ -24,10 +24,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 
 import bit.project.restfull.mapper.PaymentMapper;
+import bit.project.restfull.service.AdminBoardService;
 import bit.project.restfull.service.BoardService;
 import bit.project.restfull.service.UserService;
 import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.CustomUser;
+import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.ResponseVO;
 import bit.project.restfull.vo.UserVO;
 import lombok.AllArgsConstructor;
@@ -52,11 +54,14 @@ public class UserController {
 	@Inject
     private BCryptPasswordEncoder passEncoder;
 	
+	@Inject
+	private AdminBoardService adboardService;
+	
 	//1. 마이페이지 - 회원 탈퇴 페이지
 	@GetMapping("/userDeleteView") 
 	public String userDeleteView() {
 		log.info("welcome userDeleteView!");
-		return "user/UserDeleteView";
+		return "user/userDeleteView";
 	}
 	
 	//2. 회원 탈퇴 기능 수행
@@ -188,7 +193,7 @@ public class UserController {
 	//9. 문의글 작성 페이지로 이동
 	@GetMapping("/ask") 
 	public String userQnAWrite_view() {
-		return "write_view_qna";
+		return "user/write_view_qna";
 	}
 	
 	//10. 문의글 작성
@@ -227,6 +232,39 @@ public class UserController {
 		return "user/content_view_ask";
 	}
 	
+	
+	//13. 결제내역 list
+	@GetMapping("/paymentList") 
+	public String paymentList(UserVO userVO,Model model) {
+		String member_id = userVO.getMember_id();
+		log.info("user member_id : "+member_id); // name
+		
+		List<RequestVO> list = boardService.getPaymentList(member_id);
+		
+		model.addAttribute("list", list);
+		return "user/paymentList";
+	}
+	
+	//14. 결제내역 list --> 상품 view(사용자는 수정이 불가능-관리자만 수정기능 보유)
+	@GetMapping("/goods_view") 
+	public String user_goodsView(String goods_numbers, Model model) {
+	      log.info("content_view");
+	      int goodsNum = Integer.parseInt(goods_numbers);
+	      model.addAttribute("content_view",adboardService.getGoodsVO(goodsNum));
+		return "user/goods_content_view";
+	}
+	
+	//15. 내 좋아요 글 list
+	@GetMapping("/myLikeList") 
+	public String myLikeList(UserVO userVO,Model model) {
+		String member_id = userVO.getMember_id();
+		log.info("user member_id : "+member_id); // name
+		
+		List<BoardVO> list = boardService.getLikeList(member_id);
+		
+		model.addAttribute("boardlist", list);
+		return "user/likeList";
+	}
 	
 }
 

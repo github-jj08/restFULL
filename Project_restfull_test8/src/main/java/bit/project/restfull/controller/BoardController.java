@@ -61,9 +61,9 @@ public class BoardController {
 	@RequestMapping(value="/write", method = {RequestMethod.GET, RequestMethod.POST})
 	public String write(@RequestParam(value="file") MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException {
 		log.info("write");
-		boardService.writeBoardVO(uploadfiles, boardVO);
+		int board_numbers = boardService.writeBoardVO(uploadfiles, boardVO);
 		log.info("service.uploadFile(uploadFiles);");
-		return "redirect:/";
+		return "redirect:/content_view?board_numbers="+board_numbers;
 	}
 	
 	//좋아요 기능
@@ -129,7 +129,6 @@ public class BoardController {
 		boardService.delComment(comments_numbers);
 	}
 		
-	//${pageContext.request.contextPath}/report
 	//신고기능
 	@ResponseBody
 	@RequestMapping(value="/report", method= RequestMethod.POST)

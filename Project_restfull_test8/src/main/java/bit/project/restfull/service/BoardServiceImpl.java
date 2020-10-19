@@ -26,6 +26,7 @@ import bit.project.restfull.vo.AttachmentVO;
 import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.CommentVO;
 import bit.project.restfull.vo.LikesVO;
+import bit.project.restfull.vo.RequestVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
@@ -64,7 +65,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void writeBoardVO(MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException {
+	public int writeBoardVO(MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException {
 		//0.파일경로
 		String root_path = "C:/Users/hoora/Desktop";
 		String attach_path = "/resources/upload/";
@@ -136,7 +137,7 @@ public class BoardServiceImpl implements BoardService{
             }
             
 	    }
-
+        return bNum;
 	}
 	
 	@Override
@@ -220,5 +221,15 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<BoardVO> askList(String member_id){
 		return mapper.askList(member_id);
+	}
+
+	@Override
+	public List<RequestVO> getPaymentList(String member_id) {
+		return mapper.paymentList(member_id);
+	}
+
+	@Override
+	public List<BoardVO> getLikeList(String member_id) {
+		return mapper.getLikeList(member_id);
 	}
 }
