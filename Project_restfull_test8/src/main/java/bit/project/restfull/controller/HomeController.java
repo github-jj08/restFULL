@@ -115,5 +115,18 @@ public class HomeController {
 		List<CommentVO> commentlist = boardService.commentList(board_numbers);
 		return commentlist;
 	}
+	
+	//인덱스 페이지
+	@RequestMapping(value = "/FAQ", method = RequestMethod.GET)
+	public String FAQ() {
+		log.info("index");
+		return "FAQ";
+	}
+	
+	
+	//자주하는질문 추가하기
+	
+	
+	
 		
 }

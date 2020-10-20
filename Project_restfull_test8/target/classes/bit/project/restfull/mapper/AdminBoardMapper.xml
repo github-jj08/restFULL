@@ -326,9 +326,9 @@
 				travel_seq.nextval,
 				#{item.member_id},
 				#{item.contents},
-				#{item.tcalias},
+				#{item.tcAlias},
 				sysdate,
-				#{item.tcuniquenum}
+				#{item.tcUiqueNum}
 			) 
 		</foreach>
 	</insert>

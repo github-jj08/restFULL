@@ -13,24 +13,16 @@
 	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="user/resources/css/**" location="/resources/css/" />
-	<resources mapping="user/resources/fonts/**" location="/resources/fonts/" />
-	<resources mapping="user/resources/img/**" location="/resources/img/" />
-	<resources mapping="user/resources/js/**" location="/resources/js/" />
-	<resources mapping="user/resources/**" location="/resources/" />
-	
-	<resources mapping="admin/resources/css/**" location="/resources/css/" />
-	<resources mapping="admin/resources/fonts/**" location="/resources/fonts/" />
-	<resources mapping="admin/resources/img/**" location="/resources/img/" />
-	<resources mapping="admin/resources/js/**" location="/resources/js/" />
+
+
 	<resources mapping="admin/resources/**" location="/resources/" />
-	
-	<resources mapping="/resources/css/**" location="/resources/css/" />
-	<resources mapping="/resources/fonts/**" location="/resources/fonts/" />
-	<resources mapping="/resources/img/**" location="/resources/img/" />
-	<resources mapping="/resources/js/**" location="/resources/js/" />
+	<resources mapping="user/resources/**" location="/resources/" />
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/img/**" location="/resources/img/" />
+	<resources mapping="/img/favicon.ico" location="/resources/img/" />
 	
+
+
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />

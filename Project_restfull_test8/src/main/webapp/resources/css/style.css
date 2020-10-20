@@ -1,39 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@github-jj08 
-Learn Git and GitHub without any code!
-Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
-
-
-github-jj08
-/
-restfull_test8
-1
-00
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-More
-restfull_test8/Project_restfull_test8/src/main/webapp/resources/css/style.css
-@sally-choi
-sally-choi ㄴseri1018
-Latest commit 06c603f 2 hours ago
- History
- 2 contributors
-@sally-choi@github-jj08
-3505 lines (2955 sloc)  59.7 KB
-  
 /******************************************************************
   Template Name: Fashi
   Description: Fashi eCommerce HTML Template
@@ -45,6 +9,7 @@ Latest commit 06c603f 2 hours ago
 
 /*------------------------------------------------------------------
 [Table of contents]
+
 1.  Template default CSS
 	1.1	Variables
 	1.2	Mixins
@@ -58,6 +23,7 @@ Latest commit 06c603f 2 hours ago
 8.  Logo Carousel
 9.  Contact
 10.  Footer
+
 -------------------------------------------------------------------*/
 
 /*----------------------------------------*/
@@ -239,55 +205,10 @@ ol {
   Header
 -----------------------*/
 
-.header-top {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	
-}
 
-.header-top .ht-right {
-	float: right;
-    padding-top: 10px;
-	padding-bottom: 5px;
-}
-
-.header-top .ht-right .login-panel{
-	float: right;
-	font-size: 14px;
-	background-color:#8a93c0;
-	display: inline-block;
-	padding-left: 10px;
-    padding-right: 10px;
-	padding-top: 6px;
-	padding-bottom: 6px;
-    border-style:none;
-    border-radius:15%;
-    opacity:0.8;
-}
-
-.header-top .ht-right #logoutsubmit {
-	float: right;
-	font-size: 14px;
-	background-color:#8a93c0;
-	display: inline-block;
-	padding-left: 10px;
-    padding-right: 10px;
-	padding-top: 6px;
-	padding-bottom: 6px;
-    border-style:none;	
-    color:white;
-    border-radius:15%;
-    opacity:0.8;
-}
-
-.header-top .ht-right .login-panel a {
-    color:white;
-}
-
-
- .inner-header {
+ .header-section .inner-header {
 	padding-bottom:15px;
+	padding-top:30px;
 } 
 
 .
@@ -296,11 +217,13 @@ ol {
 	display: inline-block;
    
 }
+ .search-top {
+    padding-top: 15px;
+}
 
 .inner-header .advanced-search {
 	height: 50px;
 	border: 1px solid #ebebeb;
-   
 }
 
 
@@ -333,6 +256,61 @@ ol {
 }
 
 
+/* 로그인 버튼 */
+.inner-header .ht-right {
+	float: right;
+    padding-top: 10px;
+	padding-bottom: 5px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+
+.inner-header .ht-right .login-panel{
+	float: right;
+	font-size: 15px;
+	font-weight:500;
+	background-color:#8a93c0;
+	display: inline-block;
+	padding:5px 10px;
+    border-style:none;
+    border-radius:15%;
+    opacity:0.8;
+}
+
+.inner-header .ht-right .login-panel a{
+    color:white;
+}
+
+
+.inner-header .ht-right .showloign .userlogin {
+	float:right;
+}
+
+.inner-header .ht-right .showloign .userlogin strong {
+	font-size:17px;
+	font-weight:700;
+}
+.inner-header .ht-right .showloign .userlogin a {
+	font-size:20px;
+}
+/* 로그아웃버튼 */
+.inner-header .ht-right .showloign #logoutsubmit {
+	float:right;
+	font-size: 15px;
+	font-weight:500;
+	background-color:#8a93c0;
+	padding:5px 10px;
+    border-style:none;
+    border-radius:15%;
+    opacity:0.8;
+    color:white;
+}
+
+
+
+
 .nav-item {
 	background: #8a93c0;
 	display: -webkit-box;
@@ -357,10 +335,10 @@ ol {
 	position: relative;
 }
 
-.nav-item .nav-menu li.active a {
+/* .nav-item .nav-menu li.active a {
 	background: #455683;
 }
-
+ */
 .nav-item .nav-menu li a {
 	font-size: 14px;
 	font-weight: 700;
@@ -2987,7 +2965,7 @@ ol {
     margin : 10px 0;
     
 }
-/*회원가입 아이디 중복환인 버튼*/
+/*회원가입 아이디 중복확인 버튼*/
 .register-form .group-input #member_id {
     width: 68%;
 }
@@ -3012,9 +2990,10 @@ ol {
 	margin-top: 15px;
     background-color:#8a93c0;
     border-color:#8a93c0;
+    font-size:18px;
 }
 
-
+/* 회원가입 버튼 */
 .login-form .switch-login {
 	text-align: center;
 	margin:22px 0;
@@ -3041,64 +3020,40 @@ ol {
 	content: "";
 }
 
+/* ID,PW찾기 버튼 */
 .login-form .group-input.gi-check {
 	margin-bottom: 8px;
 }
 
 .login-form .group-input .gi-more {
 	overflow: hidden;
-}
-
-.login-form .group-input .gi-more label {
-	position: relative;
-	cursor: pointer;
-	padding-left: 28px;
-	font-size: 14px;
-	color: #6B6B6B;
-	float: left;
-}
-
-.login-form .group-input .gi-more label input {
-	position: absolute;
-	visibility: hidden;
-}
-
-.login-form .group-input .gi-more label input:checked~span {
-	border-color: #6C6C6C;
-}
-
-.login-form .group-input .gi-more label input:checked~span:after {
-	border-color: #6c6c6c;
-}
-
-.login-form .group-input .gi-more label .checkmark {
-	position: absolute;
-	left: 0;
-	top: 4px;
-	height: 13px;
-	width: 13px;
-	border: 1px solid #6C6C6C;
-	border-radius: 2px;
-}
-
-.login-form .group-input .gi-more label .checkmark:after {
-	left: 2px;
-	top: -2px;
-	width: 13px;
-	height: 6px;
-	border: solid #ffffff;
-	border-width: 2px 2px 0px 0px;
-	-webkit-transform: rotate(127deg);
-	-ms-transform: rotate(127deg);
-	transform: rotate(127deg);
+	text-align:center;
 }
 
 .login-form .group-input .gi-more .forget-pass {
-	float: right;
 	line-height: 20px;
 	margin-top: -2px;
 	font-size: 14px;
 	color: #6B6B6B;
+	
+}
+.login-form .social_login a {
+	width:100%;
+	height:50px;
+	margin: 20px 0;
+}
+
+.login-form .social_login .kakaobtn img {
+	width:100%;
+	height:50px;
+	margin-bottom: 15px;
+}
+
+.login-form .social_login #naver_id_login img {
+	width:100%;
+	height:50px;
+	
+	
 }
 
 
@@ -3127,7 +3082,7 @@ ol {
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
     inner-header .logo {
         width:150px;
-        height:80px;;
+        height:80px;
     }
     
 	.inner-header .advanced-search .category-btn {
@@ -3215,21 +3170,19 @@ ol {
 	.product-shop.page-details .product-details {
 		padding-top: 30px;
 	}
-	.inner-header .advanced-search .input-group button {
-		right: -8px;
-	}
+
 }
 
 /* Tablet Device: 768px */
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-	.header-top .ht-right .login-panel {
+	.inner-header .ht-right .login-panel {
 		padding-left: 10px;
 	}
 
 	.inner-header .logo {
-        width:120px;
-        height:60px;;
+        width:auto;
+        height:60px;
     }
 
 	.inner-header .advanced-search .category-btn {
@@ -3288,18 +3241,7 @@ ol {
 		float: none;
 		text-align: center;
 	}
-	.header-top .ht-left,
-	.header-top .top-social {
-		display: none;
-	}
-	.header-top .ht-right .login-panel {
-		padding-top: 9px;
-		padding-bottom: 7px;
-	}
-	.header-top .ht-right .lan-selector {
-		margin-top: 5px;
-		margin-bottom: 5px;
-	}
+
 	.inner-header .advanced-search .category-btn {
 		display: none;
 	}
@@ -3334,6 +3276,7 @@ ol {
     }
 	.slicknav_nav {
 		background: #8a93c0;
+		 opacity:0.8;
 	}
 	.slicknav_nav ul {
 		margin: 0;
@@ -3341,7 +3284,7 @@ ol {
 	}
 	.slicknav_nav a,
 	.slicknav_nav .slicknav_row {
-		margin: 0;
+		margin: 5px;
 	}
 	.slicknav_nav .dropdown a {
 		padding-left: 25px;
@@ -3533,18 +3476,317 @@ ol {
 }
 
 
-.search-top {
-    padding-top: 15px;
+/*-----------------
+글 보여지는 부분
+--------------------*/    
+
+
+ /* 사진 부분 */
+.leftbox .photo-view #myCarousel {
+        background-color: black;
+        width: 100%;
+        height: 450px;
+        text-align:center;
+        justify-content:center;
+     }
+     
+.leftbox .photo-view #myCarousel .carousel-inner {
+      height: 100%;
+      width: auto;
+      text-align: center;
+}   
+
+ .leftbox .photo-view #myCarousel .carousel-item,
+ .leftbox .photo-view #myCarousel .carousel-inner img {
+      height: 100%;
+      width: auto;
+      text-align: center;
 }
-© 2020 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
+
+
+/* 좋아요&드롭다운 부분 */
+.leftbox .photo-view .wrapper {
+    width:100%;
+    height:50px;
+    background-color:#8a93c0;
+}
+
+/* 좋아요 버튼 */
+
+.leftbox .photo-view .wrapper .likeanddrop {
+    text-align: center;
+   
+      
+}
+.leftbox .photo-view .wrapper .likeanddrop button {
+    background-color:#8a93c0;
+    color:white;
+    border:#8a93c0;
+    padding: 11px 0;
+    
+}
+
+.leftbox .photo-view .wrapper .likeanddrop #like-button {
+    border-color: #8a93c0;
+    background-color: #8a93c0;
+    font-size:25px;
+    color:white;
+    
+}
+
+/* 드롭다운 버튼 */
+.leftbox .photo-view .wrapper .dropdown {
+    position: relative;
+    display:inline-block;
+    float:right;
+    font-size:25px;
+    font-weight:500;
+    margin-top:-30px;
+    color:white;
+}
+
+
+.leftbox .photo-view .dropdown .dropdown-menu {
+    position: absolute;
+    background: #dfe4ff;
+    z-index: 1;
+    border: 2px #8a93c0;
+    opacity: 0.88;
+    
+    
+    
+}
+
+.leftbox .photo-view .dropdown .dropdown-menu a.dropdown-item {
+    color: #546396;
+    padding:10px 0;
+    text-align:center;
+    font-size:15px;
+    font-weight:600;
+    }
+
+
+
+/*--------------
+    신고 모달창
+------------------*/
+
+
+#DecModal .modal-content .modal-header {
+    background-color:#8a93c0;
+ 
+}
+
+#DecModal .modal-content .modal-header h4{
+    font-weight:800;
+    color: white;
+    text-align: center;
+}
+
+#DecModal .modal-content .modal-header button {
+    color: white;
+}
+
+#DecModal .modal-body {
+    float:left;
+    height: 300px;
+    width:100%;
+}
+
+#DecModal .modal-body .mb-title {
+    margin-bottom:10px;
+    
+}
+#DecModal .modal-body .mb-title b {
+    font-size: 17px;
+    
+}
+
+#DecModal .modal-body .mb-title #title {
+    margin-left:10px;
+    border:none;
+    
+    
+}
+#DecModal .modal-body .mb-reason {
+    margin: 5px 0;
+}
+
+#DecModal .modal-body .mb-reason b {
+    font-size: 17px; 
+     padding-bottom:10px;
+}
+
+
+#DecModal .modal-body .mb-reason input{ 
+    margin-right: 4px;
+    
+}
+
+#DecModal .modal-body .mb-reason label {
+    margin-right:15px;
+    font-weight:500;
+}
+
+#DecModal .modal-body .other-reason #reasontext{
+    width:100%;
+    height: 150px;
+}
+
+#DecModal .modal-footer #finish{
+    font-size:20px;
+    font-weight:900;
+    text-align:center;
+    float:right;
+    background-color:#8a93c0;
+    color:white;
+}
+
+#DecModal .modal-footer #finish:hover {
+    background-color:#38456f;
+}
+
+
+/*제목,날짜,조회수, 내용 등 표시 css*/
+
+.leftbox .write-view .board-contents {
+    margin: 40px 0;
+    width:100%;
+    border:none;
+}
+
+.leftbox .write-view .board-contents .view-hit {
+    float:left;
+    font-size:13px;  
+    border:none;
+    
+}
+
+.leftbox .write-view .board-contents .view-dates {
+    float:right;
+    font-size:15px;
+    border:none;
+ }
+
+.leftbox .write-view .board-contents .view-loc {
+    font-size:15px;  
+    border:none;
+    font-weight:600;
+    
+}
+
+.leftbox .write-view .board-contents .view-title {
+    padding:5px 0;
+    font-size:20px;
+    font-weight:800;
+    border:none; 
+    width:100%;
+}
+
+.leftbox .write-view .board-contents .view-id {
+    border:none; 
+    width:100%;
+    font-size:15px;
+    color:#8a93c0;
+    font-weight:700;
+}
+
+.leftbox .write-view .board-contents .view-contents {
+    padding:10px 0;
+    font-size:16px;
+    border:none; 
+    width:100%;
+    height: 150px;
+    
+    
+}
+
+/*댓글부분*/
+.rightbox {
+    border:#8a93c0 2px solid;
+    height: 500px;
+    padding:5px 10px;
+    background-color:#eaedff;
+    opacity: 0.8;
+    width: 100%;
+    border-radius: 12px;
+    
+}
+
+.rightbox #addMyComment #myId {
+    font-size:13px;
+}
+
+.rightbox .replycomment #addMyComment .comment-reg #reply {
+    width:93%;
+    font-size:14px;
+    height:33px;
+    border-radius: 10px;
+    border-color:#8a93c0;
+    
+}
+
+.rightbox .replycomment .comment-reg #addComment {
+    width:6%;
+    font-size:18px;
+    border:#8a93c0;
+    background-color:#eaedff;
+    position:absolute;
+}
+
+
+/*--------------------
+    아래쪽 관련게시글
+---------------------*/
+.underbox {
+	padding-top: 20px;
+	padding-bottom: 50px;
+}
+
+.underbox .listboard h4 {
+    font-weight:900;
+    color:#4b5483;
+    text-align: center;
+    padding-bottom:20px;
+}
+
+.underbox .product-item {
+	margin-bottom: 25px;
+    width:250px;
+    
+}
+
+.underbox .product-item .pi-pic {
+    padding: 5px;
+    
+   
+}
+.underbox .product-item .pi-pic img{
+    height:200px;
+    width:100%;
+    
+   
+}
+.underbox .product-item .pi-text {
+    padding: 7px 0;
+}
+
+.underbox .product-item .pi-text .caption-title {
+    font-weight:700;
+    font-size:17px;
+    margin-bottom: 8px;
+}
+
+.underbox .product-item .pi-text .caption-loc {
+    font-size:14px;
+
+}
+
+.underbox .product-item .pi-text .caption-destination {
+    font-size:15px;
+    margin-bottom: 15px;
+
+}
+
+
+
