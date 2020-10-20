@@ -129,5 +129,12 @@ public class PayController {
 		
 		adboardService.updateRequest(imp_uid,merchant_uid);
 	}
+	
+	@GetMapping("/payments/comfirm")
+	public String resultComfirm(HttpServletRequest req) {
+		log.info("결제이후페이지");
+		
+		return "user/paymentComplete";	
+	}
 }
 

@@ -135,10 +135,6 @@ public class TravelCourseController {
 	   return requests;
    }
 
-   @GetMapping("/travel/comfirm")
-   public String resultComfirm() {
-	   log.info("결제이후페이지");
-	   return "user/paymentComplete";
-   }
+
    
 }

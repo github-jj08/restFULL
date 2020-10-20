@@ -312,26 +312,41 @@
 
 	<!-- 여행코스 등록 -->
 	<insert id="insertTravelCourse" parameterType="java.util.List" > 
-		<foreach item="item" index="index" collection="list" separator=" " open="INSERT ALL " close="SELECT * FROM DUAL">
-			into TRAVEL 
+		insert into TRAVEL 
 			(
 				TRAVEL_NUMBERS,
 				MEMBER_ID,
-				CONTENTS,
+				TCCONTENTS,
 				TCALIAS,
 				DATES,
-				TCUNIQUENUM
-			) values
-			(
-				travel_seq.nextval,
-				#{item.member_id},
-				#{item.contents},
-				#{item.tcalias},
+				SERIALNUM
+			)
+		select travel_seq.nextval, a.* from (
+		<foreach item="item" collection="list" separator="UNION ALL ">
+	    	select #{item.member_id},
+				#{item.tcContents},
+				#{item.tcAlias},
 				sysdate,
-				#{item.tcuniquenum}
-			) 
-		</foreach>
+				#{item.serialNum}
+				from dual
+		</foreach>) A
 	</insert>
+	<!-- 특정 사용자의 결제내역 가져오기 -->
+ 	<select id="getUserPaymentList" resultMap="RequestVO">
+	<![CDATA[
+		select * from request where member_id = #{member_id} order by merchant_uid desc
+	]]>
+	</select>
 	
-
+	<!-- 관리자 - 모든 사용자의 주문 내역 가져오기 -->
+ 	<select id="getRequestListForAdmin" resultMap="RequestVO">
+	<![CDATA[
+		select r.*, g.name as productName 
+			from request r, goods g 
+				where r.goods_numbers = g.goods_numbers 
+						order by dates desc, merchant_uid desc
+	]]>
+	</select>
+	
+	
 </mapper>

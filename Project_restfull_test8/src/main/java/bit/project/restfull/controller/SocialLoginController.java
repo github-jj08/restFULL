@@ -1,3 +1,8 @@
+/*
+ * 나중에 카카오+네이버 합칠 시간 있으면 소셜 로그인 컨트롤러로 합치기
+ * 
+ * */
+
 //package bit.project.restfull.controller;
 //
 //import java.io.IOException;

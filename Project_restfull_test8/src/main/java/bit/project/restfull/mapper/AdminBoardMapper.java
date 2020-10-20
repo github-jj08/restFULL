@@ -29,7 +29,7 @@ import bit.project.restfull.vo.TravelVO;
 import lombok.extern.log4j.Log4j;
 
 /**
- * Handles requests for the application home page.
+ * 나중에 mapper 문법 통일하기!!!!!!!!
  */
 public interface AdminBoardMapper{
 	//게시글 목록 출력
@@ -86,11 +86,15 @@ public interface AdminBoardMapper{
 
 	void insertRequest(List<RequestVO> requestList);
 
+	//주문 정보를 등록하고, 주문 정보의 위변조 등을 비교하기 위해 주문 정보를 가져옴
 	List<RequestVO> getRequests(String request_numbers);
 
 	void updateRequests(@Param("imp_uid")String imp_uid,@Param("merchant_uid")String merchant_uid);
 
 	//여행코스 등록
 	void insertTravelCourse(List<TravelVO> myCourse);
-	
+
+	//관리자를 위한 기능 : 모든 주문 내역 출력함
+	List<RequestVO> getRequestListForAdmin();
+
 }
