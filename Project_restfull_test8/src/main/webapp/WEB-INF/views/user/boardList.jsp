@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +11,12 @@
 <script>
 	function selChange() {
 		var sel = document.getElementById('cntPerPage').value;
-		location.href="myList?nowPage=${paging.nowPage}&cntPerPage="+sel;
+		location.href="myList?member_id=<sec:authentication property="principal.user.member_id"/>&nowPage=${paging.nowPage}&cntPerPage="+sel;
 	}
 </script>
 </head>
 <body>
+<sec:authentication var="principal" property="principal"/>
 <div id="outter">
 <div style="float: right;">
 		<select id="cntPerPage" name="sel" onchange="selChange()">
@@ -44,7 +46,7 @@
 	</table>
 	
 	<c:if test="${paging.startPage != 1}">
-			<a href="myList?nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage}">&lt;</a>
+			<a href="myList?member_id=<sec:authentication property="principal.user.member_id"/>&nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage}">&lt;</a>
 		</c:if>
 		<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
 			<c:choose>
@@ -52,12 +54,12 @@
 					<b>${p}</b>
 				</c:when>
 				<c:when test="${p != paging.nowPage }">
-					<a href="myList?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+					<a href="myList?member_id=<sec:authentication property="principal.user.member_id"/>&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
 				</c:when>
 			</c:choose>
 		</c:forEach>
 		<c:if test="${paging.endPage != paging.lastPage}">
-			<a href="myList?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}">&gt;</a>
+			<a href="myList?member_id=<sec:authentication property="principal.user.member_id"/>&nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}">&gt;</a>
 		</c:if>
 		<div>
                   총 게시글 수 : ${paging.total } / 총 페이지 수 : ${paging.lastPage } / 현재 페이지 : ${paging.nowPage } / 페이지당 게시글수 : ${paging.cntPerPage }
