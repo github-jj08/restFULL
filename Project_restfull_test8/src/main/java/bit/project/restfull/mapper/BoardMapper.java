@@ -46,9 +46,14 @@ public interface BoardMapper{
 
 	List<BoardVO> getOthers(@Param("board_numbers") int board_numbers, @Param("location") String location);
 
+	@Select("select count(*) from board where member_id = #{member_id}")
+	public int countBoard(String member_id);
+	
 	// 유저 >본인 게시글 확인(by윤환)
-	@Select("select * from board where member_id = #{member_id} and boardlist_numbers = '1' order by board_numbers")
-	public List<BoardVO> boardList(String member_id);
+	@Select("Select * from (SELECT ROWNUM RN, A.* FROM "
+			+ "(select * from board b where boardlist_numbers = '1' and member_id = #{member_id} order by board_numbers) A ) "
+			+ "WHERE RN BETWEEN #{start} AND #{end}")
+	public List<BoardVO> boardList(@Param("member_id")String member_id, @Param("start")int start,  @Param("end")int end);
 
 	// 유저 문의내역 확인
 	@Select("select * from board where member_id = #{member_id} and boardlist_numbers = '4' order by board_numbers")

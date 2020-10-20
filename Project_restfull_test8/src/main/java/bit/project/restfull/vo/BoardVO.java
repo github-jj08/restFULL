@@ -14,6 +14,7 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BoardVO {
+	
 	private int board_numbers;
 	private String title;	
 	private String contents;
@@ -25,8 +26,8 @@ public class BoardVO {
 	private int filter_numbers;
 	private String filterName;
 	private String location;
-	private DestinationVO destinationVO;		//¿©ÇàÁö ÁÖ¼Ò Á¤º¸ °´Ã¼ locationVOÀÇ location_name = location
-	//private AttachmentVO attachmentVO;	//Ã·ºÎÆÄÀÏ Á¤º¸ °´Ã¼
+	private DestinationVO destinationVO;		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ locationVOï¿½ï¿½ location_name = location
+	//private AttachmentVO attachmentVO;	//Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
 	private String thumbnail;
 	
 }

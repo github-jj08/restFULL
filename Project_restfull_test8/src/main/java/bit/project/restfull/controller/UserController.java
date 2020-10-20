@@ -29,6 +29,7 @@ import bit.project.restfull.service.BoardService;
 import bit.project.restfull.service.UserService;
 import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.CustomUser;
+import bit.project.restfull.vo.PagingVO;
 import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.ResponseVO;
 import bit.project.restfull.vo.TravelVO;
@@ -127,15 +128,26 @@ public class UserController {
 	
 	//4. 마이페이지 - 내 게시글 list
 	@GetMapping("/myList") 
-	public String boardListView(BoardVO boardVO, UserVO userVO, Model model) {
+	public String boardListView(PagingVO pagingVO, BoardVO boardVO, Model model
+			,@RequestParam(value="member_id", required=false)String member_id 
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
 		
-		log.info("user board list");
-		String member_id = userVO.getMember_id();
+		int total = boardService.countBoard(member_id);
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		pagingVO = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
 		log.info("user member_id : "+member_id); // name
-		userVO = userService.getUserVO(member_id);
-		log.info(userVO);
 		
-		model.addAttribute("userBoard", boardService.boardList(member_id));
+		model.addAttribute("paging", pagingVO);
+		model.addAttribute("userBoard", boardService.boardList(member_id, pagingVO));
 		
 		return "user/boardList";
 	}

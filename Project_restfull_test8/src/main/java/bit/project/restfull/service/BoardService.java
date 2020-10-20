@@ -9,10 +9,12 @@ import bit.project.restfull.vo.AttachmentVO;
 import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.CommentVO;
 import bit.project.restfull.vo.LikesVO;
+import bit.project.restfull.vo.PagingVO;
 import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.TravelVO;
 
 public interface BoardService {
+	
 	List<BoardVO> getList(int boardlist_numbers, String searchWord);
 	
 	//메인 게시글 출력
@@ -44,7 +46,7 @@ public interface BoardService {
 	//신고글
 	void writeBoardVO(BoardVO boardVO);
 
-	List<BoardVO> boardList(String member_id);
+	List<BoardVO> boardList(String member_id, PagingVO pagingVO);
 
 	List<BoardVO> qnaList(String member_id);
 
@@ -55,6 +57,8 @@ public interface BoardService {
 	
 	//member_id에 해당하는 좋아요 글들을 출력(사용자기준)
 	List<BoardVO> getLikeList(String member_id);
+	
+	public int countBoard(String member_id);
 
 	//member_id에 해당하는 여행코스를 출력
 	List<TravelVO> getMyCourseList(String member_id);

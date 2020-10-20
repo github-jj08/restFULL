@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +18,7 @@ import bit.project.restfull.vo.AttachmentVO;
 import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.CommentVO;
 import bit.project.restfull.vo.LikesVO;
+import bit.project.restfull.vo.PagingVO;
 import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.TravelVO;
 import lombok.AllArgsConstructor;
@@ -203,8 +203,14 @@ public class BoardServiceImpl implements BoardService{
 
 	//유저 > 자기가쓴 게시글 확인
 	@Override
-	public List<BoardVO> boardList(String member_id){
-		return mapper.boardList(member_id);
+	public List<BoardVO> boardList(String member_id, PagingVO pagingVO){
+		log.info(member_id);
+		int start = pagingVO.getStart();
+		int end = pagingVO.getEnd();
+		log.info(start);
+		log.info(end);
+		
+		return mapper.boardList(member_id, start, end);
 	}
 
 	@Override
@@ -224,6 +230,11 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<BoardVO> getLikeList(String member_id) {
 		return mapper.getLikeList(member_id);
+	}
+
+	@Override
+	public int countBoard(String member_id) {
+		return mapper.countBoard(member_id);
 	}
 
 	@Override
