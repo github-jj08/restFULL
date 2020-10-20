@@ -63,7 +63,9 @@ public interface AdminBoardService {
 
 	//합계금액 가져오기
 	int sumPrice(List<Map<String, Object>> paramData);
+	//여행코스 등록(int 반환형은 등록 성공 여부를 의미)
+	void insertTravelCourse(String member_id, String[] destinations);
 
-//	//member_id에 해당하는 결제내역 출력(사용자기준)
-//	List<RequestVO> getPaymentList(String member_id);
+	//모든 주문 상품 출력(관리자 기준)
+	List<RequestVO> getRequestList();
 }

@@ -21,6 +21,7 @@ import bit.project.restfull.vo.AttachmentVO;
 import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.LikesVO;
 import bit.project.restfull.vo.RequestVO;
+import bit.project.restfull.vo.TravelVO;
 import lombok.extern.log4j.Log4j;
 
 /**
@@ -77,5 +78,13 @@ public interface BoardMapper{
 	//유저 > 내가 좋아요 누른 글들을 확인(by여진)
 	@Select("select b.* from likes l, board b where l.board_numbers = b.board_numbers and l.member_id = #{member_id}")
 	List<BoardVO> getLikeList(String member_id);
+
+	//여행코스 목록 가져오기(by여진)
+	@Select("select * from travel where member_id = #{member_id} order by travel_numbers")
+	List<TravelVO> getMyCourseList(String member_id);
+
+	//특정 여행코스 가져오기
+	@Select("select * from travel where member_id = #{member_id} and serialNum = #{serialNum} order by travel_numbers")
+	List<TravelVO> getMyCourse(@Param("member_id")String member_id, @Param("serialNum")String serialNum);
 		
 }

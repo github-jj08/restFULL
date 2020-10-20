@@ -16,8 +16,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-[<a href="${pageContext.request.contextPath}/user/userHome">결제내역으로 돌아가기</a>]<br/>
-[<a href="ask">관련문의</a>]</td>
+[<a href="${pageContext.request.contextPath}/user/userHome">홈으로 돌아가기</a>]<br/>
+[<a href="ask">취소관련문의</a>]</td>
             <input type="hidden" name="goods_numbers" value="${content_view.goods_numbers}">
             <div class="container">
                <h4>상품 정보</h4><hr/>

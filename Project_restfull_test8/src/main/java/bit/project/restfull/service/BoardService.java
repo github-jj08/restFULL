@@ -13,6 +13,7 @@ import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.CommentVO;
 import bit.project.restfull.vo.LikesVO;
 import bit.project.restfull.vo.RequestVO;
+import bit.project.restfull.vo.TravelVO;
 
 public interface BoardService {
 	List<BoardVO> getList(int boardlist_numbers, String searchWord);
@@ -57,5 +58,11 @@ public interface BoardService {
 	
 	//member_id에 해당하는 좋아요 글들을 출력(사용자기준)
 	List<BoardVO> getLikeList(String member_id);
+
+	//member_id에 해당하는 여행코스를 출력
+	List<TravelVO> getMyCourseList(String member_id);
+
+	//member_id와 serialNum을 가지고 특정 여행코스를 출력
+	List<TravelVO> getMyCourse(String member_id, String serialNum);
 
 }

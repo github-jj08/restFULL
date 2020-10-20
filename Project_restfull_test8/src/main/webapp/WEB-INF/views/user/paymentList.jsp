@@ -16,6 +16,7 @@
 			<td>주문자 id</td>
 			<td>여행지명</td>
 			<td>상품명</td>
+			<td>상품가격</td>
 			<td>결제 날짜</td>
 			<td>취소 여부</td>
 		</tr>
@@ -25,7 +26,8 @@
 			<td>${vo.request_numbers}</td>
 			<td>${vo.member_id}</td>
 			<td>${vo.destination_name}</td>
-			<td><a href="content_view?goods_numbers=${vo.goods_numbers}">${vo.productName}</a></td>
+			<td><a href="goods_view?goods_numbers=${vo.goods_numbers}">${vo.productName}</a></td>
+			<td>${vo.price}</td>
 			<td>${vo.dates}</td>
 			<td>
 				<c:set var="cancelyn" value="${vo.cancel}" />

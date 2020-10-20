@@ -266,12 +266,12 @@
 	                
 	            
 	            
-		            /* 여행코스 등록 이후 상품 관련 스크립트 */
+		            /* 여행코스 등록 및 상품 관련 스크립트 */
 		            
 		            //확인 버튼 누른 횟수 count
 					var complete_cnt=0;
 				
-					//확인 버튼 눌렀을 때 작동 - 여행코스 목록을 가지고 관련 상품 get		            
+					//확인 버튼 눌렀을 때 작동 - 생성한 여행코스 등록 & 여행코스 목록을 가지고 관련 상품 get		            
 	            	$(document).on("click","#complete-btn",function(){  
 	                  console.log("complete");
 	                  
@@ -282,14 +282,36 @@
 	                  //ajax로 넘길 배열 생성
 	                  var myCourse = new Array();
 	                  
+	                  //코스목록과 함께 넘길 member_id
+	                  var member_id = $('input[name="member_id"]').val();
+	                  
 	                  //아무것도 등록하지 않았는데 확인을 눌렀을 경우 null값 들어가는 것 방지
 	                  if(length==0){
 	                	  myCourse.push('');
+	                	  alert("여행코스가 등록되지 않았습니다.")
 	                  }else{
 		                  for(var i =0;i<length;i++){
 		                     myCourse.push($('input[name="course"]').eq(i).val());
 		                  }
-	                  }
+		                  
+		                  //아작스로 여행코스 등록! & 관련 상품 목록 출력하기
+		                  
+		                  $.ajax ({
+									url: "${pageContext.request.contextPath}/travel/myTravelCourse",
+						            type: "POST",
+						            data: {
+						            	"member_id" : member_id,
+						            	"myCourse" : myCourse
+						            },
+						            success: function () {
+						             	console.log("성공");	
+						             	alert("여행코스가 등록되었습니다. 마이페이지에서 내 여행코스를 확인하세여ㅎㅅㅎ/`~");
+						            },
+						            error : function(){
+						            	alert("여행코스가 등록되지 않았습니다. 다시 시도해주세요");
+						            }//error end
+		                  });//ajax end
+	                  }//if-else end
 	                  
 	                  console.log(myCourse);
 	                  complete_cnt++;
@@ -509,10 +531,10 @@
 				                                		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
 				                                		if ( data == 1 ) {
 						                                    var msg = '결제가 완료되었습니다.';
-						                                    msg += '매출전표 url : ' + rsp.receipt_url;
+						                                    //msg += '매출전표 url : ' + rsp.receipt_url;
 				                                			
 						                                	$.ajax({
-						                                		url: "${pageContext.request.contextPath}/payments/confirmation", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+						                                		url: "${pageContext.request.contextPath}/payments/confirmation", 
 						                                		type: 'POST',
 						                                		dataType: 'json',
 						                                		data: {
@@ -522,7 +544,7 @@
 						                                	});
 						                                    
 						                                    alert(msg);
-						                                    location.href="${pageContext.request.contextPath}/travel/comfirm";
+						                                    location.href="${pageContext.request.contextPath}/payments/comfirm?member_id="+member_id+"&merchant_id="+merchant_id;
 				                                		} else {
 				                                			alert("오류가 감지되어 결제가 되지 않았습니다.");
 				                                		}
@@ -530,7 +552,6 @@
 				                                } else {
 				                                    var msg = '결제에 실패하였습니다.';
 				                                    msg += '에러내용 : ' + rsp.error_msg;
-
 				                                    alert(msg);
 				                                }//if end
 				                            });//function end
