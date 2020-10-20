@@ -1,19 +1,11 @@
 package bit.project.restfull.service;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import javax.imageio.ImageIO;
-import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,13 +18,12 @@ import bit.project.restfull.vo.AttachmentVO;
 import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.CommentVO;
 import bit.project.restfull.vo.LikesVO;
+import bit.project.restfull.vo.PagingVO;
 import bit.project.restfull.vo.RequestVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
-
-import org.apache.commons.io.FileUtils;
 
 @Log4j
 @Service("boardService")
@@ -210,8 +201,14 @@ public class BoardServiceImpl implements BoardService{
 
 	//유저 > 자기가쓴 게시글 확인
 	@Override
-	public List<BoardVO> boardList(String member_id){
-		return mapper.boardList(member_id);
+	public List<BoardVO> boardList(String member_id, PagingVO pagingVO){
+		log.info(member_id);
+		int start = pagingVO.getStart();
+		int end = pagingVO.getEnd();
+		log.info(start);
+		log.info(end);
+		
+		return mapper.boardList(member_id, start, end);
 	}
 
 	@Override
@@ -231,5 +228,10 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<BoardVO> getLikeList(String member_id) {
 		return mapper.getLikeList(member_id);
+	}
+
+	@Override
+	public int countBoard(String member_id) {
+		return mapper.countBoard(member_id);
 	}
 }

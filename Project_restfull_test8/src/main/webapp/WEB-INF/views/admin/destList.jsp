@@ -30,6 +30,7 @@
 		</c:forEach>
 		<a href="${pageContext.request.contextPath}/admin/dest/write_view">여행지 등록</a>
 	</table>
+	<h3><button onclick="history.go(-1);">돌아가기</button></h3>
 	
 </body>
 </html>

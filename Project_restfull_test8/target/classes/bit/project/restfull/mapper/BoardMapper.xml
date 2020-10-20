@@ -139,4 +139,5 @@
             and location like '%'||#{location}||'%'
             and not board_numbers in #{board_numbers}
 	</select>
+	
 </mapper>

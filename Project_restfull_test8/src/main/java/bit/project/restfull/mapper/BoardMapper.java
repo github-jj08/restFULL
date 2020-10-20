@@ -1,27 +1,17 @@
 package bit.project.restfull.mapper;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import bit.project.restfull.vo.AttachmentVO;
 import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.LikesVO;
+import bit.project.restfull.vo.PagingVO;
 import bit.project.restfull.vo.RequestVO;
-import lombok.extern.log4j.Log4j;
 
 /**
  * Handles requests for the application home page.
@@ -58,9 +48,14 @@ public interface BoardMapper{
 
 	List<BoardVO> getOthers(@Param("board_numbers") int board_numbers, @Param("location") String location);
 
+	@Select("select count(*) from board where member_id = #{member_id}")
+	public int countBoard(String member_id);
+	
 	// 유저 >본인 게시글 확인(by윤환)
-	@Select("select * from board where member_id = #{member_id} and boardlist_numbers = '1' order by board_numbers")
-	public List<BoardVO> boardList(String member_id);
+	@Select("Select * from (SELECT ROWNUM RN, A.* FROM "
+			+ "(select * from board b where boardlist_numbers = '1' and member_id = #{member_id} order by board_numbers) A ) "
+			+ "WHERE RN BETWEEN #{start} AND #{end}")
+	public List<BoardVO> boardList(@Param("member_id")String member_id, @Param("start")int start,  @Param("end")int end);
 
 	// 유저 문의내역 확인
 	@Select("select * from board where member_id = #{member_id} and boardlist_numbers = '4' order by board_numbers")

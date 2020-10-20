@@ -9,7 +9,7 @@
 <script>
 	function selChange() {
 		var sel = document.getElementById('cntPerPage').value;
-		location.href="boardList?nowPage=${paging.nowPage}&cntPerPage="+sel;
+		location.href="userList?nowPage=${paging.nowPage}&cntPerPage="+sel;
 	}
 </script>
 </head>
@@ -43,7 +43,7 @@
 		</c:forEach>
 	</table>
 	
-	<c:if test="${paging.startPage != 1 }">
+		<c:if test="${paging.startPage != 1 }">
 			<a href="userList?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
 		</c:if>
 		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
@@ -59,8 +59,12 @@
 		<c:if test="${paging.endPage != paging.lastPage}">
 			<a href="userList?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
 		</c:if>
+		<div>
+                    총 게시글 수 : ${paging.total } / 총 페이지 수 : ${paging.lastPage } / 현재 페이지 : ${paging.nowPage } / 페이지당 게시글수 : ${paging.cntPerPage }
+        </div>
+		
 </div>
-	<h3><a href="adminHome">돌아가기</a></h3>
+	<h3><button onclick="history.go(-1);">돌아가기</button></h3>
 	
 </body>
 </html>

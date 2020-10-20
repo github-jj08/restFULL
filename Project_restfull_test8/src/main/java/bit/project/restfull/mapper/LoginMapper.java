@@ -48,7 +48,9 @@ public interface LoginMapper {
 	@Select("select count(*) from member")
 	public int countMember();
 
-	@Select("SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM member ORDER BY member_id DESC) A )WHERE RN BETWEEN #{start} AND #{end}")
+	@Select("SELECT * FROM (SELECT ROWNUM RN, A.* FROM "
+			+ "(SELECT * FROM member ORDER BY member_id DESC) A )"
+			+ "WHERE RN BETWEEN #{start} AND #{end}")
 	public List<UserVO> userList(PagingVO pagingVO);
 	
 	// 아이디 찾기
