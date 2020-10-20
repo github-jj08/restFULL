@@ -1,35 +1,17 @@
 package bit.project.restfull.mapper;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
 
 import bit.project.restfull.vo.AdminBoardVO;
 import bit.project.restfull.vo.AttachmentVO;
-import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.DestinationVO;
 import bit.project.restfull.vo.GoodsVO;
-import bit.project.restfull.vo.LikesVO;
 import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.SidoguVO;
-import lombok.extern.log4j.Log4j;
-
-/**
- * Handles requests for the application home page.
- */
+import bit.project.restfull.vo.TravelVO;
 public interface AdminBoardMapper{
 	//게시글 목록 출력
 	List<AdminBoardVO> getList(int boardlist_numbers);
@@ -85,8 +67,15 @@ public interface AdminBoardMapper{
 
 	void insertRequest(List<RequestVO> requestList);
 
+	//주문 정보를 등록하고, 주문 정보의 위변조 등을 비교하기 위해 주문 정보를 가져옴
 	List<RequestVO> getRequests(String request_numbers);
 
 	void updateRequests(@Param("imp_uid")String imp_uid,@Param("merchant_uid")String merchant_uid);
-	
+
+	//여행코스 등록
+	void insertTravelCourse(List<TravelVO> myCourse);
+
+	//관리자를 위한 기능 : 모든 주문 내역 출력함
+	List<RequestVO> getRequestListForAdmin();
+
 }

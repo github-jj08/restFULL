@@ -309,12 +309,45 @@
 		update request set imp_uid = #{imp_uid} where merchant_uid =#{merchant_uid}
 	]]>
 	</update> 
-	<!-- 
-	상품 삭제
-	<delete id="deleteGoodsVO">
+
+	<!-- 여행코스 등록 -->
+	<insert id="insertTravelCourse" parameterType="java.util.List" > 
+		insert into TRAVEL 
+			(
+				TRAVEL_NUMBERS,
+				MEMBER_ID,
+				TCCONTENTS,
+				TCALIAS,
+				DATES,
+				SERIALNUM
+			)
+		select travel_seq.nextval, a.* from (
+		<foreach item="item" collection="list" separator="UNION ALL ">
+	    	select #{item.member_id},
+				#{item.tcContents},
+				#{item.tcAlias},
+				sysdate,
+				#{item.serialNum}
+				from dual
+		</foreach>) A
+	</insert>
+	
+	<!-- 특정 사용자의 결제내역 가져오기 -->
+ 	<select id="getUserPaymentList" resultMap="RequestVO">
 	<![CDATA[
-		delete from goods where GOODS_NUMBERS = #{goods_numbers}
+		select * from request where member_id = #{member_id} order by merchant_uid desc
 	]]>
-	</delete> -->
+	</select>
+	
+	<!-- 관리자 - 모든 사용자의 주문 내역 가져오기 -->
+ 	<select id="getRequestListForAdmin" resultMap="RequestVO">
+	<![CDATA[
+		select r.*, g.name as productName 
+			from request r, goods g 
+				where r.goods_numbers = g.goods_numbers 
+						order by dates desc, merchant_uid desc
+	]]>
+	</select>
+	
 	
 </mapper>

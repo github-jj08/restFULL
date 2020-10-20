@@ -11,6 +11,7 @@ import bit.project.restfull.vo.CommentVO;
 import bit.project.restfull.vo.LikesVO;
 import bit.project.restfull.vo.PagingVO;
 import bit.project.restfull.vo.RequestVO;
+import bit.project.restfull.vo.TravelVO;
 
 public interface BoardService {
 	
@@ -58,5 +59,11 @@ public interface BoardService {
 	List<BoardVO> getLikeList(String member_id);
 	
 	public int countBoard(String member_id);
+
+	//member_id에 해당하는 여행코스를 출력
+	List<TravelVO> getMyCourseList(String member_id);
+
+	//member_id와 serialNum을 가지고 특정 여행코스를 출력
+	List<TravelVO> getMyCourse(String member_id, String serialNum);
 
 }
