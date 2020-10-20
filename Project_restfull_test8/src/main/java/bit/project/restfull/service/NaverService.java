@@ -1,39 +1,26 @@
 package bit.project.restfull.service;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.HashMap;
-
-import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 import bit.project.restfull.mapper.SnsMapper;
-import bit.project.restfull.vo.SnsVO;
 import bit.project.restfull.vo.UserVO;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-@NoArgsConstructor
 @Service
+@NoArgsConstructor
+@AllArgsConstructor
 public class NaverService {
 	
 	@Autowired
 	private SnsMapper snsMapper;
 	
-	@Inject
+	@Autowired
 	private BCryptPasswordEncoder passEncoder;
 	
 	public void addsnsN( String id, String name) {

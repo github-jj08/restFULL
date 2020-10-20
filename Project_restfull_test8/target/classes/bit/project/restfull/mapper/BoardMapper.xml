@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bit.project.restfull.mapper.BoardMapper">
 	
-	<!-- 메인 게시판/게시글 기능 -->
+	<!-- 메인 게시판/게시글  -->
 	<resultMap id="DestinationVO" type="bit.project.restfull.vo.DestinationVO" >
 		<result property="jibunaddress" column="jibunaddress"/>
 		<result property="doroaddress" column="doroaddress"/>
@@ -16,14 +16,7 @@
 		<result property="gu" column="gu"/>
 		<result property="destination_name" column="destination_name"/>
 	</resultMap>
-<!-- 	
-	<resultMap id="AttachmentVO" type="bit.project.restfull.vo.AttachmentVO" >
-		<id property="board_numbers" column="board_numbers"/>
-		<result property="filename" column="filename"/>
-		<result property="filedirectory" column="filedirectory"/>
-		<result property="filesize" column="filesize"/>
-	</resultMap>
- -->	
+
 	<resultMap id="BoardContents" type="bit.project.restfull.vo.BoardVO">
 		<id property="board_numbers" column="board_numbers"/>	
 		<result property="title" column="title"/>
@@ -40,104 +33,4 @@
 		<!-- <collection property="attachmentVO" javaType="bit.project.restfull.vo.AttachmentVO" resultMap="AttachmentVO"></collection> -->
 	</resultMap>
 
-	<!-- 메인 게시글 게시판 그룹 번호가 1이라고 했을때, 검색어를 기준으로 메인 게시글 전체를 불러오는 쿼리 -->
-  	<select id="getList" resultMap="BoardContents">
-	<![CDATA[
-		select b.*, d.* from board b, destination d
-			where b.location = d.destination_name
-				and b.boardlist_numbers = #{boardlist_numbers}
-				and b.location like '%'||#{searchWord}||'%'
-	]]>
-	</select>
-	<!-- 메인 게시글 출력 -->
- 	<select id="getBoardVO" resultType="bit.project.restfull.vo.BoardVO">
-	<![CDATA[
-		select * from board where board_numbers = #{board_numbers} 
-	]]>
-	</select>
-	
-	<!-- 메인 게시글의 첨부파일 출력 -->
-	<select id="getBoardAttachmentVO" resultType="bit.project.restfull.vo.AttachmentVO">
-	<![CDATA[
-		select a.* from board b, attachment a
-			where b.board_numbers = a.board_numbers
-				and b.board_numbers = #{board_numbers} 
-	]]>
-	</select>
-
-	<!-- 게시글 작성 -->	
-	<insert id="insertBoardVO" parameterType="bit.project.restfull.vo.BoardVO">
-	<![CDATA[
-		INSERT INTO BOARD (board_numbers, TITLE, CONTENTS, HIT, DATES, MEMBER_ID,BOARDLIST_NUMBERS,FILTER_NUMBERS,LOCATION) VALUES (BOARD_SEQ.NEXTVAL, #{title}, #{contents}, 0, sysdate, #{member_id},#{boardlist_numbers}, #{filter_numbers},#{location,jdbcType=VARCHAR})
-	]]>
-	<selectKey keyProperty="board_numbers" resultType="int" order="AFTER">
-		SELECT BOARD_SEQ.CURRVAL FROM DUAL
-	</selectKey>
-	</insert>
-	
-	<!-- 게시글 썸네일 삽입 -->	
-	<update id="updateBoardThumbImg" >
-	<![CDATA[
-		update board set thumbnail=#{thumbnail} where board_numbers = #{board_numbers}
-	]]>
-	</update>
-	
-	<!-- 게시글의 첨부파일 작성 -->
-	<insert id="insertAttachmentVO" parameterType="bit.project.restfull.vo.AttachmentVO">
-	<selectKey keyProperty="board_numbers" order="BEFORE" resultType="int">
-		SELECT BOARD_SEQ.CURRVAL AS board_numbers FROM DUAL
-	</selectKey>
-	<![CDATA[
-		insert into ATTACHMENT (FILENAME, board_numbers, FILEDIRECTORY,FILESIZE) values (#{fileName}, #{board_numbers}, #{fileDirectory},#{fileSize})
-	]]>
-	</insert>
-	
-	<!-- 게시글 수정 : 글내용 수정 -->
-	<update id="updateBoardVO">
-		update board set title = #{title}, contents = #{contents}, location = #{location} where board_numbers = #{board_numbers}
-	</update>
-	
-	<!-- 게시글 삭제 - attachment테이블에서 board_numbers에 대한 종속 삭제 기능 설정해둬서 첨부파일이 자동으로 삭제됨 -->
-	<delete id="deleteBoardVO">
-	<![CDATA[
-		delete from board where board_numbers = #{board_numbers}
-	]]>
-	</delete>
-	
-	<!-- 게시글 조회수 올리기 -->
-	<update id="upHit">
-	<![CDATA[
-		update board set hit = hit + 1 where board_numbers = #{board_numbers}
-	]]>
-	</update>
-	
-	<!-- 좋아요 기능 -->
-	<!-- 동일 게시글 좋아요 여부 검색(좋아요를 이미 누른 상태인지 검사) -->
-	<select id="likeCheck" resultType="int">
-		select count(*) from likes where board_numbers= #{board_numbers} and member_id = #{member_id}
-	</select>
-	
-	<!-- 게시글 좋아요 -->
-	<insert id="likeInsert" parameterType="map">
-		insert into likes values(#{board_numbers}, #{member_id})
-	</insert>
-	
-	<!-- 게시글 좋아요 취소 -->
-	<delete id="likeDelete" >
-		delete from likes where board_numbers= #{board_numbers} and member_id = #{member_id}
-	</delete>
-	
-	<!-- 게시글 좋아요수 세기 -->
-	<select id="likeCount" resultType="int">
-		select count(*) from likes where board_numbers= #{board_numbers}
-	</select>
-	
-	<!-- 관련 게시글 뽑기 -->
-	<select id="getOthers" resultType="bit.project.restfull.vo.BoardVO">
-		select * from board
-        where boardlist_numbers = 1
-            and location like '%'||#{location}||'%'
-            and not board_numbers in #{board_numbers}
-	</select>
-	
 </mapper>

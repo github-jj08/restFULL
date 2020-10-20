@@ -1,10 +1,5 @@
 package bit.project.restfull.interceptor;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,9 +11,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import bit.project.restfull.vo.UserVO;
 import lombok.extern.log4j.Log4j;
 
-/**
- * Handles requests for the application home page.
- */
 
 @Log4j
 
@@ -27,23 +19,23 @@ public class RecInterceptor extends HandlerInterceptorAdapter{
    @Override
    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
       
-      //HttpServletRequest request : http ÇÁ·ÎÅäÄÝ¿¡ ÀÖ´Â ¸ðµç Á¤º¸¸¦ ºÒ·¯µéÀÌ´Â ¿ªÇÒÀ» ÇÏ´Â °´Ã¼ (¼¼¼Ç, ¾ÆÀÌÇÇ µî)
+      //HttpServletRequest request : http ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½Ã¼ (ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½)
       String member_id = "admin";
       String pw = "admin";
       
-      log.info("preHandle ½ÇÇà");
+      log.info("preHandle ï¿½ï¿½ï¿½ï¿½");
       
-      //session °´Ã¼¸¦ °¡Á®¿È
+      //session ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
       HttpSession session = request.getSession();
       
-      //loginÃ³¸®¸¦ ´ã´çÇÏ´Â »ç¿ëÀÚ Á¤º¸¸¦ ´ã°íÀÖ´Â °´Ã¼¸¦ °¡Á®¿È.
+      //loginÃ³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
       UserVO user = (UserVO) session.getAttribute("uservo");
       
-      if(user==null) { //user¿¡ ¼¼¼ÇÀÌ ÀúÀåµÇ¾îÀÖÁö¾Ê´Ù¸é 
-         log.info("user°¡ null");
-         //·Î±×ÀÎÀÌ ¾ÈµÇÀÖ´Â »óÅÂÀÌ¹Ç·Î ·Î±×ÀÎ ÆûÀ¸·Î ´Ù½Ã µ¹·Áº¸³¿(redirect)
+      if(user==null) { //userï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê´Ù¸ï¿½ 
+         log.info("userï¿½ï¿½ null");
+         //ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Èµï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¹Ç·ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(redirect)
          response.sendRedirect(request.getContextPath());
-         return false; // ´õÀÌ»ó ÄÁÆ®·Ñ·¯ ¿äÃ»À¸·Î °¡Áö¾Êµµ·Ï false·Î º¯È¯
+         return false; // ï¿½ï¿½ï¿½Ì»ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ falseï¿½ï¿½ ï¿½ï¿½È¯
       } else if((user.getMember_id().equals(member_id)) &&
     		  	(user.getPw().equals(pw))) {
            return true;
@@ -56,7 +48,7 @@ public class RecInterceptor extends HandlerInterceptorAdapter{
    
       super.postHandle(request, response, handler, modelAndView);
       
-      log.info("postHandle ½ÇÇà");
+      log.info("postHandle ï¿½ï¿½ï¿½ï¿½");
    }
    
 }

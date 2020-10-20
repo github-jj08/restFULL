@@ -6,13 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.extern.log4j.Log4j;
 
-@Log4j
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class AdminBoardVO {
 	private int board_numbers;
 	private String title;	
@@ -24,5 +22,4 @@ public class AdminBoardVO {
 	private String boardlistName;
 	private AttachmentVO attachmentVO;	
 	private String thumbnail;
-	
 }

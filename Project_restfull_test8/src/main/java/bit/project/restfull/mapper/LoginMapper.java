@@ -47,15 +47,15 @@ public interface LoginMapper {
 			+ "WHERE RN BETWEEN #{start} AND #{end}")
 	public List<UserVO> userList(PagingVO pagingVO);
 	
-	// 아이디 찾기
+	/* 아이디 찾기 */
 	@Select("select member_id from member where email = #{email}")
 	public String findID(String email);
 		
-	// 비밀번호 찾기
+	/* 비밀번호 찾기 */
 	@Update("update member set pw = #{pw} where member_id = #{member_id}")
 	public void findPW(UserVO userVO);
 	
-	//kakao & naver social login
+	/* kakao & naver social login */
 	@Select("select * from member where id = #{id}")
 	public UserVO KreadUser(String id);
 	

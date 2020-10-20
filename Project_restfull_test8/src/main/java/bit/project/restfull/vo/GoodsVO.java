@@ -1,18 +1,15 @@
 package bit.project.restfull.vo;
 
-import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.extern.log4j.Log4j;
 
-@Log4j
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class GoodsVO {
 	private int goods_numbers; //GOODS_NUMBERS
 	private String destination_name; //DESTINATION_NAME

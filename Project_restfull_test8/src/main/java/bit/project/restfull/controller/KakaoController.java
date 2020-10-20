@@ -2,10 +2,10 @@ package bit.project.restfull.controller;
 
 import java.io.IOException;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -36,22 +36,19 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-/**
- * Handles requests for the application home page.
- */
 @Log4j
 @Controller
 @NoArgsConstructor
 @AllArgsConstructor
 public class KakaoController {
 	
-	@Inject
+	@Autowired
 	private KakaoService kakaoService;
 	
-	@Inject
-	private CustomUserDetailsService customuserdetailsService;
+	@Autowired
+	private CustomUserDetailsService customUserDetailsService;
 	   
-	@Inject
+	@Autowired
 	private UserService userService;
 	   
 	
@@ -157,7 +154,7 @@ public class KakaoController {
     	}
     	
     	// 시큐리티 제공하는 유저 정보 조회 서비스를 통한 유저 정보 조회
-    	UserDetails userDetails = customuserdetailsService.loadUserByUsername(socialUserId);
+    	UserDetails userDetails = customUserDetailsService.loadUserByUsername(socialUserId);
     	
     	log.info(" 로그인처리 직전 	;" +gson.toJson(loginUserInfo));
     	// 여기서 로그인 처리

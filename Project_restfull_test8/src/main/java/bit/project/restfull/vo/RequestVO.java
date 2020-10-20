@@ -6,22 +6,21 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.extern.log4j.Log4j;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class RequestVO {
-	private String request_numbers;//	REQUEST_NUMBERS	NUMBER(10,0)
-	private Timestamp dates;		//	DATES	DATE
-	private String imp_uid;		//	IMP_UID	VARCHAR2(100 BYTE)
-	private String member_id;		//	MEMBER_ID	VARCHAR2(100 BYTE)
-	private int goods_numbers;		//	GOODS_NUMBERS	NUMBER(10,0)
-	private String destination_name;		//	DESTINATION_NAME	VARCHAR2(255 BYTE)
-	private int cancel;		//	CANCELYN	NUMBER
+	private String request_numbers;
+	private Timestamp dates;		
+	private String imp_uid;		
+	private String member_id;		
+	private int goods_numbers;		
+	private String destination_name;	
+	private int cancel;		
 	private int price;
-	private String merchant_uid; // MERCHANT_UID;
+	private String merchant_uid; 
 	private String productName;
 	private int amount;
 }

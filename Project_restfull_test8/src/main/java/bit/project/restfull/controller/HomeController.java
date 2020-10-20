@@ -16,13 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import bit.project.restfull.service.BoardService;
 import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.CommentVO;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-/**
- * Handles requests for the application home page.
- */
-@Controller
 @Log4j
+@Controller
+@NoArgsConstructor
+@AllArgsConstructor
 //회원가입 하지 않아도 사용가능한 사용자 기능들
 public class HomeController {
 

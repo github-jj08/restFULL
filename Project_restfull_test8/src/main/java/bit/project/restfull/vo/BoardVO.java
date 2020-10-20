@@ -6,15 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.extern.log4j.Log4j;
 
-@Log4j
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class BoardVO {
-	
 	private int board_numbers;
 	private String title;	
 	private String contents;
@@ -26,8 +23,6 @@ public class BoardVO {
 	private int filter_numbers;
 	private String filterName;
 	private String location;
-	private DestinationVO destinationVO;		//������ �ּ� ���� ��ü locationVO�� location_name = location
-	//private AttachmentVO attachmentVO;	//÷������ ���� ��ü
+	private DestinationVO destinationVO;		
 	private String thumbnail;
-	
 }

@@ -9,8 +9,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 
-import javax.inject.Inject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,18 +20,20 @@ import com.google.gson.JsonParser;
 import bit.project.restfull.mapper.LoginMapper;
 import bit.project.restfull.mapper.SnsMapper;
 import bit.project.restfull.vo.UserVO;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-@NoArgsConstructor
 @Service
+@NoArgsConstructor
+@AllArgsConstructor
 public class KakaoService {
 	
 	@Autowired
 	private LoginMapper loginMapper;
 	
-	@Inject
+	@Autowired
 	private BCryptPasswordEncoder passEncoder; 
 	
 	@Autowired

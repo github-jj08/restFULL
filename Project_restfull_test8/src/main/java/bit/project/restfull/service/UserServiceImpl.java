@@ -1,17 +1,11 @@
 package bit.project.restfull.service;
 
-
-
 import java.io.PrintWriter;
 import java.util.List;
 
-
-
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.mail.HtmlEmail;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,17 +13,19 @@ import org.springframework.stereotype.Service;
 import bit.project.restfull.mapper.LoginMapper;
 import bit.project.restfull.vo.PagingVO;
 import bit.project.restfull.vo.UserVO;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-@NoArgsConstructor
 @Service
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-	@Inject
+	@Autowired
 	private BCryptPasswordEncoder passEncoder; 
-	@Inject
+	@Autowired
 	private LoginMapper loginMapper;
 
 	public void addUser(UserVO userVO){ 

@@ -1,56 +1,39 @@
 package bit.project.restfull.controller;
 
-import java.io.IOException;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.JsonParseException;
 
-import bit.project.restfull.security.CustomUserDetailsService;
 import bit.project.restfull.service.UserService;
-import bit.project.restfull.vo.CustomUser;
 import bit.project.restfull.vo.ResponseVO;
 import bit.project.restfull.vo.UserVO;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-/**
- * Handles requests for the application home page.
- */
 @Log4j
 @Controller
+@NoArgsConstructor
 @AllArgsConstructor
 //로그인 관련 기능
 public class LoginController {
 	
-	@Inject
+	@Autowired
     private NaverLoginBO naverLoginBO;
-	@Inject
-	private UserService userservice;
+	@Autowired
+	private UserService userService;
 	
 	//로그인
 	@GetMapping(value = "/login")
@@ -101,7 +84,7 @@ public class LoginController {
 	public String adduser(UserVO userVO) {
 		log.info("post resister");
 	      
-	    userservice.addUser(userVO);
+	    userService.addUser(userVO);
 	            
 	    return "member/registerFinish";
 	      
@@ -141,7 +124,7 @@ public class LoginController {
 		Gson gson = new Gson();
 		log.info(id);
 		
-		int str = userservice.getUser(id);
+		int str = userService.getUser(id);
 		
 		boolean validId = str == 0; // 참이면
 	    	if (validId) {
@@ -171,14 +154,14 @@ public class LoginController {
 	
 	@PostMapping("/doFind_ID")
 	public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
-		md.addAttribute("id", userservice.findID(response, email));
+		md.addAttribute("id", userService.findID(response, email));
 		return "login/findIdResult";
 	}
 	
 	@PostMapping("/doFind_PW")
 	public void find_PW(@ModelAttribute UserVO userVO, HttpServletResponse response) throws Exception{
 		System.out.println(userVO.getMember_id());
-		userservice.findPW(response, userVO);
+		userService.findPW(response, userVO);
 	}
 	
 	

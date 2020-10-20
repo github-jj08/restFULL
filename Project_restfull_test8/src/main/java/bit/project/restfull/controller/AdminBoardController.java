@@ -35,13 +35,17 @@ import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.ResponseVO;
 import bit.project.restfull.vo.SidoguVO;
 import bit.project.restfull.vo.UserVO;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 /**
  * Handles requests for the application home page.
  */
-@Controller
 @Log4j
+@Controller
+@NoArgsConstructor
+@AllArgsConstructor
 @RequestMapping("/admin")
 //관리자 페이지 기능들
 public class AdminBoardController {
@@ -54,7 +58,7 @@ public class AdminBoardController {
    private UserService userService;
 
    @Autowired
-   private AdminBoardService adboardService;
+   private AdminBoardService adBoardService;
 
    /* 회원 관리 */
    //1. 회원 리스트 with paging
@@ -127,8 +131,8 @@ public class AdminBoardController {
 	    int board_no = Integer.parseInt(board_numbers);
 	    log.info("게시글 view 호출; 게시글 번호 = " + board_no);
 
-	    model.addAttribute("content_view",adboardService.getBoardVO(board_no));
-	    model.addAttribute("filelist", adboardService.getBoardAttachmentVO(board_no));
+	    model.addAttribute("content_view",adBoardService.getBoardVO(board_no));
+	    model.addAttribute("filelist", adBoardService.getBoardAttachmentVO(board_no));
 		return "admin/userBoard";
 	}
 	
@@ -155,7 +159,7 @@ public class AdminBoardController {
    public List<AdminBoardVO> ajaxNoticeList(@PathVariable(value="boardlist_numbers") int boardlist_numbers, Model model) {
       log.info("boardlist_numbers : " + boardlist_numbers);
       //boardlist_numbers에 해당하는 게시글들을 불러옴
-      List<AdminBoardVO> noticelist = adboardService.getList(boardlist_numbers);
+      List<AdminBoardVO> noticelist = adBoardService.getList(boardlist_numbers);
       model.addAttribute("noticelist", noticelist);
       return noticelist;
    }
@@ -166,8 +170,8 @@ public class AdminBoardController {
       log.info("content_view");
       int board_no = Integer.parseInt(board_numbers);
       log.info("게시글 view 호출; 게시글 번호 = " + board_no);
-      model.addAttribute("content_view",adboardService.getBoardVO(board_no));
-      model.addAttribute("filelist", adboardService.getBoardAttachmentVO(board_no));
+      model.addAttribute("content_view",adBoardService.getBoardVO(board_no));
+      model.addAttribute("filelist", adBoardService.getBoardAttachmentVO(board_no));
       return "admin/notice_content_view";
    }
    
@@ -183,7 +187,7 @@ public class AdminBoardController {
    @RequestMapping(value="/notice/write", method = {RequestMethod.GET, RequestMethod.POST})
    public String write(HttpServletRequest request, @RequestParam(value="file") MultipartFile[] uploadfiles, AdminBoardVO boardVO) {
       log.info("write");
-      adboardService.writeBoardVO(uploadfiles, boardVO);
+      adBoardService.writeBoardVO(uploadfiles, boardVO);
       log.info("service.uploadFile(uploadFiles);");
       return "redirect:/admin/notice";
    }
@@ -191,8 +195,8 @@ public class AdminBoardController {
    //5. 공지사항 및 이벤트 글 수정 페이지 호출(사진 수정이 불가능하므로 따로 생성함)
    @RequestMapping(value = "/notice/modify", method = RequestMethod.GET)
    public String modify(int board_numbers, Model model) {
-      model.addAttribute("modify_view", adboardService.getBoardVO(board_numbers));
-      model.addAttribute("filelist", adboardService.getBoardAttachmentVO(board_numbers));
+      model.addAttribute("modify_view", adBoardService.getBoardVO(board_numbers));
+      model.addAttribute("filelist", adBoardService.getBoardAttachmentVO(board_numbers));
       
       return "admin/notice_modify_view";
    }
@@ -201,7 +205,7 @@ public class AdminBoardController {
    @RequestMapping(value = "/notice/modify", method = RequestMethod.POST)
    public String modify(AdminBoardVO boardVO) {
       log.info("modify()");
-      adboardService.modifyBoardVO(boardVO);
+      adBoardService.modifyBoardVO(boardVO);
       log.info("글번호 - " + boardVO.getBoard_numbers());
       return "redirect:/admin/notice/content_view?board_numbers="+ boardVO.getBoard_numbers();
    }
@@ -209,7 +213,7 @@ public class AdminBoardController {
    //6. 공지사항 및 이벤트 글 삭제
    @GetMapping("/notice/delete")
    public void delete(AdminBoardVO boardVO, Model model) {
-      adboardService.deleteBoardVO(boardVO.getBoard_numbers());
+      adBoardService.deleteBoardVO(boardVO.getBoard_numbers());
       log.info("삭제 성공");
    }
    
@@ -218,7 +222,7 @@ public class AdminBoardController {
    //1. 여행지 및 상품 리스트
    @RequestMapping(value = "/dest", method = RequestMethod.GET)
    public String destList(Model model) {
-      List<DestinationVO> destlist = adboardService.getDestList(); //select * from destination
+      List<DestinationVO> destlist = adBoardService.getDestList(); //select * from destination
       model.addAttribute("destlist", destlist);
       return "admin/destList";
    }
@@ -227,8 +231,8 @@ public class AdminBoardController {
    @GetMapping("/dest/content_view")
    public String destContent_view(String destination_name, Model model) {
       log.info("content_view");
-      model.addAttribute("content_view",adboardService.getDestVO(destination_name));
-      model.addAttribute("goodsList",adboardService.getGoodsList(destination_name));
+      model.addAttribute("content_view",adBoardService.getDestVO(destination_name));
+      model.addAttribute("goodsList",adBoardService.getGoodsList(destination_name));
       return "admin/dest_content_view";
    }
    
@@ -245,7 +249,7 @@ public class AdminBoardController {
    @RequestMapping(value="/dest/write", method = {RequestMethod.POST})
    public String destWrite(DestinationVO destinationVO) {
       log.info("write");
-      adboardService.writeDestVO(destinationVO);
+      adBoardService.writeDestVO(destinationVO);
       log.info("writeDestVO;");
       return "redirect:/admin/dest/";
    }
@@ -256,14 +260,14 @@ public class AdminBoardController {
    public List<SidoguVO> getSigunguCode(@PathVariable(value="sidoCode") int sidoCode) {
       log.info("sidoCode : " + sidoCode);
       //sidoNum에 해당하는 지역코드들을 불러옴
-      List<SidoguVO> optionList = adboardService.getOptionList(sidoCode);
+      List<SidoguVO> optionList = adBoardService.getOptionList(sidoCode);
       return optionList;
    }
    
    //4. 여행지 수정 기능 modify_view 페이지 호출
    @RequestMapping(value = "/dest/modify", method = RequestMethod.GET)
    public String destModify(String destination_name, Model model) {
-      model.addAttribute("modify_view", adboardService.getDestVO(destination_name));
+      model.addAttribute("modify_view", adBoardService.getDestVO(destination_name));
       
       return "admin/dest_modify_view";
    }
@@ -272,7 +276,7 @@ public class AdminBoardController {
    @RequestMapping(value = "/dest/modify", method = RequestMethod.POST)
    public String destModify(DestinationVO destinationVO) throws UnsupportedEncodingException {
       log.info("modify()");
-      adboardService.modifyDestVO(destinationVO);
+      adBoardService.modifyDestVO(destinationVO);
       log.info("글번호 - " + destinationVO.getDestination_name());
       String destination_name = destinationVO.getDestination_name();
       String encodedParam = URLEncoder.encode(destination_name, "UTF-8");
@@ -282,7 +286,7 @@ public class AdminBoardController {
    //5. 여행지 삭제
    @GetMapping("/dest/delete")
    public String destDelete(DestinationVO destinationVO, Model model) {
-      adboardService.deleteDestVO(destinationVO.getDestination_name());
+      adBoardService.deleteDestVO(destinationVO.getDestination_name());
       log.info("삭제 성공");
       return "redirect:/admin/dest/";
    }
@@ -293,7 +297,7 @@ public class AdminBoardController {
    public String goodsContent_view(String goods_numbers, Model model) {
       log.info("content_view");
       int goodsNum = Integer.parseInt(goods_numbers);
-      model.addAttribute("content_view",adboardService.getGoodsVO(goodsNum));
+      model.addAttribute("content_view",adBoardService.getGoodsVO(goodsNum));
       return "admin/goods_content_view";
    }
 
@@ -310,7 +314,7 @@ public class AdminBoardController {
    @RequestMapping(value="/dest/goods/write", method = {RequestMethod.POST})
    public String goodsWrite(GoodsVO goodsVO) throws UnsupportedEncodingException {
       log.info("write : " + goodsVO.getName());
-      adboardService.writeGoodsVO(goodsVO);
+      adBoardService.writeGoodsVO(goodsVO);
       log.info("getDestination_name = " + goodsVO.getDestination_name());
       String destination_name = goodsVO.getDestination_name();
       String encodedParam = URLEncoder.encode(destination_name, "UTF-8");
@@ -320,7 +324,7 @@ public class AdminBoardController {
    //4. 수정 기능 modify_view 페이지 호출
    @RequestMapping(value = "/dest/goods/modify", method = RequestMethod.GET)
    public String goodsModify(int goods_numbers, Model model) {
-      model.addAttribute("modify_view", adboardService.getGoodsVO(goods_numbers));
+      model.addAttribute("modify_view", adBoardService.getGoodsVO(goods_numbers));
       return "admin/goods_modify_view";
    }
    
@@ -331,14 +335,14 @@ public class AdminBoardController {
       log.info("여행지 - " + goodsVO.getDestination_name());
       log.info("상품번호 - " + goodsVO.getGoods_numbers());
       log.info("상품번호 - " + goodsVO.getName());
-      adboardService.modifyGoodsVO(goodsVO);
+      adBoardService.modifyGoodsVO(goodsVO);
       return "redirect:/admin/dest/goods/content_view?goods_numbers="+ goodsVO.getGoods_numbers();
    }         
    
    //5. 상품 삭제
    @GetMapping("/dest/{destination_name}/goods/delete")
    public String goodsDelete(@PathVariable(name="destination_name") String destination_name, int goods_numbers, Model model) throws UnsupportedEncodingException {
-      adboardService.deleteGoodsVO(goods_numbers);
+      adBoardService.deleteGoodsVO(goods_numbers);
       log.info("삭제 성공");
       String encodedParam = URLEncoder.encode(destination_name, "UTF-8");
       return "redirect:/admin/dest/content_view?destination_name=" + encodedParam;
@@ -359,7 +363,7 @@ public class AdminBoardController {
    public List<AdminBoardVO> ajaxQnAsList(@PathVariable(value="boardlist_numbers") int boardlist_numbers, Model model) {
       log.info("boardlist_numbers : " + boardlist_numbers);
       //boardlist_numbers에 해당하는 게시글들을 불러옴
-      List<AdminBoardVO> list = adboardService.getFilterList(boardlist_numbers);
+      List<AdminBoardVO> list = adBoardService.getFilterList(boardlist_numbers);
       model.addAttribute("list", list);
       return list;
    }
@@ -375,8 +379,8 @@ public class AdminBoardController {
       log.info("content_view");
       int board_no = Integer.parseInt(board_numbers);
       log.info("게시글 view 호출; 게시글 번호 = " + board_no);
-      model.addAttribute("content_view",adboardService.getBoardVO(board_no));
-      model.addAttribute("filelist", adboardService.getBoardAttachmentVO(board_no));
+      model.addAttribute("content_view",adBoardService.getBoardVO(board_no));
+      model.addAttribute("filelist", adBoardService.getBoardAttachmentVO(board_no));
       return "admin/qna_content_view";
    }
 
@@ -384,7 +388,7 @@ public class AdminBoardController {
    //주문받은 모든 상품 리스트
    @GetMapping("/requestList") 
    public String requestList(Model model) {
-	   List<RequestVO> list = adboardService.getRequestList();
+	   List<RequestVO> list = adBoardService.getRequestList();
 	   model.addAttribute("list", list);
 	   return "admin/requestList";
 	}
