@@ -3,9 +3,6 @@ package bit.project.restfull.service;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.web.multipart.MultipartFile;
 
 import bit.project.restfull.vo.AttachmentVO;

@@ -25,10 +25,6 @@ import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 
-/**
- * Handles requests for the application home page.
- */
-@Controller
 @Log4j
 public class AdminBoardServiceImpl implements AdminBoardService {
 

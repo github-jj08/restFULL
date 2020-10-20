@@ -1,23 +1,15 @@
 package bit.project.restfull.service;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.imageio.ImageIO;
-import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,14 +22,13 @@ import bit.project.restfull.vo.LikesVO;
 import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.TravelVO;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 
-import org.apache.commons.io.FileUtils;
-
 @Log4j
-@Service("boardService")
+@NoArgsConstructor
 @AllArgsConstructor
 public class BoardServiceImpl implements BoardService{ 
 	
