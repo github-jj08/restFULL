@@ -20,7 +20,7 @@
 <section class="write-section spad">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-8 order-lg-1">
+			<div class="col-lg-7 order-lg-1">
 				<input type="hidden" name="board_numbers" value="${content_view.board_numbers}">
 				<div class="leftbox">
 					<div class="photo-view">
@@ -73,8 +73,6 @@
 						
 						<div class="wrapper">
 							<div class="likeanddrop">
-
-								
 								 <!--------------------------
 		                        		좋아요 버튼 start
 		                         ----------------------------->
@@ -170,6 +168,10 @@
 							 <!--------------------------
 		                        	좋아요 버튼  end
 		                     ----------------------------->
+		                     
+		                    <!--------------------------
+		                        	드롭다운 버튼  start
+		                     ----------------------------->
 							
 								<div class="dropdown">
 							 		<button type="button" class="btn dropdown" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -245,7 +247,7 @@
 								      
 								      <!-- Modal footer -->
 								      <div class="modal-footer">
-								        <button type="button" id="finish" class="btn btn-default" data-dismiss="modal">신고</button>
+								        <input type="button" id="finish" class="btn btn-default" data-dismiss="modal" value="신고">
 								      </div>
 								      
 								      <script>
@@ -288,180 +290,202 @@
 								</div>	  
 						  	</div>
 						</div>
-					</div>
-					
-						<div class="board-contents">
-							<h2><p>${content_view.title}</p></h2>
-							<p>${content_view.member_id}</p>
-							<p>${content_view.dates}</p>
-							<p>${content_view.hit}</p>
-							<p>${content_view.contents}</p>
-						</div>
+                       
+                        <div class="write-view">
+                            <div class="board-contents">
+                                <div class="view-hit">조회수 - ${content_view.hit} 회</div>
+                                <div class="view-dates">${content_view.dates} </div>
+                                <br/>
+                                <div class="view-loc">${content_view.location}</div>                                <br>
+                                <div class="view-id">${content_view.member_id}</div>
+                                <div class="view-title">${content_view.title}</div>
+                                <div class="view-contents">${content_view.contents}</div>
+                            </div>
+                        </div>
 					</div>
 				</div>
-			</div>
-		</section>
+           
 				
-				
-				
-					<%-- <!-- 중간 구분선 -->		
-			 		<div style="width:5%; height:100%; border-left:3px solid purple;position: absolute;left: 50%;margin-left: -3px;">
-					</div>
+				<!--왼쪽부분end-->
+				<div class="col-lg-4 order-lg-2">
+                    <div class="rightbox">
+                        <div class="replycomment"> <!--댓글 부분-->
+                            <!-- 댓글 작성칸 -->
+                            <div id="addMyComment">
+                                <span id="myId">${principal.user.member_id}</span>
+                                <div class="comment-reg">
+                                    <input type="text" placeholder="댓글을 입력하세요" id="reply" name="reply"/>
+                                    <input id="addComment" type="button" value="✔"/>
+                                </div>
+                            </div>
 
-				<!-- 댓글 출력 -->
-				<div id="rightbox"style="float:right">				
-					<div>
-						<!-- 댓글 작성칸 -->
-						<div id="addMyComment">
-							<span id="myId">${principal.user.member_id}</span> :  
-							<input type="text" placeholder="댓글을 입력하세요" id="reply" name="reply"/>
-							<button id="addComment" type="button" value="입력">댓글작성</button> 
-						</div>
-						
-						<!-- 댓글 list -->
-						<div id="commentlist">
-							<!-- 사용자 프로필 사진 or 사용자 아이디 -->
-							<div>
-							
-							</div>
-							
-							<!-- 댓글 -->
-							<div id="reply">
-								<section class="replyForm">
-									<table id="list-table">
-									
-									</table>
-								</section>
-							</div>
-						</div>
-						<script>
-							$(function(){
-								var board_numbers = ${content_view.board_numbers};
-								var member_id = $('#myId').text();
-								
-								console.log("댓글쓰기 board_numbers - " + board_numbers);
-								console.log("member_id : " + member_id);
-								
-								//댓글 목록 출력(문서 로딩되자마자 실행)
-								function commentList(){ 
-									
-									$.ajax({
-									url: "${pageContext.request.contextPath}/getComments/" + board_numbers,
-					                type: "POST",
-					                dataType:"json",
-					                success: function (result) {
-					                	//html삽입 : 표시될 데이터 - 아이디,댓글내용,작성일,삭제버튼,[히든]댓글번호
-					                	var htmls="";
-					                	$("#list-table").html("");	
-					        			$("<tr>" , {
-					        				html : "<td>" + "아이디" + "</td>"+  // 컬럼명들
-					        						"<td>" + "댓글내용" + "</td>"+
-					        						"<td>" + "작성일" + "</td>"+
-					        						"<td>" + "삭제버튼+댓글번호[히든]" + "</td>"			
-					        			}).appendTo("#list-table") // 이것을 테이블에붙임
-					        			if(result.length < 1){
-					        				htmls.push("등록된 댓글이 없습니다.");
-					        			} else {
-					                            $(result).each(function(index,item){
-					                            	//사용자와 작성자의 아이디가 같다면 삭제 버튼 생성
-					                            	if(this.member_id == member_id){
-					                            		
-						                            	htmls += '<tr>';
-						        	                    htmls += '<td>'+ item.member_id + '</td>';
-						        		                htmls += '<td>'+ item.contents + '</td>';
-						        		                htmls += '<td>'+ item.dates + '</td>';
-						        	                    htmls += '<td><button type="button" name="delete" value="' + item.comments_numbers+'">삭제</button>';
-						        	                   	htmls += '<button type="button" name="comment-modify" value="'+item.comments_numbers+'">수정</button></td>';
-						        	                   	htmls += '</tr>';
-						        	                    
-					                            	} else {
-					                            		//아니라면 그냥 출력
-						                            	htmls += '<tr>';
-						        	                    htmls += '<td>'+ item.member_id + '</td>';
-						        		                htmls += '<td>'+ item.contents + '</td>';
-						        		                htmls += '<td>'+ item.dates + '</td>';
-						        	                    htmls += '<td>'+ item.comments_numbers + '<input type="hidden" value="'+ item.board_numbers + '"> 게시글번호숨김 </td>';	
-						        	                    htmls += '</tr>';
-					                            	}
-					        	                    			                    		                   
-					                        	});	//each end
-					        			}
-					        			$("#list-table").append(htmls);
-					                	}
-									});
-								};
-								
-								$(document).on("click", "button[name='delete']",function(){
-									
-									console.log("delete 버튼 클릭");
-									var comments_numbers = $(this).val();
-									
-									console.log("삭제 대상 : " + comments_numbers);
-										$.ajax({
-											url: "${pageContext.request.contextPath}/user/delComments",
-							                type: "POST",
-							                data: {
-							                    "comments_numbers": comments_numbers
-							                },
-							                success: function () {
-							                	commentList();
-							                	console.log("성공");
-							                },
-										})
-								});
-								
-								//댓글 작성 버튼 클릭 시
-								$("#addComment").click(function(){
-									var contents = $('#reply').val();
-									console.log("댓글쓰기 board_numbers - " + board_numbers);
-									console.log("member_id : " + member_id);
-									
-									console.log("contents : " + contents);
-									
-									$.ajax({
-										url: "${pageContext.request.contextPath}/user/addComments",
-						                type: "POST",
-						                data: {
-						                    "board_numbers": board_numbers,
-						                    "member_id": member_id,
-						                    "contents":contents
-						                },
-						                success: function () {
-						                	commentList();
-						                },
-									});
-								});
-								
-								
-			                	commentList(); // 처음 시작했을 때 실행되도록 해당 함수 호출
-							});
-						</script>
-					</div>
-				</div>
-				
-			</div> --%>
-			
-<%--  			<!-- 아래쪽에 다른 게시글들을 출력함 -->
-			<div class="container contents">
-				<div class="row">
-				<!-- 게시물 list -->
-					<div style="width:50%; height:500px; float:left">
-						<h2>리스트 뽑기</h2>
-							<c:forEach items="${others}" var="vo">
-								<div class="col-xs-6 col-md-3 main-postings">
-								    <a href="content_view?board_numbers=${vo.board_numbers}" class="thumbnail">
-								      <img src="${vo.thumbnail }"/>
-								      <div class="caption">
-							                <h3>${vo.title}</h3>
-							                <p>${vo.location}</p>
-							                <p>${vo.destinationVO.jibunaddress}</p>
-							          </div>
-								    </a>
-								</div>
-							</c:forEach>
-					</div>
-				</div>
-			</div> --%>
+                            <!-- 댓글 list -->
+                            <div id="commentlist">
+                                <!-- 사용자 프로필 사진 or 사용자 아이디 -->
+                                <div>
+
+                                </div>
+
+                                <!-- 댓글 -->
+                                <div id="reply">
+                                    <section class="replyForm">
+                                        <table id="list-table">
+
+                                        </table>
+                                    </section>
+                                </div>
+                            </div>
+                            
+				            <script>
+                                $(function(){
+                                    var board_numbers = ${content_view.board_numbers};
+                                    var member_id = $('#myId').text();
+
+                                    console.log("댓글쓰기 board_numbers - " + board_numbers);
+                                    console.log("member_id : " + member_id);
+
+                                    //댓글 목록 출력(문서 로딩되자마자 실행)
+                                    function commentList(){ 
+
+                                        $.ajax({
+                                        url: "${pageContext.request.contextPath}/getComments/" + board_numbers,
+                                        type: "POST",
+                                        dataType:"json",
+                                        success: function (result) {
+                                            //html삽입 : 표시될 데이터 - 아이디,댓글내용,작성일,삭제버튼,[히든]댓글번호
+                                            var htmls="";
+                                            $("#list-table").html("");	
+                                            $("<tr>" , {
+                                                html : "<td>" + "아이디" + "</td>"+  // 컬럼명들
+                                                        "<td>" + "댓글내용" + "</td>"+
+                                                        "<td>" + "작성일" + "</td>"+
+                                                        "<td>" + "삭제버튼+댓글번호[히든]" + "</td>"			
+                                            }).appendTo("#list-table") // 이것을 테이블에붙임
+                                            if(result.length < 1){
+                                                htmls.push("등록된 댓글이 없습니다.");
+                                            } else {
+                                                    $(result).each(function(index,item){
+                                                        //사용자와 작성자의 아이디가 같다면 삭제 버튼 생성
+                                                        if(this.member_id == member_id){
+
+                                                            htmls += '<tr>';
+                                                            htmls += '<td>'+ item.member_id + '</td>';
+                                                            htmls += '<td>'+ item.contents + '</td>';
+                                                            htmls += '<td>'+ item.dates + '</td>';
+                                                            htmls += '<td><button type="button" name="delete" value="' + item.comments_numbers+'">삭제</button>';
+                                                            htmls += '<button type="button" name="comment-modify" value="'+item.comments_numbers+'">수정</button></td>';
+                                                            htmls += '</tr>';
+
+                                                        } else {
+                                                            //아니라면 그냥 출력
+                                                            htmls += '<tr>';
+                                                            htmls += '<td>'+ item.member_id + '</td>';
+                                                            htmls += '<td>'+ item.contents + '</td>';
+                                                            htmls += '<td>'+ item.dates + '</td>';
+                                                            htmls += '<td>'+ item.comments_numbers + '<input type="hidden" value="'+ item.board_numbers + '"> 게시글번호숨김 </td>';	
+                                                            htmls += '</tr>';
+                                                        }
+
+                                                    });	//each end
+                                            }
+                                            $("#list-table").append(htmls);
+                                            }
+                                        });
+                                    };
+
+                                    $(document).on("click", "button[name='delete']",function(){
+
+                                        console.log("delete 버튼 클릭");
+                                        var comments_numbers = $(this).val();
+
+                                        console.log("삭제 대상 : " + comments_numbers);
+                                            $.ajax({
+                                                url: "${pageContext.request.contextPath}/user/delComments",
+                                                type: "POST",
+                                                data: {
+                                                    "comments_numbers": comments_numbers
+                                                },
+                                                success: function () {
+                                                    commentList();
+                                                    console.log("성공");
+                                                },
+                                            })
+                                    });
+
+                                    //댓글 작성 버튼 클릭 시
+                                    $("#addComment").click(function(){
+                                        var contents = $('#reply').val();
+                                        console.log("댓글쓰기 board_numbers - " + board_numbers);
+                                        console.log("member_id : " + member_id);
+
+                                        console.log("contents : " + contents);
+
+                                        $.ajax({
+                                            url: "${pageContext.request.contextPath}/user/addComments",
+                                            type: "POST",
+                                            data: {
+                                                "board_numbers": board_numbers,
+                                                "member_id": member_id,
+                                                "contents":contents
+                                            },
+                                            success: function () {
+                                                commentList();
+                                            },
+                                        });
+                                    });
+
+
+                                    commentList(); // 처음 시작했을 때 실행되도록 해당 함수 호출
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--오른쪽 댓글 부분 end-->
+        </div>
+    </section>
+    
+    <hr/>        
+    <!-------------------
+   		아래쪽 관련게시글 출력
+    --------------------->
+        
+    <div class="underbox spad">
+        <div class="container">
+            <div class="row">
+                <!-- 게시물 list -->
+                <div class="col-lg-12">
+                    <div class="listboard">
+                        <h4>✨관련게시글✨</h4>
+                    </div>
+                </div>
+            </div>
+                    
+            <div class="row">
+               <c:forEach items="${others}" var="vo">
+                    <div class="col-lg-3 col-sm-6">
+                       <div class="product-item">
+                            <div class="pi-pic">
+                                <a href="content_view?board_numbers=${vo.board_numbers}" class="thumbnail">
+                                    <img src="${vo.thumbnail }"/>
+                                </a>           
+                            </div>
+
+                            <div class="pi-text">
+                                <div class="caption-title">${vo.title}</div>
+                                
+                                <div class="caption-loc">${vo.location}</div>
+                                
+                                <div class="caption-destination">${vo.destinationVO.jibunaddress}</div>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach> 
+            </div>
+        </div>
+    </div> 
+
 	<%@ include file="/WEB-INF/include/js-footer.jsp"%>
 </body>
 </html>

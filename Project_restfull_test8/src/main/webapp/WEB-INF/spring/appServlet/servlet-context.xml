@@ -19,6 +19,7 @@
 	<resources mapping="user/resources/**" location="/resources/" />
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/img/**" location="/resources/img/" />
+	<resources mapping="/imf/favicon.ico" location="/resources/img/" />
 	
 
 

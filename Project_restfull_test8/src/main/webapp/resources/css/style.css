@@ -3508,17 +3508,8 @@ ol {
 글 보여지는 부분
 --------------------*/    
 
-.write-section {
-	margin-top:50px;
-}
+
  /* 사진 부분 */
-.leftbox .photo-view {
-        background-color: #8A93C0;
-        border : 1px;
-        width:100%;
-        height:500px;
-     }
-  
 .leftbox .photo-view #myCarousel {
         background-color: black;
         width: 100%;
@@ -3539,63 +3530,76 @@ ol {
       width: auto;
       text-align: center;
 }
+
+
 /* 좋아요&드롭다운 부분 */
 .leftbox .photo-view .wrapper {
     width:100%;
-    height:20px;
+    height:50px;
+    background-color:#8a93c0;
 }
 
 /* 좋아요 버튼 */
-.leftbox .photo-view .wrapper .likeanddrop #like-button {
-    padding-top:11px;
+
+.leftbox .photo-view .wrapper .likeanddrop {
+    text-align: center;
+   
+      
+}
+.leftbox .photo-view .wrapper .likeanddrop button {
     background-color:#8a93c0;
     color:white;
-    border:none;
-    font-size:25px;
-}
-
-/* 드롭다운 버튼 */
-.leftbox .photo-view .dropdown {
-    position: relative;
-    display:inline-block;
-    float:right;
-}
-
-.leftbox .photo-view .dropdown .dropbtn {
-    background-color: #8a93c0;
-    line-height:45px;
-    color:white;
-    font-size:20px;
-    border:none;
-    cursor:pointer;
-}
-
-.leftbox .photo-view .dropdown .dropdown-content {
-    display:none;
-    position:absolute;
-    background: #8a93c0;
-    opacity: 0.6;
-    z-index: 1;
+    border:#8a93c0;
+    padding: 11px 0;
     
 }
 
-.leftbox .photo-view .dropdown .dropdown-content a {
-    color: black;
-    text-decoration: none;
-    display:block;
+.leftbox .photo-view .wrapper .likeanddrop #like-button {
+    border-color: #8a93c0;
+    background-color: #8a93c0;
+    font-size:25px;
+    color:white;
+    
+}
+
+/* 드롭다운 버튼 */
+.leftbox .photo-view .wrapper .dropdown {
+    position: relative;
+    display:inline-block;
+    float:right;
+    font-size:25px;
+    font-weight:500;
+    margin-top:-30px;
+    color:white;
 }
 
 
+.leftbox .photo-view .dropdown .dropdown-menu {
+    position: absolute;
+    background: #dfe4ff;
+    z-index: 1;
+    border: 2px #8a93c0;
+    opacity: 0.88;
+    
+    
+    
+}
 
-
-
-
+.leftbox .photo-view .dropdown .dropdown-menu a.dropdown-item {
+    color: #546396;
+    padding:10px 0;
+    text-align:center;
+    font-size:15px;
+    font-weight:600;
+    }
 
 
 
 /*--------------
     신고 모달창
 ------------------*/
+
+
 #DecModal .modal-content .modal-header {
     background-color:#8a93c0;
  
@@ -3623,10 +3627,13 @@ ol {
 }
 #DecModal .modal-body .mb-title b {
     font-size: 17px;
+    
 }
 
 #DecModal .modal-body .mb-title #title {
-    margin-left:10px;  
+    margin-left:10px;
+    border:none;
+    
     
 }
 #DecModal .modal-body .mb-reason {
@@ -3634,15 +3641,19 @@ ol {
 }
 
 #DecModal .modal-body .mb-reason b {
-    font-size: 17px;   
+    font-size: 17px; 
+     padding-bottom:10px;
 }
+
 
 #DecModal .modal-body .mb-reason input{ 
     margin-right: 4px;
+    
 }
 
 #DecModal .modal-body .mb-reason label {
-    margin-right:15px;   
+    margin-right:15px;
+    font-weight:500;
 }
 
 #DecModal .modal-body .other-reason #reasontext{
@@ -3650,11 +3661,159 @@ ol {
     height: 150px;
 }
 
-#DecModal .modal-footer button{
+#DecModal .modal-footer #finish{
     font-size:20px;
     font-weight:900;
     text-align:center;
     float:right;
+    background-color:#8a93c0;
+    color:white;
+}
+
+#DecModal .modal-footer #finish:hover {
+    background-color:#38456f;
+}
+
+
+/*제목,날짜,조회수, 내용 등 표시 css*/
+
+.leftbox .write-view .board-contents {
+    margin: 40px 0;
+    width:100%;
+    border:none;
+}
+
+.leftbox .write-view .board-contents .view-hit {
+    float:left;
+    font-size:13px;  
+    border:none;
+    
+}
+
+.leftbox .write-view .board-contents .view-dates {
+    float:right;
+    font-size:15px;
+    border:none;
+ }
+
+.leftbox .write-view .board-contents .view-loc {
+    font-size:15px;  
+    border:none;
+    font-weight:600;
+    
+}
+
+.leftbox .write-view .board-contents .view-title {
+    padding:5px 0;
+    font-size:20px;
+    font-weight:800;
+    border:none; 
+    width:100%;
+}
+
+.leftbox .write-view .board-contents .view-id {
+    border:none; 
+    width:100%;
+    font-size:15px;
+    color:#8a93c0;
+    font-weight:700;
+}
+
+.leftbox .write-view .board-contents .view-contents {
+    padding:10px 0;
+    font-size:16px;
+    border:none; 
+    width:100%;
+    height: 150px;
+    
+    
+}
+
+/*댓글부분*/
+.rightbox {
+    border:#8a93c0 2px solid;
+    height: 500px;
+    padding:5px 10px;
+    background-color:#eaedff;
+    opacity: 0.8;
+    width: 100%;
+    border-radius: 12px;
+    
+}
+
+.rightbox #addMyComment #myId {
+    font-size:13px;
+}
+
+.rightbox .replycomment #addMyComment .comment-reg #reply {
+    width:93%;
+    font-size:14px;
+    height:33px;
+    border-radius: 10px;
+    border-color:#8a93c0;
+    
+}
+
+.rightbox .replycomment .comment-reg #addComment {
+    width:6%;
+    font-size:18px;
+    border:#8a93c0;
+    background-color:#eaedff;
+    position:absolute;
+}
+
+
+/*--------------------
+    아래쪽 관련게시글
+---------------------*/
+.underbox {
+	padding-top: 20px;
+	padding-bottom: 50px;
+}
+
+.underbox .listboard h4 {
+    font-weight:900;
+    color:#4b5483;
+    text-align: center;
+    padding-bottom:20px;
+}
+
+.underbox .product-item {
+	margin-bottom: 25px;
+    width:250px;
+    
+}
+
+.underbox .product-item .pi-pic {
+    padding: 5px;
+    
+   
+}
+.underbox .product-item .pi-pic img{
+    height:200px;
+    width:100%;
+    
+   
+}
+.underbox .product-item .pi-text {
+    padding: 7px 0;
+}
+
+.underbox .product-item .pi-text .caption-title {
+    font-weight:700;
+    font-size:17px;
+    margin-bottom: 8px;
+}
+
+.underbox .product-item .pi-text .caption-loc {
+    font-size:14px;
+
+}
+
+.underbox .product-item .pi-text .caption-destination {
+    font-size:15px;
+    margin-bottom: 15px;
+
 }
 
 

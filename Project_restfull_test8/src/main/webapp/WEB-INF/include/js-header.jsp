@@ -14,6 +14,8 @@
     <meta name="keywords" content="Fashi, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 로고 -->
+	<link rel="shortcut icon" href="resources/img/favicon.ico"/>
     <title></title>
     
     <script src="resources/js/jquery-3.3.1.min.js"></script>
@@ -42,8 +44,6 @@
     <link rel="stylesheet" href="resources/css/style.css" type="text/css">
     
        
-    <!-- 로고 넣었는데 안변하네 몰랑~ -->
-	<link rel="shortcut icon" href="resources/img/favicon.ico"/>
 	
 	 <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
