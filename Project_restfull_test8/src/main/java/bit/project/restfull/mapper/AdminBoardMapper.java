@@ -12,6 +12,7 @@ import bit.project.restfull.vo.GoodsVO;
 import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.SidoguVO;
 import bit.project.restfull.vo.TravelVO;
+
 public interface AdminBoardMapper{
 	//게시글 목록 출력
 	List<AdminBoardVO> getList(int boardlist_numbers);

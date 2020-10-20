@@ -12,12 +12,8 @@ import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.LikesVO;
 import bit.project.restfull.vo.PagingVO;
 import bit.project.restfull.vo.RequestVO;
-<<<<<<< HEAD
-=======
 import bit.project.restfull.vo.TravelVO;
 import lombok.extern.log4j.Log4j;
->>>>>>> branch 'developyj' of https://github.com/github-jj08/restfull_test8.git
-
 /**
  * Handles requests for the application home page.
  */
