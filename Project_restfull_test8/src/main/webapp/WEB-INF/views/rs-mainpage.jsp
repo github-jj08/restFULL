@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>RestFuLL | 메인페이지</title>
-    <%@ include file="/WEB-INF/include/plugins.jspf"%>
+
 </head>
 
 <body>
@@ -22,7 +22,7 @@
     <!-- Hero Section Begin -->
     <section class="hero-section">
         <div class="hero-items owl-carousel">
-            <div class="single-hero-items set-bg" data-setbg="/resources/img/KR_15.jpg">
+            <div class="single-hero-items set-bg" data-setbg="resources/img/KR_15.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
@@ -34,16 +34,16 @@
                 </div>
             </div>
 
-            <div class="single-hero-items set-bg" data-setbg="/resources/img/KR_1.jpg">
+            <div class="single-hero-items set-bg" data-setbg="resources/img/KR_1.jpg">
             </div>
 
-            <div class="single-hero-items set-bg" data-setbg="/resources/img/KR_3.jpg">
+            <div class="single-hero-items set-bg" data-setbg="resources/img/KR_3.jpg">
             </div>
 
-            <div class="single-hero-items set-bg" data-setbg="/resources/img/KR_4.jpg">
+            <div class="single-hero-items set-bg" data-setbg="resources/img/KR_4.jpg">
             </div>
 
-            <div class="single-hero-items set-bg" data-setbg="/resources/img/KR_8.jpg">
+            <div class="single-hero-items set-bg" data-setbg="resources/img/KR_8.jpg">
             </div>
 
         </div>

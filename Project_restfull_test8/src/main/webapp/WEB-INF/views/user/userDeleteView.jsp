@@ -58,27 +58,54 @@ pageEncoding="UTF-8"%>
 		
 	</head>
 	<body>
-	
-	<h4>[<a href="<c:url value="${pageContext.request.contextPath}/user/userHome" />">홈으로 돌아가기</a>]</h4>
-	<section id="container">
-				<div class="form-group has-feedback">
-				<sec:authentication var="principal" property="principal"/>
-					<label class="control-label" for="userId">아이디</label>
-					<input class="form-control" type="text" name="member_id" value="<sec:authentication property="principal.user.member_id"/>"/>
-				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="userPass">비밀번호</label>
-					<input class="form-control" type="password" id="pw" name="pw" placeholder="비밀번호를 입력해주세요"/>
-				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="userName">성명</label>
-					<input class="form-control" type="text" id="name" value="<sec:authentication property="principal.user.name"/>" readonly="readonly"/>
-				</div>
-				<div class="form-group has-feedback">
-					<button class="btn btn-success" type="submit" id="submit">회원탈퇴</button>
-					<button class="cencle btn btn-danger" type="button" id="cancel">취소</button>
-				</div>
-	</section>
+		<%@ include file="/WEB-INF/include/js-header.jsp"%>
+		<h2 class="text-center">회원탈퇴 페이지 입니다.</h2>
+		<hr>
+		    <section class="blog-section spad">
+		        <div class="container">
+		            <div class="row">
+		                <div class="col-sm-3 order-1">
+		                    <div class="blog-sidebar">
+								<div class="blog-catagory menu-background">
+							        <h4>고객센터</h4>
+							        <ul>
+							            <li><p>[<a href="<c:url value="userModify" />">개인정보 수정</a>]</p></li>
+							            <li><p>[<a href="myList?member_id=<sec:authentication property="principal.user.member_id"/>">내 게시글 보기</a>]</p></li>
+							            <li><p>[<a href="myLikeList?member_id=<sec:authentication property="principal.user.member_id"/>">좋아요 한 글 목록</a>]</p></li>
+							            <li><p>[<a href="myCourseList?member_id=<sec:authentication property="principal.user.member_id"/>">내 여행코스 보기</a>]</p></li>
+							            <li><p>[<a href="paymentList?member_id=<sec:authentication property="principal.user.member_id"/>">내 결제내역 보기</a>]</p></li>
+							            <li><p>[<a href="reportList?member_id=<sec:authentication property="principal.user.member_id"/>">내 신고내역 보기</a>]</p></li>
+							            <li><p>[<a href="qnaList?member_id=<sec:authentication property="principal.user.member_id"/>">내 문의내역 보기</a>]</p></li>
+							            <li style="background-color: #8a93c0;"><p>[<a href="<c:url value="userDeleteView" />">회원탈퇴</a>]</p></li>
+							        </ul>
+						        </div>
+					        </div>
+				        </div>
+				        <div class="col-sm-9 order-2">
+				        	<h4>[<a href="<c:url value="${pageContext.request.contextPath}/user/userHome" />">홈으로 돌아가기</a>]</h4>
+							<section id="container">
+								<div class="form-group has-feedback">
+								<sec:authentication var="principal" property="principal"/>
+									<label class="control-label" for="userId">아이디</label>
+									<input class="form-control" type="text" name="member_id" value="<sec:authentication property="principal.user.member_id"/>"/>
+								</div>
+								<div class="form-group has-feedback">
+									<label class="control-label" for="userPass">비밀번호</label>
+									<input class="form-control" type="password" id="pw" name="pw" placeholder="비밀번호를 입력해주세요"/>
+								</div>
+								<div class="form-group has-feedback">
+									<label class="control-label" for="userName">성명</label>
+									<input class="form-control" type="text" id="name" value="<sec:authentication property="principal.user.name"/>" readonly="readonly"/>
+								</div>
+								<div class="form-group has-feedback">
+									<button class="btn btn-success" type="submit" id="submit">회원탈퇴</button>
+									<button class="cencle btn btn-danger" type="button" id="cancel">취소</button>
+								</div>
+							</section>
+					    </div>
+	                </div>
+	            </div>
+			</section>
+			<%@ include file="/WEB-INF/include/js-footer.jsp"%>
 	</body>
-	
 </html>

@@ -15,55 +15,82 @@
 </script>
 </head>
 <body>
-<div id="outter">
-<div style="float: right;">
-		<select id="cntPerPage" name="sel" onchange="selChange()">
-			<option value="5"
-				<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5줄 보기</option>
-			<option value="10"
-				<c:if test="${paging.cntPerPage == 10}">selected</c:if>>10줄 보기</option>
-			<option value="15"
-				<c:if test="${paging.cntPerPage == 15}">selected</c:if>>15줄 보기</option>
-			<option value="20"
-				<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄 보기</option>
-		</select>
-	</div>
-	<table width="500" cellpadding="0" cellspacing="0" border="1">
-		<tr>
-			<td>글 번호</td>
-			<td>게시글 제목</td>
-			<td>게시 날짜</td>
-		</tr>
-		<c:forEach items="${userBoard}" var="userBoard">
-		<tr>
-			<td>${userBoard.board_numbers}</td>
-			<td><a href="content_view?board_numbers=${userBoard.board_numbers}">${userBoard.title}</a></td>
-			<td>${userBoard.dates}</td>
-		</tr>
-		</c:forEach>
-	</table>
-	
-	<c:if test="${paging.startPage != 1}">
-			<a href="myList?nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage}">&lt;</a>
-		</c:if>
-		<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
-			<c:choose>
-				<c:when test="${p == paging.nowPage}">
-					<b>${p}</b>
-				</c:when>
-				<c:when test="${p != paging.nowPage }">
-					<a href="myList?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
-				</c:when>
-			</c:choose>
-		</c:forEach>
-		<c:if test="${paging.endPage != paging.lastPage}">
-			<a href="myList?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}">&gt;</a>
-		</c:if>
-		<div>
-                  총 게시글 수 : ${paging.total } / 총 페이지 수 : ${paging.lastPage } / 현재 페이지 : ${paging.nowPage } / 페이지당 게시글수 : ${paging.cntPerPage }
-        </div>
-</div>
-	<h3>[<a href="userHome">돌아가기</a>]</h3>
-	
+	<%@ include file="/WEB-INF/include/js-header.jsp"%>
+	<h2 class="text-center">내 게시글 보기 페이지 입니다.</h2>
+	<hr>
+	    <section class="blog-section spad">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-sm-3 order-1">
+	                    <div class="blog-sidebar">
+							<div class="blog-catagory menu-background">
+						        <h4>고객센터</h4>
+						        <ul>
+						            <li><p>[<a href="<c:url value="userModify" />">개인정보 수정</a>]</p></li>
+						            <li style="background-color: #8a93c0;"><p>[<a href="myList?member_id=<sec:authentication property="principal.user.member_id"/>">내 게시글 보기</a>]</p></li>
+						            <li><p>[<a href="myLikeList?member_id=<sec:authentication property="principal.user.member_id"/>">좋아요 한 글 목록</a>]</p></li>
+						            <li><p>[<a href="myCourseList?member_id=<sec:authentication property="principal.user.member_id"/>">내 여행코스 보기</a>]</p></li>
+						            <li><p>[<a href="paymentList?member_id=<sec:authentication property="principal.user.member_id"/>">내 결제내역 보기</a>]</p></li>
+						            <li><p>[<a href="reportList?member_id=<sec:authentication property="principal.user.member_id"/>">내 신고내역 보기</a>]</p></li>
+						            <li><p>[<a href="qnaList?member_id=<sec:authentication property="principal.user.member_id"/>">내 문의내역 보기</a>]</p></li>
+						            <li><p>[<a href="<c:url value="userDeleteView" />">회원탈퇴</a>]</p></li>
+						        </ul>
+					        </div>
+				        </div>
+			        </div>
+			        <div class="col-sm-9 order-2">
+				         <div id="outter">
+							<div style="float: right;">
+									<select id="cntPerPage" name="sel" onchange="selChange()">
+										<option value="5"
+											<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5줄 보기</option>
+										<option value="10"
+											<c:if test="${paging.cntPerPage == 10}">selected</c:if>>10줄 보기</option>
+										<option value="15"
+											<c:if test="${paging.cntPerPage == 15}">selected</c:if>>15줄 보기</option>
+										<option value="20"
+											<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄 보기</option>
+									</select>
+								</div>
+								<table width="500" cellpadding="0" cellspacing="0" border="1">
+									<tr>
+										<td>글 번호</td>
+										<td>게시글 제목</td>
+										<td>게시 날짜</td>
+									</tr>
+									<c:forEach items="${userBoard}" var="userBoard">
+									<tr>
+										<td>${userBoard.board_numbers}</td>
+										<td><a href="content_view?board_numbers=${userBoard.board_numbers}">${userBoard.title}</a></td>
+										<td>${userBoard.dates}</td>
+									</tr>
+									</c:forEach>
+								</table>
+								
+								<c:if test="${paging.startPage != 1}">
+										<a href="myList?nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage}">&lt;</a>
+									</c:if>
+									<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
+										<c:choose>
+											<c:when test="${p == paging.nowPage}">
+												<b>${p}</b>
+											</c:when>
+											<c:when test="${p != paging.nowPage }">
+												<a href="myList?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+											</c:when>
+										</c:choose>
+									</c:forEach>
+									<c:if test="${paging.endPage != paging.lastPage}">
+										<a href="myList?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}">&gt;</a>
+									</c:if>
+									<div>
+							                  총 게시글 수 : ${paging.total } / 총 페이지 수 : ${paging.lastPage } / 현재 페이지 : ${paging.nowPage } / 페이지당 게시글수 : ${paging.cntPerPage }
+							        </div>
+							</div>
+			        </div>
+		        </div>
+			</div>
+		</section>
+		<%@ include file="/WEB-INF/include/js-footer.jsp"%>
 </body>
 </html>
