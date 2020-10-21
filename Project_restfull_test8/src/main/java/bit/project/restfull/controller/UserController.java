@@ -143,6 +143,7 @@ public class UserController {
 		log.info("user member_id : "+member_id); // name
 		
 		model.addAttribute("paging", pagingVO);
+		model.addAttribute("member_id", member_id);
 		model.addAttribute("userBoard", boardService.boardList(member_id, pagingVO));
 		
 		return "user/boardList";

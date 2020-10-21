@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import bit.project.restfull.service.BoardService;
 import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.CommentVO;
+import bit.project.restfull.vo.PagingVO;
 import lombok.extern.log4j.Log4j;
 
 @Controller
@@ -34,30 +35,49 @@ public class HomeController {
 	}
 	
 	//검색 결과 페이지
-	@GetMapping("/search")
-	public String search(@RequestParam(value="boardlist_numbers") int boardlist_numbers, @RequestParam(value="searchWord") String searchWord, Model model) {
-		log.info("searchWord : " + searchWord);
-		//검색어에 해당하는 게시글들을 불러옴
-		List<BoardVO> boardlist = boardService.getList(boardlist_numbers, searchWord);
-		model.addAttribute("searchWord", searchWord);
-		model.addAttribute("boardlist", boardlist);
+		@GetMapping("/search")
+		public String search(PagingVO pagingVO, @RequestParam(value="boardlist_numbers") int boardlist_numbers, @RequestParam(value="searchWord") String searchWord, Model model
+				, @RequestParam(value="nowPage", required=false)String nowPage
+				, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+			log.info("searchWord : " + searchWord);
+			
+			int total = boardService.countMainBoard(searchWord);
+			if (nowPage == null && cntPerPage == null) {
+				nowPage = "1";
+				cntPerPage = "5";
+			} else if (nowPage == null) {
+				nowPage = "1";
+			} else if (cntPerPage == null) { 
+				cntPerPage = "5";
+			}
+			
+			log.info(total);
+			pagingVO = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+			
+			//검색어에 해당하는 게시글들을 불러옴
+			List<BoardVO> boardlist = boardService.getList(pagingVO, boardlist_numbers, searchWord);
+			model.addAttribute("searchWord", searchWord);
+			model.addAttribute("boardlist_numbers", boardlist_numbers);
+			model.addAttribute("paging", pagingVO);
+			
+			model.addAttribute("boardlist", boardlist);
+			
+			log.info(searchWord + " 에 대한 검색결과 return 수 : " + total);
+			return "searchResult";
+		}
 		
-		log.info(searchWord + " 에 대한 검색결과 return 수 : " + boardlist.size());
-		return "searchResult";
-	}
-	
-	@ResponseBody
-	@GetMapping("/search/{searchWord}")
-	public List<BoardVO> ajaxSearch(@PathVariable(value="boardlist_numbers") int boardlist_numbers, @PathVariable(value="searchWord") String searchWord) throws UnsupportedEncodingException {
-		log.info("searchWord : " + searchWord);
-		//검색어를 url에 포함시켰으니 ASCII로 한글이 인코딩되서 넘어오므로, 검색어를 다시 디코딩해줌
-		searchWord = URLDecoder.decode(searchWord, "UTF-8");
-		
-		//검색어에 해당하는 게시글들을 불러옴
-		List<BoardVO> boardlist = boardService.getList(boardlist_numbers, searchWord);
-		log.info(searchWord + " 에 대한 검색결과 return 수 : " + boardlist.size());
-		return boardlist;
-	}
+		@ResponseBody
+		@GetMapping("/search/{searchWord}")
+		public List<BoardVO> ajaxSearch(PagingVO pagingVO, @PathVariable(value="boardlist_numbers") int boardlist_numbers, @PathVariable(value="searchWord") String searchWord) throws UnsupportedEncodingException {
+			log.info("searchWord : " + searchWord);
+			//검색어를 url에 포함시켰으니 ASCII로 한글이 인코딩되서 넘어오므로, 검색어를 다시 디코딩해줌
+			searchWord = URLDecoder.decode(searchWord, "UTF-8");
+			
+			//검색어에 해당하는 게시글들을 불러옴
+			List<BoardVO> boardlist = boardService.getList(pagingVO, boardlist_numbers, searchWord);
+			log.info(searchWord + " 에 대한 검색결과 return 수 : " + boardlist.size());
+			return boardlist;
+		}
 	
 	//content_view
 	@GetMapping("/content_view")
