@@ -281,18 +281,10 @@
 		    	                           		+'</tr> </thead>'
 		    	                           		+'<tbody id="goods-box"> </tbody>'
 		                  						+'</table>');
-		                  $("#goodsList").append('<div class="tp"><b>총 구매금액</b><br><div id="totalPrice"> 0  원 </div></div><br>');
+		                  $("#goodsList").append('<div id="tp"><b>총 구매금액</b><br><div id="totalPrice"><span>0</span>원</div></div><br>');
 	                      $("#goodsList").append('<input type="button" id="buy" name="buy" value="구매하기"/>');
 	                  }
-	                  
- 	                  
-/*  	                 <div class="tp">
- 	               		<h5>총 구매금액</h5>
- 	               		<div id="totalPrice"> 0  원 </div>
- 	               	</div>
- 	               		<input type="button" id="buy" name="buy" value="구매하기"/> */
- 	               	
- 	               	
+	                   	               	
  	               	
 	                  //보기 편하게 하려고 htmls로 짬
 	                  $.ajax
@@ -368,7 +360,7 @@
 	                            console.log(result); 
 	    	              		//총금액 업데이트
 	    	              		$('#totalPrice').text('');//선초기화
-	    	              		$('#totalPrice').text(result);
+	    	              		$('#totalPrice').text(result+"원");
 		                    }//success end
 	              		});//ajax end
 	              		
@@ -411,6 +403,7 @@
 			              
 		                  var member_id = $('input[name="member_id"]').val();
 		                  console.log(member_id);
+		                  
 		                  //먼저 주문 정보에 등록함
 			              $.ajax({
 			                     url: "${pageContext.request.contextPath}/travel/getgoods",

@@ -14,8 +14,6 @@
     <meta name="keywords" content="Fashi, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- 로고 -->
-	<link rel="shortcut icon" href="resources/img/favicon.ico"/>
     <title></title>
     
     <script src="resources/js/jquery-3.3.1.min.js"></script>
@@ -31,7 +29,6 @@
 	<!-- 소셜로그인 --> 
     <script type="text/javascript" src="https://static.nid.naver.com/resources/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 
-
     <!-- Css Styles -->
     <link rel="stylesheet" href="resources/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="resources/css/font-awesome.min.css" type="text/css">
@@ -43,6 +40,8 @@
     <link rel="stylesheet" href="resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="resources/css/style.css" type="text/css">
     
+	    <!-- 로고 -->
+	<link href="/favicon.ico" type="image/x-icon">
 	 <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
     
@@ -101,7 +100,7 @@
                             </div>
                         </div>
                          <div class="col-lg-6 col-md-6 offset-lg-1 search-top">
-                           <form name="searchform" method="post" action="#">
+                           <form name="searchform" method="get" action="${pageContext.request.contextPath}/search">
                                 <div class="advanced-search">
                                     <div class="input-group">
                                         <input type="text" id="searchbox" placeholder="어느 지역으로 여행을 가시나요?">

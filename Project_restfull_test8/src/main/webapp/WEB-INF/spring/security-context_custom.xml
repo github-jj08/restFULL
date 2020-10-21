@@ -13,9 +13,11 @@
     <http pattern="/fonts/**" security="none"/>
     <http pattern="/img/**" security="none"/>
     <http pattern="/**/*.js" security="none"/>
+    <http pattern="/**/*.ico" security="none"/>
     
     <http auto-config="true" use-expressions="true">
         <intercept-url pattern="/user/**" access="hasAnyRole('USER, ADMIN')" />
+        <intercept-url pattern="/travel/**" access="hasRole('USER')" />
         <intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
 		<intercept-url pattern="/**" access="permitAll" />
 
