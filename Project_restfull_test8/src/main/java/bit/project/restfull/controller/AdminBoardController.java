@@ -58,7 +58,7 @@ public class AdminBoardController {
 
    /* 회원 관리 */
    //1. 회원 리스트 with paging
-   @GetMapping("/userList")
+   	@GetMapping("/userList")
 	public String userlist(PagingVO pagingVO, Model model
 			, @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
@@ -144,7 +144,7 @@ public class AdminBoardController {
 	
    /* 공지사항 및 이벤트 관리  (기본 url : /notice) */
    //1. 공지사항 및 이벤트 리스트
-   @RequestMapping(value = "/notice", method = RequestMethod.GET)
+   @GetMapping("/notice")
    public String noticeList() {
 	   return "admin/noticeList";
    }
@@ -180,7 +180,7 @@ public class AdminBoardController {
    }
    
    //4-2. 공지사항 및 이벤트 글 작성
-   @RequestMapping(value="/notice/write", method = {RequestMethod.GET, RequestMethod.POST})
+   @PostMapping("/notice/write")
    public String write(HttpServletRequest request, @RequestParam(value="file") MultipartFile[] uploadfiles, AdminBoardVO boardVO) {
       log.info("write");
       adboardService.writeBoardVO(uploadfiles, boardVO);
@@ -189,7 +189,7 @@ public class AdminBoardController {
    }
 
    //5. 공지사항 및 이벤트 글 수정 페이지 호출(사진 수정이 불가능하므로 따로 생성함)
-   @RequestMapping(value = "/notice/modify", method = RequestMethod.GET)
+   @GetMapping("/notice/modify")
    public String modify(int board_numbers, Model model) {
       model.addAttribute("modify_view", adboardService.getBoardVO(board_numbers));
       model.addAttribute("filelist", adboardService.getBoardAttachmentVO(board_numbers));
@@ -198,7 +198,7 @@ public class AdminBoardController {
    }
    
    //5-2. 공지사항 및 이벤트 글 수정 기능 수행
-   @RequestMapping(value = "/notice/modify", method = RequestMethod.POST)
+   @PostMapping("/notice/modify")
    public String modify(AdminBoardVO boardVO) {
       log.info("modify()");
       adboardService.modifyBoardVO(boardVO);
@@ -216,7 +216,7 @@ public class AdminBoardController {
    
    /* 여행지 및 상품 관리 (기본 url = /dest) */
    //1. 여행지 및 상품 리스트
-   @RequestMapping(value = "/dest", method = RequestMethod.GET)
+   @GetMapping("/dest")
    public String destList(Model model) {
       List<DestinationVO> destlist = adboardService.getDestList(); //select * from destination
       model.addAttribute("destlist", destlist);
@@ -242,7 +242,7 @@ public class AdminBoardController {
    
    
    //3-2. 여행지 등록
-   @RequestMapping(value="/dest/write", method = {RequestMethod.POST})
+   @PostMapping("/dest/write")
    public String destWrite(DestinationVO destinationVO) {
       log.info("write");
       adboardService.writeDestVO(destinationVO);
@@ -261,7 +261,7 @@ public class AdminBoardController {
    }
    
    //4. 여행지 수정 기능 modify_view 페이지 호출
-   @RequestMapping(value = "/dest/modify", method = RequestMethod.GET)
+   @GetMapping("/dest/modify")
    public String destModify(String destination_name, Model model) {
       model.addAttribute("modify_view", adboardService.getDestVO(destination_name));
       
@@ -269,7 +269,7 @@ public class AdminBoardController {
    }
    
    //4-2. 여행지 수정 기능 수행
-   @RequestMapping(value = "/dest/modify", method = RequestMethod.POST)
+   @PostMapping("/dest/modify")
    public String destModify(DestinationVO destinationVO) throws UnsupportedEncodingException {
       log.info("modify()");
       adboardService.modifyDestVO(destinationVO);
@@ -307,7 +307,7 @@ public class AdminBoardController {
    }
    
    //3. 상품 등록
-   @RequestMapping(value="/dest/goods/write", method = {RequestMethod.POST})
+   @PostMapping(value="/dest/goods/write")
    public String goodsWrite(GoodsVO goodsVO) throws UnsupportedEncodingException {
       log.info("write : " + goodsVO.getName());
       adboardService.writeGoodsVO(goodsVO);
@@ -318,14 +318,14 @@ public class AdminBoardController {
    }             
    
    //4. 수정 기능 modify_view 페이지 호출
-   @RequestMapping(value = "/dest/goods/modify", method = RequestMethod.GET)
+   @GetMapping("/dest/goods/modify")
    public String goodsModify(int goods_numbers, Model model) {
       model.addAttribute("modify_view", adboardService.getGoodsVO(goods_numbers));
       return "admin/goods_modify_view";
    }
    
    //4-2. 수정 기능 수행
-   @RequestMapping(value = "/dest/goods/modify", method = RequestMethod.POST)
+   @PostMapping("/dest/goods/modify")
    public String goodsModify(GoodsVO goodsVO) {
       log.info("modify()");
       log.info("여행지 - " + goodsVO.getDestination_name());
