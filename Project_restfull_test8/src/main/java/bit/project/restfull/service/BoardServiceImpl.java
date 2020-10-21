@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +28,7 @@ import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.CommentVO;
 import bit.project.restfull.vo.LikesVO;
 import bit.project.restfull.vo.RequestVO;
+import bit.project.restfull.vo.TravelVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
@@ -231,5 +233,57 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<BoardVO> getLikeList(String member_id) {
 		return mapper.getLikeList(member_id);
+	}
+
+	@Override
+	public List<TravelVO> getMyCourseList(String member_id) {
+		List<TravelVO> rawCourseList = mapper.getMyCourseList(member_id);
+		List<TravelVO> processedList = new ArrayList<TravelVO>();
+		
+		log.info("processedList.size() " + processedList.size());
+		
+		if(rawCourseList.size() != 0) {
+			
+			processedList.add(rawCourseList.get(0));	//일단 첫번째 요소는 저장
+	
+			/* 여행 코스 목록을 구분짓는 data만 수집한다. */
+			for(int i =0; i<rawCourseList.size(); i++) {
+				for(int j =i+1;j<rawCourseList.size();j++) {
+					String origin = rawCourseList.get(i).getSerialNum();
+					String target = rawCourseList.get(j).getSerialNum();
+					
+					log.info("origin["+i+"] : " + origin);
+					log.info("target["+j+"] : " + target);
+					
+					if(origin.equals(target) != true) {
+						//원래 요소와 비교대상 요소의 여행코스 구별번호가 다르다면 타겟을 새로 저장시킨다.
+						log.info("origin.equals(target) != true --> " + origin.equals(target));
+						
+						if(i < j ) {
+							processedList.add(rawCourseList.get(j));
+							i = j-1;
+							log.info("i값 변경 : " + i);
+						}
+						break;
+					} else {
+						log.info("원래요소와 비교대상 요소가 같으므로 저장하지 않음" );
+					}
+					
+				}
+			}
+			//확인 테스트용
+			log.info("processedList.size() " + processedList.size());
+			for(int i =0; i<processedList.size(); i++) {
+				log.info("확인 " + processedList.get(i).getSerialNum());
+			}
+			return processedList;
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public List<TravelVO> getMyCourse(String member_id, String serialNum) {
+		return mapper.getMyCourse(member_id, serialNum);
 	}
 }

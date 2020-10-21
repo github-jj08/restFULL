@@ -288,7 +288,7 @@
 	                  //아무것도 등록하지 않았는데 확인을 눌렀을 경우 null값 들어가는 것 방지
 	                  if(length==0){
 	                	  myCourse.push('');
-	                	  alret("여행코스가 등록되지 않았습니다.")
+	                	  alert("여행코스가 등록되지 않았습니다.")
 	                  }else{
 		                  for(var i =0;i<length;i++){
 		                     myCourse.push($('input[name="course"]').eq(i).val());
@@ -303,13 +303,12 @@
 						            	"member_id" : member_id,
 						            	"myCourse" : myCourse
 						            },
-						            dataType:"json",
 						            success: function () {
 						             	console.log("성공");	
-										alret("여행코스가 등록되었습니다.");
+						             	alert("여행코스가 등록되었습니다. 마이페이지에서 내 여행코스를 확인하세여ㅎㅅㅎ/`~");
 						            },
 						            error : function(){
-											alret("여행코스가 등록되지 않았습니다. 다시 시도해주세요");
+						            	alert("여행코스가 등록되지 않았습니다. 다시 시도해주세요");
 						            }//error end
 		                  });//ajax end
 	                  }//if-else end
@@ -532,10 +531,10 @@
 				                                		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
 				                                		if ( data == 1 ) {
 						                                    var msg = '결제가 완료되었습니다.';
-						                                    msg += '매출전표 url : ' + rsp.receipt_url;
+						                                    //msg += '매출전표 url : ' + rsp.receipt_url;
 				                                			
 						                                	$.ajax({
-						                                		url: "${pageContext.request.contextPath}/payments/confirmation", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+						                                		url: "${pageContext.request.contextPath}/payments/confirmation", 
 						                                		type: 'POST',
 						                                		dataType: 'json',
 						                                		data: {
@@ -545,7 +544,7 @@
 						                                	});
 						                                    
 						                                    alert(msg);
-						                                    location.href="${pageContext.request.contextPath}/travel/comfirm";
+						                                    location.href="${pageContext.request.contextPath}/payments/comfirm?member_id="+member_id+"&merchant_id="+merchant_id;
 				                                		} else {
 				                                			alert("오류가 감지되어 결제가 되지 않았습니다.");
 				                                		}

@@ -31,6 +31,7 @@ import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.CustomUser;
 import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.ResponseVO;
+import bit.project.restfull.vo.TravelVO;
 import bit.project.restfull.vo.UserVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -39,7 +40,7 @@ import lombok.extern.log4j.Log4j;
  * Handles requests for the application home page.
  */
 @Log4j
-@Controller()
+@Controller
 @AllArgsConstructor
 @RequestMapping("/user")
 //회원가입한 사용자 -> 마이페이지
@@ -264,6 +265,39 @@ public class UserController {
 		
 		model.addAttribute("boardlist", list);
 		return "user/likeList";
+	}
+	//15. 내 여행코스 목록 보기
+	@GetMapping("/myCourseList") 
+	public String myCourseList(UserVO userVO,Model model) {
+		String member_id = userVO.getMember_id();
+		log.info("user member_id : "+member_id); // name
+		
+		List<TravelVO> list = boardService.getMyCourseList(member_id);
+		
+		model.addAttribute("list", list);
+		
+		return "user/myCourseList";
+	}
+	//16. 내 여행코스 보기
+	@GetMapping("/course_view") 
+	public String course_view(HttpServletRequest req, Model model) {
+		String member_id = req.getParameter("member_id");
+		String serialNum = req.getParameter("serialNum");
+		log.info("user member_id : "+member_id); // name
+		log.info("serialNum : "+serialNum); // name
+		
+		List<TravelVO> list = boardService.getMyCourse(member_id, serialNum);
+		
+		String alias = list.get(0).getTcAlias();
+		String dates = list.get(0).getDates().toString();
+		
+		model.addAttribute("alias", alias);
+		model.addAttribute("dates", dates);
+		model.addAttribute("list", list);
+		
+		model.addAttribute("list", list);
+		
+		return "user/content_view_crs";
 	}
 	
 }

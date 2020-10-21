@@ -18,7 +18,7 @@ pageEncoding="UTF-8"%>
     $(document).ready(function() {
 		// 취소
 		$("#cancel").on("click", function(){
-			location.href = "/user/userHome";
+			location.href = "${pageContext.request.contextPath}/user/userHome";
 		});
 
 		$("#submit").on("click", function(){
@@ -29,19 +29,18 @@ pageEncoding="UTF-8"%>
 			}
 			
 			$.ajax({
-				url : "/user/userDelete",
+				url : "${pageContext.request.contextPath}/user/userDelete",
 				async: true,
 				type : "POST",
-				dataType : "text json",
+				dataType : "json",
 				contentType: "application/json",
 				data : JSON.stringify({pw: $('#pw').val()}),
-				
 				success: function(data) {
 					console.log(data);
 					const isSuccess = data.statusCode === 200;
 					if(isSuccess){
 						alert("회원 탈퇴 성공");
-						location.href = "/user/userHome";
+						location.href = "${pageContext.request.contextPath}/user/userHome";
 					}else{
 						alert("비밀번호를 다시 입력해 주세요");
 					}
