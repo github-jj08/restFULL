@@ -111,4 +111,14 @@ public class HomeController {
 		model.addAttribute("noticelist", noticelist);
 		return "noticeList";
 	}
+	
+	@GetMapping("/notice/content_view")
+	public String notice_view(String board_numbers, Model model) {
+		log.info("content_view");
+		int board_no = Integer.parseInt(board_numbers);
+		log.info("게시글 view 호출; 게시글 번호 = " + board_no);
+		model.addAttribute("content_view",adBoardService.getBoardVO(board_no));
+		model.addAttribute("filelist", adBoardService.getBoardAttachmentVO(board_no));
+		return "notice_content_view";
+	}
 }
