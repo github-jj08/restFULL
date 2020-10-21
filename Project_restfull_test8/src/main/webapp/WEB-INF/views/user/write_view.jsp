@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
@@ -10,6 +11,7 @@
         <title>RestFuLL | 글작성 </title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fawtmt0h7b&submodules=geocoder"></script>
 		
 
 </head>
@@ -85,7 +87,7 @@
         $(document).ready(function() {
             //submit 등록. 실제로 submit type은 아니다.
             $('.write-btn').on('click',function() {                        
-                var form = $('.writeform')[0];
+                var form = $('#boardForm')[0];
                 var formData = new FormData(form);
     
                 for (var index = 0; index < Object.keys(files).length; index++) {
@@ -111,7 +113,7 @@
                 <div class="col-lg-8 offset-lg-2">
                     <div class="blog-details-inner">
                         <div class="blog-detail-title">
-							<form action="<%=request.getContextPath() %>/user/write" method="post" enctype="multipart/form-data" class="writeform">
+							<form action="<%=request.getContextPath()%>/user/write" method="post" enctype="multipart/form-data" id="boardForm">
 								<!-- hidden -->
 								<sec:authentication var="principal" property="principal" />
 								<input type="hidden" name="member_id" value="${principal.user.member_id}"/>
@@ -119,7 +121,7 @@
 								<input type="hidden" name="filter_numbers" value="<c:out value='1'/>">
 								
 								<!-- write Data -->
-
+                            	
 							    <div class="group-input">
 							        <div class="writepic">
                                         <!-- 첨부 버튼 -->
@@ -143,13 +145,8 @@
                                     </div>
 								</div>
 								
-								<div class="group-input">
-								    <div class="writeloc">
-                                        <label for="location">위치</label>
-                                        <input type="text" class="write_loc" name="location" maxlength="20" >
-                                    </div>
-								</div>
-
+                                <input type="hidden" id="hidden_loc" name="location" maxlength="20" >
+								
 								<div class="group-input">
 									<label for="contents">내용 </label>
 									<div class="writecontentx">
@@ -157,8 +154,245 @@
 									</div>
 								</div>
 
-								<input type="submit" class="site-btn write-btn" value="글 게시"/>
-							</form>
+							</form> <!-- 1차 form end -->
+							
+							
+							<!-- 2차 form : 주소정보 등록 -->
+							<!-- 위치 직접 지정하기 -->
+				            	위치 지정하기 <hr/>
+			                                       <div id="map" style="width: 100%; height:300px; position: relative; overflow: hidden;"> </div>
+			                                       <script>
+									                    var map = new naver.maps.Map("map", {
+									                    center: new naver.maps.LatLng(37.3595316, 127.1052133),
+									                    zoom: 15,
+									                    mapTypeControl: true
+									                    });
+									
+									                    var infoWindow = new naver.maps.InfoWindow({
+									                    anchorSkew: true
+									                    });
+									
+									                    map.setCursor('pointer');
+									                   
+									                    function searchCoordinateToAddress(latlng) {
+									
+									                    infoWindow.close();
+									
+									                    naver.maps.Service.reverseGeocode({
+									                        coords: latlng,
+									                        orders: [
+										                        naver.maps.Service.OrderType.ADDR,
+										                        naver.maps.Service.OrderType.ROAD_ADDR
+									                        ].join(',')
+									                    }, function(status, response) {
+									                        if (status === naver.maps.Service.Status.ERROR) {
+									                        if (!latlng) {
+									                            return alert('ReverseGeocode Error, Please check latlng');
+									                        }
+									                        if (latlng.toString) {
+									                            return alert('ReverseGeocode Error, latlng:' + latlng.toString());
+									                        }
+									                        if (latlng.x && latlng.y) {
+									                            return alert('ReverseGeocode Error, x:' + latlng.x + ', y:' + latlng.y);
+									                        }
+									                        return alert('ReverseGeocode Error, Please check latlng');
+									                        }
+									
+									                        var address = response.v2.address,
+									                            htmlAddresses = [];
+									
+									
+									                        if (address.jibunAddress !== '') {
+									                            htmlAddresses.push('[지번 주소] ' + address.jibunAddress);
+									                        }
+									
+									                        if (address.roadAddress !== '') {
+									                            htmlAddresses.push('[도로명 주소] ' + address.roadAddress);
+									                        }
+									
+									                        infoWindow.setContent([
+									                        '<div style="padding:10px;min-width:200px;line-height:150%;">',
+									                        '<h4 style="margin-top:5px;">검색 좌표</h4>',
+									                        '<button type="button" onclick="setAddressIntoBox()">입력</button><br />',
+									                        htmlAddresses.join('<br />'),
+									        	          	'<input id="x" type="hidden" value="'+ latlng.x + '"> ',
+									        	          	'<input id="y" type="hidden" value="'+ latlng.y + '"> ',
+									        	          	'<input id="jibunAddress" type="hidden" value="'+ address.jibunAddress + '"> ',
+									        	          	'<input id="roadAddress" type="hidden" value="'+ address.roadAddress + '"> ',
+									                        '</div>'
+									                        ].join('\n'));
+									                        
+									                        console.log(" 좌표 검색  latlngs " + latlng.x + ", " + latlng.y);
+									                        
+									                        infoWindow.open(map, latlng);
+									                    });
+									                    }
+									
+									                    function searchAddressToCoordinate(address) {
+									                    naver.maps.Service.geocode({
+									                        query: address
+									                    }, function(status, response) {
+									                        if (status === naver.maps.Service.Status.ERROR) {
+									                        if (!address) {
+									                            return alert('Geocode Error, Please check address');
+									                        }
+									                        return alert('Geocode Error, address:' + address);
+									                        }
+									
+									                        if (response.v2.meta.totalCount === 0) {
+									                        return alert('No result.');
+									                        }
+									
+									                        var htmlAddresses = [],
+									                        item = response.v2.addresses[0],
+									                        point = new naver.maps.Point(item.x, item.y);
+									
+									                        if (item.roadAddress) {
+									                        htmlAddresses.push('[도로명 주소] ' + item.roadAddress);
+									                        }
+									
+									                        if (item.jibunAddress) {
+									                        htmlAddresses.push('[지번 주소] ' + item.jibunAddress);
+									                        }
+									
+									                        if (item.englishAddress) {
+									                        htmlAddresses.push('[영문명 주소] ' + item.englishAddress);
+									                        }
+															
+									                        infoWindow.setContent([
+									                        '<div style="padding:10px;min-width:200px;line-height:150%;">',
+									                        '<h4 style="margin-top:5px;">검색 주소 : '+ address +'</h4>',
+									                        '<button type="button" onclick="setAddressIntoBox()">입력</button><br />',
+									                        htmlAddresses.join('<br />'),
+									        	          	'<input id="x" type="hidden" value="'+ item.x + '"> ',
+									        	          	'<input id="y" type="hidden" value="'+ item.y + '"> ',
+									        	          	'<input id="jibunAddress" type="hidden" value="'+ item.jibunAddress + '"> ',
+									        	          	'<input id="roadAddress" type="hidden" value="'+ item.roadAddress + '"> ',
+									                        '</div>'
+									                        ].join('\n'));
+																                        
+									                        map.setCenter(point);
+									                        infoWindow.open(map, point);
+									                    });
+									                    }
+									
+									
+														function setAddressIntoBox() {
+															
+															var jibunAddr = $("#jibunAddress").val(); 
+														    var doroAddr = $("#roadAddress").val(); 
+															var x= $("#x").val();
+															var y= $("#y").val();
+																  	
+															document.getElementById("jibunAddr").value = jibunAddr;
+															document.getElementById("doroAddr").value = doroAddr;
+															document.getElementById("gps-x").value = x;
+															document.getElementById("gps-y").value = y;
+									                    };
+									
+									                    function initGeocoder() {
+									                    if (!map.isStyleMapReady) {
+									                        return;
+									                    }
+									
+									                    map.addListener('click', function(e) {
+									                        searchCoordinateToAddress(e.coord);
+									                    });
+									
+									                    $('#address').on('keydown', function(e) {
+									                        var keyCode = e.which;
+									
+									                        if (keyCode === 13) { // Enter Key
+									                        searchAddressToCoordinate($('#address').val());
+									                        }
+									                    });
+									
+									                    $('#submit').on('click', function(e) {
+									                        e.preventDefault();
+									
+									                        searchAddressToCoordinate($('#address').val());
+									                    });
+									
+									                    
+									                    }
+									
+									                    naver.maps.onJSContentLoaded = initGeocoder;
+									                    naver.maps.Event.once(map, 'init_stylemap', initGeocoder);
+									                    </script>
+									          		<!-- naverMap script End -->
+									          
+													<!-- 입력할 주소 출력 -->
+													<div>	
+														<form id="addressForm" name="destination-data" >
+															여행지명 : <input id="destination_name" name="destination_name" type="text" style="width:50%" required><br/>
+															지번 주소 : <input id="jibunAddr" name="jibunaddress" type="text" style="width:50%" ><br/>
+															도로명 주소 : <input id="doroAddr" name="doroaddress" type="text" style="width:50%" ><br/>
+											          		추가 주소 : <input id="detailAddr" name="details" type="text" style="width:50%"><br/>
+											          		x 좌표 : <input id="gps-x" name="lat" type="text" style="width:50%"><br/>
+											          		y 좌표 : <input id="gps-y" name="lng" type="text" style="width:50%"><br/>
+														</form>
+											        </div>
+												
+									        	</div>
+											</div>
+			                        	</div>
+			                     	</div>
+								</div>
+							
+							<!-- 작성 완료 버튼 -->
+							<button type="button" onclick="submitData()" value="글 게시"></button>
+							<script type="text/javascript">
+								function submitData(){
+							        // Get form
+							        var boardForm = $('#boardForm')[0];
+									
+								    // Create an FormData object 
+							        var boardData = new FormData(boardForm);
+							        
+									console.log(boardData);
+							        $.ajax({
+							            type: "POST",
+							            enctype: 'multipart/form-data',
+							            url: "${pageContext.request.contextPath}/user/writeMainPosting",
+							            data: boardData,
+							            processData: false,
+							            contentType: false,
+							            cache: false,
+							            success: function (data) {
+							            	console.log("ㅇㅇ")
+							            	//성공시 다른놈 호출
+											var addressForm = new Object();
+											addressForm.jibunaddress = $('input[name="jibunaddress"]').val();
+											addressForm.doroaddress = $('input[name="doroaddress"]').val();
+											addressForm.details = $('input[name="details"]').val();
+											addressForm.lat = $('input[name="lat"]').val();
+											addressForm.lng = $('input[name="lng"]').val();
+												
+							            	console.log(addressForm);
+							            	console.log(addressForm.jibunaddress);
+											$.ajax({
+									            type: "GET",
+									            url: "${pageContext.request.contextPath}/user/dest_write",
+									            contentType:"application/json",
+									            data: addressForm,
+									            success: function (data) {
+									                alert("ㄹㅇ 성공");
+									            },
+									            error: function (xhr, status) {
+									                alert(xhr + " : " + status);
+									            }
+									        });
+							            	
+							            },
+							            error: function (e) {
+							                console.log("ERROR : ", e);
+							                alert("fail");
+							            }
+							        });
+							        
+							        
+								}
+							</script>
 						</div>
 					</div>
 				</div>

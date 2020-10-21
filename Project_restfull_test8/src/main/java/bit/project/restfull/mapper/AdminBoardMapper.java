@@ -114,7 +114,7 @@ public interface AdminBoardMapper{
 	void updateGoodsVO(GoodsVO goodsVO);
 	
 	/* 상품 삭제 */
-	@Delete("delete from goods where GOODS_NUMBERS = #{goods_numbers}")
+	@Delete("delete from goods where goods_numbers = #{goods_numbers}")
 	void deleteGoodsVO(int goods_numbers);
 
 	

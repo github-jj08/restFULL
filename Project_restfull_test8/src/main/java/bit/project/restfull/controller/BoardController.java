@@ -6,15 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import bit.project.restfull.service.AdminBoardService;
 import bit.project.restfull.service.BoardService;
 import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.CommentVO;
+import bit.project.restfull.vo.DestinationVO;
 import bit.project.restfull.vo.LikesVO;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -31,6 +34,10 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
+	@Autowired
+	private AdminBoardService adBoardService;
+	
+	
 	//write_view
 	@GetMapping("/write_view")
 	public String write_view() {
@@ -38,6 +45,27 @@ public class BoardController {
 		
 		return "user/write_view";
 	}
+	
+	
+	/////////////////////////////////////////////
+	@ResponseBody
+	@PostMapping("/writeMainPosting")
+	public void writeMainPosting(@RequestParam(value="file") MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException {
+		log.info("writeMainPosting");
+		int board_numbers = boardService.writeBoardVO(uploadfiles, boardVO);
+		log.info("service.uploadFile(uploadFiles);" + board_numbers );
+	}
+	//return "redirect:/content_view?board_numbers="+board_numbers;
+
+	
+	@PostMapping("/dest_write")
+	public void dest_Write(@ModelAttribute DestinationVO destinationVO) {
+		log.info("dest write");
+		adBoardService.writeDestVO(destinationVO);
+		log.info("writeDestVO;");
+	}
+	
+	//////////////////////////////////////////////
 	
 	@PostMapping("/write")
 	public String write(@RequestParam(value="file") MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException {

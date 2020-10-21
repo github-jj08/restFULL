@@ -60,6 +60,9 @@
 	<div id="map" style="width:50%; height:500px; float:right"></div>
 	<script>
 		$(document).ready(function(){
+			var divLength = $('div .main-postings').val();
+			
+			console.log("divLength" + divLength);
 				//1. 지도 세팅.임시로 지도의 센터를 첫 게시물의 좌표에 맞춰둠(검색했을 때 지도 중심을 어디로 놓아야 될지, 어떻게 해야될지 의논...)
 				//1-1. 지도 세팅을 위한 center 좌표 가져오기. 알아서 자동으로 첫번째 좌표 반환하는 듯
 				var centerX = $('input[name="lat"]').val(),
@@ -168,39 +171,4 @@
 
 </body>
 
-<!-- 재검색 ajax -->
-                            <script>
-								$("#submit").click(function(e){
-									e.preventDefault();
-									
-									var searchWord = $('input[name=searchWord]').val();
-									var boardlist_numbers = $('input[name=boardlist_numbers]').val();
-									
-									console.log("새로운 검색어에 대한 결과 출력 : " + searchWord);
-					
-									var url = "${pageContext.request.contextPath}/search/";
-									
-									console.log("searchWord 는 " + searchWord);
-									
-									(function() {
-										$.ajax({
-								            type: 'GET',
-								            url: url.concat(searchWord),
-								            data: {
-								            	"searchWord" : searchWord,
-								            	"boardlist_numbers" : boardlist_numbers,
-								            },
-								            cache : false, // 이걸 안쓰거나 true하면 수정해도 값반영이 잘안댐
-								            dataType: 'json', //리턴될 데이터 타입을 제이슨으로 지정
-								            contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-									        success: function(result) {
-									        	console.log("setTable()");
-												setTable(result);
-									        	console.log("createMap()");
-												createMap(result);
-									        }
-										});	// Ajax end
-									})();
-								});
-							</script>
 </html>

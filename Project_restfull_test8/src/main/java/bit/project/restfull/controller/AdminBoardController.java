@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -222,6 +223,7 @@ public class AdminBoardController {
    //1. 여행지 및 상품 리스트
    @GetMapping("/dest")
    public String destList(Model model) {
+	  log.info("??");
       List<DestinationVO> destlist = adBoardService.getDestList(); //select * from destination
       model.addAttribute("destlist", destlist);
       return "admin/destList";
@@ -247,7 +249,7 @@ public class AdminBoardController {
    
    //3-2. 여행지 등록
    @PostMapping("/dest/write")
-   public String destWrite(DestinationVO destinationVO) {
+   public String destWrite(@ModelAttribute DestinationVO destinationVO) {
       log.info("write");
       adBoardService.writeDestVO(destinationVO);
       log.info("writeDestVO;");

@@ -148,11 +148,13 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	// 여행지 등록
 	@Override
 	public List<DestinationVO> getDestList() {
+		log.info("adBoardMapper.getDestList();");
 		return adBoardMapper.getDestList();
 	}
 
 	@Override
 	public DestinationVO getDestVO(String destination_name) {
+		log.info("adBoardMapper.getDestVO");
 		return adBoardMapper.getDestVO(destination_name);
 	}
 
