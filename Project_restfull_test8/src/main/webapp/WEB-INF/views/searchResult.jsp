@@ -15,7 +15,7 @@
 		.container contents {
 			background-color: white;
 		}
-		
+		 
 		.main-postings{
 			background-color: white;
 			display:inline-block;
