@@ -28,10 +28,6 @@
 			<td>${member.gender}</td>
 			<td>${member.phone}</td>
 			<td>${member.email}</td>
-			<%-- <td>
-				<c:forEach begin="1" end="${dto.bIndent}">-</c:forEach>
-				<c:forEach begin="1" end="12">-</c:forEach>
-				<a href="content_view?board_count=${restful.board_count}">${restful.title}</a></td> --%>
 		</tr>
 		</c:forEach>
 		<tr>
