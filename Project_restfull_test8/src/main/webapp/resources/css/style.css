@@ -3855,10 +3855,12 @@ ol {
 
 .choosecourse #sigungu .sigungu-choice {
 	padding: 2.5px 2px;
+	cursor: pointer;
 }
 
 .choosecourse #travel-destinations .trav-btn {
 	padding: 2.5px 2px;
+	cursor: pointer;
 }
 
 /* 여행코스등록 부분 */
@@ -3941,33 +3943,38 @@ ol {
 	padding : 7px;
 	width:100%
 }
+
 .choosecourse .goods #goodsList table .td-choice {
 	width: 8%;
+
 }
 
 .choosecourse .goods #goodsList table .td {
 	width:23%;
 	text-aglin:center;
+
 }
 
-.choosecourse .goods #goodsList .tp b{
-	float:right;
+
+.choosecourse #goodsList #tp {
+	text-align:right;
 	font-size: 20px;
-	padding: 10px 0;
+	margin: 10px 0;
 	
 }
 
-.choosecourse .goods #goodsList .tp #totalPrice {
-	float:right;
-	padding: 10px 0;
-}
 
-.choosecourse .goods #goodsList #buy {
+
+.choosecourse  #goodsList  #buy {
 	float:right;
-	padding: 10px 0;
-	background-color:#8a93c0;
-	border: #8a93c0 2px solid;
 	color:white;
+	letter-spacing: 2px;
+	margin-top: 15px;
+	padding:5px 10px;
+    background-color:#8a93c0;
+    border:#8a93c0 1px solid;
+    font-size:18px;
+    border-radius:5px;
 }
 
 
