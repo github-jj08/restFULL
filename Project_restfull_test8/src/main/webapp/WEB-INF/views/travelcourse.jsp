@@ -8,161 +8,107 @@
     <meta name="keywords" content="Fashi, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>신고 모달창</title>
+	<title>RestFuLL | 여행코스짜기</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-    <%@ include file="/WEB-INF/include/plugins.jspf"%>
-   <style>
-         .sortable {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            width: 60%;
-            
-         }
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+  <script>
+      $(function() {
+         $(".sortable").sortable();
+         $(".sortable").disableSelection(); /* 드래그 해서 순서 변경 가능하게  */
+      });
+   </script>
+</head>
+
+ <body>
+    <%@ include file="/WEB-INF/include/js-header.jsp"%>
          
-         .sortable li {
-            margin: 10px 10px 10px 10px;
-            padding: 0;
-            padding-left: 1.5em;
-            font-size: 1.4em;
-            height: 18px;
-            background-color: #8A93C0;
-         }
          
-         .sortable li span {
-            position: relative;
-         }
-         
-         input {
-            border: none 0;
-            margin: 0 auto;
-            border: 1px;
-            background-color: #8A93C2;
-         }
-         
-         .choice-menu {
-            width: 200px;
-            height: 250px;
-            display: inline-block;
-            overflow: auto;
-            cursor: pointer;
-         }
-         
-         .sido-choice, .sigungu-choice, .trav-btn {
-            
-         }
-         
-         .course {
-            text-align: center;
-         }
-         
-         .course-1day {
-            width: 350px;
-            height: 300px;
-            background-color: skyblue;
-            border: 1px solid black;
-            display: inline-block;
-            cursor: pointer;
-            margin: 5px;
-            border-radius: .25em;
-            text-align: center;
-         }
-         .delete-btn {
-         background-color: red;
-         }
-         
-         #myCourse {
-            width: 100px;
-            height: 325px;
-            white-space: nowrap;
-         }
-         </style>
-         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-         <script>
-            $(function() {
-               $(".sortable").sortable();
-               $(".sortable").disableSelection(); /* 드래그 해서 순서 변경 가능하게  */
-            });
-         </script>
-      </head>
-      <body>
-         <%@ include file="/WEB-INF/include/js-header.jsp"%>
+       <div class="choosecourse">
          <div class="container">
             <div class="row">
-               <div class="col-xs-4 col-sm-2" style="margin-right: 15px;">
+            	<!-- 시/도 선택 -->
+               <div class="sec col-lg-2 col-md-5">
                   <div id="mybtns">
-                     <h2>sido</h2>
+                     <h6><b>시/도 선택</b></h6>
                      <div id="sido" class="choice-menu">
                         <div class="sido-choice" value="11"
-                           onMouseover="this.style.background='skyblue';"
+                           onMouseover="this.style.background='#d8ddff';"
                            onMouseout="this.style.background='white';">서울/경기</div>
                         <div class="sido-choice" value="28"
-                           onMouseover="this.style.background='skyblue';"
+                           onMouseover="this.style.background='#d8ddff';"
                            onMouseout="this.style.background='white';">인천</div>
                         <div class="sido-choice" value="42"
-                           onMouseover="this.style.background='skyblue';"
+                           onMouseover="this.style.background='#d8ddff';"
                            onMouseout="this.style.background='white';">강원</div>
                         <div class="sido-choice" value="43"
-                           onMouseover="this.style.background='skyblue';"
+                           onMouseover="this.style.background='#d8ddff';"
                            onMouseout="this.style.background='white';">충북</div>
                         <div class="sido-choice" value="44"
-                           onMouseover="this.style.background='skyblue';"
+                           onMouseover="this.style.background='#d8ddff';"
                            onMouseout="this.style.background='white';">충남/대전</div>
                         <div class="sido-choice" value="47"
-                           onMouseover="this.style.background='skyblue';"
+                           onMouseover="this.style.background='#d8ddff';"
                            onMouseout="this.style.background='white';">경북/대구</div>
                         <div class="sido-choice" value="48"
-                           onMouseover="this.style.background='skyblue';"
+                           onMouseover="this.style.background='#d8ddff';"
                            onMouseout="this.style.background='white';">경남/부산/울산</div>
                         <div class="sido-choice" value="45"
-                           onMouseover="this.style.background='skyblue';"
+                           onMouseover="this.style.background='#d8ddff';"
                            onMouseout="this.style.background='white';">전북</div>
                         <div class="sido-choice" value="46"
-                           onMouseover="this.style.background='skyblue';"
+                           onMouseover="this.style.background='#d8ddff';"
                            onMouseout="this.style.background='white';">전남/광주</div>
                         <div class="sido-choice" value="50"
-                           onMouseover="this.style.background='skyblue';"
+                           onMouseover="this.style.background='#d8ddff';"
                            onMouseout="this.style.background='white';">제주</div>
                      </div>
+                     
                   </div>
                </div>
-               <div class="col-xs-4 col-sm-2" style="margin-right: 15px;">
-                  <h2>sigungu</h2>
+               
+               <!-- 시,군,구 선택  -->
+               <div class="sec col-lg-2 col-md-5">
+                  <h6><b>시/군/구 선택</b></h6>
                   <div id="sigungu" class="choice-menu"></div>
-      
                </div>
-               <div class="col-sm-3" style="margin-right: 15px;">
-                  <h2>여행지목록</h2>
+               
+               <!-- 여행지 목록 표시 -->
+               <div class="sec col-lg-3 col-md-5">
+                  <h6><b>여행지 목록</b></h6>
                   <div id="travel-destinations" class="choice-menu"></div>
                </div>
-               <div class="col-xs-4 col-sm-4" >
-                  
-                  
-                  <h2>여행코스등록</h2>
+               
+               <!-- 여행코스등록 -->
+               <div class="sec col-lg-4 col-md-5" > 
+                  <h6><b>여행코스등록</b></h6>
                   <div id="myCourse">
                      <div class="course">
-                        <div id="day1" class="course-1day" style="overflow: auto;">
+                        <div id="day1" class="course-1day">
                            <ol class="sortable">
    
                            </ol>
                         </div>
                      </div>
                   </div>
-                  <button type="button" id="complete-btn" value="확인">확인</button>
                   <button type="button" id="blank-btn" class="travel">빈칸추가</button>
+                  <button type="button" id="complete-btn" value="확인">등록</button>
                </div>
             </div>
+            
+            <!-- 여행지역 상품 결제 ajax로 번쩎 뜩ㅁ -->
             <div class="row">
-               <div class="col-sm-1"></div>
-               <div class="col-sm-10">
-                  <div id="goodsList"></div>
+               <div class="col-lg-12">
+                  <div id="goodsList">
+                  
+                  </div>
                </div>
             </div>
-         </div>
+            
+        </div>
+    </div>
       
       
       
@@ -222,16 +168,18 @@
 	                var count = 0;
 	
 	                //여행지 추가 제한갯수(count 할 때 쓰임)
-	            	var limit = 5;
+	            	var limit = 10;
 	
 	                //공백칸 추가 버튼을 눌러서 여행코스에 추가
 	                $(function(){
 		               	$("#blank-btn").click(function(){
 		                        console.log("blank");
-		                  		$(".sortable").append('<li class="ui-state-default"><div><input type="text" name="course" maxlength="300"/><span><input type="button" class="delete-btn" value="x"></span></div></li>');
+		                  		$(".sortable").append('<li class="ui-state-default"><div><input type="text" class="course_blank" name="course" maxlength="300"/><input type="button" class="delete-btn" value="x"></div></li>');
 		                 	});
 	           		});
-	
+
+	                
+	                
 	                //추가한 여행지를 삭제함
 		            $(document).on("click",".delete-btn",function(){ 
 		               console.log("delete");
@@ -245,7 +193,7 @@
 		            $(document).on("click",".trav-btn",function(){  
 		               var trav = $(this).text();
 		               console.log(trav);
-		               $(".sortable").append('<li class="ui-state-default"><div><input type="text" name="course" value="'+trav+'" readonly/><span><input type="button" class="delete-btn" value="x"></span></div></li>');
+		               $(".sortable").append('<li class="ui-state-default"><div><input type="text" class="course_blank" name="course" value="'+trav+'" readonly/><span><input type="button" class="delete-btn" value="x"></span></div></li>');
 		                    
 		            });
 	
@@ -320,7 +268,7 @@
  	                  if(complete_cnt>1){
 	                	  console.log("reComplete");
 	                  }else{ 
-		                  $("#goodsList").append('<h2>관련 상품 목록</h2><hr/>'
+		                  $("#goodsList").append('<h4>관련 상품 목록</h4><hr/>'
 		                  						+'<table style="100%">'
 		                  						+'<thead> <tr>'
 		                  						+'<td style="width:5%">선택</td>'
@@ -565,6 +513,6 @@
 	         </script>
 	   
 	
-			<%@ include file="/WEB-INF/include/js-footer.jsp"%>
-	</body>
+	<%@ include file="/WEB-INF/include/js-footer.jsp"%>
+</body>
 </html>

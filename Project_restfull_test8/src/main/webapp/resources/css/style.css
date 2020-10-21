@@ -3118,6 +3118,12 @@ ol {
 	.related-products .product-item .pi-pic ul li a {
 		padding: 16px 12px 12px 11px;
 	}
+/* 	.choosecourse .course .course-1day .sortable li {
+		padding-left:3px;
+		font-size:13px;
+		list-style: none;
+		max-width:80%;
+	} */
 }
 
 @media only screen and (max-width: 991px) {
@@ -3171,6 +3177,13 @@ ol {
 		padding-top: 30px;
 	}
 
+/* 	.choosecourse .course .course-1day .sortable li {
+		padding-left:3px;
+		font-size:13px;
+		list-style: none;
+		max-width:100%;
+	} */
+
 }
 
 /* Tablet Device: 768px */
@@ -3223,6 +3236,13 @@ ol {
 	.checkout-content input {
 		margin-top: 50px;
 	}
+/* 	.choosecourse .course .course-1day .sortable li {
+		padding-left:3px;
+		margin-right:2px;
+		font-size:13px;
+		list-style: none;
+		max-width:74%;
+	} */
 }
 
 /* Large Device: 480px */
@@ -3350,10 +3370,6 @@ ol {
 		width: 100px;
 	}
 	
-	
-	
-	
-	
 	.hero-items .off-card {
 		display: none;
 	}
@@ -3390,6 +3406,13 @@ ol {
 	.footer-widget ul li a {
 		font-size:12px;
 	}
+/* 	.choosecourse .course .course-1day .sortable li {
+		padding-left:3px;
+		margin: 2px 5px;
+		font-size:13px;
+		list-style: none;
+		width:100%;
+	} */
 }
 
 /* Small Device: 320px */
@@ -3788,5 +3811,120 @@ ol {
 
 }
 
+/*--------------------
+    여행코스 페이지
+------------------------*/
+.choosecourse {
+    margin : 80px 0;
+}
+.choosecourse .sec {
+	margin-right: 10px;
+}
+.choosecourse .choice-menu {
+    width:100%;
+    height: 300px;
+    display: inline-block;
+    overflow: auto;
+    cursor: pointer;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  	border: #8a93c0 2px solid;   
+}
+
+/*시,도 버튼*/
 
 
+.choosecourse h6 {
+	font-size: 20px;
+    text-align: center;
+    height:40px;
+    line-height: 42px;
+    background-color:#8a93c0;
+    color: #1a0c34;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    opacity:0.9;
+    
+}
+
+.choosecourse #mybtns .choice-menu .sido-choice {
+    padding: 2.5px 1px;
+    font-weight:600;
+}
+
+
+.choosecourse #sigungu .sigungu-choice {
+	padding: 2.5px 2px;
+}
+
+.choosecourse #travel-destinations .trav-btn {
+	padding: 2.5px 2px;
+}
+
+/* 여행코스등록 부분 */
+
+.choosecourse .course {
+    width:100%;
+    background-color:#f0f2ff;
+}
+
+.choosecourse .course .course-1day {
+    width: 350px;
+    height: 300px;
+    display: inline-block;
+    cursor: pointer;
+    margin: 5px;
+    text-align: center;
+    overflow: auto;
+    
+}
+
+.choosecourse #blank-btn{
+    margin-top:15px;
+    background-color:#8a93c0;
+    color:white;
+    border: #8a93c0 2px solid;
+    padding : 3px 6px;
+    border-radius: 5px;
+    float:left;
+}
+
+.choosecourse #complete-btn {
+	margin-top:15px;
+    background-color:#4c5686;
+    color:white;
+    border: #4c5686 2px solid;
+    padding : 3px 6px;
+    border-radius: 5px;
+    float:right;
+}
+.choosecourse .course .course-1day {
+	width:95%;
+}
+
+.choosecourse .course .course-1day .sortable li {
+	padding-left:5px;
+	font-size:15px;
+	list-style: none;
+	background-color: white;
+	margin-bottom: 5px;
+	width:95%;
+}
+
+.choosecourse .course .course-1day .sortable .course_blank {
+	background-color: white;
+	border-style:none;
+	height: 15px;
+	width:90%;
+}
+
+.choosecourse .course .sortable .delete-btn{
+	 background-color:#8a93c0;
+	 color: white;
+	 font-size: 15px;
+	 border:#8a93c0 1px solid;
+	 padding: 3px;
+	 width:10%;
+}
+
+         

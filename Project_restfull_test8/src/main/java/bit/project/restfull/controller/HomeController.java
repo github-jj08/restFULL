@@ -116,7 +116,7 @@ public class HomeController {
 		return commentlist;
 	}
 	
-	//인덱스 페이지
+	//자주하는질문 추가하기
 	@RequestMapping(value = "/FAQ", method = RequestMethod.GET)
 	public String FAQ() {
 		log.info("index");
