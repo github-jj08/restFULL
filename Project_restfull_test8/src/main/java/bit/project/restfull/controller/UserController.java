@@ -304,8 +304,6 @@ public class UserController {
 		model.addAttribute("dates", dates);
 		model.addAttribute("list", list);
 		
-		model.addAttribute("list", list);
-		
 		return "user/content_view_crs";
 	}
 	

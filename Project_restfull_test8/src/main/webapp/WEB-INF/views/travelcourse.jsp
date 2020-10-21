@@ -361,7 +361,7 @@
 	                                		 + '<c:forEach begin="1" end="10" var="i">'
 	                                         + 		'<option value="${i}">${i}</option>'
 											 + '</c:forEach></select>'
-											 + '</td> </tr>';	//상품 재고수량
+											 + '</td> </tr>';
 	                                
 	                            });   //each end
 	                        }
