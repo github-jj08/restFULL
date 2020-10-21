@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -148,7 +147,7 @@ public class AdminBoardController {
 	
    /* 공지사항 및 이벤트 관리  (기본 url : /notice) */
    //1. 공지사항 및 이벤트 리스트
-   @RequestMapping(value = "/notice", method = RequestMethod.GET)
+   @GetMapping("/notice")
    public String noticeList() {
 	   return "admin/noticeList";
    }

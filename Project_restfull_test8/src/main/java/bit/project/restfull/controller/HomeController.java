@@ -3,36 +3,29 @@ package bit.project.restfull.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import bit.project.restfull.service.AdminBoardService;
 import bit.project.restfull.service.BoardService;
-import bit.project.restfull.vo.AdminBoardVO;
 import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.CommentVO;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-@Log4j
 @Controller
-@NoArgsConstructor
-@AllArgsConstructor
+@Log4j
 //회원가입 하지 않아도 사용가능한 사용자 기능들
 public class HomeController {
 
 	@Autowired
 	private BoardService boardService;
-	
-	@Autowired
-	private AdminBoardService adBoardService;
 	
 	//인덱스 페이지
 	@GetMapping("/")
@@ -96,28 +89,17 @@ public class HomeController {
 	//댓글 기능
 	//댓글 목록
 	@ResponseBody
-	@PostMapping("/getComments/{board_numbers}")
+	@RequestMapping(value="/getComments/{board_numbers}", method= RequestMethod.POST)
 	public List<CommentVO> getComments(@PathVariable int board_numbers){
 		List<CommentVO> commentlist = boardService.commentList(board_numbers);
 		return commentlist;
 	}
-		
-	@GetMapping("/notice/{boardlist_numbers}")
-	public String ajaxNoticeList(@PathVariable(value="boardlist_numbers") int boardlist_numbers, Model model) {
-		log.info("boardlist_numbers : " + boardlist_numbers);
-		//boardlist_numbers에 해당하는 게시글들을 불러옴
-		List<AdminBoardVO> noticelist = adBoardService.getList(boardlist_numbers);
-		model.addAttribute("noticelist", noticelist);
-		return "noticeList";
-	}
 	
-	@GetMapping("/notice/content_view")
-	public String notice_view(String board_numbers, Model model) {
-		log.info("content_view");
-		int board_no = Integer.parseInt(board_numbers);
-		log.info("게시글 view 호출; 게시글 번호 = " + board_no);
-		model.addAttribute("content_view",adBoardService.getBoardVO(board_no));
-		model.addAttribute("filelist", adBoardService.getBoardAttachmentVO(board_no));
-		return "notice_content_view";
+	//자주하는질문 추가하기
+	@RequestMapping(value = "/FAQ", method = RequestMethod.GET)
+	public String FAQ() {
+		log.info("index");
+		return "FAQ";
 	}
+		
 }
