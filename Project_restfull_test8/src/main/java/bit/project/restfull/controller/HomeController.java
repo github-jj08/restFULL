@@ -128,4 +128,11 @@ public class HomeController {
 		return "FAQ";
 	}
 	
+	//자주하는질문
+	@GetMapping("/personal")
+	public String personal() {
+		log.info("personal");
+		return "Sc_personal";
+	}
+	
 }

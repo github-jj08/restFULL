@@ -27,10 +27,10 @@
                         <div class="blog-catagory">
                             <h4>고객센터</h4>
                             <ul>
-                                <li><a href="#">공지사항</a></li>
-                                <li><a href="#">이벤트</a></li>
+                                <li><a href="${pageContext.request.contextPath}/notice/<c:out value='2'/>">공지사항</a></li>
+                                <li><a href="${pageContext.request.contextPath}/notice/<c:out value='5'/>">이벤트</a></li>
                                 <li><a href="${pageContext.request.contextPath}/FAQ">자주하는질문</a></li>
-                                <li><a href="#">약관 및 정책</a></li>
+                                <li><a href="${pageContext.request.contextPath}/personal">약관 및 정책</a></li>
                             </ul>
                         </div>
                         

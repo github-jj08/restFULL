@@ -139,13 +139,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1">
                     <div class="blog-sidebar">
-<!--                        <div class="search-form">
-                            <h4>Search</h4>
-                            <form action="#">
-                                <input type="text" placeholder="Search . . .  ">
-                                <button type="submit"><i class="fa fa-search"></i></button>
-                            </form>
-                        </div>-->
+
                         <div class="blog-catagory">
                             <h4>고객센터</h4>
                             <ul>
@@ -172,6 +166,8 @@
                         </div>
                     </div>
                 </div>
+                
+                
                 <!--ajax로 받아야하는 부분-마이페이지 start-->
                 <div class="col-lg-9 order-1 order-lg-2">
                     <div class="row">
