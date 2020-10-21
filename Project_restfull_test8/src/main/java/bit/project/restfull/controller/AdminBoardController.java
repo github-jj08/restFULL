@@ -348,7 +348,7 @@ public class AdminBoardController {
       return "redirect:/admin/dest/content_view?destination_name=" + encodedParam;
    }
    
-   /* 문의글 관리 (url:admin/board/qnas) */
+   /* 문의글 관리 (url:admin/qnas) */
    //1. 회원의 문의 및 신고 리스트
    @GetMapping("/qnas")
    public String qnas() {
@@ -393,5 +393,4 @@ public class AdminBoardController {
 	   return "admin/requestList";
 	}
 	
-   
 }

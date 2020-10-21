@@ -32,7 +32,7 @@
          var boardlist = $("#boardlist_numbers option:selected").val();
            
          $.ajax({
-            url: "${pageContext.request.contextPath}/admin/board/qnas/" + boardlist,
+            url: "${pageContext.request.contextPath}/admin/qnas/" + boardlist,
                type: "GET",
                dataType:"json",
                success: function (result) {
@@ -60,7 +60,7 @@
                    $(result).each(function(){                                                          
                        htmls += '<tr>';
                        htmls += '<td>'+ this.boardName + '</td>';
-                       htmls += '<td><a href="${pageContext.request.contextPath}/admin/board/qnas/content_view?board_numbers=' + this.board_numbers + '">' + this.title + '</a></td>';
+                       htmls += '<td><a href="${pageContext.request.contextPath}/admin/qnas/content_view?board_numbers=' + this.board_numbers + '">' + this.title + '</a></td>';
                       htmls += '<td>'+ this.member_id + '</td>';
                        htmls += '<td>'+ this.dates + '</td>';   
                        htmls += '</tr>';   //여기까지가 결과물 출력

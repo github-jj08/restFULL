@@ -327,7 +327,6 @@
 		    	                           		+'<td style="width:50px">상품명</td>'
 		    	                           		+'<td style="width:50px">상품가격</td>'
 		    	                           		+'<td style="width:50px">매수선택</td>'
-		    	                           		+'<td style="width:50px">재고수량</td>'
 		    	                           		+'</tr> </thead>'
 		    	                           		+'<tbody id="goods-box"> </tbody>'
 		                  						+'</table>');
@@ -362,8 +361,7 @@
 	                                		 + '<c:forEach begin="1" end="10" var="i">'
 	                                         + 		'<option value="${i}">${i}</option>'
 											 + '</c:forEach></select>'
-											 + '</td>';	
-	                                htmls += '<td style="width:40px">'+ this.amount + '</td></tr>';	//상품 재고수량
+											 + '</td> </tr>';	//상품 재고수량
 	                                
 	                            });   //each end
 	                        }

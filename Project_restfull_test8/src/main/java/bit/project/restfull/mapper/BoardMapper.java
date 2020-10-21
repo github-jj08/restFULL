@@ -114,7 +114,7 @@ public interface BoardMapper{
 	List<BoardVO> getLikeList(String member_id);
 
 	/* 여행코스 목록 가져오기(by여진) */
-	@Select("select * from travel where member_id = #{member_id} order by travel_numbers")
+	@Select("select distinct tcAlias, dates, serialNum from travel where member_id = #{member_id} group by tcAlias, dates, serialNum")
 	List<TravelVO> getMyCourseList(String member_id);
 
 	/* 특정 여행코스 가져오기 */

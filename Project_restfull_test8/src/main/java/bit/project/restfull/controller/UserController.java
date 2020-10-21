@@ -286,6 +286,7 @@ public class UserController {
 		
 		return "user/myCourseList";
 	}
+	
 	//16. 내 여행코스 보기
 	@GetMapping("/course_view") 
 	public String course_view(HttpServletRequest req, Model model) {
