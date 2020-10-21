@@ -59,6 +59,8 @@ public interface BoardService {
 	List<BoardVO> getLikeList(String member_id);
 	
 	public int countBoard(String member_id);
+	
+	public int countComment(int board_numbers);
 
 	//member_id에 해당하는 여행코스를 출력
 	List<TravelVO> getMyCourseList(String member_id);

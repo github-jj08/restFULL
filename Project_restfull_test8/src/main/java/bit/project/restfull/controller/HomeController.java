@@ -35,6 +35,7 @@ import bit.project.restfull.service.BoardService;
 import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.CommentVO;
 import bit.project.restfull.vo.LikesVO;
+import bit.project.restfull.vo.PagingVO;
 import lombok.extern.log4j.Log4j;
 
 /**

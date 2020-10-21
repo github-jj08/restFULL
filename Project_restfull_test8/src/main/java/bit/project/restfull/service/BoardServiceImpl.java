@@ -288,4 +288,9 @@ public class BoardServiceImpl implements BoardService{
 	public List<TravelVO> getMyCourse(String member_id, String serialNum) {
 		return mapper.getMyCourse(member_id, serialNum);
 	}
+
+	@Override
+	public int countComment(int board_numbers) {
+		return mapper.countComment(board_numbers);
+	}
 }

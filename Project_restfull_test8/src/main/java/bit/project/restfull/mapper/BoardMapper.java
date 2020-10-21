@@ -82,5 +82,8 @@ public interface BoardMapper{
 	//특정 여행코스 가져오기
 	@Select("select * from travel where member_id = #{member_id} and serialNum = #{serialNum} order by travel_numbers")
 	List<TravelVO> getMyCourse(@Param("member_id")String member_id, @Param("serialNum")String serialNum);
+	
+	@Select("select count(*) from comments where board_numbers = #{board_numbers}")
+	public int countComment(int board_numbers);
 		
 }
