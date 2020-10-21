@@ -28,6 +28,7 @@
 			margin:10px 10px 10px 10px;
 		}
 	</style>
+							
 </head>
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
@@ -166,4 +167,40 @@
 <%@ include file="/WEB-INF/include/js-footer.jsp"%>
 
 </body>
+
+<!-- 재검색 ajax -->
+                            <script>
+								$("#submit").click(function(e){
+									e.preventDefault();
+									
+									var searchWord = $('input[name=searchWord]').val();
+									var boardlist_numbers = $('input[name=boardlist_numbers]').val();
+									
+									console.log("새로운 검색어에 대한 결과 출력 : " + searchWord);
+					
+									var url = "${pageContext.request.contextPath}/search/";
+									
+									console.log("searchWord 는 " + searchWord);
+									
+									(function() {
+										$.ajax({
+								            type: 'GET',
+								            url: url.concat(searchWord),
+								            data: {
+								            	"searchWord" : searchWord,
+								            	"boardlist_numbers" : boardlist_numbers,
+								            },
+								            cache : false, // 이걸 안쓰거나 true하면 수정해도 값반영이 잘안댐
+								            dataType: 'json', //리턴될 데이터 타입을 제이슨으로 지정
+								            contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+									        success: function(result) {
+									        	console.log("setTable()");
+												setTable(result);
+									        	console.log("createMap()");
+												createMap(result);
+									        }
+										});	// Ajax end
+									})();
+								});
+							</script>
 </html>

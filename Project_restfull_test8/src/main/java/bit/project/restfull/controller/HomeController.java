@@ -120,4 +120,12 @@ public class HomeController {
 		model.addAttribute("filelist", adBoardService.getBoardAttachmentVO(board_no));
 		return "notice_content_view";
 	}
+	
+	//자주하는질문
+	@GetMapping("/FAQ")
+	public String FAQ() {
+		log.info("FAQ");
+		return "FAQ";
+	}
+	
 }
