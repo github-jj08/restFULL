@@ -1,9 +1,7 @@
 package bit.project.restfull.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,17 +15,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -38,32 +29,26 @@ import com.google.gson.JsonParseException;
 import bit.project.restfull.security.CustomUserDetailsService;
 import bit.project.restfull.service.KakaoService;
 import bit.project.restfull.service.UserService;
-import bit.project.restfull.vo.CustomUser;
 import bit.project.restfull.vo.KakaoProfile;
 import bit.project.restfull.vo.OAuthToken;
-import bit.project.restfull.vo.ResponseVO;
-import bit.project.restfull.vo.SnsVO;
 import bit.project.restfull.vo.UserVO;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-/**
- * Handles requests for the application home page.
- */
 @Log4j
 @Controller
 @NoArgsConstructor
 @AllArgsConstructor
 public class KakaoController {
 	
-	@Inject
+	@Autowired
 	private KakaoService kakaoService;
 	
-	@Inject
-	private CustomUserDetailsService customuserdetailsService;
+	@Autowired
+	private CustomUserDetailsService customUserDetailsService;
 	   
-	@Inject
+	@Autowired
 	private UserService userService;
 	   
 	
@@ -71,7 +56,7 @@ public class KakaoController {
 	private static String KAKAO_TOKEN_URL = "https://kauth.kakao.com/oauth/token";
 	private static String KAKAO_USER_URL= "https://kapi.kakao.com/v2/user/me";
 	
-	@RequestMapping("/kakaologin")
+	@GetMapping("/kakaologin")
 	public String kakaologin(String code, HttpServletRequest request) throws Exception{
 
     	Gson gson = new Gson();
@@ -169,7 +154,7 @@ public class KakaoController {
     	}
     	
     	// 시큐리티 제공하는 유저 정보 조회 서비스를 통한 유저 정보 조회
-    	UserDetails userDetails = customuserdetailsService.loadUserByUsername(socialUserId);
+    	UserDetails userDetails = customUserDetailsService.loadUserByUsername(socialUserId);
     	
     	log.info(" 로그인처리 직전 	;" +gson.toJson(loginUserInfo));
     	// 여기서 로그인 처리
@@ -187,7 +172,7 @@ public class KakaoController {
         return "redirect:/";  // 여기서 홈으로 리다리엑트 하면 됨
     }
 	
-	@RequestMapping(value="/kakaologout") 
+	@GetMapping("/kakaologout") 
 	public String kakaologout(HttpSession session) {
 		kakaoService.kakaoLogout((String)session.getAttribute("access_Token"));
 	  

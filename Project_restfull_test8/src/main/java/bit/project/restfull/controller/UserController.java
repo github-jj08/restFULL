@@ -3,27 +3,24 @@ package bit.project.restfull.controller;
 import java.io.IOException;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
-import bit.project.restfull.mapper.PaymentMapper;
 import bit.project.restfull.service.AdminBoardService;
 import bit.project.restfull.service.BoardService;
 import bit.project.restfull.service.UserService;
@@ -35,29 +32,28 @@ import bit.project.restfull.vo.ResponseVO;
 import bit.project.restfull.vo.TravelVO;
 import bit.project.restfull.vo.UserVO;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-/**
- * Handles requests for the application home page.
- */
 @Log4j
 @Controller
+@NoArgsConstructor
 @AllArgsConstructor
 @RequestMapping("/user")
 //회원가입한 사용자 -> 마이페이지
 public class UserController {
 	
-	@Inject
+	@Autowired
     private UserService userService;
 	
-	@Inject
+	@Autowired
     private BoardService boardService;
 	
-	@Inject
+	@Autowired
     private BCryptPasswordEncoder passEncoder;
 	
-	@Inject
-	private AdminBoardService adboardService;
+	@Autowired
+	private AdminBoardService adBoardService;
 	
 	//1. 마이페이지 - 회원 탈퇴 페이지
 	@GetMapping("/userDeleteView") 
@@ -153,17 +149,17 @@ public class UserController {
 	}
 	
 	//5. 내 게시글 조회
-		@GetMapping("/content_view") 
-		public String content_view_detail(UserVO userVO, BoardVO boardVO, Model model) {
-			log.info("board_view");
-			int board_numbers = boardVO.getBoard_numbers();
-			log.info(board_numbers); // name
-			boardVO = boardService.getBoardVO(board_numbers);
-			log.info(boardVO);
-			
-			model.addAttribute("content_view", boardVO);
-			return "content_view";
-		}
+	@GetMapping("/content_view") 
+	public String content_view_detail(UserVO userVO, BoardVO boardVO, Model model) {
+		log.info("board_view");
+		int board_numbers = boardVO.getBoard_numbers();
+		log.info(board_numbers); // name
+		boardVO = boardService.getBoardVO(board_numbers);
+		log.info(boardVO);
+		
+		model.addAttribute("content_view", boardVO);
+		return "content_view";
+	}
 
 	//6. 내 게시글 - 유저 본인 게시글 삭제
 	@PostMapping("/boardDeleteUser") 
@@ -263,7 +259,7 @@ public class UserController {
 	public String user_goodsView(String goods_numbers, Model model) {
 	      log.info("content_view");
 	      int goodsNum = Integer.parseInt(goods_numbers);
-	      model.addAttribute("content_view",adboardService.getGoodsVO(goodsNum));
+	      model.addAttribute("content_view",adBoardService.getGoodsVO(goodsNum));
 		return "user/goods_content_view";
 	}
 	
@@ -280,8 +276,8 @@ public class UserController {
 	}
 	//15. 내 여행코스 목록 보기
 	@GetMapping("/myCourseList") 
-	public String myCourseList(UserVO userVO,Model model) {
-		String member_id = userVO.getMember_id();
+	public String myCourseList(HttpServletRequest req, Model model) {
+		String member_id = req.getParameter("member_id");
 		log.info("user member_id : "+member_id); // name
 		
 		List<TravelVO> list = boardService.getMyCourseList(member_id);
@@ -290,6 +286,7 @@ public class UserController {
 		
 		return "user/myCourseList";
 	}
+	
 	//16. 내 여행코스 보기
 	@GetMapping("/course_view") 
 	public String course_view(HttpServletRequest req, Model model) {
@@ -307,11 +304,7 @@ public class UserController {
 		model.addAttribute("dates", dates);
 		model.addAttribute("list", list);
 		
-		model.addAttribute("list", list);
-		
 		return "user/content_view_crs";
 	}
 	
 }
-
-

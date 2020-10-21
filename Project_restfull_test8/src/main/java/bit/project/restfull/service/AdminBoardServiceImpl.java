@@ -1,6 +1,7 @@
 package bit.project.restfull.service;
 
 import java.io.File;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +10,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,42 +22,43 @@ import bit.project.restfull.vo.GoodsVO;
 import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.SidoguVO;
 import bit.project.restfull.vo.TravelVO;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 
-/**
- * Handles requests for the application home page.
- */
-@Controller
 @Log4j
+@Service
+@NoArgsConstructor
+@AllArgsConstructor
 public class AdminBoardServiceImpl implements AdminBoardService {
 
 	@Autowired
-	private AdminBoardMapper mapper;	
+	private AdminBoardMapper adBoardMapper;	
 	
 	@Override
 	public List<AdminBoardVO> getList(int boardlist_numbers) {
-		return mapper.getList(boardlist_numbers);
+		return adBoardMapper.getList(boardlist_numbers);
 	}
 
 	@Override
 	public AdminBoardVO getBoardVO(int board_numbers) {
 		log.info("boardServicImpl-getBoardVO(게시글 호출): " + board_numbers);
-		mapper.upHit(board_numbers);
-		return mapper.getBoardVO(board_numbers);
+		adBoardMapper.upHit(board_numbers);
+		return adBoardMapper.getBoardVO(board_numbers);
 	}
 	
 	@Override
 	public List<AttachmentVO> getBoardAttachmentVO(int board_numbers) {
 		log.info("boardServicImpl-getBoardVO(게시글 호출): " + board_numbers);
-		return mapper.getBoardAttachmentVO(board_numbers);
+		return adBoardMapper.getBoardAttachmentVO(board_numbers);
 	}
 
 	@Override
 	public void writeBoardVO(MultipartFile[] uploadfiles, AdminBoardVO boardVO) {
         //1.글작성
-		mapper.insertBoardVO(boardVO);
+		adBoardMapper.insertBoardVO(boardVO);
 		int bNum = boardVO.getBoard_numbers();
 		log.info("insertBoardVO() completed");
 		
@@ -101,8 +103,8 @@ public class AdminBoardServiceImpl implements AdminBoardService {
  	                System.out.println("fileMap :"+fileMap);
  	                uploadfiles[i].transferTo(image);
  	                
- 	                mapper.insertAttachmentVO(fileMap);
- 	       		    mapper.updateBoardThumbImg(bNum, attach_path + thumbDir);
+ 	                adBoardMapper.insertAttachmentVO(fileMap);
+ 	       		    adBoardMapper.updateBoardThumbImg(bNum, attach_path + thumbDir);
  	                
          		} else {
          			//첫번째 요소가 아니라면 그냥 저장
@@ -117,7 +119,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
  	                fileMap.put("fileSize", fileSize);
  	                System.out.println("fileMap :"+fileMap);
  	                uploadfiles[i].transferTo(saveFile);
- 	                mapper.insertAttachmentVO(fileMap);
+ 	                adBoardMapper.insertAttachmentVO(fileMap);
  	            }
             }
             catch(Exception e){
@@ -129,91 +131,91 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 
 	@Override
 	public void modifyBoardVO(AdminBoardVO boardVO) {
-		mapper.updateBoardVO(boardVO);
+		adBoardMapper.updateBoardVO(boardVO);
 	}
 
 	@Override
 	public void deleteBoardVO(int board_numbers) {
-		mapper.deleteBoardVO(board_numbers);
+		adBoardMapper.deleteBoardVO(board_numbers);
 	}
 
 	
 	// 여행지 등록을 위한 드롭다운 옵션 세팅
 	@Override
 	public List<SidoguVO> getOptionList(int sidoCode) {
-		return mapper.sigunguList(sidoCode);
+		return adBoardMapper.sigunguList(sidoCode);
 	}
 	
 	// 여행지 등록
 	@Override
 	public List<DestinationVO> getDestList() {
-		return mapper.getDestList();
+		return adBoardMapper.getDestList();
 	}
 
 	@Override
 	public DestinationVO getDestVO(String destination_name) {
-		return mapper.getDestVO(destination_name);
+		return adBoardMapper.getDestVO(destination_name);
 	}
 
 	@Override
 	public void writeDestVO(DestinationVO destinationVO) {
-		mapper.insertDestVO(destinationVO);
+		adBoardMapper.insertDestVO(destinationVO);
 	}
 
 	@Override
 	public void modifyDestVO(DestinationVO destinationVO) {
-		mapper.updateDestVO(destinationVO);
+		adBoardMapper.updateDestVO(destinationVO);
 	}
 
 	@Override
 	public void deleteDestVO(String destination_name) {
-		mapper.deleteDestVO(destination_name);
+		adBoardMapper.deleteDestVO(destination_name);
 	}
 	
 	//여행지 관련 상품 목록
 	@Override
 	public List<GoodsVO> getGoodsList(String destination_name) {
-		return mapper.getGoodsList(destination_name);
+		return adBoardMapper.getGoodsList(destination_name);
 	}
 	
 	//상품 CRUD
 	@Override
 	public GoodsVO getGoodsVO(int goods_numbers) {
-		return mapper.getGoodsVO(goods_numbers);
+		return adBoardMapper.getGoodsVO(goods_numbers);
 	}
 
 	@Override
 	public void writeGoodsVO(GoodsVO goodsVO) {
-		mapper.insertGoodsVO(goodsVO);
+		adBoardMapper.insertGoodsVO(goodsVO);
 	}
 
 	@Override
 	public void modifyGoodsVO(GoodsVO goodsVO) {
-		mapper.updateGoodsVO(goodsVO);
+		adBoardMapper.updateGoodsVO(goodsVO);
 	}
 
 	@Override
 	public void deleteGoodsVO(int goods_numbers) {
-		mapper.deleteGoodsVO(goods_numbers);
+		adBoardMapper.deleteGoodsVO(goods_numbers);
 	}
 
 	@Override
 	public List<DestinationVO> getDestList(int sigungu_code) {
-		return mapper.getDests(sigungu_code);
+		return adBoardMapper.getDests(sigungu_code);
 	}
 	
 	public List<GoodsVO> getRGoods(String[] destinations) {
-		return mapper.getRGoods(destinations);
+		return adBoardMapper.getRGoods(destinations);
 	}
 
 	@Override
 	public List<AdminBoardVO> getFilterList(int boardlist_numbers) {
-		return mapper.getFilterList(boardlist_numbers);
+		return adBoardMapper.getFilterList(boardlist_numbers);
 	}
 
 	@Override
 	public List<GoodsVO> myGoods(String[] goodsList) {
-		return mapper.myGoods(goodsList);
+		return adBoardMapper.myGoods(goodsList);
 	}
 
 	@Override
@@ -254,18 +256,18 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 			}
 		}
 		
-		mapper.insertRequest(requestList);		
+		adBoardMapper.insertRequest(requestList);		
 		return getRequests(merchant_uid);
 	}
 	
 	@Override
 	public List<RequestVO> getRequests(String merchant_uid){
-		return mapper.getRequests(merchant_uid);
+		return adBoardMapper.getRequests(merchant_uid);
 	}
 
 	@Override
 	public void updateRequest(String imp_uid, String merchant_uid) {
-		mapper.updateRequests(imp_uid,merchant_uid);
+		adBoardMapper.updateRequests(imp_uid,merchant_uid);
 	}
 
 	@Override
@@ -305,12 +307,12 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 			myCourse.add(vo);
 		}
 		
-		mapper.insertTravelCourse(myCourse);
+		adBoardMapper.insertTravelCourse(myCourse);
 	}
 
 	//모든 사용자의 주문내역(관리자 기능)
 	@Override
 	public List<RequestVO> getRequestList() {
-		return mapper.getRequestListForAdmin();
+		return adBoardMapper.getRequestListForAdmin();
 	}
 }

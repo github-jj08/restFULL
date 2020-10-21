@@ -1,46 +1,23 @@
 package bit.project.restfull.controller;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
-
-import java.io.File;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.text.DateFormat;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import bit.project.restfull.service.BoardService;
 import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.CommentVO;
-import bit.project.restfull.vo.LikesVO;
-import bit.project.restfull.vo.PagingVO;
 import lombok.extern.log4j.Log4j;
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
 @Log4j
 //회원가입 하지 않아도 사용가능한 사용자 기능들
@@ -50,7 +27,7 @@ public class HomeController {
 	private BoardService boardService;
 	
 	//인덱스 페이지
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@GetMapping("/")
 	public String index() {
 		log.info("index");
 		return "rs-mainpage";
@@ -101,7 +78,7 @@ public class HomeController {
 	
 	//좋아요 수 검색
 	@ResponseBody
-	@RequestMapping(value="/board/likeCount", method = {RequestMethod.GET, RequestMethod.POST})
+	@GetMapping("/board/likeCount")
 	public int likeCount(int board_numbers) {
 		int like_count = boardService.likeCount(board_numbers);
 		return like_count;
@@ -111,10 +88,17 @@ public class HomeController {
 	//댓글 기능
 	//댓글 목록
 	@ResponseBody
-	@RequestMapping(value="/getComments/{board_numbers}", method= RequestMethod.POST)
+	@PostMapping("/getComments/{board_numbers}")
 	public List<CommentVO> getComments(@PathVariable int board_numbers){
 		List<CommentVO> commentlist = boardService.commentList(board_numbers);
 		return commentlist;
+	}
+	
+	//자주하는질문
+	@GetMapping("/FAQ")
+	public String FAQ() {
+		log.info("index");
+		return "FAQ";
 	}
 		
 }

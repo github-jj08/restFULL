@@ -25,8 +25,8 @@
 			<td>${vo.imp_uid}</td>
 			<td>${vo.request_numbers}</td>
 			<td>${vo.member_id}</td>
-			<td>${vo.destination_name}</td>					
-			<td><a href="${pageContext.request.contextPath}/admin/dest/goods/content_view?goods_numbers=${vo.goods_numbers}">${vo.productName}</a></td>
+			<td>${vo.destination_name}</td>
+			<td><a href="${pageContext.request.contextPath}/user/goods_view?goods_numbers=${vo.goods_numbers}">${vo.productName}</a></td>
 			<td>${vo.price}</td>
 			<td>${vo.dates}</td>
 			<td>

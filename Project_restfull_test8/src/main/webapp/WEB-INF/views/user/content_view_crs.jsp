@@ -9,15 +9,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-			<h1>여행코스명 | ${alias}</h1>
-			<p>작성일 | ${dates}</p>
-			
-			<c:forEach items="${list}" var="vo">
-				${vo.tcContents}<br/>
-			</c:forEach>
-	
-	
-	<h3>[<a href="userHome">돌아가기</a>]</h3>
-	
+   <h2>여행 코스명 | ${alias}</h2>
+   <p> 작성일 | ${dates} </p>
+   <c:forEach items="${list}" var="vo">
+      <p>${vo.tcContents}</p>
+   </c:forEach>
+   
+   <h3>[<a href="userHome">돌아가기</a>]</h3>
+    
 </body>
 </html>

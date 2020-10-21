@@ -1,7 +1,6 @@
 package bit.project.restfull.vo;
 
 import java.sql.Timestamp;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,5 +17,4 @@ public class TravelVO {
 	private String tcAlias;		//TCALIAS	VARCHAR2(100 BYTE)
 	private Timestamp dates;	//DATES	DATE
 	private String serialNum;	//SERIALNUM	VARCHAR2(20 BYTE)
-	
 }

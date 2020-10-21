@@ -118,8 +118,8 @@
                         <li class="active"><a href="${pageContext.request.contextPath}/">Home</a></li>
                         <li><a href="${pageContext.request.contextPath}/user/write_view">글작성</a></li>
                         <li><a href="${pageContext.request.contextPath}/travel/">여행코스작성</a></li>
-                        <li><a href="./rs-Servicecenter.jsp">공지사항</a></li>
-                        <li><a href="#">이벤트</a></li>
+                        <li><a href="${pageContext.request.contextPath}/notice">공지사항</a></li>
+                        <li><a href="${pageContext.request.contextPath}/notice">이벤트</a></li>
                         <li><a href="./FAQ.jsp">자주하는질문</a></li>
                     </ul>
                 </nav>

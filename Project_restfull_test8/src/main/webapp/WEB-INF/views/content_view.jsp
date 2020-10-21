@@ -216,7 +216,7 @@
 												function likeCheck(){ 
 													$.ajax({
 													url: "${pageContext.request.contextPath}/user/board/likeCheck",
-									                type: "POST",
+									                type: "GET",
 									                dataType:"json",
 									                data: {
 									                    "board_numbers": board_numbers,
@@ -253,7 +253,7 @@
 											    function likeCount() {
 													$.ajax({
 														url: "${pageContext.request.contextPath}/board/likeCount",
-										                type: "POST",
+										                type: "GET",
 										                data: {
 										                    "board_numbers": board_numbers
 										                },
