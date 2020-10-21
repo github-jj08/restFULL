@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
@@ -112,7 +111,7 @@
                 <div class="col-lg-8 offset-lg-2">
                     <div class="blog-details-inner">
                         <div class="blog-detail-title">
-							<form action="<%=request.getContextPath()%>/user/write" method="post" enctype="multipart/form-data" class="writeform">
+							<form action="<%=request.getContextPath() %>/user/write" method="post" enctype="multipart/form-data" class="writeform">
 								<!-- hidden -->
 								<sec:authentication var="principal" property="principal" />
 								<input type="hidden" name="member_id" value="${principal.user.member_id}"/>
@@ -120,9 +119,7 @@
 								<input type="hidden" name="filter_numbers" value="<c:out value='1'/>">
 								
 								<!-- write Data -->
-                            
-                            
-                            
+
 							    <div class="group-input">
 							        <div class="writepic">
                                         <!-- 첨부 버튼 -->

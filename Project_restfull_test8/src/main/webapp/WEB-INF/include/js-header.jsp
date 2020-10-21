@@ -120,7 +120,7 @@
                         <li><a href="${pageContext.request.contextPath}/travel/">여행코스작성</a></li>
                         <li><a href="${pageContext.request.contextPath}/notice">공지사항</a></li>
                         <li><a href="${pageContext.request.contextPath}/notice">이벤트</a></li>
-                        <li><a href="./FAQ.jsp">자주하는질문</a></li>
+                        <li><a href="${pageContext.request.contextPath}/FAQ">자주하는질문</a></li>
                     </ul>
                 </nav>
                 <div id="mobile-menu-wrap"></div>
