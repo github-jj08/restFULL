@@ -25,7 +25,7 @@
                             <a href="#"><img src="resources/img/LOGOsmall.png" alt=""></a>
                         </div>
                         <ul>
-                            <li>Address: 60-49 Road 11378 New York</li>
+                            <li>Address:서울 마포구 백범로 23 구프라자 B1</li>
                             <li>Phone: +65 11.188.888</li>
                             <li>Email: hello.colorlib@gmail.com</li>
                         </ul>
@@ -38,9 +38,9 @@
                           	<li><a href="./rs-comapnyinfo.jsp">회사소개</a></li>
                             <li><a href="#">이용약관</a></li>
                             <li><a href="#">여행지등록</a></li>
-                            <li><a href="./rs-Servicecenter.jsp">고객센터</a></li>
+                            <li><a href="${pageContext.request.contextPath}/notice/<c:out value='2'/>">고객센터</a></li>
                             <li><a href="#">사이트맵</a></li>
-                            <li><a href="./rs-Servicecenter_personal.jsp"><b>개인정보처리방침</b></a></li>
+                            <li><a href="${pageContext.request.contextPath}/personal"><b>개인정보처리방침</b></a></li>
                             <li><a href="#">위치기반서비스이용약관</a></li>
                         </ul>
                     </div>
@@ -52,7 +52,7 @@
                         <p>Get E-mail updates about our latest shop and special offers.</p>
                         <form action="#" class="subscribe-form">
                             <input type="text" placeholder="Enter Your Mail">
-                            <button type="button">Subscribe</button>
+                            <button type="button">구독</button>
                         </form>
                     </div>
                 </div>

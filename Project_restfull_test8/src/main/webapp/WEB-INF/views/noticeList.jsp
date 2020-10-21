@@ -14,7 +14,7 @@
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
 
-  <!-- Blog Section Begin -->
+ <!-- Blog Section Begin -->
     <section class="blog-section spad">
         <div class="container">
             <div class="row">
@@ -36,54 +36,40 @@
                 </div>
                 
                 
-                <!--ajax로 받아야하는 부분-마이페이지 start-->
+                <!--공지사항 table start-->
                 <div class="col-lg-9 order-2 order-lg-2">
                     <div class="row">
                         <div class="col-lg-12 col-sm-12">
-                            <div class="blog-item">
-                                <table id="list-table" width="500" cellpadding="0" cellspacing="0" border="1">
-									<tr>
+                            <div class="notice-table">
+                                <table id="list-table">
+									<tr class="first-list">
 										<td>구분</td>
 										<td>제목</td>
 										<td>작성일</td>
 										<td>조회수</td>
 									</tr>
-									<c:forEach items="${noticelist}" var="vo">
-									<tr>
+									<!--<c:forEach items="${noticelist}" var="vo">-->
+									<tr class="noticetable">
 										<td>${vo.boardlistName}</td>
 										<td><a href="${pageContext.request.contextPath}/notice/content_view?board_numbers=${vo.board_numbers}">${vo.title}</a></td>
 										<td>${vo.dates}</td>
 										<td>${vo.hit}</td>
 									</tr>
-									</c:forEach>
+									<!--</c:forEach>-->
 								</table>
                             </div>
                         </div>
                         
                     </div>
                 </div>
+                <!--공지사항 table end-->
             </div>
         </div>
     </section>
-   <!--ajax로 받아야하는 부분-마이페이지 start-->
 
 
 
 
-<!--                         <div class="col-lg-12 col-sm-12">
-                            <div class="blog-item">
-                                <div class="bi-pic">
-                                    <img src="img/blog/blog-2.jpg" alt="">
-                                </div>
-                                <div class="bi-text">
-                                    <a href="./blog-details.html">
-                                        <h4>This was one of our first days in Hawaii last week.</h4>
-                                    </a>
-                                    <p>Fashion <span>- May 19, 2019</span></p>
-                                </div>
-                            </div>
-                        </div>
- -->
 
 
 <!-- 	<h3><button onclick="history.go(-1);">돌아가기</button></h3> -->

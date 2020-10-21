@@ -2146,6 +2146,7 @@ ol {
 	cursor: pointer;
 }
 
+/* 고개센터, 마이페이지..해당일듯 */
 .blog-sidebar .blog-catagory {
 	margin-bottom: 41px;
 }
@@ -2164,6 +2165,10 @@ ol {
 	font-size: 16px;
 	color: #636363;
 	line-height: 39px;
+}
+
+.blog-sidebar .blog-catagory ul li:hover>a {
+	background: #8a93c0;
 }
 
 .blog-sidebar .recent-post {
@@ -2730,9 +2735,9 @@ ol {
 }
 
 .faq-accordin .card .card-heading {
-	font-size: 22px;
-	color: #252525;
-	font-weight: 700;
+	font-size: 18px;
+	color: #4e4e4e;
+	font-weight: 600;
 	cursor: pointer;
 }
 
@@ -2753,10 +2758,10 @@ ol {
 
 .faq-accordin .card-heading a:after,
 .faq-accordin .card-heading>a.active[aria-expanded=false]:after {
-	content: "�윍�";
+	content: "▼";
 	font-family: "FontAwesome";
 	font-size: 14px;
-	color: #404040;
+	color: white;
 	height: 25px;
 	width: 25px;
 	text-align: center;
@@ -2770,16 +2775,16 @@ ol {
 
 .faq-accordin .card-heading a[aria-expanded=true]:after,
 .faq-accordin .card-heading>a.active:after {
-	content: "�윍�";
+	content: "▼";
 	font-family: "FontAwesome";
 	float: left;
 	font-size: 13px;
-	color: #ffffff;
+	color: white;
 	background: #8a93c0;
 }
 
 /*---------------------
-	�빟愿��룞�쓽李�
+	join-form
 ---------------------*/
 
 
@@ -3091,9 +3096,6 @@ ol {
 	.inner-header .advanced-search .input-group {
 		max-width: 100%;
 	}
-	.nav-item .nav-menu li a {
-		padding: 16px 26px 15px;
-	}
 	.hero-items .owl-nav button[type=button] {
 		left: 5px;
 	}
@@ -3177,12 +3179,7 @@ ol {
 		padding-top: 30px;
 	}
 
-/* 	.choosecourse .course .course-1day .sortable li {
-		padding-left:3px;
-		font-size:13px;
-		list-style: none;
-		max-width:100%;
-	} */
+
 
 }
 
@@ -3212,7 +3209,7 @@ ol {
 		padding: 14px 40px 14px 18px;
 	}
 	.nav-item .nav-menu li a {
-		padding: 16px 10px 15px;
+		padding: 15px 20px;
 	}
 	.instagram-photo .insta-item .inside-text h5 {
 		font-size: 14px;
@@ -3975,6 +3972,43 @@ ol {
     border:#8a93c0 1px solid;
     font-size:18px;
     border-radius:5px;
+}
+
+
+/*----------------------
+		공지사항 css
+----------------------*/
+.blog-section .notice-table #list-table {
+    width:100%;
+   
+}
+
+.blog-section .notice-table #list-table tr {
+    padding : px 0;
+     
+}
+.blog-section .notice-table #list-table td {
+   border : #8a93c0 2px solid;
+}
+
+.blog-section .notice-table #list-table .first-list {
+    background-color: #626eac;
+    color: white;
+    text-align:center;
+    border-bottom : #626eac 2px solid;
+    font-size: 18px;
+    font-weight:600;
+}
+.blog-section .notice-table #list-table .first-list td {
+    padding: 6px 0;
+}
+
+.blog-section .notice-table #list-table .noticetable {
+    text-align:center;
+}
+
+.blog-section .notice-table #list-table .noticetable td {
+    padding: 4px 0;
 }
 
 
