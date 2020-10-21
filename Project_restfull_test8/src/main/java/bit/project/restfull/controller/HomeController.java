@@ -9,8 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -89,14 +88,14 @@ public class HomeController {
 	//댓글 기능
 	//댓글 목록
 	@ResponseBody
-	@RequestMapping(value="/getComments/{board_numbers}", method= RequestMethod.POST)
+	@PostMapping("/getComments/{board_numbers}")
 	public List<CommentVO> getComments(@PathVariable int board_numbers){
 		List<CommentVO> commentlist = boardService.commentList(board_numbers);
 		return commentlist;
 	}
 	
-	//자주하는질문 추가하기
-	@RequestMapping(value = "/FAQ", method = RequestMethod.GET)
+	//자주하는질문
+	@GetMapping("/FAQ")
 	public String FAQ() {
 		log.info("index");
 		return "FAQ";
