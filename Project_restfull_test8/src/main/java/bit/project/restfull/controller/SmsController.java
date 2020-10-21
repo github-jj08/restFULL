@@ -1,15 +1,12 @@
 package bit.project.restfull.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.extern.log4j.Log4j;
 
-/**
- * Handles requests for the application home page.
- */
 @Log4j
 @Controller()
 public class SmsController {
@@ -31,7 +28,7 @@ public class SmsController {
 		}
 
 		@ResponseBody
-		@RequestMapping("/smsCheck")
+		@GetMapping("/smsCheck")
 		public String smsCheck(String code) {
 			String result = null;
 			log.info("==============");
@@ -40,9 +37,11 @@ public class SmsController {
 			log.info("입력받은 인증번호는:" + code);
 
 			if (code.equals(authNum)) {
-				return result = "ok";
+				result = "ok";
+				return result;
 			} else {
-				return result = "no";
+				result = "no";
+				return result;
 			}
 		}
 }

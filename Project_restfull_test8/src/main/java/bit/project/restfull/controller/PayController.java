@@ -1,41 +1,21 @@
 package bit.project.restfull.controller;
 
-import static org.junit.Assert.assertNotNull;
-
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.siot.IamportRestClient.IamportClient;
-import com.siot.IamportRestClient.exception.IamportResponseException;
-import com.siot.IamportRestClient.response.AccessToken;
-import com.siot.IamportRestClient.response.IamportResponse;
 
 import bit.project.restfull.service.AdminBoardService;
 import bit.project.restfull.service.PaymentService;
-import bit.project.restfull.service.UserService;
-import bit.project.restfull.vo.GoodsVO;
-import bit.project.restfull.vo.PaymentVO;
 import bit.project.restfull.vo.RequestVO;
-import bit.project.restfull.vo.UserVO;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -44,7 +24,6 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @NoArgsConstructor
 @AllArgsConstructor
-//@RequestMapping("/pay")
 //아임포트 - 결제 기능 정의
 public class PayController {
 

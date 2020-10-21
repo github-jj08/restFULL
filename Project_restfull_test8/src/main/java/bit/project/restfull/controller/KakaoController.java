@@ -2,10 +2,10 @@ package bit.project.restfull.controller;
 
 import java.io.IOException;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -18,7 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -45,13 +45,13 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class KakaoController {
 	
-	@Inject
+	@Autowired
 	private KakaoService kakaoService;
 	
-	@Inject
+	@Autowired
 	private CustomUserDetailsService customuserdetailsService;
 	   
-	@Inject
+	@Autowired
 	private UserService userService;
 	   
 	
@@ -59,7 +59,7 @@ public class KakaoController {
 	private static String KAKAO_TOKEN_URL = "https://kauth.kakao.com/oauth/token";
 	private static String KAKAO_USER_URL= "https://kapi.kakao.com/v2/user/me";
 	
-	@RequestMapping("/kakaologin")
+	@GetMapping("/kakaologin")
 	public String kakaologin(String code, HttpServletRequest request) throws Exception{
 
     	Gson gson = new Gson();
@@ -175,7 +175,7 @@ public class KakaoController {
         return "redirect:/";  // 여기서 홈으로 리다리엑트 하면 됨
     }
 	
-	@RequestMapping(value="/kakaologout") 
+	@GetMapping(value="/kakaologout") 
 	public String kakaologout(HttpSession session) {
 		kakaoService.kakaoLogout((String)session.getAttribute("access_Token"));
 	  

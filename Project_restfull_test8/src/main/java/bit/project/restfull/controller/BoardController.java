@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,9 +17,6 @@ import bit.project.restfull.vo.CommentVO;
 import bit.project.restfull.vo.LikesVO;
 import lombok.extern.log4j.Log4j;
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
 @Log4j
 @RequestMapping("/user")
@@ -38,7 +35,7 @@ public class BoardController {
 		return "user/write_view";
 	}
 	
-	@RequestMapping(value="/write", method = {RequestMethod.GET, RequestMethod.POST})
+	@PostMapping("/write")
 	public String write(@RequestParam(value="file") MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException {
 		log.info("write");
 		int board_numbers = boardService.writeBoardVO(uploadfiles, boardVO);
@@ -48,7 +45,7 @@ public class BoardController {
 	
 	//좋아요 기능
 	@ResponseBody
-	@RequestMapping(value="/board/likeCheck", method = {RequestMethod.GET, RequestMethod.POST})
+	@GetMapping("/board/likeCheck")
 	public int likeCheck(LikesVO likesVO) {
 		log.info("likeCheck");
 		int result = boardService.likeCheck(likesVO);
@@ -57,7 +54,7 @@ public class BoardController {
 	
 	//좋아요 수 업데이트
 	@ResponseBody
-	@RequestMapping(value="/board/likeUpdate", method = {RequestMethod.GET, RequestMethod.POST})
+	@PostMapping("/board/likeUpdate")
 	public void likeUpdate(LikesVO likesVO) {
 		log.info("likeUpdate");
 		log.info("조아여 글 번호 : " + likesVO.getBoard_numbers());
@@ -67,7 +64,7 @@ public class BoardController {
 	
 
 	//수정 기능 modify_view 페이지 호출
-	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	@GetMapping("/modify")
 	public String modify(int board_numbers, Model model) {
 		model.addAttribute("modify_view", boardService.getBoardVO(board_numbers));
 		model.addAttribute("filelist", boardService.getBoardAttachmentVO(board_numbers));
@@ -76,7 +73,7 @@ public class BoardController {
 	}
 	
 	//수정 기능 수행
-	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	@PostMapping("/modify")
 	public String modify(BoardVO boardVO) {
 		log.info("modify()");
 		boardService.modifyBoardVO(boardVO);
@@ -97,21 +94,21 @@ public class BoardController {
 	//댓글 기능
 	//댓글 작성
 	@ResponseBody
-	@RequestMapping(value="/addComments", method= RequestMethod.POST)
+	@PostMapping("/addComments")
 	public void writeComment(CommentVO commentVO){
 		boardService.writeComment(commentVO);
 	}
 		
 	//댓글 삭제
 	@ResponseBody
-	@RequestMapping(value="/delComments", method= RequestMethod.POST)
+	@PostMapping("/delComments")
 	public void delComment(int comments_numbers){
 		boardService.delComment(comments_numbers);
 	}
 		
 	//신고기능
 	@ResponseBody
-	@RequestMapping(value="/report", method= RequestMethod.POST)
+	@PostMapping("/report")
 	public void report(BoardVO boardVO) {
 		log.info(boardVO.getBoardlist_numbers());
 		log.info(boardVO.getTitle());

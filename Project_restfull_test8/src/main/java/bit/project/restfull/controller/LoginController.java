@@ -1,55 +1,35 @@
 package bit.project.restfull.controller;
 
-import java.io.IOException;
-
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.JsonParseException;
 
-import bit.project.restfull.security.CustomUserDetailsService;
 import bit.project.restfull.service.UserService;
-import bit.project.restfull.vo.CustomUser;
 import bit.project.restfull.vo.ResponseVO;
 import bit.project.restfull.vo.UserVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-/**
- * Handles requests for the application home page.
- */
 @Log4j
 @Controller
 @AllArgsConstructor
 //로그인 관련 기능
 public class LoginController {
 	
-	@Inject
+	@Autowired
     private NaverLoginBO naverLoginBO;
-	@Inject
+	
+	@Autowired
 	private UserService userservice;
 	
 	//로그인
@@ -70,7 +50,7 @@ public class LoginController {
 	}
 	
 	//로그아웃.
-	@RequestMapping(value = "/logout")
+	@GetMapping(value = "/logout")
 	public String logout(HttpSession session) throws Exception{
 		
 		log.info("/member/logout");
