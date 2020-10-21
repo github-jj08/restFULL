@@ -36,9 +36,6 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-/**
- * Handles requests for the application home page.
- */
 @Log4j
 @Controller
 @NoArgsConstructor
@@ -49,7 +46,7 @@ public class KakaoController {
 	private KakaoService kakaoService;
 	
 	@Autowired
-	private CustomUserDetailsService customuserdetailsService;
+	private CustomUserDetailsService customUserDetailsService;
 	   
 	@Autowired
 	private UserService userService;
@@ -157,7 +154,7 @@ public class KakaoController {
     	}
     	
     	// 시큐리티 제공하는 유저 정보 조회 서비스를 통한 유저 정보 조회
-    	UserDetails userDetails = customuserdetailsService.loadUserByUsername(socialUserId);
+    	UserDetails userDetails = customUserDetailsService.loadUserByUsername(socialUserId);
     	
     	log.info(" 로그인처리 직전 	;" +gson.toJson(loginUserInfo));
     	// 여기서 로그인 처리
@@ -175,7 +172,7 @@ public class KakaoController {
         return "redirect:/";  // 여기서 홈으로 리다리엑트 하면 됨
     }
 	
-	@GetMapping(value="/kakaologout") 
+	@GetMapping("/kakaologout") 
 	public String kakaologout(HttpSession session) {
 		kakaoService.kakaoLogout((String)session.getAttribute("access_Token"));
 	  

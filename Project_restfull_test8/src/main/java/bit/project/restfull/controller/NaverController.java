@@ -24,24 +24,28 @@ import com.google.gson.Gson;
 import bit.project.restfull.security.CustomUserDetailsService;
 import bit.project.restfull.service.UserService;
 import bit.project.restfull.vo.UserVO;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Controller
+@NoArgsConstructor
+@AllArgsConstructor
 public class NaverController {
    
 	/* NaverLoginBO */
 	@Autowired
 	private NaverLoginBO naverLoginBO;
-	
+   
 	@Autowired
-	private CustomUserDetailsService customuserdetailsService;
-	
+	private CustomUserDetailsService customUserDetailsService;
+   
 	@Autowired
-	private UserService userservice;
-	
+	private UserService userService;
+   
 	private String apiResult = null;
-	
+
 	//네이버 로그인 성공시 callback호출 메소드
 	@GetMapping("/callback")
 	public String callback( HttpServletRequest request, @RequestParam String code, @RequestParam String state, HttpSession session)
@@ -51,7 +55,7 @@ public class NaverController {
 		Gson gson = new Gson();
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverLoginBO.getAccessToken(session, code, state);
-      
+		
 		//1. 로그인 사용자 정보를 읽어온다.
 		apiResult = naverLoginBO.getUserProfile(oauthToken); // String형식의 json데이터
 		/**
@@ -75,10 +79,10 @@ public class NaverController {
 		
 		//id+"@n" 아이디 만들어서 있는지 중복체크 
 		String naverId = id+"@n";
-		int dbid = userservice.getUser(naverId);
+		int dbid = userService.getUser(naverId);
 		log.info("dbid= "+dbid);
 		
-		UserVO loginUserInfo = userservice.getUserByIdandAutho(naverId,"naver");
+		UserVO loginUserInfo = userService.getUserByIdandAutho(naverId,"naver");
 		if(dbid==0) {
 			//시큐리티 적용할 uservo
 			
@@ -99,18 +103,18 @@ public class NaverController {
 						//여권대조
 						.build();
 				log.info("  여기까지 왔낭     ;" +gson.toJson(socialRegisterUser));
-				userservice.addUser(socialRegisterUser);
-			}
-		} else {
+				userService.addUser(socialRegisterUser);
+			}	
+		}else {
 			log.info("id : "+id+" 는 이미 가입된 아이디 입니다.");
 		}
        
 		// 시큐리티 제공하는 유저 정보 조회 서비스를 통한 유저 정보 조회
-		UserDetails userDetails = customuserdetailsService.loadUserByUsername(naverId);
+		UserDetails userDetails = customUserDetailsService.loadUserByUsername(naverId);
 		
 		// 여기서 로그인 처리
 		// 유저정보 + 비밀번호(2번쨰 파라미터) 를 통한 로그인 권한정보 생성
-		Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, naverId + "naver", userDetails.getAuthorities());
+        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, naverId + "naver", userDetails.getAuthorities());
         // 로그인 정보를 스프링 시큐리티 컨텍스트에 넣기 위해 컨텍스트 정보 가져오기
         SecurityContext securityContext = SecurityContextHolder.getContext();
         // 스프링 시큐리티 권한정보에 위에서 만든 권한정보를 넣어준다.
@@ -121,6 +125,6 @@ public class NaverController {
         session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
 
         return "redirect:/";  // 여기서 홈으로 리다리엑트 하면 됨
-   }
+	}
 	
 }

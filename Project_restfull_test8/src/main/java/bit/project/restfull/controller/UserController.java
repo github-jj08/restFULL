@@ -26,15 +26,18 @@ import bit.project.restfull.service.BoardService;
 import bit.project.restfull.service.UserService;
 import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.CustomUser;
+import bit.project.restfull.vo.PagingVO;
 import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.ResponseVO;
 import bit.project.restfull.vo.TravelVO;
 import bit.project.restfull.vo.UserVO;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Controller
+@NoArgsConstructor
 @AllArgsConstructor
 @RequestMapping("/user")
 //회원가입한 사용자 -> 마이페이지
@@ -50,7 +53,7 @@ public class UserController {
     private BCryptPasswordEncoder passEncoder;
 	
 	@Autowired
-	private AdminBoardService adboardService;
+	private AdminBoardService adBoardService;
 	
 	//1. 마이페이지 - 회원 탈퇴 페이지
 	@GetMapping("/userDeleteView") 
@@ -121,15 +124,26 @@ public class UserController {
 	
 	//4. 마이페이지 - 내 게시글 list
 	@GetMapping("/myList") 
-	public String boardListView(BoardVO boardVO, UserVO userVO, Model model) {
+	public String boardListView(PagingVO pagingVO, BoardVO boardVO, Model model
+			,@RequestParam(value="member_id", required=false)String member_id 
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
 		
-		log.info("user board list");
-		String member_id = userVO.getMember_id();
+		int total = boardService.countBoard(member_id);
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		pagingVO = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
 		log.info("user member_id : "+member_id); // name
-		userVO = userService.getUserVO(member_id);
-		log.info(userVO);
 		
-		model.addAttribute("userBoard", boardService.boardList(member_id));
+		model.addAttribute("paging", pagingVO);
+		model.addAttribute("userBoard", boardService.boardList(member_id, pagingVO));
 		
 		return "user/boardList";
 	}
@@ -245,7 +259,7 @@ public class UserController {
 	public String user_goodsView(String goods_numbers, Model model) {
 	      log.info("content_view");
 	      int goodsNum = Integer.parseInt(goods_numbers);
-	      model.addAttribute("content_view",adboardService.getGoodsVO(goodsNum));
+	      model.addAttribute("content_view",adBoardService.getGoodsVO(goodsNum));
 		return "user/goods_content_view";
 	}
 	
@@ -262,8 +276,8 @@ public class UserController {
 	}
 	//15. 내 여행코스 목록 보기
 	@GetMapping("/myCourseList") 
-	public String myCourseList(UserVO userVO,Model model) {
-		String member_id = userVO.getMember_id();
+	public String myCourseList(HttpServletRequest req, Model model) {
+		String member_id = req.getParameter("member_id");
 		log.info("user member_id : "+member_id); // name
 		
 		List<TravelVO> list = boardService.getMyCourseList(member_id);
@@ -272,6 +286,7 @@ public class UserController {
 		
 		return "user/myCourseList";
 	}
+	
 	//16. 내 여행코스 보기
 	@GetMapping("/course_view") 
 	public String course_view(HttpServletRequest req, Model model) {
@@ -293,5 +308,3 @@ public class UserController {
 	}
 	
 }
-
-

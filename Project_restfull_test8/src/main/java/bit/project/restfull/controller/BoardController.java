@@ -1,6 +1,7 @@
 package bit.project.restfull.controller;
 
 import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,18 +16,21 @@ import bit.project.restfull.service.BoardService;
 import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.CommentVO;
 import bit.project.restfull.vo.LikesVO;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-@Controller
 @Log4j
+@Controller
+@NoArgsConstructor
+@AllArgsConstructor
 @RequestMapping("/user")
 //회원가입 및 로그인이 필요한 사용자 기능들
 public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
-	
-	
+
 	//write_view
 	@GetMapping("/write_view")
 	public String write_view() {
@@ -120,4 +124,6 @@ public class BoardController {
 		log.info("신고 성공");
 			
 	}	 
+	
+
 }

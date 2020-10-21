@@ -1,6 +1,5 @@
 package bit.project.restfull.vo;
 
-import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

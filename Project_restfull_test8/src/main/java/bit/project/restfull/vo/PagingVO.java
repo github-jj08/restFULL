@@ -3,16 +3,14 @@ package bit.project.restfull.vo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.log4j.Log4j;
 
-@Log4j
 @Getter
 @Setter
 @AllArgsConstructor
 public class PagingVO {
 
 	
-	// ÇöÀçÆäÀÌÁö, ½ÃÀÛÆäÀÌÁö, ³¡ÆäÀÌÁö, °Ô½Ã±Û ÃÑ °¹¼ö, ÆäÀÌÁö´ç ±Û °¹¼ö, ¸¶Áö¸·ÆäÀÌÁö, SQLÄõ¸®¿¡ ¾µ start, end
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, SQLï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ start, end
 		private int nowPage, startPage, endPage, total, cntPerPage, lastPage, start, end;
 		private int cntPage = 5;
 		
@@ -26,11 +24,11 @@ public class PagingVO {
 			calcStartEndPage(getNowPage(), cntPage);
 			calcStartEnd(getNowPage(), getCntPerPage());
 		}
-		// Á¦ÀÏ ¸¶Áö¸· ÆäÀÌÁö °è»ê
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		public void calcLastPage(int total, int cntPerPage) {
 			setLastPage((int) Math.ceil((double)total / (double)cntPerPage));
 		}
-		// ½ÃÀÛ, ³¡ ÆäÀÌÁö °è»ê
+		// ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		public void calcStartEndPage(int nowPage, int cntPage) {
 			setEndPage(((int)Math.ceil((double)nowPage / (double)cntPage)) * cntPage);
 			if (getLastPage() < getEndPage()) {
@@ -41,7 +39,7 @@ public class PagingVO {
 				setStartPage(1);
 			}
 		}
-		// DB Äõ¸®¿¡¼­ »ç¿ëÇÒ start, end°ª °è»ê
+		// DB ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ start, endï¿½ï¿½ ï¿½ï¿½ï¿½
 		public void calcStartEnd(int nowPage, int cntPerPage) {
 			setEnd(nowPage * cntPerPage);
 			setStart(getEnd() - cntPerPage + 1);

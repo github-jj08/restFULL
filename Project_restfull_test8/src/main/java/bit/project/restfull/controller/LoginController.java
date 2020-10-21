@@ -1,5 +1,6 @@
 package bit.project.restfull.controller;
 
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -18,22 +19,23 @@ import bit.project.restfull.service.UserService;
 import bit.project.restfull.vo.ResponseVO;
 import bit.project.restfull.vo.UserVO;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Controller
+@NoArgsConstructor
 @AllArgsConstructor
 //로그인 관련 기능
 public class LoginController {
 	
 	@Autowired
     private NaverLoginBO naverLoginBO;
-	
 	@Autowired
-	private UserService userservice;
+	private UserService userService;
 	
 	//로그인
-	@GetMapping(value = "/login")
+	@GetMapping("/login")
 	public String loginForm(Model model, HttpSession session) {
 		log.info("session : " + session);
 		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
@@ -50,7 +52,7 @@ public class LoginController {
 	}
 	
 	//로그아웃.
-	@GetMapping(value = "/logout")
+	@GetMapping("/logout")
 	public String logout(HttpSession session) throws Exception{
 		
 		log.info("/member/logout");
@@ -81,7 +83,7 @@ public class LoginController {
 	public String adduser(UserVO userVO) {
 		log.info("post resister");
 	      
-	    userservice.addUser(userVO);
+	    userService.addUser(userVO);
 	            
 	    return "member/registerFinish";
 	      
@@ -121,7 +123,7 @@ public class LoginController {
 		Gson gson = new Gson();
 		log.info(id);
 		
-		int str = userservice.getUser(id);
+		int str = userService.getUser(id);
 		
 		boolean validId = str == 0; // 참이면
 	    	if (validId) {
@@ -151,14 +153,14 @@ public class LoginController {
 	
 	@PostMapping("/doFind_ID")
 	public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
-		md.addAttribute("id", userservice.findID(response, email));
+		md.addAttribute("id", userService.findID(response, email));
 		return "login/findIdResult";
 	}
 	
 	@PostMapping("/doFind_PW")
 	public void find_PW(@ModelAttribute UserVO userVO, HttpServletResponse response) throws Exception{
 		System.out.println(userVO.getMember_id());
-		userservice.findPW(response, userVO);
+		userService.findPW(response, userVO);
 	}
 	
 	
