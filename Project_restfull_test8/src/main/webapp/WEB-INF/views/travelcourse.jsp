@@ -99,12 +99,14 @@
             </div>
             
             <!-- 여행지역 상품 결제 ajax로 번쩎 뜩ㅁ -->
-            <div class="row">
-               <div class="col-lg-12">
-                  <div id="goodsList">
-                  
-                  </div>
-               </div>
+            <div class="goods">
+	            <div class="row">
+	               <div class="col-lg-12">
+	                  <div id="goodsList">
+	                  
+	                  </div>
+	               </div>
+	            </div>
             </div>
             
         </div>
@@ -114,8 +116,8 @@
       
       
       <!-------------------------------------------------------------------------------------------->
-            <!-- 시군구 가져오는 곳 -->
 
+            <!-- 시군구 가져오는 곳 -->
 				<script>
 					$(function(){
 						$(".sido-choice").click(function(){
@@ -162,8 +164,8 @@
 						});
 				</script>
 			
+	             <!-- 여행코스 등록 기능 관련 스크립트 --> 
 				<script>
-	            	/* 여행코스 등록 기능 관련 스크립트 */
 	            	//여행지 추가 count
 	                var count = 0;
 	
@@ -269,21 +271,29 @@
 	                	  console.log("reComplete");
 	                  }else{ 
 		                  $("#goodsList").append('<h4>관련 상품 목록</h4><hr/>'
-		                  						+'<table style="100%">'
+		                  						+'<table>'
 		                  						+'<thead> <tr>'
-		                  						+'<td style="width:5%">선택</td>'
-		                  						+'<td style="width:50px">여행지명</td>'
-		    	                           		+'<td style="width:50px">상품명</td>'
-		    	                           		+'<td style="width:50px">상품가격</td>'
-		    	                           		+'<td style="width:50px">매수선택</td>'
-		    	                           		+'<td style="width:50px">재고수량</td>'
+		                  						+'<td class="td-choice">선택</td>'
+		                  						+'<td class="td">여행지명</td>'
+		    	                           		+'<td class="td">상품명</td>'
+		    	                           		+'<td class="td">상품가격</td>'
+		    	                           		+'<td class="td">매수선택</td>'
 		    	                           		+'</tr> </thead>'
 		    	                           		+'<tbody id="goods-box"> </tbody>'
 		                  						+'</table>');
-		                  $("#goodsList").append('<span><h1>총 구매금액</h1></span> <span id="totalPrice"> 0 </span><span><h1> 원  </h1></span>');
+		                  $("#goodsList").append('<div class="tp"><b>총 구매금액</b><br><div id="totalPrice"> 0  원 </div></div><br>');
 	                      $("#goodsList").append('<input type="button" id="buy" name="buy" value="구매하기"/>');
 	                  }
 	                  
+ 	                  
+/*  	                 <div class="tp">
+ 	               		<h5>총 구매금액</h5>
+ 	               		<div id="totalPrice"> 0  원 </div>
+ 	               	</div>
+ 	               		<input type="button" id="buy" name="buy" value="구매하기"/> */
+ 	               	
+ 	               	
+ 	               	
 	                  //보기 편하게 하려고 htmls로 짬
 	                  $.ajax
 	                  ({
@@ -302,18 +312,17 @@
 	                        } else {
 	                           	$(result).each(function(){        
 	                           		$("#goods-box").empty();
-	                           		htmls += '<tr><td style="width:5%"><input type="checkbox" name="chk_goods" value="'+this.goods_numbers+'"></td>';
-	                             	htmls += '<td style="width:40px">'+ this.destination_name + '<input type="hidden" name="destination_name" value="'+this.destination_name+'"/> </td>';
-	                                htmls += '<td style="width:40px"><a href="${pageContext.request.contextPath}/travel/goods/content_view?goods_numbers=' + this.goods_numbers + '" target="_blank">' + this.name + '</a></td>';
-	                                htmls += '<td style="width:40px">'+ this.price + '</td>';
-	                                htmls += '<td style="width:40px">'
+	                           		htmls += '<tr><td class="td-choice"><input type="checkbox" name="chk_goods" value="'+this.goods_numbers+'"></td>';
+	                             	htmls += '<td class="td">'+ this.destination_name + '<input type="hidden" name="destination_name" value="'+this.destination_name+'"/> </td>';
+	                                htmls += '<td class="td"><a href="${pageContext.request.contextPath}/travel/goods/content_view?goods_numbers=' + this.goods_numbers + '" target="_blank">' + this.name + '</a></td>';
+	                                htmls += '<td class="td">'+ this.price + '</td>';
+	                                htmls += '<td class="td">'
 	                                		 + '<select name="count">'
 	                                		 + '<c:forEach begin="1" end="10" var="i">'
 	                                         + 		'<option value="${i}">${i}</option>'
 											 + '</c:forEach></select>'
 											 + '</td>';	
-	                                htmls += '<td style="width:40px">'+ this.amount + '</td></tr>';	//상품 재고수량
-	                                
+	                                                               
 	                            });   //each end
 	                        }
 	                        $("#goods-box").append(htmls);

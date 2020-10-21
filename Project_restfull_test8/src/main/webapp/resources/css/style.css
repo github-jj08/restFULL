@@ -3927,4 +3927,52 @@ ol {
 	 width:10%;
 }
 
-         
+ /* 상품 목록 표시 css */
+.choosecourse .goods #goodsList {
+    padding: 80px 0;
+}
+
+.choosecourse .goods #goodsList h4 {
+	font-weight: 600;
+	padding:7px;
+}
+
+.choosecourse .goods #goodsList table {
+	padding : 7px;
+	width:100%
+}
+.choosecourse .goods #goodsList table .td-choice {
+	width: 8%;
+}
+
+.choosecourse .goods #goodsList table .td {
+	width:23%;
+	text-aglin:center;
+}
+
+.choosecourse .goods #goodsList .tp b{
+	float:right;
+	font-size: 20px;
+	padding: 10px 0;
+	
+}
+
+.choosecourse .goods #goodsList .tp #totalPrice {
+	float:right;
+	padding: 10px 0;
+}
+
+.choosecourse .goods #goodsList #buy {
+	float:right;
+	padding: 10px 0;
+	background-color:#8a93c0;
+	border: #8a93c0 2px solid;
+	color:white;
+}
+
+
+
+
+
+
+
