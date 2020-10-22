@@ -31,8 +31,7 @@
          <!-- hidden -->
          <input type="hidden" name="goods_numbers" value="${modify_view.goods_numbers}"/>
          <hr/>               
-            여행지명 : ${modify_view.destination_name}
-            <input type="hidden" name="destination_name" id="destination_name" value="${modify_view.destination_name}"/>
+            <input type="hidden" name="destination_numbers" id="destination_numbers" value="${modify_view.destination_numbers}"/>
             <hr/>
             상품명 : <input type="text" name="name" value="${modify_view.name}"/>
             판매업자 : <input type="text" name="seller" value="${modify_view.seller}"/>

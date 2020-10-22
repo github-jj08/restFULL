@@ -279,7 +279,7 @@ public class AdminBoardController {
       int destNum = destinationVO.getDestination_numbers();
       log.info("여행지번호 : " + destNum);
       adBoardService.modifyDestVO(destinationVO);
-      return "redirect:/admin/dest/content_view?destination_name="+ destNum;
+      return "redirect:/admin/dest/content_view?destination_numbers="+ destNum;
    }
    
    //5. 여행지 삭제
@@ -302,11 +302,11 @@ public class AdminBoardController {
    }
 
    //2. 상품 등록 페이지
-   @GetMapping("/dest/{destination_name}/goods/write_view")
-   public String goodsWrite_view(@PathVariable(name="destination_name") String destination_name, Model model) {
+   @GetMapping("/dest/{destination_numbers}/goods/write_view")
+   public String goodsWrite_view(@PathVariable(name="destination_numbers") int destination_numbers, Model model) {
       log.info("dest_write_view");
-      log.info(destination_name);
-      model.addAttribute("destination_name", destination_name);
+      log.info(destination_numbers);
+      model.addAttribute("destVO",adBoardService.getDestVO(destination_numbers));
       return "admin/goods_write_view";
    }
    
@@ -317,7 +317,7 @@ public class AdminBoardController {
       log.info("getDestination_name = " + goodsVO.getDestination_name());
       adBoardService.writeGoodsVO(goodsVO);
       //상품 등록 후 등록한 상품의 view로 이동
-      int goodsNum = goodsVO.getGoods_numbers();
+      int goodsNum = goodsVO.getDestination_numbers();
       return "redirect:/admin/dest/content_view?destination_numbers="+ goodsNum;
    }             
    
