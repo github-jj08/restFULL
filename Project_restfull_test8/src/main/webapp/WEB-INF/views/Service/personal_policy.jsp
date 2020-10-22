@@ -14,7 +14,8 @@
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
 
-
+   <div class="text-center"><h2>약관 및 정책</h2></div>
+   <hr>
 
  <!-- Blog Section Begin -->
     <section class="blog-section spad">
