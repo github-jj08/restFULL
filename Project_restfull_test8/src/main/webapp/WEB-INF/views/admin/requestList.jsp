@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table width="500" cellpadding="0" cellspacing="0" border="1">
+	<table width="700" cellpadding="0" cellspacing="0" border="1">
 		<tr>
 			<td>결제 번호</td>
 			<td>주문 번호</td>
@@ -47,6 +47,6 @@
 		</c:forEach>
 	</table>
 	
-	<h3>[<a href="userHome">돌아가기</a>]</h3>
+	<h3><button onclick="history.go(-1);">돌아가기</button></h3>
 </body>
 </html>

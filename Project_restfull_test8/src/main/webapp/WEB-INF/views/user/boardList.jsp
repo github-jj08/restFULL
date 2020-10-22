@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>RestFuLL | 내 게시글</title>
 <script>
 	function selChange() {
 		var sel = document.getElementById('cntPerPage').value;
@@ -17,7 +17,6 @@
 </head>
 <body>
 <sec:authentication var="principal" property="principal"/>
-<<<<<<< HEAD
 	<%@ include file="/WEB-INF/include/js-header.jsp"%>
 	<h2 class="text-center">내 게시글 보기 페이지 입니다.</h2>
 	<hr>

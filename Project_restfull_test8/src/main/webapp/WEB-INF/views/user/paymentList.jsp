@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>RestFuLL | 결제 내역</title>
 </head>
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
@@ -33,7 +33,7 @@
 				        </div>
 			        </div>
 			        <div class="col-sm-9 order-2">
-				        <table width="500" cellpadding="0" cellspacing="0" border="1">
+				        <table width="600" cellpadding="0" cellspacing="0" border="1">
 							<tr>
 								<td>결제 번호</td>
 								<td>주문 번호</td>

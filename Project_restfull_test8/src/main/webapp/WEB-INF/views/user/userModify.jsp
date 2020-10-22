@@ -6,7 +6,7 @@
 <html lang="ko">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>사용자 홈</title>
+    <title>RestFuLL | 개인정보 수정</title>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
@@ -112,9 +112,7 @@
 			       
 			        <div class="col-sm-9 order-2">
 						<sec:authentication var="principal" property="principal"/>
-						<p>Principal : <sec:authentication property="principal.user"/></p>
 						<p>사용자 아이디 : <sec:authentication property="principal.user.member_id"/></p>
-						<p>사용자 비밀번호 : <sec:authentication property="principal.user.pw"/></p>
 						<p>사용자 이름 : <sec:authentication property="principal.user.name"/></p>
 						<p>사용자 성별 : <sec:authentication property="principal.user.gender"/></p>
 						<p>사용자 이메일 : <sec:authentication property="principal.user.email"/></p>
@@ -155,7 +153,7 @@
 									  
 									  <tr>
 										   <td>이메일</td>
-										   <td><input type="email" class="form-control" id="email" placeholder="EMAIL" name="email" value="<sec:authentication property="principal.user.email"/>"/><br/>
+										   <td><input type="email" id="email" placeholder="EMAIL" name="email" value="<sec:authentication property="principal.user.email"/>"/>
 										   </td>
 									  </tr>
 									

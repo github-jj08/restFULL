@@ -13,7 +13,7 @@ pageEncoding="UTF-8"%>
 	 	
 	 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-		<title>회원탈퇴</title>
+		<title>RestFuLL | 회원탈퇴</title>
     <script>
     $(document).ready(function() {
 		// 취소
@@ -87,7 +87,7 @@ pageEncoding="UTF-8"%>
 								<div class="form-group has-feedback">
 								<sec:authentication var="principal" property="principal"/>
 									<label class="control-label" for="userId">아이디</label>
-									<input class="form-control" type="text" name="member_id" value="<sec:authentication property="principal.user.member_id"/>"/>
+									<input class="form-control" type="text" name="member_id" value="<sec:authentication property="principal.user.member_id"/>" readonly/>
 								</div>
 								<div class="form-group has-feedback">
 									<label class="control-label" for="userPass">비밀번호</label>
@@ -95,7 +95,7 @@ pageEncoding="UTF-8"%>
 								</div>
 								<div class="form-group has-feedback">
 									<label class="control-label" for="userName">성명</label>
-									<input class="form-control" type="text" id="name" value="<sec:authentication property="principal.user.name"/>" readonly="readonly"/>
+									<input class="form-control" type="text" id="name" value="<sec:authentication property="principal.user.name"/>" readonly/>
 								</div>
 								<div class="form-group has-feedback">
 									<button class="btn btn-success" type="submit" id="submit">회원탈퇴</button>
