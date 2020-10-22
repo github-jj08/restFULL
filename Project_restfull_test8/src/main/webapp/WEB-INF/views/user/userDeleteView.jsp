@@ -67,7 +67,7 @@ pageEncoding="UTF-8"%>
 		                <div class="col-sm-3 order-1">
 		                    <div class="blog-sidebar">
 								<div class="blog-catagory menu-background">
-							        <h4>고객센터</h4>
+							        <h4>마이페이지</h4>
 							        <ul>
 							            <li><p>[<a href="<c:url value="userModify" />">개인정보 수정</a>]</p></li>
 							            <li><p>[<a href="myList?member_id=<sec:authentication property="principal.user.member_id"/>">내 게시글 보기</a>]</p></li>
@@ -82,7 +82,6 @@ pageEncoding="UTF-8"%>
 					        </div>
 				        </div>
 				        <div class="col-sm-9 order-2">
-				        	<h4>[<a href="<c:url value="${pageContext.request.contextPath}/user/userHome" />">홈으로 돌아가기</a>]</h4>
 							<section id="container">
 								<div class="form-group has-feedback">
 								<sec:authentication var="principal" property="principal"/>

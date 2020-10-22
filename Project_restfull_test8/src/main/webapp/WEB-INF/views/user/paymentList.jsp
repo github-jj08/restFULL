@@ -18,7 +18,7 @@
 	                <div class="col-sm-3 order-1">
 	                    <div class="blog-sidebar">
 							<div class="blog-catagory menu-background">
-						        <h4>고객센터</h4>
+						        <h4>마이페이지</h4>
 						        <ul>
 						            <li><p>[<a href="<c:url value="userModify" />">개인정보 수정</a>]</p></li>
 						            <li><p>[<a href="myList?member_id=<sec:authentication property="principal.user.member_id"/>">내 게시글 보기</a>]</p></li>
@@ -33,17 +33,18 @@
 				        </div>
 			        </div>
 			        <div class="col-sm-9 order-2">
-				        <table width="500" cellpadding="0" cellspacing="0" border="1">
-							<tr>
-								<td>결제 번호</td>
-								<td>주문 번호</td>
-								<td>주문자 id</td>
-								<td>여행지명</td>
-								<td>상품명</td>
-								<td>상품가격</td>
-								<td>결제 날짜</td>
-								<td>취소 여부</td>
-							</tr>
+				       <div class="notice-table">
+							<table id="list-table">
+								<tr class="firs-list">
+									<td>결제 번호</td>
+									<td>주문 번호</td>
+									<td>주문자 id</td>
+									<td>여행지명</td>
+									<td>상품명</td>
+									<td>상품가격</td>
+									<td>결제 날짜</td>
+									<td>취소 여부</td>
+								</tr>
 							<c:forEach items="${list}" var="vo">
 							<tr>
 								<td>${vo.imp_uid}</td>
