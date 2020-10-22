@@ -10,7 +10,7 @@
 </head>
 
 <body>
-
+<%@ include file="/WEB-INF/include/js-header.jsp"%>
 <h1>관리자 페이지 입니다.</h1>
 
 <form:form action="${pageContext.request.contextPath}/logout" method="POST">
@@ -22,5 +22,9 @@
 <h3>[<a href="<c:url value="/admin/board/qnas" />">문의 및 신고 답변</a>]</h3>
 <h3>[<a href="<c:url value="/admin/board/dest" />">여행지 및 상품 관리</a>]</h3>
 
+
+
+
+<%@ include file="/WEB-INF/include/js-footer.jsp"%>
 </body>
 </html>

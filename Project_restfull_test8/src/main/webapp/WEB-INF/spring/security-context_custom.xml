@@ -9,12 +9,16 @@
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
     
-    <mvc:annotation-driven />
-    <!-- 검사 URL -->
+    <http pattern="/**/*.css" security="none"/>
+    <http pattern="/fonts/**" security="none"/>
+    <http pattern="/img/**" security="none"/>
+    <http pattern="/**/*.js" security="none"/>
+    
     <http auto-config="true" use-expressions="true">
         <intercept-url pattern="/user/**" access="hasAnyRole('USER, ADMIN')" />
+        <intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
 		<intercept-url pattern="/**" access="permitAll" />
-		        
+
         <form-login login-page="/login"
                     default-target-url="/"
                     authentication-failure-url="/login?error"
@@ -24,6 +28,11 @@
          <logout logout-url="/logout"
                 logout-success-url="/" /> 
                 
+         <!-- 중복 로그인방지 설정 -->
+	    <session-management invalid-session-url="/login">
+	        <concurrency-control max-sessions="1" expired-url="/login"/>
+	    </session-management>
+
         <access-denied-handler error-page="/login/accessDenied" />
         <csrf disabled="true"></csrf>
     </http>
@@ -34,6 +43,7 @@
     
     <beans:bean id="customNoOpPasswordEncoder" class="bit.project.restfull.security.customNoOpPasswordEncoder"/>
     <beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+    
     <beans:bean id="customUserDetailsService" class="bit.project.restfull.security.CustomUserDetailsService"/>
     
 	

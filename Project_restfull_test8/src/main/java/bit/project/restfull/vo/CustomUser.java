@@ -18,11 +18,10 @@ import lombok.extern.log4j.Log4j;
 public class CustomUser extends User {
 
 	private UserVO user;
-	/* principal.user < ¿ä °´Ã¼*/
+	/* principal.user < ï¿½ï¿½ ï¿½ï¿½Ã¼*/
 	
 	public CustomUser(String userid, String password, Collection<? extends GrantedAuthority> authorities) {
 		super(userid, password, authorities);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public CustomUser(UserVO uservo) {
@@ -30,7 +29,6 @@ public class CustomUser extends User {
 		super(uservo.getMember_id(), uservo.getPw(), Collections.singletonList(new SimpleGrantedAuthority(uservo.getAuthorities())));
 		
 		this.user = uservo;
-		
 	}
 	
 }

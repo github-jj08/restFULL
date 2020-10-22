@@ -4,6 +4,7 @@ package bit.project.restfull.security;
 import javax.inject.Inject;
 
 
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,11 +28,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 				
 		UserVO vo = loginmapper.readUser(member_id);
 		
+		
 		log.warn("queried by UserVO mapper : " + vo);		
 		
 		return vo == null ? null : new CustomUser(vo);
 
 	}
-   
+	
 }
 

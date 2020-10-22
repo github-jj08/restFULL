@@ -16,33 +16,33 @@ import bit.project.restfull.vo.LikesVO;
 public interface BoardService {
 	List<BoardVO> getList(int boardlist_numbers, String searchWord);
 	
-	//¸ÞÀÎ °Ô½Ã±Û Ãâ·Â
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½
 	BoardVO getBoardVO(int board_numbers);
 	List<AttachmentVO> getBoardAttachmentVO(int board_numbers);
 	
-	//±ÛÀÛ¼º
-	void writeBoardVO(MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException;
+	//ï¿½ï¿½ï¿½Û¼ï¿½
+	int writeBoardVO(MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException;
 	
-	//±Û¼öÁ¤
+	//ï¿½Û¼ï¿½ï¿½ï¿½
 	void modifyBoardVO(BoardVO boardVO);
 
-	//±Û»èÁ¦
+	//ï¿½Û»ï¿½ï¿½ï¿½
 	void deleteBoardVO(int board_numbers);
 
-	//ÁÁ¾Æ¿ä ±â´É 
+	//ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ï¿½ 
 	int likeCheck(LikesVO likesVO);
 	void likeUpdate(LikesVO likesVO);
 	int likeCount(int board_numbers);
 
-	//´ñ±Û ±â´É
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public void writeComment(CommentVO commentVO);
 	public List<CommentVO> commentList(int board_numbers);
 	public void delComment(int comments_numbers);
 
-	//°ü·Ã °Ô½Ã±Û »Ì±â
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½Ì±ï¿½
 	List<BoardVO> getOtherBoardVO(int board_numbers, String location);
 
-	//½Å°í±Û
+	//ï¿½Å°ï¿½ï¿½
 	void writeBoardVO(BoardVO boardVO);
 
 	List<BoardVO> boardList(String member_id);

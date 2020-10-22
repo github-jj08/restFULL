@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title></title>
-    <%@ include file="/WEB-INF/include/plugins.jspf"%>
+
 </head>
 
 <body>
@@ -76,6 +76,17 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> 2020 
         </div>
     </footer>
     <!-- Footer Section End -->
+    
+    
+            <!-- Js Plugins -->
+    <script src="resources/js/jquery-ui.min.js"></script>
+    <script src="resources/js/jquery.countdown.min.js"></script>
+    <script src="resources/js/jquery.nice-select.min.js"></script>
+    <script src="resources/js/jquery.zoom.min.js"></script>
+    <script src="resources/js/jquery.dd.min.js"></script>
+    <script src="resources/js/jquery.slicknav.js"></script>
+    <script src="resources/js/owl.carousel.min.js"></script>
+    <script src="resources/js/main.js"></script>
 
 </body>
 </html>

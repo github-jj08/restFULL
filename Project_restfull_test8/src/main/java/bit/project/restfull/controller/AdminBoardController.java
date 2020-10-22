@@ -41,7 +41,8 @@ import lombok.extern.log4j.Log4j;
  */
 @Controller
 @Log4j
-@RequestMapping("/admin/board")
+@RequestMapping("/admin")
+//ê´€ë¦¬ì í˜ì´ì§€ ê¸°ëŠ¥ë“¤
 public class AdminBoardController {
 
 
@@ -54,37 +55,9 @@ public class AdminBoardController {
    @Autowired
    private AdminBoardService adboardService;
 
-   
-   
-   //////È¸¿ø °ü¸®///////
-   @PostMapping("/adminUpdate") // to modify user information by admin
-	public String adminUpdate(UserVO userVO, HttpSession session) {
-		log.info("to Modify user information");
-		
-		log.info(userVO.getMember_id());  
-		log.info(userVO.getEmail()); 
-		log.info(userVO.getPw());
-		log.info(userVO.getPhone()); 
-		log.info(userVO.getGrade_name());
-		
-		userService.adminModifyUser(userVO);
-		session.invalidate();
-		
-		return "admin/adminHome";
-	}
-   
-   @ResponseBody
-	@PostMapping("admin/userDeleteAdmin") // delete user account by admin
-	public String userDeleteAdmin(@RequestBody UserVO userVO, Authentication authentication, HttpServletRequest request) throws Exception{
-		Gson gson = new Gson();
-		
-		userService.userDelete(userVO);
-           
-           request.getSession().invalidate();  
-           return gson.toJson(new ResponseVO<>(200, "success"));
-   }
-	
-	@GetMapping("/userList") // to see user list with paging
+   /* íšŒì› ê´€ë¦¬ */
+   //1. íšŒì› ë¦¬ìŠ¤íŠ¸ with paging
+   @GetMapping("/userList")
 	public String userlist(PagingVO pagingVO, Model model
 			, @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
@@ -103,64 +76,101 @@ public class AdminBoardController {
 		model.addAttribute("restful_user", userService.userList(pagingVO));
 		return "admin/userList";
 	}
-	
-	@GetMapping("/user_content_view") // to see user detail information after list
+   
+    //2. íŠ¹ì • íšŒì› ì •ë³´ í™•ì¸
+	@GetMapping("/user_content_view") 
 	public String user_content_view(UserVO userVO, BoardVO boardVO, Model model) {
-		
-		//À¯Àú ¸®½ºÆ® ÃßÃâ ÇÔ¼ö
-		log.info("content_view");
+		log.info("ìœ ì €ì •ë³´ í™•ì¸");
 		String member_id = userVO.getMember_id();
-		log.info(member_id); // name
+		log.info("í™•ì¸í•  user id" + member_id); // name
 		userVO = userService.getUserVO(member_id);
-		log.info(userVO);
 		
 		model.addAttribute("userDetail", userVO);
 		model.addAttribute("admin_board", boardService.boardList(member_id));
-		return "user_content_view";
+		return "admin/userData";
 	}
 	
-	
-	@PostMapping("admin/boardDeleteAdmin") // °ü¸®ÀÚ ±ÇÇÑ °Ô½Ã±Û »èÁ¦
-	public String boardDeleteAdmin(BoardVO boardVO, HttpSession session) throws Exception{
+	//3. íšŒì› ê³„ì • ì‚­ì œ
+	@ResponseBody
+	@PostMapping("/userDeleteAdmin") 
+	public String userDeleteAdmin(@RequestBody UserVO userVO, Authentication authentication, HttpServletRequest request) throws Exception{
+		Gson gson = new Gson();
+			
+		userService.userDelete(userVO);
+	           
+	    	request.getSession().invalidate();  
+	        return gson.toJson(new ResponseVO<>(200, "success"));
+	}
+
+	//4. ê´€ë¦¬ì ê¶Œí•œìœ¼ë¡œ íšŒì› ì •ë³´ ë³€ê²½
+	@PostMapping("/adminUpdate") 
+	public String adminUpdate(UserVO userVO, HttpSession session) {
+		log.info("to Modify user information");
 		
-		//±âÁ¸¿¡ ÀÖ´ø delete¿Í ¶È°°¾Æ¼­ ÆÄ¶ó¹ÌÅÍ ¼öÁ¤
-		boardService.deleteBoardVO(boardVO.getBoard_numbers());
+		log.info(userVO.getMember_id());  
+		log.info(userVO.getEmail()); 
+		log.info(userVO.getPw());
+		log.info(userVO.getPhone()); 
+		log.info(userVO.getGrade_name());
 		
-		session.invalidate(); 
+		userService.adminModifyUser(userVO);
+		session.invalidate();
+		
 		return "admin/adminHome";
 	}
-	
    
-   ////////À¥»çÀÌÆ® °ü¸®////////////
-   //°øÁö»çÇ× ¹× ÀÌº¥Æ® °ü¸® : ±âº» url = /notice
+	//5. ê´€ë¦¬ì ê¶Œí•œìœ¼ë¡œ íšŒì› ê²Œì‹œê¸€ ì¡°íšŒ
+	@GetMapping("/boardView") 
+	public String boardView(String board_numbers, Model model) throws Exception{
+		log.info("content_view");
+	    int board_no = Integer.parseInt(board_numbers);
+	    log.info("ê²Œì‹œê¸€ view í˜¸ì¶œ; ê²Œì‹œê¸€ ë²ˆí˜¸ = " + board_no);
+
+	    model.addAttribute("content_view",adboardService.getBoardVO(board_no));
+	    model.addAttribute("filelist", adboardService.getBoardAttachmentVO(board_no));
+		return "admin/userBoard";
+	}
+	
+	//6. ê´€ë¦¬ì ê¶Œí•œìœ¼ë¡œ íšŒì› ê²Œì‹œê¸€ ì‚­ì œ
+	@ResponseBody
+	@GetMapping("/boardDeleteAdmin") 
+	public void boardDeleteAdmin(String board_numbers, HttpSession session) throws Exception{
+		log.info("adController delete : " + Integer.parseInt(board_numbers));
+		//ê¸°ì¡´ì— ìˆë˜ deleteì™€ ë˜‘ê°™ì•„ì„œ íŒŒë¼ë¯¸í„° ìˆ˜ì •
+		boardService.deleteBoardVO(Integer.parseInt(board_numbers));
+		session.invalidate(); 
+	}
+	
+   /* ê³µì§€ì‚¬í•­ ë° ì´ë²¤íŠ¸ ê´€ë¦¬  (ê¸°ë³¸ url : /notice) */
+   //1. ê³µì§€ì‚¬í•­ ë° ì´ë²¤íŠ¸ ë¦¬ìŠ¤íŠ¸
    @RequestMapping(value = "/notice", method = RequestMethod.GET)
    public String noticeList() {
 	   return "admin/noticeList";
    }
    
+   //2. ê²Œì‹œíŒ ë²ˆí˜¸ë¡œ ê³µì§€ì‚¬í•­(2) í˜¹ì€ ì´ë²¤íŠ¸(5) ë¦¬ìŠ¤íŠ¸ ë½‘ê¸°
    @ResponseBody
    @GetMapping("/notice/{boardlist_numbers}")
    public List<AdminBoardVO> ajaxNoticeList(@PathVariable(value="boardlist_numbers") int boardlist_numbers, Model model) {
       log.info("boardlist_numbers : " + boardlist_numbers);
-      //boardlist_numbers¿¡ ÇØ´çÇÏ´Â °Ô½Ã±ÛµéÀ» ºÒ·¯¿È
+      //boardlist_numbersì— í•´ë‹¹í•˜ëŠ” ê²Œì‹œê¸€ë“¤ì„ ë¶ˆëŸ¬ì˜´
       List<AdminBoardVO> noticelist = adboardService.getList(boardlist_numbers);
       model.addAttribute("noticelist", noticelist);
       return noticelist;
    }
    
-   //content_view
+   //3. ê³µì§€ì‚¬í•­ ë° ì´ë²¤íŠ¸ ê¸€ ì¡°íšŒ
    @GetMapping("/notice/content_view")
    public String content_view(String board_numbers, Model model) {
       log.info("content_view");
       int board_no = Integer.parseInt(board_numbers);
-      log.info("°Ô½Ã±Û view È£Ãâ; °Ô½Ã±Û ¹øÈ£ = " + board_no);
+      log.info("ê²Œì‹œê¸€ view í˜¸ì¶œ; ê²Œì‹œê¸€ ë²ˆí˜¸ = " + board_no);
       model.addAttribute("content_view",adboardService.getBoardVO(board_no));
       model.addAttribute("filelist", adboardService.getBoardAttachmentVO(board_no));
       return "admin/notice_content_view";
    }
    
-
-   //write_view
+   //4. ê³µì§€ì‚¬í•­ ë° ì´ë²¤íŠ¸ ê¸€ ì‘ì„± í˜ì´ì§€ ì¶œë ¥
    @GetMapping("/notice/write_view")
    public String write_view() {
       log.info("write_view ");
@@ -168,15 +178,16 @@ public class AdminBoardController {
       return "admin/notice_write_view";
    }
    
+   //4-2. ê³µì§€ì‚¬í•­ ë° ì´ë²¤íŠ¸ ê¸€ ì‘ì„±
    @RequestMapping(value="/notice/write", method = {RequestMethod.GET, RequestMethod.POST})
    public String write(HttpServletRequest request, @RequestParam(value="file") MultipartFile[] uploadfiles, AdminBoardVO boardVO) {
       log.info("write");
       adboardService.writeBoardVO(uploadfiles, boardVO);
       log.info("service.uploadFile(uploadFiles);");
-      return "redirect:/admin/board/notice";
+      return "redirect:/admin/notice";
    }
 
-   //¼öÁ¤ ±â´É modify_view ÆäÀÌÁö È£Ãâ
+   //5. ê³µì§€ì‚¬í•­ ë° ì´ë²¤íŠ¸ ê¸€ ìˆ˜ì • í˜ì´ì§€ í˜¸ì¶œ(ì‚¬ì§„ ìˆ˜ì •ì´ ë¶ˆê°€ëŠ¥í•˜ë¯€ë¡œ ë”°ë¡œ ìƒì„±í•¨)
    @RequestMapping(value = "/notice/modify", method = RequestMethod.GET)
    public String modify(int board_numbers, Model model) {
       model.addAttribute("modify_view", adboardService.getBoardVO(board_numbers));
@@ -185,33 +196,33 @@ public class AdminBoardController {
       return "admin/notice_modify_view";
    }
    
-   //¼öÁ¤ ±â´É ¼öÇà
+   //5-2. ê³µì§€ì‚¬í•­ ë° ì´ë²¤íŠ¸ ê¸€ ìˆ˜ì • ê¸°ëŠ¥ ìˆ˜í–‰
    @RequestMapping(value = "/notice/modify", method = RequestMethod.POST)
    public String modify(AdminBoardVO boardVO) {
       log.info("modify()");
       adboardService.modifyBoardVO(boardVO);
-      log.info("±Û¹øÈ£ - " + boardVO.getBoard_numbers());
-      return "redirect:/admin/board/notice/content_view?board_numbers="+ boardVO.getBoard_numbers();
+      log.info("ê¸€ë²ˆí˜¸ - " + boardVO.getBoard_numbers());
+      return "redirect:/admin/notice/content_view?board_numbers="+ boardVO.getBoard_numbers();
    }
    
-   //delete?bId=${content_view.bId}
+   //6. ê³µì§€ì‚¬í•­ ë° ì´ë²¤íŠ¸ ê¸€ ì‚­ì œ
    @GetMapping("/notice/delete")
-   public String delete(AdminBoardVO boardVO, Model model) {
+   public void delete(AdminBoardVO boardVO, Model model) {
       adboardService.deleteBoardVO(boardVO.getBoard_numbers());
-      log.info("»èÁ¦ ¼º°ø");
-      return "redirect:/admin/board/notice";
+      log.info("ì‚­ì œ ì„±ê³µ");
    }
    
    
-   //////////////////////////////////////
-   //¿©ÇàÁö ¹× »óÇ° °ü¸® ±âº» url = /dest    ////
+   /* ì—¬í–‰ì§€ ë° ìƒí’ˆ ê´€ë¦¬ (ê¸°ë³¸ url = /dest) */
+   //1. ì—¬í–‰ì§€ ë° ìƒí’ˆ ë¦¬ìŠ¤íŠ¸
    @RequestMapping(value = "/dest", method = RequestMethod.GET)
    public String destList(Model model) {
       List<DestinationVO> destlist = adboardService.getDestList(); //select * from destination
       model.addAttribute("destlist", destlist);
       return "admin/destList";
    }
-   //content_view
+   
+   //2. ì—¬í–‰ì§€ ì¡°íšŒ
    @GetMapping("/dest/content_view")
    public String destContent_view(String destination_name, Model model) {
       log.info("content_view");
@@ -220,8 +231,7 @@ public class AdminBoardController {
       return "admin/dest_content_view";
    }
    
-
-   //write_view
+   //3. ì—¬í–‰ì§€ ë“±ë¡ í˜ì´ì§€ ì¶œë ¥
    @GetMapping("/dest/write_view")
    public String destWrite_view() {
       log.info("dest_write_view");
@@ -229,24 +239,27 @@ public class AdminBoardController {
       return "admin/dest_write_view";
    }
    
-   @RequestMapping(value="/dest/write", method = {RequestMethod.GET, RequestMethod.POST})
+   
+   //3-2. ì—¬í–‰ì§€ ë“±ë¡
+   @RequestMapping(value="/dest/write", method = {RequestMethod.POST})
    public String destWrite(DestinationVO destinationVO) {
       log.info("write");
       adboardService.writeDestVO(destinationVO);
       log.info("writeDestVO;");
-      return "redirect:/admin/board/dest/";
+      return "redirect:/admin/dest/";
    }
    
+   //3-3. ì—¬í–‰ì§€ ë“±ë¡ ì‹œ ì§€ì—­ì½”ë“œ ê°€ì ¸ì˜¤ê¸°
    @ResponseBody
    @GetMapping("/dest/getSigunguCode/{sidoCode}")
    public List<SidoguVO> getSigunguCode(@PathVariable(value="sidoCode") int sidoCode) {
       log.info("sidoCode : " + sidoCode);
-      //sidoNum¿¡ ÇØ´çÇÏ´Â Áö¿ªÄÚµåµéÀ» ºÒ·¯¿È
+      //sidoNumì— í•´ë‹¹í•˜ëŠ” ì§€ì—­ì½”ë“œë“¤ì„ ë¶ˆëŸ¬ì˜´
       List<SidoguVO> optionList = adboardService.getOptionList(sidoCode);
       return optionList;
    }
    
-   //¼öÁ¤ ±â´É modify_view ÆäÀÌÁö È£Ãâ
+   //4. ì—¬í–‰ì§€ ìˆ˜ì • ê¸°ëŠ¥ modify_view í˜ì´ì§€ í˜¸ì¶œ
    @RequestMapping(value = "/dest/modify", method = RequestMethod.GET)
    public String destModify(String destination_name, Model model) {
       model.addAttribute("modify_view", adboardService.getDestVO(destination_name));
@@ -254,28 +267,27 @@ public class AdminBoardController {
       return "admin/dest_modify_view";
    }
    
-   //¼öÁ¤ ±â´É ¼öÇà
+   //4-2. ì—¬í–‰ì§€ ìˆ˜ì • ê¸°ëŠ¥ ìˆ˜í–‰
    @RequestMapping(value = "/dest/modify", method = RequestMethod.POST)
    public String destModify(DestinationVO destinationVO) throws UnsupportedEncodingException {
       log.info("modify()");
       adboardService.modifyDestVO(destinationVO);
-      log.info("±Û¹øÈ£ - " + destinationVO.getDestination_name());
+      log.info("ê¸€ë²ˆí˜¸ - " + destinationVO.getDestination_name());
       String destination_name = destinationVO.getDestination_name();
       String encodedParam = URLEncoder.encode(destination_name, "UTF-8");
-      return "redirect:/admin/board/dest/content_view?destination_name="+ encodedParam;
+      return "redirect:/admin/dest/content_view?destination_name="+ encodedParam;
    }
    
-   //delete?bId=${content_view.bId}
+   //5. ì—¬í–‰ì§€ ì‚­ì œ
    @GetMapping("/dest/delete")
    public String destDelete(DestinationVO destinationVO, Model model) {
       adboardService.deleteDestVO(destinationVO.getDestination_name());
-      log.info("»èÁ¦ ¼º°ø");
-      return "redirect:/admin/board/dest/";
+      log.info("ì‚­ì œ ì„±ê³µ");
+      return "redirect:/admin/dest/";
    }
    
-   //////////////////////////////////////
-   //»óÇ° °ü¸® ±âº» url = /dest/goods/    ////
-   //content_view
+   /* ìƒí’ˆ ê´€ë¦¬ (ê¸°ë³¸ url = /dest/goods) */
+   //1. ìƒí’ˆ ì¡°íšŒ
    @GetMapping("/dest/goods/content_view")
    public String goodsContent_view(String goods_numbers, Model model) {
       log.info("content_view");
@@ -284,7 +296,7 @@ public class AdminBoardController {
       return "admin/goods_content_view";
    }
 
-   //write_view
+   //2. ìƒí’ˆ ë“±ë¡ í˜ì´ì§€
    @GetMapping("/dest/{destination_name}/goods/write_view")
    public String goodsWrite_view(@PathVariable(name="destination_name") String destination_name, Model model) {
       log.info("dest_write_view");
@@ -293,6 +305,7 @@ public class AdminBoardController {
       return "admin/goods_write_view";
    }
    
+   //3. ìƒí’ˆ ë“±ë¡
    @RequestMapping(value="/dest/goods/write", method = {RequestMethod.POST})
    public String goodsWrite(GoodsVO goodsVO) throws UnsupportedEncodingException {
       log.info("write : " + goodsVO.getName());
@@ -300,106 +313,70 @@ public class AdminBoardController {
       log.info("getDestination_name = " + goodsVO.getDestination_name());
       String destination_name = goodsVO.getDestination_name();
       String encodedParam = URLEncoder.encode(destination_name, "UTF-8");
-      return "redirect:/admin/board/dest/content_view?destination_name="+ encodedParam;
+      return "redirect:/admin/dest/content_view?destination_name="+ encodedParam;
    }             
    
-   //¼öÁ¤ ±â´É modify_view ÆäÀÌÁö È£Ãâ
+   //4. ìˆ˜ì • ê¸°ëŠ¥ modify_view í˜ì´ì§€ í˜¸ì¶œ
    @RequestMapping(value = "/dest/goods/modify", method = RequestMethod.GET)
    public String goodsModify(int goods_numbers, Model model) {
       model.addAttribute("modify_view", adboardService.getGoodsVO(goods_numbers));
-      
       return "admin/goods_modify_view";
    }
    
-   //¼öÁ¤ ±â´É ¼öÇà
+   //4-2. ìˆ˜ì • ê¸°ëŠ¥ ìˆ˜í–‰
    @RequestMapping(value = "/dest/goods/modify", method = RequestMethod.POST)
    public String goodsModify(GoodsVO goodsVO) {
       log.info("modify()");
+      log.info("ì—¬í–‰ì§€ - " + goodsVO.getDestination_name());
+      log.info("ìƒí’ˆë²ˆí˜¸ - " + goodsVO.getGoods_numbers());
+      log.info("ìƒí’ˆë²ˆí˜¸ - " + goodsVO.getName());
       adboardService.modifyGoodsVO(goodsVO);
-      log.info("±Û¹øÈ£ - " + goodsVO.getDestination_name());
-      return "redirect:/admin/board/dest/goods/content_view?goods_numbers="+ goodsVO.getGoods_numbers();
+      return "redirect:/admin/dest/goods/content_view?goods_numbers="+ goodsVO.getGoods_numbers();
    }         
    
-   //delete?bId=${content_view.bId}
+   //5. ìƒí’ˆ ì‚­ì œ
    @GetMapping("/dest/{destination_name}/goods/delete")
    public String goodsDelete(@PathVariable(name="destination_name") String destination_name, int goods_numbers, Model model) throws UnsupportedEncodingException {
       adboardService.deleteGoodsVO(goods_numbers);
-      log.info("»èÁ¦ ¼º°ø");
+      log.info("ì‚­ì œ ì„±ê³µ");
       String encodedParam = URLEncoder.encode(destination_name, "UTF-8");
-      return "redirect:/admin/board/dest/content_view?destination_name=" + encodedParam;
+      return "redirect:/admin/dest/content_view?destination_name=" + encodedParam;
    }
    
-   //È¸¿øÀÇ ¹®ÀÇ ¹× ½Å°í¿¡ ´ëÇÑ ´äº¯ ÀÛ¼º : admin/board/qnas
+   /* ë¬¸ì˜ê¸€ ê´€ë¦¬ (url:admin/board/qnas) */
+   //1. íšŒì›ì˜ ë¬¸ì˜ ë° ì‹ ê³  ë¦¬ìŠ¤íŠ¸
    @GetMapping("/qnas")
    public String qnas() {
       log.info("qnas");
       return "admin/qnaList";
    }
    
+   
+   //2. ê²Œì‹œíŒ ë²ˆí˜¸ë¥¼ ê°€ì§€ê³  ë¬¸ì˜ê¸€ or ì‹ ê³ ê¸€ ë¦¬ìŠ¤íŠ¸ ë¶„ë¥˜í•´ì„œ ì¶œë ¥
    @ResponseBody
    @GetMapping("/qnas/{boardlist_numbers}")
    public List<AdminBoardVO> ajaxQnAsList(@PathVariable(value="boardlist_numbers") int boardlist_numbers, Model model) {
       log.info("boardlist_numbers : " + boardlist_numbers);
-      //boardlist_numbers¿¡ ÇØ´çÇÏ´Â °Ô½Ã±ÛµéÀ» ºÒ·¯¿È
+      //boardlist_numbersì— í•´ë‹¹í•˜ëŠ” ê²Œì‹œê¸€ë“¤ì„ ë¶ˆëŸ¬ì˜´
       List<AdminBoardVO> list = adboardService.getFilterList(boardlist_numbers);
       model.addAttribute("list", list);
       return list;
    }
    
    
-   //content_view
-   @GetMapping("/notice/content_view")
-   public String content_view(String board_numbers, Model model) {
+   //3. ë¬¸ì˜ê¸€/ì‹ ê³ ê¸€ ì¡°íšŒ - adminìš© content_view
+   /* adminì€ ëŒ“ê¸€ í˜•ì‹ìœ¼ë¡œ ë‹µë³€ê¸€ì„ ì‘ì„±í•  ìˆ˜ ìˆìŒ.
+    * ëŒ“ê¸€ê¸°ëŠ¥ì€ BoardControllerì— ì‘ì„±í•¨.
+    * addComments ë“±
+    */
+   @GetMapping("/qnas/content_view")
+   public String adminqna_view(String board_numbers, Model model) {
       log.info("content_view");
       int board_no = Integer.parseInt(board_numbers);
-      log.info("°Ô½Ã±Û view È£Ãâ; °Ô½Ã±Û ¹øÈ£ = " + board_no);
+      log.info("ê²Œì‹œê¸€ view í˜¸ì¶œ; ê²Œì‹œê¸€ ë²ˆí˜¸ = " + board_no);
       model.addAttribute("content_view",adboardService.getBoardVO(board_no));
       model.addAttribute("filelist", adboardService.getBoardAttachmentVO(board_no));
-      return "admin/notice_content_view";
+      return "admin/qna_content_view";
    }
-   
-
-   //write_view
-   @GetMapping("/notice/write_view")
-   public String write_view() {
-      log.info("write_view ");
-      
-      return "admin/notice_write_view";
-   }
-   
-   @RequestMapping(value="/notice/write", method = {RequestMethod.GET, RequestMethod.POST})
-   public String write(HttpServletRequest request, @RequestParam(value="file") MultipartFile[] uploadfiles, AdminBoardVO boardVO) {
-      log.info("write");
-      adboardService.writeBoardVO(uploadfiles, boardVO);
-      log.info("service.uploadFile(uploadFiles);");
-      return "redirect:/admin/board/notice";
-   }
-
-   //¼öÁ¤ ±â´É modify_view ÆäÀÌÁö È£Ãâ
-   @RequestMapping(value = "/notice/modify", method = RequestMethod.GET)
-   public String modify(int board_numbers, Model model) {
-      model.addAttribute("modify_view", adboardService.getBoardVO(board_numbers));
-      model.addAttribute("filelist", adboardService.getBoardAttachmentVO(board_numbers));
-      
-      return "admin/notice_modify_view";
-   }
-   
-   //¼öÁ¤ ±â´É ¼öÇà
-   @RequestMapping(value = "/notice/modify", method = RequestMethod.POST)
-   public String modify(AdminBoardVO boardVO) {
-      log.info("modify()");
-      adboardService.modifyBoardVO(boardVO);
-      log.info("±Û¹øÈ£ - " + boardVO.getBoard_numbers());
-      return "redirect:/admin/board/notice/content_view?board_numbers="+ boardVO.getBoard_numbers();
-   }
-   
-   //delete?bId=${content_view.bId}
-   @GetMapping("/notice/delete")
-   public String delete(AdminBoardVO boardVO, Model model) {
-      adboardService.deleteBoardVO(boardVO.getBoard_numbers());
-      log.info("»èÁ¦ ¼º°ø");
-      return "redirect:/admin/board/notice";
-   }
-   
    
 }

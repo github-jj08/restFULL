@@ -1,17 +1,19 @@
-<!-- <!-- 검색 자동완성 있음 -->
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
+<%@ page import="org.springframework.security.core.Authentication" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Fashi Template">
-    <meta name="keywords" content="Fashi, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>RestFuLL | 메인페이지</title>
-    <%@ include file="/WEB-INF/include/plugins.jspf"%>
+
 </head>
+
+
 
 <body>
 
@@ -20,14 +22,12 @@
 
     <!-- Hero Section Begin -->
     <section class="hero-section">
-        <div class="hero-items owl-carousel">
+       <div class="hero-items owl-carousel">
             <div class="single-hero-items set-bg" data-setbg="resources/img/KR_15.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
                             <h1>휴식 가득한 여행</h1>
-                            <p></p>
-                            <!--<a href="#" class="primary-btn"></a>-->
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
             </div>
 
         </div>
-    </section>
+     </section>
     <!-- Hero Section End -->
 
 

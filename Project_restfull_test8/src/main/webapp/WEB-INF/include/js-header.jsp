@@ -2,6 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
+<%@ page import="org.springframework.security.core.Authentication" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,15 +14,46 @@
     <meta name="keywords" content="Fashi, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>RestFuLL | 메인페이지</title>
-    <%@ include file="/WEB-INF/include/plugins.jspf"%>
+    <!-- 로고 -->
+	<link rel="shortcut icon" href="resources/img/favicon.ico"/>
+    <title></title>
+    
+    <script src="resources/js/jquery-3.3.1.min.js"></script>
+    <script src="resources/js/popper.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
+    
+    <!-- 자동완성 cdn -->
+     <link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+	
+	<!-- 소셜로그인 --> 
+    <script type="text/javascript" src="https://static.nid.naver.com/resources/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/themify-icons.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/style.css" type="text/css">
+    
+       
+	
+	 <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    
 </head>
 
+
+
+
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
 
     <!-- Header Section Begin -->
     <header class="header-section">
@@ -33,22 +68,26 @@
 		                 	</button>
 		                </sec:authorize>
 		             </c:if>
-	             
-		             <c:if test = "${member_id ne null}">
-						<input type="hidden" name="member_id" value="${user.member_id}"/>
-							<div class="showloign"></div>
-								<strong>${principal.user.sns_nickname}</strong>님 환영합니다.
-			              		 <a href="<c:url value="/user/userHome" />">🏠‍💁‍♀️‍🙋‍♀️💁‍♂️💒
-			              		<form action = "${pageContext.request.contextPath}/kakaologout" method="post">
-									<button type="submit" name="submit" id="kakaosubmit">로그아웃</button>
-								</form>
-							</div>
-			          </c:if>
-		          
-			          <c:if test="${principal.user.name == 'ADMIN'}">
-			              [<a href="<c:url value="/admin/adminHome" />">관리자 홈</a>]
-			          </c:if>
-
+		             
+		             
+	             	 <sec:authorize access="isAuthenticated()">
+						<div class="showloign">
+ 	             			<sec:authentication var="principal" property="principal"/>
+	             				<c:if test="${principal.user.authority_name == 'ROLE_USER'}">
+									<strong>${principal.user.member_id}</strong>님 환영합니다.
+						            <a href="<c:url value="/user/userHome" />">🏠‍💁‍♀️‍🙋‍♀️💁‍♂️💒</a>	
+					            </c:if>
+					            
+					            <c:if test="${principal.user.authority_name == 'ROLE_ADMIN'}">
+			            		  <a href="<c:url value="/admin/adminHome" />">👾관리자 홈👾</a>
+					            </c:if>
+					            
+								<form:form action="${pageContext.request.contextPath}/logout" method="POST">
+									<input type="submit" id="logoutsubmit" value="로그아웃" />
+								</form:form> 
+							
+						</div>	
+			        </sec:authorize>
                	</div>  
             </div>
          </div>
@@ -91,7 +130,7 @@
                     <div class="row">
                         <div class="col-lg-2 col-md-2">
                             <div class="logo">
-                                <a href="./rs-mainpage.jsp">
+                                <a href="${pageContext.request.contextPath}/">
                                     <img src="resources/img/LOGOsmall.png" alt="">
                                 </a>
                             </div>
@@ -114,12 +153,12 @@
             <div class="container">
                 <nav class="nav-menu mobile-menu">
                     <ul>
-                        <li class="active"><a href="./rs-mainpage.jsp">Home</a></li>
-                        <li><a href="${pageContext.request.contextPath}/write_view">글작성</a></li>
-                        <li><a href="#">여행코스작성</a></li>
+                        <li class="active"><a href="${pageContext.request.contextPath}/">Home</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/write_view">글작성</a></li>
+                        <li><a href="">여행코스작성</a></li>
                         <li><a href="./rs-Servicecenter.jsp">공지사항</a></li>
                         <li><a href="#">이벤트</a></li>
-                        <li><a href="./rs-Servicecenter_faq.jsp">자주하는질문</a></li>
+                        <li><a href="./FAQ.jsp">자주하는질문</a></li>
                         <!--<li><a href="#">로그인</a></li>-->
                     </ul>
                 </nav>

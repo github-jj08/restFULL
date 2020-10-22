@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -36,6 +38,7 @@ public class LoginController {
 	@Inject
     private BCryptPasswordEncoder passEncoder;
 	
+
 	//로그인
 	@GetMapping(value = "/login")
 	public String loginForm() {
@@ -44,16 +47,29 @@ public class LoginController {
 		return "login/login";
 	}
 	
-	//로그아웃.
-	@RequestMapping(value = "/logout")
-	public String logout(HttpSession session) throws Exception{
-		
-		log.info("/member/logout");
-		//세션 객체는  HttpServletRequest (login안에있음.) 여기서 가져옴
-		session.invalidate();// 메모리 날리는 대상 (가비지 콜렉터 )에게
 	
-		return "redirect:/";
+	
+	//로그아웃.
+	/*
+	 * @RequestMapping(value = "/logout") public String logout(HttpSession session)
+	 * throws Exception{
+	 * 
+	 * log.info("/member/logout"); //세션 객체는 HttpServletRequest (login안에있음.) 여기서 가져옴
+	 * session.invalidate();// 메모리 날리는 대상 (가비지 콜렉터 )에게
+	 * 
+	 * return "redirect:/"; }
+	 */
+	
+	// 회원가입약관동의창
+	@GetMapping("/register") // 회원가입 약관동의창 이동
+	public String confirm() {
+		
+		log.info("registerConfirm");
+		
+		return "member/registerConfirm";
 	}
+	
+	
 	
 	// 회원가입
 	@GetMapping("/join") // 회원가입 창 이동
@@ -61,7 +77,7 @@ public class LoginController {
 		
 		log.info("join");
 		
-		return "member/join";
+		return "member/register";
 	}
 
 	
@@ -71,7 +87,7 @@ public class LoginController {
 		
 		userservice.addUser(userVO);
 				
-		return "redirect:/login";
+		return "member/registerFinish";
 		
 	}
 	
@@ -83,14 +99,16 @@ public class LoginController {
 
 	
 	@GetMapping("/user/userHome")
-	public void userHome() {
+	public String userHome() {
 		log.info("user welcome");
+		return "user/userHome";
 	}
 	
 	@GetMapping("/admin/adminHome")
-	public void adminHome() {
+	public String adminHome() {
 		
 		log.info("admin welcome");
+		return "admin/adminHome";
 		
 	}
 	

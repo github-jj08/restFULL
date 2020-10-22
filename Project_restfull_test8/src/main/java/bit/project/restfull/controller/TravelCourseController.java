@@ -33,46 +33,83 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class TravelCourseController {
 
-	//¿©ÇàÁö °ü·Ã ¸Ş¼Òµå°¡ adminBoardService¿¡ ÀÌ¹Ì Á¸ÀçÇÏ¹Ç·Î admin¼­ºñ½º¿¡ ÀÖ´Â °Å °®´Ù¾¸
+	//ì—¬í–‰ì§€ ê´€ë ¨ ë©”ì†Œë“œê°€ adminBoardServiceì— ì´ë¯¸ ì¡´ì¬í•˜ë¯€ë¡œ adminì„œë¹„ìŠ¤ì— ìˆëŠ” ê±° ê°–ë‹¤ì”€
 
    @Autowired
    private AdminBoardService adboardService;
    
-   @GetMapping("/travelcourse")
+   @GetMapping("/travel")
    public String travelCourse() {
 	   return "travelcourse";
    }
    
    
    @ResponseBody
-   @GetMapping("/getSigunguCode/{sidoCode}")
+   @GetMapping("travel/getSigunguCode/{sidoCode}")
    public List<SidoguVO> getSigunguCode(@PathVariable(value="sidoCode") int sidoCode) {
       log.info("sidoCode : " + sidoCode);
-      //sidoNum¿¡ ÇØ´çÇÏ´Â Áö¿ªÄÚµåµéÀ» ºÒ·¯¿È
+      //sidoNumì— í•´ë‹¹í•˜ëŠ” ì§€ì—­ì½”ë“œë“¤ì„ ë¶ˆëŸ¬ì˜´
       List<SidoguVO> optionList = adboardService.getOptionList(sidoCode);
       return optionList;
    }
    
    @ResponseBody
-   @GetMapping("/getDest/{sigungu_code}")
+   @GetMapping("travel/getDest/{sigungu_code}")
    public List<DestinationVO> getDests(@PathVariable(value="sigungu_code") int sigungu_code) {
       log.info("sigungu_code : " + sigungu_code);
-      //sigungu_code¿¡ ÇØ´çÇÏ´Â ¿©ÇàÁöµéÀ» ºÒ·¯¿È(±âÁ¸ adboardService¿¡ sigungu_code¸¦ ¹Ş¾Æ ¸ñ·ÏÀ» Ãâ·ÂÇÏ´Â »õ·Î¿î ¸Ş¼Òµå Ãß°¡)
+      //sigungu_codeì— í•´ë‹¹í•˜ëŠ” ì—¬í–‰ì§€ë“¤ì„ ë¶ˆëŸ¬ì˜´(ê¸°ì¡´ adboardServiceì— sigungu_codeë¥¼ ë°›ì•„ ëª©ë¡ì„ ì¶œë ¥í•˜ëŠ” ìƒˆë¡œìš´ ë©”ì†Œë“œ ì¶”ê°€)
       List<DestinationVO> destlist = adboardService.getDestList(sigungu_code); //select * from destination where sigungu_code = 11110;
       return destlist;
    }
    
+   //ì—¬í–‰ì½”ìŠ¤ ë“±ë¡(ë¯¸ì™„)
    @ResponseBody
-   @PostMapping("/myTravelCourse")
+   @PostMapping("travel/myTravelCourse")
    public List<GoodsVO> addTravelCourse(HttpServletRequest req) {
-      log.info("addTravelCourse");
-      String[] destinations = req.getParameterValues("myCourse[]");
-      log.info(destinations.length);
-      for(int i=0;i<destinations.length;i++) {
-    	  log.info("¿©ÇàÁö ¸ñ·Ï ? " + destinations[i]);
-      }
-      List<GoodsVO> goodslist = adboardService.getRGoods(destinations);
-      //°ü·Ã »óÇ° ¸ñ·ÏÀ» µ¹·ÁÁà¾ßÇÔ ¤Ğ¤Ğ ¿©±â ¾îÄÉÇÒÁö°í¹Î
-      return goodslist;
+	   log.info("addTravelCourse");
+	   String[] destinations = req.getParameterValues("myCourse[]");
+	   log.info(destinations.length);
+	   for(int i=0;i<destinations.length;i++) {
+		   log.info("ì—¬í–‰ì§€ ëª©ë¡ ? " + destinations[i]);
+	   }
+	   List<GoodsVO> goodslist = adboardService.getRGoods(destinations);
+	   return goodslist;
    }
+   
+   //ì—¬í–‰ì§€ê´€ë ¨ ìƒí’ˆ get
+   @ResponseBody
+   @PostMapping("travel/getGoodsList")
+   public List<GoodsVO> getGoodsList(HttpServletRequest req) {
+	   log.info("addTravelCourse");
+	   String[] destinations = req.getParameterValues("myCourse[]");
+	   log.info(destinations.length);
+	   for(int i=0;i<destinations.length;i++) {
+		   log.info("ì—¬í–‰ì§€ ëª©ë¡ ? " + destinations[i]);
+	   }
+	   List<GoodsVO> goodslist = adboardService.getRGoods(destinations);
+	   return goodslist;
+   }
+   
+   //ê²°ì œ ê¸°ëŠ¥í˜ì´ì§€ì—ì„œ ìƒí’ˆ viewë¡œ ì´ë™(ê´€ë¦¬ìê°€ ë³´ëŠ” ìƒí’ˆ viewì™€ ë‹¤ë¦„)
+   @GetMapping("travel/goods/content_view")
+   public String goodsContent_view(String goods_numbers, Model model) {
+      log.info("content_view");
+      int goodsNum = Integer.parseInt(goods_numbers);
+      model.addAttribute("content_view",adboardService.getGoodsVO(goodsNum));
+      return "goods_content_view";
+   }
+  
+   //êµ¬ë§¤ë¥¼ ìœ„í•œ ìƒí’ˆì •ë³´ get (ì—¬í–‰ì§€ ì´ë¦„ì„ ë³´ë‚´ì„œ ì—¬í–‰ì§€ ê´€ë ¨ ìƒí’ˆì„ ê°€ì ¸ì˜¤ëŠ” ê²ƒê³¼ ë‹¤ë¦„)
+   //êµ¬ë§¤ë¥¼ ìœ„í•œ ìƒí’ˆë²ˆí˜¸ë¥¼ ë³´ë‚´ì„œ êµ¬ë§¤í•  ìƒí’ˆ ì •ë³´ë¥¼ ê°€ì ¸ì˜´
+	/*
+	 * @ResponseBody
+	 * 
+	 * @PostMapping("travel/getgoods") public List<GoodsVO>
+	 * getGoods(HttpServletRequest req) { log.info("addTravelCourse"); String[]
+	 * myGoods = req.getParameterValues("myGoods[]"); log.info(myGoods.length);
+	 * for(int i=0;i<myGoods.length;i++) { log.info("ìƒí’ˆ ë²ˆí˜¸ ëª©ë¡ ? " + myGoods[i]); }
+	 * List<GoodsVO> goodslist = adboardService.myGoods(myGoods); return goodslist;
+	 * }
+	 */
+   
 }

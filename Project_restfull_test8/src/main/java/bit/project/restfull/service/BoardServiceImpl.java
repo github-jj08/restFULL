@@ -46,45 +46,45 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Override
 	public List<BoardVO> getList(int boardlist_numbers, String searchWord) {
-		log.info("boardServicImpl-getList(°Ô½Ã±Û ¸ñ·Ï È£Ãâ): " + searchWord);
+		log.info("boardServicImpl-getList(ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ È£ï¿½ï¿½): " + searchWord);
 		return mapper.getList(boardlist_numbers, searchWord);
 	}
 
 	@Override
 	public BoardVO getBoardVO(int board_numbers) {
-		log.info("boardServicImpl-getBoardVO(°Ô½Ã±Û È£Ãâ): " + board_numbers);
+		log.info("boardServicImpl-getBoardVO(ï¿½Ô½Ã±ï¿½ È£ï¿½ï¿½): " + board_numbers);
 		mapper.upHit(board_numbers);
 		return mapper.getBoardVO(board_numbers);
 	}
 	
 	@Override
 	public List<AttachmentVO> getBoardAttachmentVO(int board_numbers) {
-		log.info("boardServicImpl-getBoardVO(°Ô½Ã±Û È£Ãâ): " + board_numbers);
+		log.info("boardServicImpl-getBoardVO(ï¿½Ô½Ã±ï¿½ È£ï¿½ï¿½): " + board_numbers);
 		return mapper.getBoardAttachmentVO(board_numbers);
 	}
 
 	@Override
-	public void writeBoardVO(MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException {
-		//0.ÆÄÀÏ°æ·Î
-		String root_path = "C:/Users/hoora/Desktop";
+	public int writeBoardVO(MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException {
+		//0.ï¿½ï¿½ï¿½Ï°ï¿½ï¿½
+		String root_path = "C:/Users/ssell";
 		String attach_path = "/resources/upload/";
-
-		//1.±ÛÀÛ¼º
+		
+		//1.ï¿½ï¿½ï¿½Û¼ï¿½
 		mapper.insertBoardVO(boardVO);
 		int bNum = boardVO.getBoard_numbers();
-		log.info("insertBoardVO() completed. ±Û¹øÈ£´Â " + bNum);
+		log.info("insertBoardVO() completed. ï¿½Û¹ï¿½È£ï¿½ï¿½ " + bNum);
 		
 		 
-		//2. ÆÄÀÏ ¾÷·Îµå
+		//2. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½
 		Map<String,Object>fileMap = new HashMap<String,Object>();
         
         for(int i = 0; i<uploadfiles.length; i++) {
             try {
-            	//ÇÁ·ÎÁ§Æ® Æú´õ ³»¿¡ ÀúÀå. »çÁø ÆÄÀÏ¸í Áßº¹ ¹æÁö¸¦ À§ÇÑ ÀÌ¸§ Àç»ý¼º
-            	UUID uuid = UUID.randomUUID();	//·£´ý ¹®ÀÚ¿­ »ý¼º
+            	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ßºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+            	UUID uuid = UUID.randomUUID();	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½
         		String fileName = uuid + "_" + uploadfiles[i].getOriginalFilename();
         		
-                //Ã¹¹øÂ° ¿ä¼Ò¿¡ ´ëÇØ¼­¸¸ ½æ³×ÀÏÀ» »ý¼ºÇÔ
+                //Ã¹ï¿½ï¿½Â° ï¿½ï¿½Ò¿ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         		if(i == 0) {
         		
 	        		File target = new File(root_path+attach_path, fileName);
@@ -117,13 +117,13 @@ public class BoardServiceImpl implements BoardService{
 	       		    mapper.updateBoardThumbImg(bNum, attach_path + thumbDir);
 	                
         		} else {
-        			//Ã¹¹øÂ° ¿ä¼Ò°¡ ¾Æ´Ï¶ó¸é ±×³É ÀúÀå
+        			//Ã¹ï¿½ï¿½Â° ï¿½ï¿½Ò°ï¿½ ï¿½Æ´Ï¶ï¿½ï¿½ ï¿½×³ï¿½ ï¿½ï¿½ï¿½ï¿½
 	        		int fileSize = (int) uploadfiles[i].getSize();	
 	                String fileDirectory = attach_path + fileName;
-	                log.info("ÀúÀåµÈ ÀÌ¸§ :"+ fileName);
+	                log.info("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ :"+ fileName);
 	                
-	                File saveFile = new File(root_path+attach_path,fileName); // ½ÇÁ¦·Î ÀúÀåÇÒ Æú´õ ÀÌ¸§ + ÀúÀåÇÒ ÆÄÀÏ ÀÌ¸§À¸·Î ÀúÀåÇÒ ÆÄÀÏ °´Ã¼¸¦ »ý¼ºÇÔ
-	                //ÀúÀå °æ·Î¸¦ DB¿¡ µî·Ï
+	                File saveFile = new File(root_path+attach_path,fileName); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	                //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¸ï¿½ DBï¿½ï¿½ ï¿½ï¿½ï¿½
 	                fileMap.put("fileDirectory", fileDirectory);
 	                fileMap.put("fileName", fileName);
 	                fileMap.put("fileSize", fileSize);
@@ -136,7 +136,7 @@ public class BoardServiceImpl implements BoardService{
             }
             
 	    }
-
+        return bNum;
 	}
 	
 	@Override
@@ -150,34 +150,34 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 
-	//ÁÁ¾Æ¿ä ±â´É (1) ÁÁ¾Æ¿ä »óÅÂ ¾÷µ¥ÀÌÆ®
+	//ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ï¿½ (1) ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 	@Override
 	public void likeUpdate(LikesVO likesVO){
-		log.info("¼­ºñ½º´Ü Á¶¾Æ¿ä ±â´É " );
-		//ÁÁ¾Æ¿ä »óÅÂ Ã¼Å© ÇÔ¼ö È£Ãâ
+		log.info("ï¿½ï¿½ï¿½ñ½º´ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ï¿½ " );
+		//ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å© ï¿½Ô¼ï¿½ È£ï¿½ï¿½
 		int result = likeCheck(likesVO);
 		
-		if(result == 0){ // ÁÁ¾Æ¿ä¸¦ ´©¸£Áö ¾ÊÀ¸¸é 0
+		if(result == 0){ // ï¿½ï¿½ï¿½Æ¿ä¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0
 			mapper.likeInsert(likesVO);
 		}else{ 
 			mapper.likeDelete(likesVO);
 		}
 	}
 	
-	//ÁÁ¾Æ¿ä ±â´É (2) °¹¼ö ¼¼±â
+	//ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ï¿½ (2) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public int likeCount(int board_numbers) {
 		return mapper.likeCount(board_numbers);
 	}
 
-	//ÁÁ¾Æ¿ä ±â´É (3) ÁÁ¾Æ¿ä »óÅÂ Ã¼Å©
+	//ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ï¿½ (3) ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
 	@Override
 	public int likeCheck(LikesVO likesVO) {
 		int result = mapper.likeCheck(likesVO);
 		return result;
 	}
 
-	//´ñ±Û ±â´É
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@Override
 	public void writeComment(CommentVO commentVO) {
 		String cts = commentVO.getContents();
@@ -200,14 +200,14 @@ public class BoardServiceImpl implements BoardService{
 		return mapper.getOthers(board_numbers, location);
 	}
 
-	//½Å°í±â´É
+	//ï¿½Å°ï¿½ï¿½ï¿½
 	@Override
 	public void writeBoardVO(BoardVO boardVO) {
 		boardVO.setLocation("");
 		mapper.insertBoardVO(boardVO);
 	}
 
-	//À¯Àú > ÀÚ±â°¡¾´ °Ô½Ã±Û È®ÀÎ
+	//ï¿½ï¿½ï¿½ï¿½ > ï¿½Ú±â°¡ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ È®ï¿½ï¿½
 	@Override
 	public List<BoardVO> boardList(String member_id){
 		return mapper.boardList(member_id);

@@ -20,7 +20,7 @@ import bit.project.restfull.vo.UserVO;
 public interface LoginMapper {
 	
 	
-	@Insert("insert into member(member_id, pw, name, birth, gender, phone, email, enabled, grade_name, authority_name) values(#{member_id}, #{pw}, #{name}, #{birth}, #{gender}, #{phone}, #{email}, #{enabled}, #{grade_name}, #{authority_name})")
+	@Insert("insert into member(member_id, pw, name, birth, gender, phone, email, enabled, grade_name, authority_name, login_type) values(#{member_id}, #{pw}, #{name}, #{birth}, #{gender}, #{phone}, #{email}, #{enabled}, #{grade_name}, #{authority_name}, #{login_type})")
 	public void insertUser(UserVO userVO);
 
 	@Select("select * from member where member_id = #{member_id}")
@@ -29,15 +29,15 @@ public interface LoginMapper {
 	@Delete("delete from member where member_id = #{member_id}")
 	public void delMember(String member_id);
 	
-	/* ¾ÆÀÌµð Áßº¹ Ã¼Å© */
+	/* ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½ Ã¼Å© */
 	@Select("select count(*) from member where member_id = #{member_id}")
 	public int idChk(String member_id);
 	
-	/* °ü¸®ÀÚ ±ÇÇÑ °³ÀÎÁ¤º¸ ¼öÁ¤ */
+	/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 	@Update("update member set gender = #{gender}, email = #{email}, phone = #{phone}, grade_name = #{grade_name}, authority_name = #{authority_name} where member_id = #{member_id}")
 	public void adminModifyUser(UserVO userVO);
 	
-	/* À¯Àú ±ÇÇÑ °³ÀÎÁ¤º¸ ¼öÁ¤ */ 
+	/* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */ 
 	@Update("update member set pw = #{pw}, email = #{email}, phone = #{phone} where member_id = #{member_id}")
 	public void modifyUser(UserVO userVO);
 	
