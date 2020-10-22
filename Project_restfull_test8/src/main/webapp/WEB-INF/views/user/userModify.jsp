@@ -111,15 +111,6 @@
 			        </div>
 			       
 			        <div class="col-sm-9 order-2">
-						<sec:authentication var="principal" property="principal"/>
-						<p>Principal : <sec:authentication property="principal.user"/></p>
-						<p>사용자 아이디 : <sec:authentication property="principal.user.member_id"/></p>
-						<p>사용자 비밀번호 : <sec:authentication property="principal.user.pw"/></p>
-						<p>사용자 이름 : <sec:authentication property="principal.user.name"/></p>
-						<p>사용자 성별 : <sec:authentication property="principal.user.gender"/></p>
-						<p>사용자 이메일 : <sec:authentication property="principal.user.email"/></p>
-						<p>사용자 연락처 : <sec:authentication property="principal.user.phone"/></p>
-						
 						
 						 <fieldset>
 							<form:form id="modifyForm" action="update" method="POST">
