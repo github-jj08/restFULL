@@ -24,11 +24,13 @@ public interface BoardMapper{
 	
 	/* 게시글 목록 출력 (관리자와 불러오는 테이블 수가 다르므로 따로 정의) */
 	@ResultMap("BoardContents")
-	@Select("select b.*, d.* from board b, destination d"
+	@Select("Select * from (SELECT ROWNUM RN, A.* FROM"
+			+ "(select b.*, d.* from board b, destination d"
 			+ " where b.location = d.destination_name"
 			+ "	and b.boardlist_numbers = #{boardlist_numbers}"
-			+ "	and b.location like '%'||#{searchWord}||'%'")
-	List<BoardVO> getList(@Param("boardlist_numbers")int boardlist_numbers, @Param("searchWord") String searchWord);
+			+ "	and b.location like '%'||#{searchWord}||'%') A )"
+			+"WHERE RN BETWEEN #{start} AND #{end}")
+	List<BoardVO> getList(@Param("boardlist_numbers")int boardlist_numbers, @Param("searchWord") String searchWord, @Param("start")int start,  @Param("end")int end);
 	
 	/* 메인 게시글 출력(content_view) */
 	@Select("select * from board where board_numbers = #{board_numbers}")
@@ -123,5 +125,11 @@ public interface BoardMapper{
 	
 	@Select("select count(*) from comments where board_numbers = #{board_numbers}")
 	public int countComment(int board_numbers);
+	
+	// 메인 게시글 리스트 숫자세기
+		@Select("select count(*) from board b, destination d\n" + 
+				"			where b.location = d.destination_name\n" + 
+				"				and b.location like '%'||#{searchWord}||'%'")
+		public int countMainBoard(@Param("searchWord") String searchWord);
 		
 }

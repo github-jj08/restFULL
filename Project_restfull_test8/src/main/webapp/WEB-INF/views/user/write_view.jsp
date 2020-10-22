@@ -278,17 +278,18 @@
 									
 									
 							function setAddressIntoBox() {
-															
 								var jibunAddr = $("#jibunAddress").val(); 
 								var doroAddr = $("#roadAddress").val(); 
 								var x= $("#x").val();
 								var y= $("#y").val();
 																  	
-								document.getElementById("jibunAddr").value = jibunAddr;
-								document.getElementById("doroAddr").value = doroAddr;
-								document.getElementById("gps-x").value = x;
-								document.getElementById("gps-y").value = y;
-							};
+															document.getElementById("jibunAddr").value = jibunAddr;
+															document.getElementById("doroAddr").value = doroAddr;
+															
+															//가끔 x좌표와 y좌표가 뒤바뀌어서 저장됨. x에 125.~~~~ 처럼 30대가 아니고 120대 숫자가 찍히면 이부분의 x,y 위치를 바꿔주면 됨
+															document.getElementById("gps-x").value = y;
+															document.getElementById("gps-y").value = x;
+									                    };
 									
 							function initGeocoder() {
 								if (!map.isStyleMapReady) {
@@ -299,22 +300,8 @@
 									searchCoordinateToAddress(e.coord);
 								});
 									
-								$('#address').on('keydown', function(e) {
-									var keyCode = e.which;
-									
-									if (keyCode === 13) { // Enter Key
-										searchAddressToCoordinate($('#address').val());
-									}
-								});
-									
-								$('#submit').on('click', function(e) {
-									e.preventDefault();
-									
-									searchAddressToCoordinate($('#address').val());
-								});
-									
-									                    
-							}
+
+									                    }
 									
 							naver.maps.onJSContentLoaded = initGeocoder;
 							naver.maps.Event.once(map, 'init_stylemap', initGeocoder);

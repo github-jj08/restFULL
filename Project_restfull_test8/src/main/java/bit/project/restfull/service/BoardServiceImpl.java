@@ -41,9 +41,13 @@ public class BoardServiceImpl implements BoardService{
 	private CommentMapper commentMapper;
 	
 	@Override
-	public List<BoardVO> getList(int boardlist_numbers, String searchWord) {
+	public List<BoardVO> getList(PagingVO pagingVO, int boardlist_numbers, String searchWord) {
 		log.info("boardServicImpl-getList(게시글 목록 호출): " + searchWord);
-		return boardMapper.getList(boardlist_numbers, searchWord);
+		int start = pagingVO.getStart();
+		int end = pagingVO.getEnd();
+		log.info(start);
+		log.info(end);
+		return boardMapper.getList(boardlist_numbers, searchWord, start, end);
 	}
 
 	@Override
@@ -248,6 +252,11 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<TravelVO> getMyCourse(String member_id, String serialNum) {
 		return boardMapper.getMyCourse(member_id, serialNum);
+	}
+
+	@Override
+	public int countMainBoard(String searchWord) {
+		return boardMapper.countMainBoard(searchWord);
 	}
 
 }

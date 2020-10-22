@@ -207,6 +207,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	}
 	
 	public List<GoodsVO> getRGoods(int[] destination_numbers) {
+		log.info("getRGoods()");
 		return adBoardMapper.getRGoods(destination_numbers);
 	}
 

@@ -126,6 +126,7 @@
 				             	 <sec:authorize access="isAuthenticated()">
 									<div class="showloign">
 			 	             			<sec:authentication var="principal" property="principal"/>
+			 	             			<input type="hidden" name="member_id" value="${principal.user.member_id}"/>
 				             			<c:if test="${principal.user.authority_name == 'ROLE_USER'}">
 				             				<div class="userlogin">
 												<strong>${principal.user.name}</strong>님

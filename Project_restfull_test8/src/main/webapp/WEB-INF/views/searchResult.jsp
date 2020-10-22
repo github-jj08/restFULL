@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <% request.setCharacterEncoding("utf-8"); %>
 <% response.setContentType("text/html; charset=utf-8"); %>
 <!DOCTYPE html>
@@ -20,7 +21,7 @@
 			background-color: white;
 			display:inline-block;
 			border: 1px solid black;
-			width:30px;
+			width:300px;
 			height:350px;
 			text-align:center;
 			position:absolute;
@@ -52,12 +53,26 @@
 						    </a>
 						</div>
 					</c:forEach>
-					
-					
 			</div>
+			<c:if test="${paging.startPage != 1 }">
+			<a href="search?boardlist_numbers=${boardlist_numbers}&searchWord=${searchWord}&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+		</c:if>
+		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+			<c:choose>
+				<c:when test="${p == paging.nowPage }">
+					<b>${p }</b>
+				</c:when>
+				<c:when test="${p != paging.nowPage }">
+					<a href="search?boardlist_numbers=${boardlist_numbers}&searchWord=${searchWord}&nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+				</c:when>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${paging.endPage != paging.lastPage}">
+			<a href="search?boardlist_numbers=${boardlist_numbers}&searchWord=${searchWord}&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+		</c:if>
 		</div>
 	</div>
-
+	
 	<!-- 지도 -->
 	<div id="map" style="width:50%; height:500px; float:right"></div>
 	<script>

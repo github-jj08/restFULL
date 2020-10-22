@@ -233,6 +233,7 @@
 					
 					<select name="sigungu_code" id="sigungu_code">
 					</select>	
+					
 						<script>
 							$(function(){
 								function getOptionList(){
@@ -248,7 +249,7 @@
 							            	//옵션 초기화
 							            	$('#sigungu_code').empty();
 								            $(result).each(function(){		
-							                    $('#sigungu_code').append('<option value="'+this.sigungu_code+'">'+this.sigunguname+'</option>');
+							                    $('#sigungu_code').append('<option value="'+this.sigungu_code+'">'+this.sigunguName+'</option>');
 							                })
 								        }
 										
