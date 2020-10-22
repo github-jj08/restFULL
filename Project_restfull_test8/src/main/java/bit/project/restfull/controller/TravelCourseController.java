@@ -111,7 +111,7 @@ public class TravelCourseController {
 	@ResponseBody
 	@PostMapping("travel/getgoods")
 	public List<RequestVO> getGoods(HttpServletRequest req, @RequestBody List<Map<String,Object>> paramData) {
-		log.info("addTravelCourse");
+		log.info("getgoods");
 		String member_id =null;
 		for (Map<String, Object> map : paramData) {
 			member_id = (String) map.get("member_id");
@@ -128,6 +128,11 @@ public class TravelCourseController {
 		//주문이 성공한 경우에 대해서는 PayController --> /payments/complete에서 정의함
 		List<RequestVO> requests =  adBoardService.insertRequest(paramData);
 		return requests;
+	}	
+	
+	@GetMapping("travel/comfirm")
+	public String comfirm() {
+		return "user/paymentComplete";
 	}	
 	
 }
