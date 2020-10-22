@@ -37,27 +37,44 @@
 				        </div>
 			        </div>
 			        <div class="col-sm-9 order-2">
-				        <!-- 게시글 목록 -->
-							<div class="container contents">
-								<div class="row">
-								<!-- 게시물 list -->
-									<div style="width:100%; height:500px; float:left">
-										<h2>리스트 뽑기</h2>
+			       		<div class="notice-table">
+							<table id="list-table">
+								<tr class="firs-list">
+									<td>대표사진</td>
+									<td>게시글 제목</td>
+									<td>위치</td>
+									<td>게시 날짜</td>
+								</tr>
 											<c:forEach items="${boardlist}" var="vo">
-												<div class="col-xs-6 col-md-3 main-postings" style="border:solid 1px">
+											    <a href="${pageContext.request.contextPath}/content_view?board_numbers=${vo.board_numbers}" class="thumbnail">
+														<tr>
+													<div  class="caption">
+												      		<td> <img src="${vo.thumbnail }"/></td>
+											                <td> <a href="${pageContext.request.contextPath}/content_view?board_numbers=${vo.board_numbers}" class="thumbnail">${vo.title}</td>
+											                <td> ${vo.location}</td>
+											                <td> ${vo.destinationVO.jibunaddress}</td>
+													</div>
+														</tr>
+												</a>
+											</c:forEach>
+							</table>
+						</div>
+				        <!-- 게시글 목록 -->
+											<c:forEach items="${boardlist}" var="vo">
 												    <a href="${pageContext.request.contextPath}/content_view?board_numbers=${vo.board_numbers}" class="thumbnail">
-												      <img src="${vo.thumbnail }"/>
 												      <div class="caption">
-											                <h3>${vo.title}</h3>
-											                <p>${vo.location}</p>
-											                <p>${vo.destinationVO.jibunaddress}</p>
+												      	<tr>
+												      		<td><img src="${vo.thumbnail }"/></td>
+											                <td>${vo.title}</td>
+											                <td>${vo.location}</td>
+											                <td>${vo.destinationVO.jibunaddress}</td>
+										                </tr>
 											          </div>
 												    </a>
-												</div>
 											</c:forEach>
-									</div>
-								</div>
-							</div>
+							
+							
+							
 						<hr/>
 				    </div>
 		        </div>
