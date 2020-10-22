@@ -98,13 +98,13 @@ public class HomeController {
 	@GetMapping("/FAQ")
 	public String FAQ() {
 		log.info("index");
-		return "FAQ";
+		return "Service/FAQ";
 	}
 	
 	//자주하는질문
 	@GetMapping("/personal")
 	public String personal() {
 		log.info("personal");
-		return "Sc_personal";
+		return "Service/personal_policy";
 	}
 }
