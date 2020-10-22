@@ -19,13 +19,13 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
       <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fawtmt0h7b&submodules=geocoder"></script>
-      <script type="text/javascript" src="<%=request.getContextPath()%>/resources/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 
          <form method="post" action="${pageContext.request.contextPath}/admin/dest/goods/write">
-            여행지명 : ${destination_name}
-            <input type="hidden" name="destination_name" id="destination_name" value="${destination_name}"/>
+            여행지명 : ${destVO.destination_name}
+            <input type="hidden" name="destination_numbers" id="destination_numbers" value="${destVO.destination_numbers}"/>
+            <input type="hidden" name="destination_name" id="destination_name" value="${destVO.destination_name}"/>
             <hr/>
             상품명 : <input type="text" name="name"/>
             판매업자 : <input type="text" name="seller"/>

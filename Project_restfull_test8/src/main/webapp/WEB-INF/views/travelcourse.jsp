@@ -134,7 +134,7 @@
 					         	//옵션 초기화 
 					          	$('#sigungu').empty();
 					            $(result).each(function(){		
-					           		$('#sigungu').append('<div class="sigungu-choice" value="'+this.sigungu_code+'">'+this.sigunguname+'</div>');
+					           		$('#sigungu').append('<div class="sigungu-choice" value="'+this.sigungu_code+'">'+this.sigunguName+'</div>');
 					      		})
 							}
 						});	//ajax end
@@ -156,7 +156,7 @@
 						         	//옵션 초기화
 						          	$('#travel-destinations').empty();
 						            $(result).each(function(){		
-						           		$('#travel-destinations').append('<div class="trav-btn travel" value="'+this.destination_name+'">'+this.destination_name+'</option>');
+						           		$('#travel-destinations').append('<div class="trav-btn travel" value="'+this.destination_numbers+'">'+this.destination_name+'</option>');
 						      		})
 								}
 							});	//ajax end
@@ -195,7 +195,8 @@
 		            $(document).on("click",".trav-btn",function(){  
 		               var trav = $(this).text();
 		               console.log(trav);
-		               $(".sortable").append('<li class="ui-state-default"><div><input type="text" class="course_blank" name="course" value="'+trav+'" readonly/><span><input type="button" class="delete-btn" value="x"></span></div></li>');
+		               $(".sortable").append('<li class="ui-state-default"><div><input type="text" class="course_blank" name="course" value="'+trav+'" readonly/>'
+		            		   					+'<input type="hidden" name="destNum" value="' + $(this).attr("value") + '"/><span><input type="button" class="delete-btn" value="x"></span></div></li>');
 		                    
 		            });
 	
@@ -227,21 +228,26 @@
 	                  
 	                  //여행코스 전체 목록의 길이를 가져옴
 	                  var length= $('input[name="course"]').length;
-	                  console.log(length);
+	                  console.log("length : " + length);
 	                  
 	                  //ajax로 넘길 배열 생성
 	                  var myCourse = new Array();
 	                  
+	                  //여행지 정보 담기()
+	                  var myDest = new Array();
+	                  
+	                  
 	                  //코스목록과 함께 넘길 member_id
 	                  var member_id = $('input[name="member_id"]').val();
+	                  console.log("member_id = " + member_id);
 	                  
 	                  //아무것도 등록하지 않았는데 확인을 눌렀을 경우 null값 들어가는 것 방지
 	                  if(length==0){
-	                	  myCourse.push('');
-	                	  alret("여행코스가 등록되지 않았습니다.")
+	                	  alert("여행코스가 등록되지 않았습니다.")
 	                  }else{
 		                  for(var i =0;i<length;i++){
 		                     myCourse.push($('input[name="course"]').eq(i).val());
+		                     myDest.push($('input[name="destNum"]').eq(i).val());
 		                  }
 		                  
 		                  //아작스로 여행코스 등록! & 관련 상품 목록 출력하기
@@ -253,74 +259,83 @@
 						            	"member_id" : member_id,
 						            	"myCourse" : myCourse
 						            },
-						            dataType:"json",
 						            success: function () {
-						             	console.log("성공");	
-										alret("여행코스가 등록되었습니다.");
+						             	console.log("여행코스 등록 성공");	
+										alert("여행코스가 등록되었습니다.");
+										setGoodsTBLHead();
+										setGoodsTBLBody();
 						            },
 						            error : function(){
-											alret("여행코스가 등록되지 않았습니다. 다시 시도해주세요");
+						            	alert("여행코스가 등록되지 않았습니다. 다시 시도해주세요");
 						            }//error end
 		                  });//ajax end
 	                  }//if-else end
 	                  
-	                  console.log(myCourse);
-	                  complete_cnt++;
-	                  console.log("관련상품목록 한번만찍기" + complete_cnt);
- 	                  if(complete_cnt>1){
-	                	  console.log("reComplete");
-	                  }else{ 
-		                  $("#goodsList").append('<h4>관련 상품 목록</h4><hr/>'
-		                  						+'<table>'
-		                  						+'<thead> <tr>'
-		                  						+'<td class="td-choice">선택</td>'
-		                  						+'<td class="td">여행지명</td>'
-		    	                           		+'<td class="td">상품명</td>'
-		    	                           		+'<td class="td">상품가격</td>'
-		    	                           		+'<td class="td">매수선택</td>'
-		    	                           		+'</tr> </thead>'
-		    	                           		+'<tbody id="goods-box"> </tbody>'
-		                  						+'</table>');
-		                  $("#goodsList").append('<div id="tp"><b>총 구매금액</b><br><div id="totalPrice"><span>0</span>원</div></div><br>');
-	                      $("#goodsList").append('<input type="button" id="buy" name="buy" value="구매하기"/>');
-	                  }
-	                   	               	
- 	               	
-	                  //보기 편하게 하려고 htmls로 짬
-	                  $.ajax
-	                  ({
-	                     url: "${pageContext.request.contextPath}/travel/getGoodsList",
-	                        type: "POST",
-	                        data: {
-	                           "myCourse" : myCourse,
-	                        },
-	                        dataType:"json",
-	                        success: function (result) {
-	                            console.log("성공");   
-	                       		var htmls="";
-	                        if(result.length < 1){
-	                            $("#goods-box").empty();
-	                           	htmls += '<tr><td colspan="5" style="100%">관련상품이 없습니다.</td></tr>';
-	                        } else {
-	                           	$(result).each(function(){        
-	                           		$("#goods-box").empty();
-	                           		htmls += '<tr><td class="td-choice"><input type="checkbox" name="chk_goods" value="'+this.goods_numbers+'"></td>';
-	                             	htmls += '<td class="td">'+ this.destination_name + '<input type="hidden" name="destination_name" value="'+this.destination_name+'"/> </td>';
-	                                htmls += '<td class="td"><a href="${pageContext.request.contextPath}/travel/goods/content_view?goods_numbers=' + this.goods_numbers + '" target="_blank">' + this.name + '</a></td>';
-	                                htmls += '<td class="td">'+ this.price + '</td>';
-	                                htmls += '<td class="td">'
-	                                		 + '<select name="count">'
-	                                		 + '<c:forEach begin="1" end="10" var="i">'
-	                                         + 		'<option value="${i}">${i}</option>'
-											 + '</c:forEach></select>'
-											 + '</td>';	
-	                                                               
-	                            });   //each end
-	                        }
-	                        $("#goods-box").append(htmls);
-							
-	                     }//success end
-	                   }); //ajax end
+	                  function setGoodsTBLHead(){
+	                	  
+		                  complete_cnt++;
+		                  console.log("여행 코스 등록 시 관련상품목록 한번만찍기" + complete_cnt);
+	 	                  if(complete_cnt>1){
+		                	  console.log("reComplete");
+		                  }else{ 
+			                  $("#goodsList").append('<h4>관련 상품 목록</h4><hr/>'
+			                  						+'<table>'
+			                  						+'<thead> <tr>'
+			                  						+'<td class="td-choice">선택</td>'
+			                  						+'<td class="td">여행지명</td>'
+			    	                           		+'<td class="td">상품명</td>'
+			    	                           		+'<td class="td">상품가격</td>'
+			    	                           		+'<td class="td">매수선택</td>'
+			    	                           		+'</tr> </thead>'
+			    	                           		+'<tbody id="goods-box"> </tbody>'
+			                  						+'</table>');
+			                  $("#goodsList").append('<div id="tp"><b>총 구매금액</b><br><div id="totalPrice"><span>0</span>원</div></div><br>');
+		                      $("#goodsList").append('<input type="button" id="buy" name="buy" value="구매하기"/>');
+		                  }
+	 	                  
+	                  }//setGoodsTBLHead function end
+	                   	              
+	                  
+	                  function setGoodsTBLBody(){
+	                	  
+	 						console.log(myDest);
+		                  //보기 편하게 하려고 htmls로 짬
+		                  $.ajax
+		                  ({
+		                     url: "${pageContext.request.contextPath}/travel/getGoodsList",
+		                        type: "POST",
+		                        data: {
+		                           "myDest" : myDest,
+		                        },
+		                        dataType:"json",
+		                        success: function (result) {
+		                            console.log("성공");   
+		                       		var htmls="";
+		                        if(result.length < 1){
+		                            $("#goods-box").empty();
+		                           	htmls += '<tr><td colspan="5" style="100%">관련상품이 없습니다.</td></tr>';
+		                        } else {
+		                           	$(result).each(function(){        
+		                           		$("#goods-box").empty();
+		                           		htmls += '<tr><td class="td-choice"><input type="checkbox" name="chk_goods" value="'+this.goods_numbers+'"></td>';
+		                             	htmls += '<td class="td">'+ this.destination_name + '<input type="hidden" name="g_destination_name" value="'+this.destination_name+'"/>';
+		                             	htmls += '<input type="hidden" name="g_destination_numbers" value="'+this.destination_numbers+'"/> </td>';
+		                                htmls += '<td class="td"><a href="${pageContext.request.contextPath}/travel/goods/content_view?goods_numbers=' + this.goods_numbers + '" target="_blank">' + this.name + '</a></td>';
+		                                htmls += '<td class="td">'+ this.price + '</td>';
+		                                htmls += '<td class="td">'
+		                                		 + '<select name="count">'
+		                                		 + '<c:forEach begin="1" end="10" var="i">'
+		                                         + 		'<option value="${i}">${i}</option>'
+												 + '</c:forEach></select>'
+												 + '</td>';	
+		                                                               
+		                            });   //each end
+		                        }
+		                        $("#goods-box").append(htmls);
+								
+		                     }//success end
+		                   }); //ajax end
+	                  }//setGoodsTBLBody function end
 	            
 	              	});//관련상품 불러오기 end
 	
@@ -328,7 +343,8 @@
 	              	/* 중복코드 맞는데 정리하기 너무 귀찮ㅇㅁㄱㅈㄷ뷰ㅠㅠ*/
 	              	$(document).on('change','input[name="chk_goods"], select[name="count"]',function(){ 
 		                var myGoodsArray = new Array();
-		                
+		                var prices = 0;
+	              		
 		                var myLength = $('input[name="chk_goods"]:checked').length;
 						console.log("체크된것갯수: " + myLength);
 		                
@@ -344,25 +360,24 @@
 			                	myGoods.goods_numbers=$('input[name="chk_goods"]:checked').eq(i).val();
 			                    myGoods.count = $("select option:selected").eq(i).val();
 			                    myGoodsArray.push(myGoods);
+			                    
+			              		$.ajax({
+		                    		url: "${pageContext.request.contextPath}/payments/sumPrice", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+		                    		type: "POST",
+			                        data: JSON.stringify(myGoodsArray),
+			                        contentType: "application/json; charset=utf-8",
+			                        dataType:"json",
+			                        success: function (result) {
+			                            console.log("성공"); 
+			                            console.log(result); 
+			    	              		//총금액 업데이트
+			    	              		$('#totalPrice').text('');//선초기화
+			    	              		$('#totalPrice').text(result+"원");
+				                    }//success end
+			              		});//ajax end
 			                }
 		                }
 						
-	              		var prices = 0;
-	              		
-	              		$.ajax({
-                    		url: "${pageContext.request.contextPath}/payments/sumPrice", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
-                    		type: "POST",
-	                        data: JSON.stringify(myGoodsArray),
-	                        contentType: "application/json; charset=utf-8",
-	                        dataType:"json",
-	                        success: function (result) {
-	                            console.log("성공"); 
-	                            console.log(result); 
-	    	              		//총금액 업데이트
-	    	              		$('#totalPrice').text('');//선초기화
-	    	              		$('#totalPrice').text(result+"원");
-		                    }//success end
-	              		});//ajax end
 	              		
 	              	});
 	              	
@@ -382,23 +397,23 @@
 		                  
 		                  var myLength = $('input[name="chk_goods"]:checked').length;
 		                  console.log("체크된것갯수: " + myLength);
-		                  //아무것도 등록하지 않았는데 확인을 눌렀을 경우 null값 들어가는 것 방지
+		                  //아무것도 선택하지 않았는데 확인을 눌렀을 경우 null값 들어가는 것 방지
 		                  if(myLength==0){
-		                	  goodsArray.push('');
+		                	  alert("상품이 선택되지 않았습니다.");
 		                  }else{
 			                  for(var i =0;i<myLength;i++){
 				                  var goods = new Object();
 				                  goods.member_id = $('input[name="member_id"]').val();
 				                  goods.goods_numbers=$('input[name="chk_goods"]:checked').eq(i).val();
 				                  goods.count = $("select option:selected").eq(i).val();
-				                  goods.destination_name = $('input[name="destination_name"]').eq(i).val();
+				                  goods.destination_name = $('input[name="g_destination_name"]').eq(i).val();
+				                  goods.destination_numbers = $('input[name="g_destination_numbers"]').eq(i).val();
 			                      goodsArray.push(goods);
 			                  }
 			                  
 			              }
 			              
 		                  //체크한 상품의 상품번호
-			              console.log("myGoodsArray" + goodsArray);
 			              console.log("myGoodsArray" + JSON.stringify(goodsArray));
 			              
 		                  var member_id = $('input[name="member_id"]').val();
@@ -482,8 +497,6 @@
 				                                		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
 				                                		if ( data == 1 ) {
 						                                    var msg = '결제가 완료되었습니다.';
-						                                    msg += '매출전표 url : ' + rsp.receipt_url;
-				                                			
 						                                	$.ajax({
 						                                		url: "${pageContext.request.contextPath}/payments/confirmation", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
 						                                		type: 'POST',

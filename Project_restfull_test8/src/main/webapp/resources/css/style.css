@@ -2291,66 +2291,120 @@ ol {
 	padding-bottom: 70px;
 }
 
-/*사진 업로드 css*/
-.blog-detail-title .group-input .writepic .imgs_wrap {
-    border-style:double;
-    width:100%;
-    height:400px;
-    margin-bottom:50px;
-    margin-top:10px;
-    overflow:auto;
-}
-
-.blog-detail-title .group-input .writepic #preview img {
-   
-    height:200px;
-    
-}
-
-.blog-detail-title .group-input .writepic .preview-box {
-    border: 1px solid;
-    padding: 5px;
-    border-radius: 2px;
-    margin-bottom: 10px;
-}
-
-.blog-detail-title .group-input .writepic .preview-box a {
-    float:right;
-}
-
-
-
-.blog-detail-title .group-input .writecontentx textarea {
-    width:100%;
-    height: 250px;
-}
-
 .blog-details-inner .blog-detail-title {
 	margin-bottom: 25px;
     
 }
 
-.blog-details-inner .blog-detail-title .writeform .group-input {
-    margin : 20px 5PX;
+/*사진 업로드 css*/
+.blog-detail-title .group-input .writepic .imgs_wrap {
+    border:#8a93c0 2px double;
+    width:100%;
+    height:500px;
+    margin-bottom:50px;
+    margin-top:10px;
+    overflow:auto;
+    border-radius: 6px;
 }
 
-.blog-details-inner .blog-detail-title .writeform .group-input label{
+.blog-detail-title .group-input .writepic #preview img {
+    height:200px; 
+    width: auto;
+}
+
+.blog-detail-title .group-input .writepic #preview .preview-box {
+    border-bottom: #8a93c0 1px solid;
+
+}
+
+.blog-detail-title .group-input .writepic .preview-box a {
+    float:right;
+    padding: 4px;
+    color: black;
+}
+
+/* 제목, 내용 css */
+.blog-detail-title #boardForm .group-input {
+    margin : 20px 5px;
+}
+
+.blog-detail-title #boardForm .group-input label{
     font-size:20px;
-    font-weight:900;
+    font-weight:800;
     
 }
-.blog-details-inner .blog-detail-title .writeform .group-input input {
-    height:40px;
+ .blog-detail-title #boardForm .group-input .writetitle input {
+    height:30px;
+    width:50%;
+    border: #8a93c0 1px solid;
+    margin-left: 7px;
+    padding :0 7px;
+    
+}
+
+.blog-detail-title #boardForm .group-input .writecontentx textarea {
+    color: #252525;
+    border:#8a93c0 2px double;
     width:100%;
+    height: 250px;
+    border-radius: 6px;
+    padding : 5px 12px;
 }
 
-
-.blog-details-inner .blog-detail-title .writeform .group-input 
-.writetitle {
-    margin-top:30px;
+/* 위치(지도) 지정 */
+.blog-detail-title .group-input label {
+	font-size:20px;
+    font-weight:800;
+	
 }
 
-.blog-details-inner .blog-detail-title .writeform .write-btn {
+.blog-detail-title .group-input #map {
+	width: 100%; 
+	height:350px; 
+	position: relative; 
+	overflow: hidden;
+	margin: 15px 0;
+}
+
+.blog-detail-title .maploc {
+	width:100%;
+	height:210px;
+	margin: 30px 5px;
+	padding : 10px;
+	background-color:#dde1f5;
+	border-radius: 5px;
+	
+}
+
+.blog-detail-title .maploc #addressForm label {
+	font-size: 17px;
+	color:#4c5686;
+	font-weight: 600;
+}
+
+.blog-detail-title .maploc #addressForm .addform{
+	margin: 5px;
+	padding-left:10px;
+	padding-right: 5px;
+	width: 60%;
+	border: none;
+	border-bottom: #8a93c0 1px solid;
+	background-color:#dde1f5;
+}
+
+.blog-detail-title .maploc #addressForm .addform2 {
+	margin: 5px;
+	padding-left:10px;
+	padding-right: 5px;
+	width: 40%;
+	text-align: center;
+	border: none;
+	border-bottom: #8a93c0 1px solid;
+	background-color:#dde1f5;
+	
+}
+
+.blog-details-inner .blog-detail-title .write-btn {
     float:right;
     background-color:#8a93c0;
     border-style:none;
@@ -2784,10 +2838,7 @@ ol {
 	background: #8a93c0;
 }
 
-.text-center{
-	text-align: center;
-	padding-top: 2%;
-}
+
 
 /*---------------------
 	join-form
@@ -2882,6 +2933,56 @@ ol {
 /*---------------------
   Register Form
 -----------------------*/
+/* ID찾기 css */
+.login-form form .FindID .find-btn {
+	width: 49%;
+	letter-spacing: 2px;
+	margin-top: 35px;
+    background-color:#8a93c0;
+    border-color:#8a93c0;
+    margin-bottom: 50px;
+	
+}
+
+/* ID찾기 검색결과css */
+.login-form .FindID h5{
+	text-align:center;
+		
+}
+
+
+/* PW찾기 css */
+.login-form .FindPW .group-input {
+	margin-bottom: 20px;
+}
+.login-form .FindPW .group-input input {
+	border: 1px solid #ebebeb;
+	height: 45px;
+	width: 100%;
+	padding-left: 20px;
+	padding-right: 15px;
+}
+
+.login-form .FindPW .group-input label {
+	display: block;
+	font-size: 15px;
+	color: #252525;
+    font-weight: 700;
+	margin-bottom: 13px;
+	
+}
+
+.login-form .FindPW .find-btn {
+	width: 49%;
+	letter-spacing: 2px;
+	margin-top: 35px;
+    background-color:#8a93c0;
+    border-color:#8a93c0;
+    margin-bottom: 50px;
+}
+
+/*--------ID,PW찾기 PAGE & ID검색결과 창 css-----------끝  */
+
 
 .register-login-section {
 	padding-top: 100px;
@@ -2930,7 +3031,7 @@ ol {
     background-color:#8a93c0;
     border-color:#8a93c0;
     
-    }
+}
     
  .register-form .home-btn a {
  	color:white;
@@ -4023,7 +4124,12 @@ ol {
 /*----------------------
 		개인정보  css
 ----------------------*/
-
+/* 고객센터 부분 */
+.text-center{
+	text-align: center;
+	padding-top: 100px;
+	padding-bottom:25px;
+}
 .blog-section .container .mywriting-table #mylist-table {
     width:100%;
    
@@ -4055,6 +4161,11 @@ ol {
 
 .blog-section .container .mywriting-table #mylist-table .noticetable td {
     padding: 4px 0;
+}
+
+.text-center h2 {
+	font-weight:700;
+	color: #41497a;
 }
 
 
