@@ -318,7 +318,8 @@
 		                           	$(result).each(function(){        
 		                           		$("#goods-box").empty();
 		                           		htmls += '<tr><td class="td-choice"><input type="checkbox" name="chk_goods" value="'+this.goods_numbers+'"></td>';
-		                             	htmls += '<td class="td">'+ this.destination_name + '<input type="hidden" name="destination_name" value="'+this.destination_name+'"/> </td>';
+		                             	htmls += '<td class="td">'+ this.destination_name + '<input type="hidden" name="g_destination_name" value="'+this.destination_name+'"/>';
+		                             	htmls += '<input type="hidden" name="g_destination_numbers" value="'+this.destination_numbers+'"/> </td>';
 		                                htmls += '<td class="td"><a href="${pageContext.request.contextPath}/travel/goods/content_view?goods_numbers=' + this.goods_numbers + '" target="_blank">' + this.name + '</a></td>';
 		                                htmls += '<td class="td">'+ this.price + '</td>';
 		                                htmls += '<td class="td">'
@@ -396,23 +397,23 @@
 		                  
 		                  var myLength = $('input[name="chk_goods"]:checked').length;
 		                  console.log("체크된것갯수: " + myLength);
-		                  //아무것도 등록하지 않았는데 확인을 눌렀을 경우 null값 들어가는 것 방지
+		                  //아무것도 선택하지 않았는데 확인을 눌렀을 경우 null값 들어가는 것 방지
 		                  if(myLength==0){
-		                	  goodsArray.push('');
+		                	  alert("상품이 선택되지 않았습니다.");
 		                  }else{
 			                  for(var i =0;i<myLength;i++){
 				                  var goods = new Object();
 				                  goods.member_id = $('input[name="member_id"]').val();
 				                  goods.goods_numbers=$('input[name="chk_goods"]:checked').eq(i).val();
 				                  goods.count = $("select option:selected").eq(i).val();
-				                  goods.destination_name = $('input[name="destination_name"]').eq(i).val();
+				                  goods.destination_name = $('input[name="g_destination_name"]').eq(i).val();
+				                  goods.destination_numbers = $('input[name="g_destination_numbers"]').eq(i).val();
 			                      goodsArray.push(goods);
 			                  }
 			                  
 			              }
 			              
 		                  //체크한 상품의 상품번호
-			              console.log("myGoodsArray" + goodsArray);
 			              console.log("myGoodsArray" + JSON.stringify(goodsArray));
 			              
 		                  var member_id = $('input[name="member_id"]').val();
@@ -496,8 +497,6 @@
 				                                		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
 				                                		if ( data == 1 ) {
 						                                    var msg = '결제가 완료되었습니다.';
-						                                    msg += '매출전표 url : ' + rsp.receipt_url;
-				                                			
 						                                	$.ajax({
 						                                		url: "${pageContext.request.contextPath}/payments/confirmation", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
 						                                		type: 'POST',

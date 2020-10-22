@@ -9,10 +9,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>RestFuLL | 여행일기</title>
   	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	
+
 </head>
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>   
+
 	   
 	            
 <!-- 메인 컨텐츠  -->
@@ -56,13 +57,15 @@
 								console.log("filelist : " + filelist);
 								
 						    	for(var i=0 ; i< filelist.length ; i++) {
-							       $('<div class="carousel-item"><img src="'+filelist[i].filedirectory+'" width=\"460\" height=\"345\""></div>').appendTo('.carousel-inner');
+							       $('<div class="carousel-item"><img src="'+filelist[i].filedirectory+'" width="460" height="345"></div>').appendTo('.carousel-inner');
 							       $('<li data-target="#myCarousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
-							     	}
+							     }
+						    	
 							     $('.carousel-item').first().addClass('active');
 							     $('.carousel-indicators>li').first().addClass('active');
-							     $('#myCarousel').carousel();
+							     //$('#myCarousel').carousel();
 							});
+														
 						</script>
 						 <!--------------------------
                         	 Carousel 스크립트 end
@@ -108,7 +111,7 @@
 												function likeCheck(){ 
 													$.ajax({
 													url: "${pageContext.request.contextPath}/user/board/likeCheck",
-									                type: "POST",
+									                type: "GET",
 									                dataType:"json",
 									                data: {
 									                    "board_numbers": board_numbers,
@@ -145,7 +148,7 @@
 											    function likeCount() {
 													$.ajax({
 														url: "${pageContext.request.contextPath}/board/likeCount",
-										                type: "POST",
+										                type: "GET",
 										                data: {
 										                    "board_numbers": board_numbers
 										                },
@@ -358,7 +361,7 @@
                                                         "<td>" + "삭제버튼+댓글번호[히든]" + "</td>"			
                                             }).appendTo("#list-table") // 이것을 테이블에붙임
                                             if(result.length < 1){
-                                                htmls.push("등록된 댓글이 없습니다.");
+                                                htmls += "등록된 댓글이 없습니다.";
                                             } else {
                                                     $(result).each(function(index,item){
                                                         //사용자와 작성자의 아이디가 같다면 삭제 버튼 생성
