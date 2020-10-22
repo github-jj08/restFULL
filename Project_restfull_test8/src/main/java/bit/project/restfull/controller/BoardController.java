@@ -55,8 +55,8 @@ public class BoardController {
 		log.info("writeMainPosting");
 		int board_numbers = boardService.writeBoardVO(uploadfiles, boardVO);
 		log.info("service.uploadFile(uploadFiles);" + board_numbers );
-		String bNum = board_numbers.toString();
-		return board_numbers;
+		String bNum = Integer.toString(board_numbers);
+		return bNum;
 	}
 	//return "redirect:/content_view?board_numbers="+board_numbers;
 

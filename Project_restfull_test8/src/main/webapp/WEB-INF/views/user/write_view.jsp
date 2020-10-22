@@ -355,8 +355,7 @@
 							        contentType: false,
 							        cache: false,
 							        success: function (result) {
-							        	console.log(result);
-							            insertDest(result);
+							            insertDest(JSON.parse(result));
 							      	},
 							      	error: function (e) {
 							          	console.log("ERROR : ", e);
@@ -367,7 +366,7 @@
 							        
 							}
 								
-							function insertDest(){
+							function insertDest(result){
 								var addressForm = new Object();
 								addressForm.destination_name = $('input[name="destination_name"]').val();
 								addressForm.jibunaddress = $('input[name="jibunaddress"]').val();
@@ -384,7 +383,7 @@
 							        data: JSON.stringify(addressForm),
 							        contentType:"application/json",
 							        success: function () {
-							        	//location.href = "${pageContext.request.contextPath}/content_view"
+							        	location.href = "${pageContext.request.contextPath}/content_view?board_numbers=" + result;
 							        },
 							        error: function (xhr, status) {
 							           alert(xhr + " : " + status);
