@@ -119,7 +119,7 @@ public class HomeController {
 		model.addAttribute("content_view",adBoardService.getBoardVO(board_no));
 		model.addAttribute("filelist", adBoardService.getBoardAttachmentVO(board_no));
 		return "notice_content_view";
-	}
+	}  
 	
 	//자주하는질문
 	@GetMapping("/FAQ")
