@@ -15,7 +15,7 @@ import bit.project.restfull.vo.TravelVO;
 
 public interface BoardService {
 	
-	List<BoardVO> getList(int boardlist_numbers, String searchWord);
+	List<BoardVO> getList(PagingVO pagingVO, int boardlist_numbers, String searchWord);
 	
 	//메인 게시글 출력
 	BoardVO getBoardVO(int board_numbers);
@@ -65,5 +65,7 @@ public interface BoardService {
 
 	//member_id와 serialNum을 가지고 특정 여행코스를 출력
 	List<TravelVO> getMyCourse(String member_id, String serialNum);
+	
+	int countMainBoard(String searchWord);
 
 }
