@@ -361,28 +361,8 @@
 							            success: function (data) {
 							            	console.log("ㅇㅇ")
 							            	//성공시 다른놈 호출
-											var addressForm = new Object();
-											addressForm.jibunaddress = $('input[name="jibunaddress"]').val();
-											addressForm.doroaddress = $('input[name="doroaddress"]').val();
-											addressForm.details = $('input[name="details"]').val();
-											addressForm.lat = $('input[name="lat"]').val();
-											addressForm.lng = $('input[name="lng"]').val();
-												
-							            	console.log(addressForm);
-							            	console.log(addressForm.jibunaddress);
-											$.ajax({
-									            type: "GET",
-									            url: "${pageContext.request.contextPath}/user/dest_write",
-									            contentType:"application/json",
-									            data: addressForm,
-									            success: function (data) {
-									                alert("ㄹㅇ 성공");
-									            },
-									            error: function (xhr, status) {
-									                alert(xhr + " : " + status);
-									            }
-									        });
-							            	
+							            	//POST로 ajax 아무리 호출해도 Not Supported POST Method라고 뜸(컨트롤러 매핑도 맞췄는데...)
+							            	insertDest();
 							            },
 							            error: function (e) {
 							                console.log("ERROR : ", e);
@@ -392,6 +372,31 @@
 							        
 							        
 								}
+								
+								function insertDest(){
+									var addressForm = new Object();
+									addressForm.destination_name = $('input[name="destination_name"]').val();
+									addressForm.jibunaddress = $('input[name="jibunaddress"]').val();
+									addressForm.doroaddress = $('input[name="doroaddress"]').val();
+									addressForm.details = $('input[name="details"]').val();
+									addressForm.lat = $('input[name="lat"]').val();
+									addressForm.lng = $('input[name="lng"]').val();
+										
+					            	console.log(addressForm);
+					            	console.log(addressForm.jibunaddress);
+									$.ajax({
+							            type: "POST",
+							            url: "${pageContext.request.contextPath}/user/writeMainPosting_dest",
+							            contentType:"application/json",
+							            data: JSON.stringify(addressForm),
+							            success: function (data) {
+							                alert("ㄹㅇ 성공");
+							            },
+							            error: function (xhr, status) {
+							                alert(xhr + " : " + status);
+							            }
+							        });
+								};
 							</script>
 						</div>
 					</div>

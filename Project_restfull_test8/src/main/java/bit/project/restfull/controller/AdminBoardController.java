@@ -223,7 +223,7 @@ public class AdminBoardController {
    //1. 여행지 및 상품 리스트
    @GetMapping("/dest")
    public String destList(Model model) {
-	  log.info("??");
+	  log.info("여행지 목록 출력");
       List<DestinationVO> destlist = adBoardService.getDestList(); //select * from destination
       model.addAttribute("destlist", destlist);
       return "admin/destList";
@@ -231,10 +231,10 @@ public class AdminBoardController {
    
    //2. 여행지 조회
    @GetMapping("/dest/content_view")
-   public String destContent_view(String destination_name, Model model) {
+   public String destContent_view(int destination_numbers, Model model) {
       log.info("content_view");
-      model.addAttribute("content_view",adBoardService.getDestVO(destination_name));
-      model.addAttribute("goodsList",adBoardService.getGoodsList(destination_name));
+      model.addAttribute("content_view",adBoardService.getDestVO(destination_numbers));
+      model.addAttribute("goodsList",adBoardService.getGoodsList(destination_numbers));
       return "admin/dest_content_view";
    }
    
@@ -268,9 +268,8 @@ public class AdminBoardController {
    
    //4. 여행지 수정 기능 modify_view 페이지 호출
    @GetMapping("/dest/modify")
-   public String destModify(String destination_name, Model model) {
-      model.addAttribute("modify_view", adBoardService.getDestVO(destination_name));
-      
+   public String destModify(int destination_numbers, Model model) {
+      model.addAttribute("modify_view", adBoardService.getDestVO(destination_numbers));
       return "admin/dest_modify_view";
    }
    
@@ -278,17 +277,17 @@ public class AdminBoardController {
    @PostMapping("/dest/modify")
    public String destModify(DestinationVO destinationVO) throws UnsupportedEncodingException {
       log.info("modify()");
+      int destNum = destinationVO.getDestination_numbers();
+      log.info("여행지번호 : " + destNum);
       adBoardService.modifyDestVO(destinationVO);
-      log.info("글번호 - " + destinationVO.getDestination_name());
-      String destination_name = destinationVO.getDestination_name();
-      String encodedParam = URLEncoder.encode(destination_name, "UTF-8");
-      return "redirect:/admin/dest/content_view?destination_name="+ encodedParam;
+      return "redirect:/admin/dest/content_view?destination_name="+ destNum;
    }
    
    //5. 여행지 삭제
    @GetMapping("/dest/delete")
    public String destDelete(DestinationVO destinationVO, Model model) {
-      adBoardService.deleteDestVO(destinationVO.getDestination_name());
+	  int destNum = destinationVO.getDestination_numbers();
+      adBoardService.deleteDestVO(destNum);
       log.info("삭제 성공");
       return "redirect:/admin/dest/";
    }
@@ -315,12 +314,12 @@ public class AdminBoardController {
    //3. 상품 등록
    @PostMapping("/dest/goods/write")
    public String goodsWrite(GoodsVO goodsVO) throws UnsupportedEncodingException {
-      log.info("write : " + goodsVO.getName());
-      adBoardService.writeGoodsVO(goodsVO);
+      log.info("goods insert : " + goodsVO.getName());
       log.info("getDestination_name = " + goodsVO.getDestination_name());
-      String destination_name = goodsVO.getDestination_name();
-      String encodedParam = URLEncoder.encode(destination_name, "UTF-8");
-      return "redirect:/admin/dest/content_view?destination_name="+ encodedParam;
+      adBoardService.writeGoodsVO(goodsVO);
+      //상품 등록 후 등록한 상품의 view로 이동
+      int goodsNum = goodsVO.getGoods_numbers();
+      return "redirect:/admin/dest/content_view?destination_numbers="+ goodsNum;
    }             
    
    //4. 수정 기능 modify_view 페이지 호출
@@ -346,8 +345,8 @@ public class AdminBoardController {
    public String goodsDelete(@PathVariable(name="destination_name") String destination_name, int goods_numbers, Model model) throws UnsupportedEncodingException {
       adBoardService.deleteGoodsVO(goods_numbers);
       log.info("삭제 성공");
-      String encodedParam = URLEncoder.encode(destination_name, "UTF-8");
-      return "redirect:/admin/dest/content_view?destination_name=" + encodedParam;
+      //상품 삭제 후 처리 필요함(수정예정)
+      return "redirect:/admin/dest/content_view?destination_numbers="+ goods_numbers;
    }
    
    /* 문의글 관리 (url:admin/qnas) */

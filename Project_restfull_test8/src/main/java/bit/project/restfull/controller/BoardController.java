@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -58,9 +59,10 @@ public class BoardController {
 	//return "redirect:/content_view?board_numbers="+board_numbers;
 
 	
-	@PostMapping("/dest_write")
-	public void dest_Write(@ModelAttribute DestinationVO destinationVO) {
+	@PostMapping("/writeMainPosting_dest")
+	public void dest_Write(@RequestBody DestinationVO destinationVO) {
 		log.info("dest write");
+		log.info("넘어온 여행지명 : " + destinationVO.getDestination_name());
 		adBoardService.writeDestVO(destinationVO);
 		log.info("writeDestVO;");
 	}

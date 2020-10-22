@@ -27,15 +27,15 @@ public interface AdminBoardService {
 
 	//여행지 CRUD
 	List<DestinationVO> getDestList();
-	DestinationVO getDestVO(String destination_name);
+	DestinationVO getDestVO(int destination_numbers);
 	void writeDestVO(DestinationVO destinationVO);
 	void modifyDestVO(DestinationVO destinationVO);
-	void deleteDestVO(String destination_name);
+	void deleteDestVO(int destination_numbers);
 
 	List<SidoguVO> getOptionList(int sicoCode);
 	
 	//상품 CRUD
-	List<GoodsVO> getGoodsList(String destination_name);
+	List<GoodsVO> getGoodsList(int destination_numbers);
 	GoodsVO getGoodsVO(int goods_numbers);
 	void writeGoodsVO(GoodsVO goodsVO);
 	void modifyGoodsVO(GoodsVO goodsVO);
@@ -44,7 +44,7 @@ public interface AdminBoardService {
 	//여행지 Read - 여행코스짜기에서 사용함
 	List<DestinationVO> getDestList(int sigungu_code);
 	//관련 상품목록 Read
-	List<GoodsVO> getRGoods(String[] destinations);
+	List<GoodsVO> getRGoods(int[] destination_numbers);
 
 	//필터게시판뽑기
 	List<AdminBoardVO> getFilterList(int boardlist_numbers);
