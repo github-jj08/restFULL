@@ -228,55 +228,6 @@
 									                    });
 									                    }
 									
-									                    function searchAddressToCoordinate(address) {
-									                    naver.maps.Service.geocode({
-									                        query: address
-									                    }, function(status, response) {
-									                        if (status === naver.maps.Service.Status.ERROR) {
-									                        if (!address) {
-									                            return alert('Geocode Error, Please check address');
-									                        }
-									                        return alert('Geocode Error, address:' + address);
-									                        }
-									
-									                        if (response.v2.meta.totalCount === 0) {
-									                        return alert('No result.');
-									                        }
-									
-									                        var htmlAddresses = [],
-									                        item = response.v2.addresses[0],
-									                        point = new naver.maps.Point(item.x, item.y);
-									
-									                        if (item.roadAddress) {
-									                        htmlAddresses.push('[도로명 주소] ' + item.roadAddress);
-									                        }
-									
-									                        if (item.jibunAddress) {
-									                        htmlAddresses.push('[지번 주소] ' + item.jibunAddress);
-									                        }
-									
-									                        if (item.englishAddress) {
-									                        htmlAddresses.push('[영문명 주소] ' + item.englishAddress);
-									                        }
-															
-									                        infoWindow.setContent([
-									                        '<div style="padding:10px;min-width:200px;line-height:150%;">',
-									                        '<h4 style="margin-top:5px;">검색 주소 : '+ address +'</h4>',
-									                        '<button type="button" onclick="setAddressIntoBox()">입력</button><br />',
-									                        htmlAddresses.join('<br />'),
-									        	          	'<input id="x" type="hidden" value="'+ item.x + '"> ',
-									        	          	'<input id="y" type="hidden" value="'+ item.y + '"> ',
-									        	          	'<input id="jibunAddress" type="hidden" value="'+ item.jibunAddress + '"> ',
-									        	          	'<input id="roadAddress" type="hidden" value="'+ item.roadAddress + '"> ',
-									                        '</div>'
-									                        ].join('\n'));
-																                        
-									                        map.setCenter(point);
-									                        infoWindow.open(map, point);
-									                    });
-									                    }
-									
-									
 														function setAddressIntoBox() {
 															
 															var jibunAddr = $("#jibunAddress").val(); 
@@ -286,8 +237,10 @@
 																  	
 															document.getElementById("jibunAddr").value = jibunAddr;
 															document.getElementById("doroAddr").value = doroAddr;
-															document.getElementById("gps-x").value = x;
-															document.getElementById("gps-y").value = y;
+															
+															//가끔 x좌표와 y좌표가 뒤바뀌어서 저장됨. x에 125.~~~~ 처럼 30대가 아니고 120대 숫자가 찍히면 이부분의 x,y 위치를 바꿔주면 됨
+															document.getElementById("gps-x").value = y;
+															document.getElementById("gps-y").value = x;
 									                    };
 									
 									                    function initGeocoder() {
@@ -299,21 +252,6 @@
 									                        searchCoordinateToAddress(e.coord);
 									                    });
 									
-									                    $('#address').on('keydown', function(e) {
-									                        var keyCode = e.which;
-									
-									                        if (keyCode === 13) { // Enter Key
-									                        searchAddressToCoordinate($('#address').val());
-									                        }
-									                    });
-									
-									                    $('#submit').on('click', function(e) {
-									                        e.preventDefault();
-									
-									                        searchAddressToCoordinate($('#address').val());
-									                    });
-									
-									                    
 									                    }
 									
 									                    naver.maps.onJSContentLoaded = initGeocoder;
