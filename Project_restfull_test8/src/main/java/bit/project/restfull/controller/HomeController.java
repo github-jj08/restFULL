@@ -100,11 +100,4 @@ public class HomeController {
 		log.info("index");
 		return "FAQ";
 	}
-	//자주하는질문
-	@GetMapping("/rs-Servicecenter")
-	public String Servicecenter() {
-		log.info("rs-Servicecenter");
-		return "rs-Servicecenter";
-	}
-		
 }

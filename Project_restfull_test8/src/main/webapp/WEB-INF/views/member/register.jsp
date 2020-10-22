@@ -7,7 +7,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>RestFuLL | 회원가입</title>
-    <%@ include file="/WEB-INF/include/plugins.jspf"%>
 </head> 
 <body>  
 

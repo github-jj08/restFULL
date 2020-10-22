@@ -101,10 +101,11 @@
                             </div>
                         </div>
                          <div class="col-lg-6 col-md-6 offset-lg-1 search-top">
-                           	<form name="searchform" method="get" action="${pageContext.request.contextPath}/search">
+                           <form name="searchform" method="get" action="${pageContext.request.contextPath}/search">
                                 <div class="advanced-search">
                                     <div class="input-group">
-                                        <input type="text" id="searchbox" placeholder="어느 지역으로 여행을 가시나요?">
+	                                    <input type="hidden" name="boardlist_numbers" value="<c:out value='1'/>">
+                                        <input type="text" name="searchWord" id="searchWord" placeholder="어느 지역으로 여행을 가시나요?">
                                         <button type="submit" id="submit" value="검색"><i class="ti-search"></i></button>
                                     </div>
                                 </div>
@@ -154,11 +155,10 @@
                     <ul>
                         <li><a href="${pageContext.request.contextPath}/">Home</a></li>
                         <li><a href="${pageContext.request.contextPath}/user/write_view">글작성</a></li>
-                        <li><a href="${pageContext.request.contextPath}/travel">여행코스작성</a></li>
-                        <li><a href="rs-Servicecenter">공지사항</a></li>
-                        <li><a href="#">이벤트</a></li>
+                        <li><a href="${pageContext.request.contextPath}/travel/">여행코스작성</a></li>
+                        <li><a href="${pageContext.request.contextPath}/notice/<c:out value='2'/>">공지사항</a></li>
+                        <li><a href="${pageContext.request.contextPath}/notice/<c:out value='5'/>">이벤트</a></li>
                         <li><a href="${pageContext.request.contextPath}/FAQ">자주하는질문</a></li>
-                        <!--<li><a href="#">로그인</a></li>-->
                     </ul>
                 </nav>
                <div id="mobile-menu-wrap"></div>
