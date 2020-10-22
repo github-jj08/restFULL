@@ -149,12 +149,14 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	// 여행지 등록
 	@Override
 	public List<DestinationVO> getDestList() {
+		log.info("adBoardMapper.getDestList();");
 		return adBoardMapper.getDestList();
 	}
 
 	@Override
-	public DestinationVO getDestVO(String destination_name) {
-		return adBoardMapper.getDestVO(destination_name);
+	public DestinationVO getDestVO(int destination_numbers) {
+		log.info("adBoardMapper.getDestVO");
+		return adBoardMapper.getDestVO(destination_numbers);
 	}
 
 	@Override
@@ -168,14 +170,14 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	}
 
 	@Override
-	public void deleteDestVO(String destination_name) {
-		adBoardMapper.deleteDestVO(destination_name);
+	public void deleteDestVO(int destination_numbers) {
+		adBoardMapper.deleteDestVO(destination_numbers);
 	}
 	
 	//여행지 관련 상품 목록
 	@Override
-	public List<GoodsVO> getGoodsList(String destination_name) {
-		return adBoardMapper.getGoodsList(destination_name);
+	public List<GoodsVO> getGoodsList(int destination_numbers) {
+		return adBoardMapper.getGoodsList(destination_numbers);
 	}
 	
 	//상품 CRUD
@@ -204,8 +206,8 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		return adBoardMapper.getDests(sigungu_code);
 	}
 	
-	public List<GoodsVO> getRGoods(String[] destinations) {
-		return adBoardMapper.getRGoods(destinations);
+	public List<GoodsVO> getRGoods(int[] destination_numbers) {
+		return adBoardMapper.getRGoods(destination_numbers);
 	}
 
 	@Override

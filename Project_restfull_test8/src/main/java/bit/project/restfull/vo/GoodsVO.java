@@ -12,7 +12,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class GoodsVO {
 	private int goods_numbers; //GOODS_NUMBERS
-	private String destination_name; //DESTINATION_NAME
+	private int destination_numbers;
+	private String destination_name;
 	private String name; //NAME
 	private int price; //PRICE
 	private int amount; //AMOUNT

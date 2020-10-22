@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DestinationVO {
+	private int destination_numbers;
 	private String jibunaddress;
 	private String doroaddress;
 	private String details;

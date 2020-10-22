@@ -74,46 +74,46 @@ public interface AdminBoardMapper{
 	
 	/* 특정 여행지 보기 */
 	@ResultMap("DestinationContents")
-	@Select("select * from destination d, sidogu s where d.sigungu_code = s.sigungu_code and d.destination_name = #{destination_name} ")
-	DestinationVO getDestVO(String destination_name);
+	@Select("select * from destination d, sidogu s where d.sigungu_code = s.sigungu_code and d.destination_numbers = #{destination_numbers} ")
+	DestinationVO getDestVO(int destination_numbers);
 	
 	/* 여행지 등록 */
-	@Insert("insert into destination (destination_name, jibunaddress, doroaddress, details, lat, lng, sigungu_code)"
-			+ " values (#{destination_name}, #{jibunaddress}, #{doroaddress}, #{details}, #{lat}, #{lng}, #{sigungu_code}")
+	@Insert("insert into destination (destination_numbers, destination_name, jibunaddress, doroaddress, details, lat, lng, sigungu_code)"
+			+ " values (destination_seq.nextval, #{destination_name}, #{jibunaddress}, #{doroaddress}, #{details}, #{lat}, #{lng}, #{sigungu_code})")
 	void insertDestVO(DestinationVO destinationVO);
 	
 	/* 여행지 수정 */
-	@Update("update destination set jibunaddress = #{jibunaddress}, doroaddress = #{doroaddress}, details = #{details}, lat = #{lat}, lng = #{lng}, sigungu_code = #{sigungu_code} where destination_name = #{destination_name}")
+	@Update("update destination set jibunaddress = #{jibunaddress}, doroaddress = #{doroaddress}, details = #{details}, lat = #{lat}, lng = #{lng}, sigungu_code = #{sigungu_code} where destination_numbers = #{destination_numbers}")
 	void updateDestVO(DestinationVO destinationVO);
 	
 	/* 여행지 삭제 */
-	@Delete("delete from destination where destination_name = #{destination_name}")
-	void deleteDestVO(String destination_name);
+	@Delete("delete from destination where destination_numbers = #{destination_numbers}")
+	void deleteDestVO(int destination_numbers);
 		
 	/* 지역 번호 목록 출력 */
 	@Select("select * from sidogu where sidocode = #{sidoCode} order by sidocode asc")
 	List<SidoguVO> sigunguList(int sidocode);
 	
 	/* 상품 목록 출력 */
-	@Select("select * from goods where destination_name = #{destination_name}")
-	List<GoodsVO> getGoodsList(String destination_name);
+	@Select("select * from goods where destination_numbers = #{destination_numbers}")
+	List<GoodsVO> getGoodsList(int destination_numbers);
 	
 	/* 상품 보기 */
 	@Select("select * from goods where goods_numbers = #{goods_numbers}")
 	GoodsVO getGoodsVO(int goods_numbers);
 	
 	/* 상품 등록 */
-	@Insert("insert into goods (goods_numbers,destination_name,name,price,amount,status,sellstart,sellend,seller)"
-			+ "values (goods_seq.nextval,#{destination_name}, #{name}, #{price},#{amount},#{status},#{sellstart},#{sellend},#{seller})")
+	@Insert("insert into goods (goods_numbers,destination_numbers,name,price,amount,status,sellstart,sellend,seller)"
+			+ "values (goods_seq.nextval,#{destination_numbers}, #{name}, #{price},#{amount},#{status},#{sellstart},#{sellend},#{seller})")
 	void insertGoodsVO(GoodsVO goodsVO);
 	
 	/* 상품 수정 */
-	@Update("update goods set destination_name=#{destination_name},name=#{name},price=#{price},amount=#{amount},status=#{status},sellstart=#{sellstart},sellend=#{sellend},seller=#{seller}"
+	@Update("update goods set destination_numbers=#{destination_numbers},name=#{name},price=#{price},amount=#{amount},status=#{status},sellstart=#{sellstart},sellend=#{sellend},seller=#{seller}"
 			+ "where goods_numbers = #{goods_numbers}")
 	void updateGoodsVO(GoodsVO goodsVO);
 	
 	/* 상품 삭제 */
-	@Delete("delete from goods where GOODS_NUMBERS = #{goods_numbers}")
+	@Delete("delete from goods where goods_numbers = #{goods_numbers}")
 	void deleteGoodsVO(int goods_numbers);
 
 	
@@ -126,7 +126,7 @@ public interface AdminBoardMapper{
 	void updateBoardThumbImg(@Param("board_numbers") int board_numbers, @Param("thumbnail")String thumbnail);
 	
 	/* 관련 상품출력  <foreach>*/
-	List<GoodsVO> getRGoods(String[] destinations);
+	List<GoodsVO> getRGoods(int[] destination_numbers);
 
 	/* 필터있는 게시판 리스트 뽑기 <쿼리문 길어서 xml에 위치 유지> */
 	List<AdminBoardVO> getFilterList(int boardlist_numbers);

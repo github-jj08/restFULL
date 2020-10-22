@@ -74,19 +74,19 @@ public class TravelCourseController {
 		adBoardService.insertTravelCourse(member_id,destinations);
 	}
    
-	//여행지관련 상품 get
-	@ResponseBody
-	@PostMapping("travel/getGoodsList")
-	public List<GoodsVO> getGoodsList(HttpServletRequest req) {
-		log.info("addTravelCourse");
-		String[] destinations = req.getParameterValues("myCourse[]");
-		log.info(destinations.length);
-		for(int i=0;i<destinations.length;i++) {
-			log.info("여행지 목록 ? " + destinations[i]);
-		}	
-		List<GoodsVO> goodslist = adBoardService.getRGoods(destinations);
-		return goodslist;
-	}	
+//	//여행지관련 상품 get
+//	@ResponseBody
+//	@PostMapping("travel/getGoodsList")
+//	public List<GoodsVO> getGoodsList(HttpServletRequest req) {
+//		log.info("addTravelCourse");
+//		String[] destinations = req.getParameterValues("myCourse[]");
+//		log.info(destinations.length);
+//		for(int i=0;i<destinations.length;i++) {
+//			log.info("여행지 목록 ? " + destinations[i]);
+//		}	
+//		List<GoodsVO> goodslist = adBoardService.getRGoods(destinations);
+//		return goodslist;
+//	}	
    
 	//결제 기능페이지에서 상품 view로 이동(관리자가 보는 상품 view와 다름)
 	@GetMapping("travel/goods/content_view")
