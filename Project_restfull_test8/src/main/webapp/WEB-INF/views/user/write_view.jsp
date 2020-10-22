@@ -345,11 +345,12 @@
 								function submitData(){
 							        // Get form
 							        var boardForm = $('#boardForm')[0];
-									
+							        //여행지명을 게시글의 주소로 setting
+							        boardForm.location.value = $('input[name="destination_name"]').val();
+							        
 								    // Create an FormData object 
 							        var boardData = new FormData(boardForm);
 							        
-									console.log(boardData);
 							        $.ajax({
 							            type: "POST",
 							            enctype: 'multipart/form-data',
@@ -387,9 +388,9 @@
 									$.ajax({
 							            type: "POST",
 							            url: "${pageContext.request.contextPath}/user/writeMainPosting_dest",
-							            contentType:"application/json",
 							            data: JSON.stringify(addressForm),
-							            success: function (data) {
+							            contentType:"application/json",
+							            success: function () {
 							                alert("ㄹㅇ 성공");
 							            },
 							            error: function (xhr, status) {

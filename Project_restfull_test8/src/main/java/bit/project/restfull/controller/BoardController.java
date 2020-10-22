@@ -58,7 +58,7 @@ public class BoardController {
 	}
 	//return "redirect:/content_view?board_numbers="+board_numbers;
 
-	
+	@ResponseBody
 	@PostMapping("/writeMainPosting_dest")
 	public void dest_Write(@RequestBody DestinationVO destinationVO) {
 		log.info("dest write");
