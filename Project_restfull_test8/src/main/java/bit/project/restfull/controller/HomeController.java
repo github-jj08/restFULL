@@ -147,7 +147,7 @@ public class HomeController {
 	@GetMapping("/FAQ")
 	public String FAQ() {
 		log.info("FAQ");
-		return "FAQ";
+		return "Service/FAQ";
 	}
 	
 	//약관
