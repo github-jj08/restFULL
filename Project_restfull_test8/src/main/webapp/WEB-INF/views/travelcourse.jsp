@@ -99,12 +99,14 @@
             </div>
             
             <!-- 여행지역 상품 결제 ajax로 번쩎 뜩ㅁ -->
-            <div class="row">
-               <div class="col-lg-12">
-                  <div id="goodsList">
-                  
-                  </div>
-               </div>
+            <div class="goods">
+	            <div class="row">
+	               <div class="col-lg-12">
+	                  <div id="goodsList">
+	                  
+	                  </div>
+	               </div>
+	            </div>
             </div>
             
         </div>

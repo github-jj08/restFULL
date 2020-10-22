@@ -3855,10 +3855,12 @@ ol {
 
 .choosecourse #sigungu .sigungu-choice {
 	padding: 2.5px 2px;
+	cursor: pointer;
 }
 
 .choosecourse #travel-destinations .trav-btn {
 	padding: 2.5px 2px;
+	cursor: pointer;
 }
 
 /* 여행코스등록 부분 */
