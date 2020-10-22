@@ -103,8 +103,8 @@ public interface AdminBoardMapper{
 	GoodsVO getGoodsVO(int goods_numbers);
 	
 	/* 상품 등록 */
-	@Insert("insert into goods (goods_numbers,destination_numbers,name,price,amount,status,sellstart,sellend,seller)"
-			+ "values (goods_seq.nextval,#{destination_numbers}, #{name}, #{price},#{amount},#{status},#{sellstart},#{sellend},#{seller})")
+	@Insert("insert into goods (goods_numbers,destination_numbers,destination_name,name,price,amount,status,sellstart,sellend,seller)"
+			+ "values (goods_seq.nextval,#{destination_numbers}, #{destination_name}, #{name}, #{price},#{amount},#{status},#{sellstart},#{sellend},#{seller})")
 	void insertGoodsVO(GoodsVO goodsVO);
 	
 	/* 상품 수정 */

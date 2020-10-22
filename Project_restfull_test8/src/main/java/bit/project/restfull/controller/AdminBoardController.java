@@ -312,7 +312,7 @@ public class AdminBoardController {
    
    //3. 상품 등록
    @PostMapping("/dest/goods/write")
-   public String goodsWrite(GoodsVO goodsVO) throws UnsupportedEncodingException {
+   public String goodsWrite(GoodsVO goodsVO){
       log.info("goods insert : " + goodsVO.getName());
       log.info("getDestination_name = " + goodsVO.getDestination_name());
       adBoardService.writeGoodsVO(goodsVO);
