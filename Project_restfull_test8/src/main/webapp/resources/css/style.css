@@ -3932,8 +3932,9 @@ ol {
 	 padding: 3px;
 	 width:10%;
 }
-
- /* 상품 목록 표시 css */
+/*----------------------
+  		상품 목록 표시 css 
+ ----------------------*/
 .choosecourse .goods #goodsList {
     padding: 80px 0;
 }
@@ -3975,7 +3976,9 @@ ol {
 	border: #8a93c0 2px solid;
 	color:white;
 }
-
+/*----------------------
+		마이페이지 css
+ ----------------------*/
 .td-width{
 	width: 50px;
 }

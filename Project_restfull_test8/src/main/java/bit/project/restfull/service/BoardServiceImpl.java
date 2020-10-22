@@ -2,6 +2,7 @@ package bit.project.restfull.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -248,4 +249,5 @@ public class BoardServiceImpl implements BoardService{
 	public List<TravelVO> getMyCourse(String member_id, String serialNum) {
 		return boardMapper.getMyCourse(member_id, serialNum);
 	}
+
 }

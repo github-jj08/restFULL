@@ -10,8 +10,8 @@ import lombok.Setter;
 public class PagingVO {
 
 	
-	// ����������, ����������, ��������, �Խñ� �� ����, �������� �� ����, ������������, SQL������ �� start, end
-		private int nowPage, startPage, endPage, total, cntPerPage, lastPage, start, end;
+
+	private int nowPage, startPage, endPage, total, cntPerPage, lastPage, start, end;
 		private int cntPage = 5;
 		
 		public PagingVO() {
@@ -24,11 +24,9 @@ public class PagingVO {
 			calcStartEndPage(getNowPage(), cntPage);
 			calcStartEnd(getNowPage(), getCntPerPage());
 		}
-		// ���� ������ ������ ���
 		public void calcLastPage(int total, int cntPerPage) {
 			setLastPage((int) Math.ceil((double)total / (double)cntPerPage));
 		}
-		// ����, �� ������ ���
 		public void calcStartEndPage(int nowPage, int cntPage) {
 			setEndPage(((int)Math.ceil((double)nowPage / (double)cntPage)) * cntPage);
 			if (getLastPage() < getEndPage()) {
@@ -39,7 +37,6 @@ public class PagingVO {
 				setStartPage(1);
 			}
 		}
-		// DB �������� ����� start, end�� ���
 		public void calcStartEnd(int nowPage, int cntPerPage) {
 			setEnd(nowPage * cntPerPage);
 			setStart(getEnd() - cntPerPage + 1);

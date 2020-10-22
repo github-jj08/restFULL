@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +11,12 @@
 <script>
 	function selChange() {
 		var sel = document.getElementById('cntPerPage').value;
-		location.href="myList?nowPage=${paging.nowPage}&cntPerPage="+sel;
+		location.href="myList?member_id=<sec:authentication property="principal.user.member_id"/>&nowPage=${paging.nowPage}&cntPerPage="+sel;
 	}
 </script>
 </head>
 <body>
+<sec:authentication var="principal" property="principal"/>
 	<%@ include file="/WEB-INF/include/js-header.jsp"%>
 	<h2 class="text-center">내 게시글 보기 페이지 입니다.</h2>
 	<hr>

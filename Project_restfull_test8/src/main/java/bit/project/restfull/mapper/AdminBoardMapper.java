@@ -1,6 +1,7 @@
 package bit.project.restfull.mapper;
 
 import java.util.List;
+
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
@@ -19,8 +20,6 @@ import bit.project.restfull.vo.GoodsVO;
 import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.SidoguVO;
 import bit.project.restfull.vo.TravelVO;
-
-@Mapper
 public interface AdminBoardMapper{
 	/*
 	 * 다중 게시판을 활용하므로, 쿼리문이 매우 길기때문에 너무 긴 쿼리문은 가독성을 위해 xml파일에 위치 유지

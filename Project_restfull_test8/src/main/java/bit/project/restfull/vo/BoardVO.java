@@ -12,6 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BoardVO {
+	
 	private int board_numbers;
 	private String title;	
 	private String contents;

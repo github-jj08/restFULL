@@ -15,6 +15,7 @@ import org.apache.ibatis.annotations.Update;
 import bit.project.restfull.vo.AttachmentVO;
 import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.LikesVO;
+import bit.project.restfull.vo.PagingVO;
 import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.TravelVO;
 
@@ -91,7 +92,6 @@ public interface BoardMapper{
 	@Select("select count(*) from board where member_id = #{member_id}")
 	public int countBoard(String member_id);
 	
-	/* 유저 >본인 게시글 확인(by윤환) */
 	@Select("Select * from (SELECT ROWNUM RN, A.* FROM "
 			+ "(select * from board b where boardlist_numbers = '1' and member_id = #{member_id} order by board_numbers) A ) "
 			+ "WHERE RN BETWEEN #{start} AND #{end}")
@@ -120,5 +120,8 @@ public interface BoardMapper{
 	/* 특정 여행코스 가져오기 */
 	@Select("select * from travel where member_id = #{member_id} and serialNum = #{serialNum} order by travel_numbers")
 	List<TravelVO> getMyCourse(@Param("member_id")String member_id, @Param("serialNum")String serialNum);
+	
+	@Select("select count(*) from comments where board_numbers = #{board_numbers}")
+	public int countComment(int board_numbers);
 		
 }

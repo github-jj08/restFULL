@@ -82,5 +82,6 @@
 		});
 	});
 	</script>
+	<h3><button onclick="history.go(-1);">돌아가기</button></h3>
 </body>
 </html>

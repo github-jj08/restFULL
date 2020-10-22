@@ -425,11 +425,13 @@
 							<div id="reply">
 								<section class="replyForm">
 									<table id="list-table">
-									
 									</table>
 								</section>
 							</div>
 						</div>
+				
+													
+						
 						<script>
 							$(function(){
 								var board_numbers = ${content_view.board_numbers};
@@ -471,7 +473,6 @@
 						        	                    htmls += '<td><button type="button" name="delete" value="' + item.comments_numbers+'">삭제</button>';
 						        	                   	htmls += '<button type="button" name="comment-modify" value="'+item.comments_numbers+'">수정</button></td>';
 						        	                   	htmls += '</tr>';
-						        	                    
 
 					                            	} else {
 					                            		//아니라면 그냥 출력
