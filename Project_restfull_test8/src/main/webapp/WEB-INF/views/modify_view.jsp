@@ -27,7 +27,7 @@
 </head>
 <body>
 
-<form action="<%=request.getContextPath() %>/modify" method="post" enctype="multipart/form-data">
+<form action="modify" method="post" enctype="multipart/form-data">
 	<!-- hidden -->
 	<sec:authentication var="principal" property="principal" />
 	<input type="hidden" name="member_id" value="${modify_view.member_id}"/>
@@ -35,7 +35,7 @@
 	<input type="hidden" name="filter_numbers" value="<c:out value='1'/>">
 	<input type="hidden" name="board_numbers" value="${modify_view.board_numbers}"/>
 	<!-- write Data -->
-	사진 데이터는 수정이 불가능합니다.
+	사진 데이터 및 위치정보는 수정이 불가능합니다.
 		 <div id="photo-view">
 						<div id="myCarousel" class="carousel slide" data-ride="carousel">
 						     <ul class="carousel-indicators"> </ul>
@@ -79,7 +79,7 @@
 	${modify_view.contents}
 	</textarea>
 	<hr/>
-	대표위치 검색 : <input type="text" name="location" value="${modify_view.location}">
+	위치 : <input type="text" name="location" value="${modify_view.location}" readOnly>
 	<hr/>
 	<input type="submit" id="submit" value="완료" style="position:absolute;"/>
 </form>
