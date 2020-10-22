@@ -33,13 +33,13 @@
 				<c:set var="cancelyn" value="${vo.cancel}" />
 				<c:choose>
 				    <c:when test="${cancelyn == 0}">
-						취소미신청
+						공지사항
 					</c:when>
 				    <c:when test="${cancelyn == 1}">
-				    	처리중
+				    	이벤트
 				    </c:when>
 				    <c:otherwise>
-				    	취소완료
+				    	못받아왓쟈냐
 				    </c:otherwise>
 				</c:choose>
 			</td>

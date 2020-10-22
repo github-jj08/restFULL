@@ -312,24 +312,26 @@
 						<div class="maploc">	
 							<form id="addressForm" name="destination-data" >
 								<label>여행지명</label>
-								<input id="destination_name" class="addform" name="destination_name" type="text" placeholder="여행지명을 입력해주세요" required>
+								<input id="destination_name" class="addform" name="destination_name" type="text" placeholder="여행지명을 입력해주세요" required="required">
 								<br/>
 								<label>지번주소</label>
-								<input id="jibunAddr" class="addform" name="jibunaddress" type="text">
+								<input id="jibunAddr" class="addform" name="jibunaddress" type="text" readonly="readonly" >
 								<br/>
 								<label>도로명 주소 </label> 
-								<input id="doroAddr" class="addform" name="doroaddress" type="text" >
+								<input id="doroAddr" class="addform" name="doroaddress" type="text">
 								<br/>
 								<label>추가 주소 </label>
 								<input id="detailAddr" class="addform" name="details" type="text">
 								<br/>
 								<label>x 좌표</label>
-								<input id="gps-x" class="addform2" name="lat" type="text" >
+								<input id="gps-x" class="addform2" name="lat" type="text" readonly="readonly">
 								<label>y 좌표</label>
-								<input id="gps-y" class="addform2" name="lng" type="text">
+								<input id="gps-y" class="addform2" name="lng" type="text"  readonly="readonly">
 							</form>
 						</div>
 						
+						
+
 						<!-- 작성 완료 버튼 -->
 						<input type="button" class="site-btn write-btn" onclick="submitData()" value="글 게시" >
 						
