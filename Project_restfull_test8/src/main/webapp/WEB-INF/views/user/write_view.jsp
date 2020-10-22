@@ -350,18 +350,17 @@
 							        enctype: 'multipart/form-data',
 							        url: "${pageContext.request.contextPath}/user/writeMainPosting",
 							        data: boardData,
+							        dataType:"json",
 							        processData: false,
 							        contentType: false,
 							        cache: false,
-							        success: function (data) {
-							           console.log("ㅇㅇ")
-							           //성공시 다른놈 호출
-							           //POST로 ajax 아무리 호출해도 Not Supported POST Method라고 뜸(컨트롤러 매핑도 맞췄는데...)
-							            insertDest();
+							        success: function (result) {
+							        	console.log(result);
+							            insertDest(result);
 							      	},
 							      	error: function (e) {
 							          	console.log("ERROR : ", e);
-							           	alert("fail");
+							           	alert("글을 등록하지 못했습니다. 다시 시도해주세요");
 							      	}
 							    });
 							        
@@ -385,7 +384,7 @@
 							        data: JSON.stringify(addressForm),
 							        contentType:"application/json",
 							        success: function () {
-							            alert("ㄹㅇ 성공");
+							        	//location.href = "${pageContext.request.contextPath}/content_view"
 							        },
 							        error: function (xhr, status) {
 							           alert(xhr + " : " + status);
