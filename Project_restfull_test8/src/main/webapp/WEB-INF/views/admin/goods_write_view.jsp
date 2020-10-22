@@ -24,8 +24,8 @@
 <body>
 
          <form method="post" action="${pageContext.request.contextPath}/admin/dest/goods/write">
-            여행지명 : ${destination_name}
-            <input type="hidden" name="destination_name" id="destination_name" value="${destination_name}"/>
+            여행지명 : ${destVO.destination_name}
+            <input type="hidden" name="destination_numbers" id="destination_numbers" value="${destVO.destination_numbers}"/>
             <hr/>
             상품명 : <input type="text" name="name"/>
             판매업자 : <input type="text" name="seller"/>

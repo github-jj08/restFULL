@@ -21,8 +21,8 @@
 		</tr>
 		<c:forEach items="${destlist}" var="vo">
 		<tr>
-			<td>${vo.sidoguVO.sidoname}</td>
-			<td><a href="dest/content_view?destination_name=${vo.destination_name}">${vo.destination_name}</td>
+			<td>${vo.sidoguVO.sidoName}</td>
+			<td><a href="dest/content_view?destination_numbers=${vo.destination_numbers}">${vo.destination_name}</td>
 			<td>${vo.jibunaddress}</td>
 			<td>${vo.doroaddress}</td>
 			<td>0</td>

@@ -58,21 +58,20 @@
 	
 	<resultMap id="SidoguVO" type="bit.project.restfull.vo.SidoguVO" >
 		<id property="sigungu_code" column="sigungu_code"/>
-		<result property="sigunguname" column="sigunguname"/>
-		<result property="sidocode" column="sidocode"/>
-		<result property="sidoname" column="sidoname"/>
+		<result property="sidoCode" column="sidocode"/>
+		<result property="sidoName" column="sidoname"/>
+		<result property="sigunguName" column="sigunguname"/>
 	</resultMap>
 	
 	<resultMap id="DestinationContents" type="bit.project.restfull.vo.DestinationVO">
-		<id property="destination_name" column="destination_name"/>	
+		<id property="destination_numbers" column="destination_numbers"/>	
 		<result property="jibunaddress" column="jibunaddress"/>
 		<result property="doroaddress" column="doroaddress"/>
 		<result property="details" column="details"/>
 		<result property="lat" column="lat"/>
 		<result property="lng" column="lng"/>
 		<result property="sigungu_code" column="sigungu_code"/>
-		<result property="filter_numbers" column="filter_numbers"/>
-		<result property="location" column="location"/>
+		<result property="destination_name" column="destination_name"/>
 		<association property="sidoguVO" javaType="bit.project.restfull.vo.SidoguVO" resultMap="SidoguVO"></association>
 	</resultMap>
 	
