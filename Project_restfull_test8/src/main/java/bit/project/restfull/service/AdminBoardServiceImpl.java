@@ -241,7 +241,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 					vo.setImp_uid(null);
 					vo.setMember_id((String)paramData.get(i).get("member_id"));	//주문자 아이디
 					vo.setGoods_numbers(Integer.parseInt((String)paramData.get(i).get("goods_numbers")));
-					vo.setDestination_name((String)paramData.get(i).get("destination_name"));
+					vo.setDestination_numbers((String)paramData.get(i).get("destination_numbers"));
 					vo.setCancel(0);
 					requestList.add(vo);
 				}
@@ -253,7 +253,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 				vo.setImp_uid(null);
 				vo.setMember_id((String)paramData.get(i).get("member_id"));	//주문자 아이디
 				vo.setGoods_numbers(Integer.parseInt((String)paramData.get(i).get("goods_numbers")));
-				vo.setDestination_name((String)paramData.get(i).get("destination_name"));
+				vo.setDestination_numbers((String)paramData.get(i).get("destination_numbers"));
 				vo.setCancel(0);
 				requestList.add(vo);
 			}

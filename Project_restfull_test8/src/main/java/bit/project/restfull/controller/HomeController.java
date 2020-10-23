@@ -128,8 +128,11 @@ public class HomeController {
 		log.info("boardlist_numbers : " + boardlist_numbers);
 		//boardlist_numbers에 해당하는 게시글들을 불러옴
 		List<AdminBoardVO> noticelist = adBoardService.getList(boardlist_numbers);
+		String boardListName = noticelist.get(0).getBoardlistName();
+		log.info("boardListName = " + boardListName);
+		model.addAttribute("boardListName", boardListName);
 		model.addAttribute("noticelist", noticelist);
-		return "noticeList";
+		return "Service/noticeList";
 	}
 	
 
@@ -140,14 +143,14 @@ public class HomeController {
 		log.info("게시글 view 호출; 게시글 번호 = " + board_no);
 		model.addAttribute("content_view",adBoardService.getBoardVO(board_no));
 		model.addAttribute("filelist", adBoardService.getBoardAttachmentVO(board_no));
-		return "notice_content_view";
+		return "Service/notice_content_view";
 	}  
 	
 	//자주하는질문
 	@GetMapping("/FAQ")
 	public String FAQ() {
 		log.info("FAQ");
-		return "FAQ";
+		return "Service/FAQ";
 	}
 	
 	//약관

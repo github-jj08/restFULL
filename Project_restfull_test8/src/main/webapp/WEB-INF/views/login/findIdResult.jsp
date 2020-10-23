@@ -4,8 +4,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 	$(function(){
@@ -14,24 +12,33 @@
 		})
 	})
 </script>
-<title>아이디 찾기</title>
+<title>아이디 찾기 검색결과</title>
 </head>
 <body>
-	<div class="w3-content w3-container w3-margin-top">
-		<div class="w3-container w3-card-4">
-			<div class="w3-center w3-large w3-margin-top">
-				<h3>아이디 찾기 검색결과</h3>
-			</div>
-			<div>
-				<h5>
-					${ id }
-				</h5>
-				<p class="w3-center">
-					<button type="button" id=loginBtn class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">Login</button>
-					<button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">Cancel</button>
-				</p>
+
+<%@ include file="/WEB-INF/include/js-header.jsp"%>
+
+    <!-- id찾기 검색결과 Section Begin -->
+    <div class="register-login-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 offset-lg-4">
+                    <div class="login-form">
+                        <h2>아이디 찾기 검색결과</h2>
+						<div class="FindID">
+							<h5>
+								${ id }
+							</h5>
+							<button type="button" id="loginBtn" class="site-btn find-btn">로그인</button>
+							<button type="button" onclick="history.go(-1);" class="site-btn find-btn">취소</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+	
+<%@ include file="/WEB-INF/include/js-footer.jsp"%>
+	
 </body>
 </html>

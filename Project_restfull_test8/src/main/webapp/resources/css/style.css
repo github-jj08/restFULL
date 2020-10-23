@@ -2155,7 +2155,7 @@ ol {
 .blog-sidebar .blog-catagory h4 {
 	color: #252525;
 	font-weight: 700;
-	margin-bottom: 14px;
+	margin-bottom: 50px;
 }
 
 .blog-sidebar .blog-catagory ul li {
@@ -2169,7 +2169,9 @@ ol {
 }
 
 .blog-sidebar .blog-catagory ul li:hover>a {
-	background: #8a93c0;
+	color: #252525;
+	font-weight:900;
+	font-size: 20px;
 }
 
 .blog-sidebar .recent-post {
@@ -2291,66 +2293,120 @@ ol {
 	padding-bottom: 70px;
 }
 
-/*사진 업로드 css*/
-.blog-detail-title .group-input .writepic .imgs_wrap {
-    border-style:double;
-    width:100%;
-    height:400px;
-    margin-bottom:50px;
-    margin-top:10px;
-    overflow:auto;
-}
-
-.blog-detail-title .group-input .writepic #preview img {
-   
-    height:200px;
-    
-}
-
-.blog-detail-title .group-input .writepic .preview-box {
-    border: 1px solid;
-    padding: 5px;
-    border-radius: 2px;
-    margin-bottom: 10px;
-}
-
-.blog-detail-title .group-input .writepic .preview-box a {
-    float:right;
-}
-
-
-
-.blog-detail-title .group-input .writecontentx textarea {
-    width:100%;
-    height: 250px;
-}
-
 .blog-details-inner .blog-detail-title {
 	margin-bottom: 25px;
     
 }
 
-.blog-details-inner .blog-detail-title .writeform .group-input {
-    margin : 20px 5PX;
+/*사진 업로드 css*/
+.blog-detail-title .group-input .writepic .imgs_wrap {
+    border:#8a93c0 2px double;
+    width:100%;
+    height:500px;
+    margin-bottom:50px;
+    margin-top:10px;
+    overflow:auto;
+    border-radius: 6px;
 }
 
-.blog-details-inner .blog-detail-title .writeform .group-input label{
+.blog-detail-title .group-input .writepic #preview img {
+    height:200px; 
+    width: auto;
+}
+
+.blog-detail-title .group-input .writepic #preview .preview-box {
+    border-bottom: #8a93c0 1px solid;
+
+}
+
+.blog-detail-title .group-input .writepic .preview-box a {
+    float:right;
+    padding: 4px;
+    color: black;
+}
+
+/* 제목, 내용 css */
+.blog-detail-title #boardForm .group-input {
+    margin : 20px 5px;
+}
+
+.blog-detail-title #boardForm .group-input label{
     font-size:20px;
-    font-weight:900;
+    font-weight:800;
     
 }
-.blog-details-inner .blog-detail-title .writeform .group-input input {
-    height:40px;
+ .blog-detail-title #boardForm .group-input .writetitle input {
+    height:30px;
+    width:50%;
+    border: #8a93c0 1px solid;
+    margin-left: 7px;
+    padding :0 7px;
+    border-radius: 5px;  
+}
+
+.blog-detail-title #boardForm .group-input .writecontentx textarea {
+    color: #252525;
+    border:#8a93c0 2px double;
     width:100%;
+    height: 250px;
+    border-radius: 6px;
+    padding : 5px 12px;
 }
 
-
-.blog-details-inner .blog-detail-title .writeform .group-input 
-.writetitle {
-    margin-top:30px;
+/* 위치(지도) 지정 */
+.blog-detail-title .group-input label {
+	font-size:20px;
+    font-weight:800;
+	
 }
 
-.blog-details-inner .blog-detail-title .writeform .write-btn {
+.blog-detail-title .group-input #map {
+	width: 100%; 
+	height:350px; 
+	position: relative; 
+	overflow: hidden;
+	margin: 15px 0;
+}
+
+.blog-detail-title .maploc {
+	width:100%;
+	height:210px;
+	margin: 30px 5px;
+	padding : 10px;
+	background-color:#dde1f5;
+	border-radius: 5px;
+	
+}
+
+.blog-detail-title .maploc #addressForm label {
+	font-size: 17px;
+	color:#4c5686;
+	font-weight: 600;
+}
+
+.blog-detail-title .maploc #addressForm .addform{
+	margin: 5px;
+	padding-left:10px;
+	padding-right: 5px;
+	width: 60%;
+	border: none;
+	border-bottom: #8a93c0 1px solid;
+	background-color:#dde1f5;
+}
+
+.blog-detail-title .maploc #addressForm .addform2 {
+	margin: 5px;
+	padding-left:10px;
+	padding-right: 5px;
+	width: 40%;
+	text-align: center;
+	border: none;
+	border-bottom: #8a93c0 1px solid;
+	background-color:#dde1f5;
+	
+}
+
+.blog-details-inner .blog-detail-title .write-btn {
     float:right;
     background-color:#8a93c0;
     border-style:none;
@@ -2784,10 +2840,7 @@ ol {
 	background: #8a93c0;
 }
 
-.text-center{
-	text-align: center;
-	padding-top: 2%;
-}
+
 
 /*---------------------
 	join-form
@@ -2882,6 +2935,56 @@ ol {
 /*---------------------
   Register Form
 -----------------------*/
+/* ID찾기 css */
+.login-form form .FindID .find-btn {
+	width: 49%;
+	letter-spacing: 2px;
+	margin-top: 35px;
+    background-color:#8a93c0;
+    border-color:#8a93c0;
+    margin-bottom: 50px;
+	
+}
+
+/* ID찾기 검색결과css */
+.login-form .FindID h5{
+	text-align:center;
+		
+}
+
+
+/* PW찾기 css */
+.login-form .FindPW .group-input {
+	margin-bottom: 20px;
+}
+.login-form .FindPW .group-input input {
+	border: 1px solid #ebebeb;
+	height: 45px;
+	width: 100%;
+	padding-left: 20px;
+	padding-right: 15px;
+}
+
+.login-form .FindPW .group-input label {
+	display: block;
+	font-size: 15px;
+	color: #252525;
+    font-weight: 700;
+	margin-bottom: 13px;
+	
+}
+
+.login-form .FindPW .find-btn {
+	width: 49%;
+	letter-spacing: 2px;
+	margin-top: 35px;
+    background-color:#8a93c0;
+    border-color:#8a93c0;
+    margin-bottom: 50px;
+}
+
+/*--------ID,PW찾기 PAGE & ID검색결과 창 css-----------끝  */
+
 
 .register-login-section {
 	padding-top: 100px;
@@ -2930,7 +3033,7 @@ ol {
     background-color:#8a93c0;
     border-color:#8a93c0;
     
-    }
+}
     
  .register-form .home-btn a {
  	color:white;
@@ -3126,12 +3229,35 @@ ol {
 	.related-products .product-item .pi-pic ul li a {
 		padding: 16px 12px 12px 11px;
 	}
-/* 	.choosecourse .course .course-1day .sortable li {
-		padding-left:3px;
-		font-size:13px;
-		list-style: none;
-		max-width:80%;
-	} */
+
+	.blog-detail-title .maploc {
+		width:100%;
+		height:auto;
+		padding: 16px;
+	
+	}
+
+	.blog-detail-title .maploc #addressForm label {
+		font-size: 14px;
+	}
+	
+	.blog-detail-title .maploc #addressForm .addform{
+		padding-left:15px;
+		pading-right: 15px;
+		width: 100%;
+
+	}
+	
+	.blog-detail-title .maploc #addressForm .addform2 {
+		padding-left:5px;
+		width: 40%;
+		
+	}
+	
+	.blog-details-inner .blog-detail-title .write-btn {
+	    border-style:none;
+	    margin-top: 10px;
+	}
 }
 
 @media only screen and (max-width: 991px) {
@@ -3184,7 +3310,6 @@ ol {
 	.product-shop.page-details .product-details {
 		padding-top: 30px;
 	}
-
 
 
 }
@@ -3269,7 +3394,7 @@ ol {
 		display: none;
 	}
 	.inner-header .advanced-search .input-group {
-		max-width: 100%;
+		max-width: 95%;
 	}
 	.inner-header {
 		padding: 0;
@@ -3409,13 +3534,45 @@ ol {
 	.footer-widget ul li a {
 		font-size:12px;
 	}
-/* 	.choosecourse .course .course-1day .sortable li {
-		padding-left:3px;
-		margin: 2px 5px;
-		font-size:13px;
-		list-style: none;
+	
+	 .blog-detail-title #boardForm .group-input .writetitle input {
+	    width:100%;
+	    margin-left: 7px;
+	    padding :0 7px;  
+	    border-radius: 5px;
+	}
+	
+	.blog-detail-title .maploc {
 		width:100%;
-	} */
+		height:auto;
+		padding : 10px;
+		background-color:#dde1f5;
+		border-radius: 5px;
+	
+	}
+
+	.blog-detail-title .maploc #addressForm label {
+		font-size: 14px;
+	}
+	
+	.blog-detail-title .maploc #addressForm .addform{
+		padding-left:5px;
+		width: 90%;
+
+	}
+	
+	.blog-detail-title .maploc #addressForm .addform2 {
+		padding-left:5px;
+		width: 90%;
+		
+	}
+	
+	.blog-details-inner .blog-detail-title .write-btn {
+	    border-style:none;
+	    margin-top: 10px;
+	}
+	
+	
 }
 
 /* Small Device: 320px */
@@ -3428,7 +3585,7 @@ ol {
 		display: none;
 	}
 	.inner-header .advanced-search .input-group {
-		max-width: 100%;
+		max-width: 90%;
 	}
 	.inner-header .nav-right li.cart-icon .cart-hover {
 		width: 270px;
@@ -4017,9 +4174,55 @@ ol {
     padding: 4px 0;
 }
 
+.blog-section .notice-table #list-table .input{
+	width: 100%;
+	}
+/*----------------------
+		개인정보  css
+----------------------*/
+/* 고객센터 부분 */
+.text-center{
+	text-align: center;
+	padding-top: 100px;
+	padding-bottom:25px;
+}
+.blog-section .container .mywriting-table #mylist-table {
+    width:100%;
+   
+}
 
+.blog-section .container .mywriting-table #mylist-table tr {
+    padding : px 0;
+     
+}
+.blog-section .container .mywriting-table #mylist-table td {
+   border : #8a93c0 2px solid;
+}
 
+.blog-section .container .mywriting-table #mylist-table .first-list {
+    background-color: #626eac;
+    color: white;
+    text-align:center;
+    border-bottom : #626eac 2px solid;
+    font-size: 18px;
+    font-weight:600;
+}
+.blog-section .container .mywriting-table #mylist-table .first-list td {
+    padding: 6px 0;
+}
 
+.blog-section .container .mywriting-table #mylist-table .noticetable {
+    text-align:center;
+}
+
+.blog-section .container .mywriting-table #mylist-table .noticetable td {
+    padding: 4px 0;
+}
+
+.text-center h2 {
+	font-weight:700;
+	color: #41497a;
+}
 
 
 

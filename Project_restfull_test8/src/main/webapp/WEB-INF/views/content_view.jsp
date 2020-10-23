@@ -9,10 +9,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>RestFuLL | 여행일기</title>
   	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	
+
 </head>
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>   
+
 	   
 	            
 <!-- 메인 컨텐츠  -->
@@ -56,19 +57,19 @@
 								console.log("filelist : " + filelist);
 								
 						    	for(var i=0 ; i< filelist.length ; i++) {
-							       $('<div class="carousel-item"><img src="'+filelist[i].filedirectory+'" width=\"460\" height=\"345\""></div>').appendTo('.carousel-inner');
+							       $('<div class="carousel-item" style="width:100%; text-align:center; margin:0px auto;"><img src="'+filelist[i].filedirectory+'" style="height:100%; line-height:auto; "></div>').appendTo('.carousel-inner');
 							       $('<li data-target="#myCarousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
-							     	}
-							     $('.carousel-item').first().addClass('active');
-							     $('.carousel-indicators>li').first().addClass('active');
-							     $('#myCarousel').carousel();
+							    }
+						    	
+							    $('.carousel-item').first().addClass('active');
+							    $('.carousel-indicators>li').first().addClass('active');
+							     //$('#myCarousel').carousel();
 							});
+														
 						</script>
 						 <!--------------------------
                         	 Carousel 스크립트 end
                          ----------------------------->
-						
-						
 						
 						<div class="wrapper">
 							<div class="likeanddrop">
@@ -108,7 +109,7 @@
 												function likeCheck(){ 
 													$.ajax({
 													url: "${pageContext.request.contextPath}/user/board/likeCheck",
-									                type: "POST",
+									                type: "GET",
 									                dataType:"json",
 									                data: {
 									                    "board_numbers": board_numbers,
@@ -116,7 +117,7 @@
 									                },
 									                success: function (result) {
 									                	//좋아요 체크를 했을 때, 좋아요 된 상태(1)일 경우 하트의 상태를 바꿈(빈하트 -> 꽉찬 하트)
-									                	if(result == 1){
+									                	if(JSON.parse(result == 1)){
 										                	$("#like-button").attr('class','fa fa-heart');
 									                	}else{
 									                		$("#like-button").attr('class','fa fa-heart-o');
@@ -145,14 +146,14 @@
 											    function likeCount() {
 													$.ajax({
 														url: "${pageContext.request.contextPath}/board/likeCount",
-										                type: "POST",
+										                type: "GET",
 										                data: {
 										                    "board_numbers": board_numbers
 										                },
 										                dataType:"json",
 										                success: function (count) {
-										                	console.log(count);
-										                	$(".like_count").text(count);
+										                	console.log(JSON.parse(count));
+										                	$(".like_count").text(JSON.parse(count));
 										                },
 													})
 											    };
@@ -177,8 +178,11 @@
 							  		  ...
 							 		</button>
 								    <div class="dropdown-menu">
-								      <a class="dropdown-item" href="modify?board_numbers=${content_view.board_numbers}">수정</a>
-								      <a class="dropdown-item" href="delete?board_numbers=${content_view.board_numbers}">삭제</a>
+								    	<!-- 자신이 쓴 글일 때만 수정/삭제 버튼 노출 -->
+									    <c:if test="${principal.user.member_id eq content_view.member_id}">
+									      <a class="dropdown-item" href="user/modify?board_numbers=${content_view.board_numbers}">수정</a>
+									      <a class="dropdown-item" href="user/delete?board_numbers=${content_view.board_numbers}">삭제</a>
+									    </c:if>
 								      <a class="dropdown-item" href="#DecModal" data-toggle="modal">신고</a>
 								    </div>
 							
@@ -351,14 +355,8 @@
                                             //html삽입 : 표시될 데이터 - 아이디,댓글내용,작성일,삭제버튼,[히든]댓글번호
                                             var htmls="";
                                             $("#list-table").html("");	
-                                            $("<tr>" , {
-                                                html : "<td>" + "아이디" + "</td>"+  // 컬럼명들
-                                                        "<td>" + "댓글내용" + "</td>"+
-                                                        "<td>" + "작성일" + "</td>"+
-                                                        "<td>" + "삭제버튼+댓글번호[히든]" + "</td>"			
-                                            }).appendTo("#list-table") // 이것을 테이블에붙임
                                             if(result.length < 1){
-                                                htmls.push("등록된 댓글이 없습니다.");
+                                                htmls += "등록된 댓글이 없습니다.";
                                             } else {
                                                     $(result).each(function(index,item){
                                                         //사용자와 작성자의 아이디가 같다면 삭제 버튼 생성
@@ -367,8 +365,7 @@
                                                             htmls += '<td>'+ item.member_id + '</td>';
                                                             htmls += '<td>'+ item.contents + '</td>';
                                                             htmls += '<td>'+ item.dates + '</td>';
-                                                            htmls += '<td><button type="button" name="delete" value="' + item.comments_numbers+'">삭제</button>';
-                                                            htmls += '<button type="button" name="comment-modify" value="'+item.comments_numbers+'">수정</button></td>';
+                                                            htmls += '<td><button type="button" name="delete" value="' + item.comments_numbers+'"> x </button>';
                                                             htmls += '</tr>';
                                                         } else {
                                                             //아니라면 그냥 출력
@@ -376,7 +373,7 @@
                                                             htmls += '<td>'+ item.member_id + '</td>';
                                                             htmls += '<td>'+ item.contents + '</td>';
                                                             htmls += '<td>'+ item.dates + '</td>';
-                                                            htmls += '<td>'+ item.comments_numbers + '<input type="hidden" value="'+ item.board_numbers + '"> 게시글번호숨김 </td>';	
+                                                            htmls += '<td>'+ item.comments_numbers + '<input type="hidden" value="'+ item.board_numbers + '"></td>';	
                                                             htmls += '</tr>';
                                                         }
                                                     });	//each end
@@ -416,6 +413,7 @@
                                                 "contents":contents
                                             },
                                             success: function () {
+                                            	$('input[name="reply"]').val(''); //작성했으니 초기화시킴
                                                 commentList();
                                             },
                                         });

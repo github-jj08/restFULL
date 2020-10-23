@@ -95,7 +95,7 @@
 	                <div class="col-sm-3 order-1">
 	                    <div class="blog-sidebar">
 							<div class="blog-catagory menu-background">
-						        <h4>고객센터</h4>
+						        <h4>마이페이지</h4>
 						        <ul>
 						            <li style="background-color: #8a93c0;"><p>[<a href="<c:url value="userModify" />">개인정보 수정</a>]</p></li>
 						            <li><p>[<a href="myList?member_id=<sec:authentication property="principal.user.member_id"/>">내 게시글 보기</a>]</p></li>
@@ -111,54 +111,45 @@
 			        </div>
 			       
 			        <div class="col-sm-9 order-2">
-						<sec:authentication var="principal" property="principal"/>
-						<p>Principal : <sec:authentication property="principal.user"/></p>
-						<p>사용자 아이디 : <sec:authentication property="principal.user.member_id"/></p>
-						<p>사용자 비밀번호 : <sec:authentication property="principal.user.pw"/></p>
-						<p>사용자 이름 : <sec:authentication property="principal.user.name"/></p>
-						<p>사용자 성별 : <sec:authentication property="principal.user.gender"/></p>
-						<p>사용자 이메일 : <sec:authentication property="principal.user.email"/></p>
-						<p>사용자 연락처 : <sec:authentication property="principal.user.phone"/></p>
-						
 						
 						 <fieldset>
 							<form:form id="modifyForm" action="update" method="POST">
-								 <table border="1" id="modifyTable">
+								<div class="notice-table">
+								 <table id="list-table">
 									  <tr>
 										   <td>아이디</td>
-										   <td><input type="text"  id="member_id" name="member_id"  value="<sec:authentication property="principal.user.member_id"/>" readOnly/></td>
+										   <td><input class="input" type="text"  id="member_id" name="member_id"  value="<sec:authentication property="principal.user.member_id"/>" readOnly/></td>
 									  </tr>
 									
 									  <tr>
 										   <td>패스워드</td>
 										   <td>
-										   	 	<input type="password"  id="pw" name="pw" placeholder="패스워드 입력(8자 이상)"/><br />
+										   	 	<input class="input" type="password"  id="pw" name="pw" placeholder="패스워드 입력(8자 이상)"/><br />
 										   </td>
 									  </tr>
 									
 									  <tr>
 									   	   <td>패스워드 확인</td>
 										   <td>
-										    	<input type="password"  id="pw2" name="password_chk" placeholder="패스워드 확인(8자 이상)" /><br />
+										    	<input class="input" type="password"  id="pw2" name="password_chk" placeholder="패스워드 확인(8자 이상)" /><br />
 										   </td>
 									  </tr>
 									
 									  <tr>
 										   <td>이름</td>
-										   <td><input type="text"  id="name" placeholder="이름" value="<sec:authentication property="principal.user.name"/>" readOnly/><br /></td>
+										   <td><input class="input" type="text"  id="name" placeholder="이름" value="<sec:authentication property="principal.user.name"/>" readOnly/><br /></td>
 									  </tr>
 									  
 									  <tr>
 										   <td>휴대폰</td>
-										   <td><input type="text" id="phone" name="phone" placeholder="PHONE" value="<sec:authentication property="principal.user.phone"/>" required onkeypress="onlyNumber()"/></td>
+										   <td><input class="input" type="text" id="phone" name="phone" placeholder="PHONE" value="<sec:authentication property="principal.user.phone"/>" required onkeypress="onlyNumber()"/></td>
 									  </tr>
 									  
 									  <tr>
 										   <td>이메일</td>
-										   <td><input type="email" class="form-control" id="email" placeholder="EMAIL" name="email" value="<sec:authentication property="principal.user.email"/>"/><br/>
+										   <td><input class="input" type="email" id="email" placeholder="EMAIL" name="email" value="<sec:authentication property="principal.user.email"/>"/><br/>
 										   </td>
 									  </tr>
-									
 									  <tr>
 										   <td colspan="2">
 											    <a href="userHome" id="home"><button type="button" class="button3">돌아가기</button></a>
@@ -167,6 +158,7 @@
 									  </tr>
 									  
 								 </table>
+								</div>
 							 </form:form>
 						 </fieldset>
 					 </div>

@@ -17,7 +17,7 @@ public class RequestVO {
 	private String imp_uid;		//	IMP_UID	VARCHAR2(100 BYTE)
 	private String member_id;		//	MEMBER_ID	VARCHAR2(100 BYTE)
 	private int goods_numbers;		//	GOODS_NUMBERS	NUMBER(10,0)
-	private String destination_name;		//	DESTINATION_NAME	VARCHAR2(255 BYTE)
+	private String destination_numbers;		//	DESTINATION_NAME	VARCHAR2(255 BYTE)
 	private int cancel;		//	CANCELYN	NUMBER
 	private int price;
 	private String merchant_uid; // MERCHANT_UID;

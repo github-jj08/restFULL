@@ -16,13 +16,13 @@
 <%@ include file="/WEB-INF/include/js-header.jsp"%> 
 
 
-         <div class="text-center"><h2>자주하는 질문(FAQ)</h2></div>
-         <hr>
+    <div class="text-center"><h2>자주하는 질문(FAQ)</h2></div>
+    <hr>
   <!-- Blog Section Begin -->
     <section class="blog-section spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-8 order-1">
+                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1">
                     <div class="blog-sidebar">
 
                         <div class="blog-catagory">
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <!--ajax로 받아야하는 부분-마이페이지 start-->
-                <div class="col-lg-9 order-2">
+                <div class="col-lg-9 order-1 order-lg-2">
                     <div class="faq-accordin">
                     
                         <div class="accordion" id="accordionExample">

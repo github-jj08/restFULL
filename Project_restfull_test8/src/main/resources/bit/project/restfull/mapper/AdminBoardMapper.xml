@@ -118,7 +118,7 @@
 				IMP_UID,
 				MEMBER_ID,
 				GOODS_NUMBERS,
-				DESTINATION_NAME,
+				DESTINATION_NUMBERS,
 				CANCEL,
 				MERCHANT_UID
 			) values
@@ -128,7 +128,7 @@
 				#{item.imp_uid, jdbcType=VARCHAR} , 
 				#{item.member_id} , 
 				#{item.goods_numbers},
-				#{item.destination_name},
+				#{item.destination_numbers},
 				#{item.cancel},
 				#{item.merchant_uid}
 			) 

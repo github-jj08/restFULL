@@ -68,6 +68,7 @@ public class BoardServiceImpl implements BoardService{
 		//0.파일경로
 		//학원 컴 경로 C:\Users\bit\Desktop\
 		String root_path = "C:/Users/hoora/Desktop";
+		//String root_path = "C:/Users/bit/Desktop";
 		String attach_path = "/resources/upload/";
 
 		//1.글작성

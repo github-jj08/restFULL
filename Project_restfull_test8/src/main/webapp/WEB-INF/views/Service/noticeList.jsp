@@ -13,12 +13,22 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
+				<c:set var="boardListName" value="${boardListName}" />
+				<c:choose>
+				    <c:when test="${boardListName eq 'event'}">
+						<div class="text-center"><h2>이벤트</h2></div>
+					</c:when>
+				    <c:when test="${boardListName eq 'notice'}">
+				    	<div class="text-center"><h2>공지사항</h2></div>
+				    </c:when>
+				</c:choose>
+   <hr>
 
  <!-- Blog Section Begin -->
     <section class="blog-section spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-8 order-1 order-lg-1">
+                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1">
                     <div class="blog-sidebar">
                         <div class="blog-catagory">
                             <h4>고객센터</h4>
@@ -37,7 +47,7 @@
                 
                 
                 <!--공지사항 table start-->
-                <div class="col-lg-9 order-2 order-lg-2">
+                <div class="col-lg-9 order-1 order-lg-2">
                     <div class="row">
                         <div class="col-lg-12 col-sm-12">
                             <div class="notice-table">
