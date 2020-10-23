@@ -15,7 +15,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- 로고 -->
-	<link rel="shortcut icon" href="resources/img/favicon.ico"/>
+	<link rel="shortcut icon" href="resources/img/o_1.ico"/>
+	
     <title></title>
     
     <script src="resources/js/jquery-3.3.1.min.js"></script>
