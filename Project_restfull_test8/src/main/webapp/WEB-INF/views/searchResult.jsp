@@ -24,7 +24,7 @@
 <section class="search-section spad">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-5 order-lg-1 search">
+			<div class="col-lg-6 order-lg-1">
 				<div class="row">
 					<c:forEach items="${boardlist}" var="vo">
 						<div class="col-lg-6 col-sm-6 ">
@@ -51,29 +51,30 @@
 				</div>
 				
 				<!-- 페이징 -->
-				<c:if test="${paging.startPage != 1 }">
-					<a href="search?boardlist_numbers=${boardlist_numbers}&searchWord=${searchWord}&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
-				</c:if>
-				<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
-					<c:choose>
-						<c:when test="${p == paging.nowPage }">
-							<b>${p }</b>
-						</c:when>
-						<c:when test="${p != paging.nowPage }">
-							<a href="search?boardlist_numbers=${boardlist_numbers}&searchWord=${searchWord}&nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
-						</c:when>
-					</c:choose>
-				</c:forEach>
-				<c:if test="${paging.endPage != paging.lastPage}">
-					<a href="search?boardlist_numbers=${boardlist_numbers}&searchWord=${searchWord}&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
-				</c:if>
-				
+				<div class="page-center">
+					<c:if test="${paging.startPage != 1 }">
+						<a href="search?boardlist_numbers=${boardlist_numbers}&searchWord=${searchWord}&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+					</c:if>
+					<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+						<c:choose>
+							<c:when test="${p == paging.nowPage }">
+								<b>${p }</b>
+							</c:when>
+							<c:when test="${p != paging.nowPage }">
+								<a href="search?boardlist_numbers=${boardlist_numbers}&searchWord=${searchWord}&nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+							</c:when>
+						</c:choose>
+					</c:forEach>
+				</div>
+					<c:if test="${paging.endPage != paging.lastPage}">
+						<a href="search?boardlist_numbers=${boardlist_numbers}&searchWord=${searchWord}&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+					</c:if>
 			</div>
 		
 			
-			<div class="col-lg-7 order-lg-2">
+			<div class="col-lg-6 order-lg-2">
 				<!-- 지도 -->
-				<div id="map" style="width:100%; height:500px;"></div>
+				<div id="map"></div>
 			</div>
 		</div>
 	</div>

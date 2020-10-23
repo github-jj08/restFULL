@@ -57,28 +57,36 @@
 
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
 
-			<!-- 메인 컨텐츠  -->
-			<div class="contentswrapper">
+
+<!-- 메인 컨텐츠  -->
+<section class="write-section spad">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-7 order-lg-1">
 				<input type="hidden" name="board_numbers" value="${content_view.board_numbers}">
-				<input type="hidden" name="boardlist_numbers" value="${content_view.boardlist_numbers}">
-				<div id="leftbox" style="float:left; width:50%;">
-					<div id="photo-view">
+				<div class="leftbox">
+					<div class="photo-view">
+					
 						<!-- 사진들 -->
 						<div id="myCarousel" class="carousel slide" data-ride="carousel">
-						     <!-- Indicators -->
-						     <ul class="carousel-indicators"> </ul>
+							<!-- Indicators -->
+						    <ul class="carousel-indicators"> </ul>
 						     
-						     <!-- Wrapper for slides -->
-						     <div class="carousel-inner"> </div>
+						    <!-- Wrapper for slides -->
+						    <div class="carousel-inner"> </div>
 						     
-						     <!-- Controls -->
-						     <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+						    <!-- Controls -->
+						    <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
 						       <span class="carousel-control-prev-icon"></span>
-						     </a>
-						     <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+						    </a>
+						    <a class="carousel-control-next" href="#myCarousel" data-slide="next">
 						       <span class="carousel-control-next-icon"></span>
-						     </a>
+						    </a>
 						</div>
+						
+						 <!--------------------------
+                        	 Carousel 스크립트 start
+                         ----------------------------->
 						<script>
 							$(function(){  
 								var filelist = new Array();
@@ -92,61 +100,37 @@
 								console.log("filelist : " + filelist);
 								
 						    	for(var i=0 ; i< filelist.length ; i++) {
-							       $('<div class="carousel-item"><img src="'+filelist[i].filedirectory+'" width=\"460\" height=\"345\""></div>').appendTo('.carousel-inner');
+							       $('<div class="carousel-item" style="width:100%; text-align:center; margin:0px auto;"><img src="'+filelist[i].filedirectory+'" style="height:100%; line-height:auto; "></div>').appendTo('.carousel-inner');
 							       $('<li data-target="#myCarousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
-							     	}
-							     $('.carousel-item').first().addClass('active');
-							     $('.carousel-indicators>li').first().addClass('active');
-							     $('#myCarousel').carousel();
+							    }
+						    	
+							    $('.carousel-item').first().addClass('active');
+							    $('.carousel-indicators>li').first().addClass('active');
+							     //$('#myCarousel').carousel();
 							});
+														
 						</script>
+						 <!--------------------------
+                        	 Carousel 스크립트 end
+                         ----------------------------->
+						
 
-						    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-						     
-						    </button>
-						    <div class="dropdown-menu">
-						      <a class="dropdown-item" id="modify" href="modify?board_numbers=${content_view.board_numbers}">수정</a>
-						      <a class="dropdown-item" id="delete">삭제</a>
-						      <a class="dropdown-item" id="report" href="#DecModal" data-toggle="modal" >신고</a>
-						    </div>
-						    
-						    <script>
-						    	$("#delete").on("click", function(){
-						    		var board_numbers = $('input[name=board_numbers]').val()
-						    		var boardlist_numbers = $('input[name=boardlist_numbers]').val();
-						    		var yn = confirm("게시글을 삭제하시겠습니까?");
-						    		if(yn){
-						    			
-						    				$.ajax({
-						    					url : "/restfull/admin/notice/delete",
-						    					async: true,
-						    					type : "GET",
-						    					data : {
-						    						"board_numbers" : board_numbers
-						    					},
-						    					success: function() {
-						    							alert("게시글이 삭제되었습니다.");
-						    							location.href = "/restfull/admin/notice";
-						    					},
-						    					error: function() {
-						    						alert("알수 없는 에러 발생");
-						    					}
-						    				})
-						    		}else{
-						    			alert("게시글 삭제가 취소되었습니다.");
-						    		}
-						    	});
-						    </script>
-						  </div>
+						</div>
+						<div class="write-view">
+                            <div class="board-contents">
+                                <div class="view-hit">조회수 - ${content_view.hit} 회</div>
+                                <div class="view-dates">${content_view.dates} </div>
+                                <br/>
+                                <div class="view-id">${content_view.member_id}</div>
+                                <div class="view-title">${content_view.title}</div>
+                                <div class="view-contents">${content_view.contents}</div>
+                            </div>
+                        </div>
+						  
+						  
 					</div>
 					
-					<div>
-						<h2><p>${content_view.title}</p></h2>
-						<p>${content_view.member_id}</p>
-						<p>${content_view.dates}</p>
-						<p>${content_view.hit}</p>
-						<p>${content_view.contents}</p>
-					</div>
+
 					
 					
 					

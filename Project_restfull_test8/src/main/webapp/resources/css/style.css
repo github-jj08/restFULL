@@ -4220,19 +4220,8 @@ ol {
 
 /* 검색결과 게시판 page CSS */
 
-.search-section .main-postings {
-	margin : 50px 10px;
-	border: #8a93c0 1px 
-}
-
-
-.search-section .main-postings .pi-pic {
-    padding: 5px;
-    
-   
-}
 .search-section .main-postings.pi-pic img{
-    height:150px;
+    height:200px;
     width:100%;
     
    
@@ -4243,19 +4232,37 @@ ol {
 
 .search-section .main-postings .pi-text .caption-title {
     font-weight:700;
-    font-size:10px;
+    font-size:17px;
     margin-bottom: 8px;
 }
 
 .search-section .main-postings .pi-text .caption-loc {
-    font-size:10px;
+    font-size:14px;
+    font-weight: 600;
+    color: #41497a;
+    
 
 }
 
 .search-section .main-postings .pi-text .caption-destination {
-    font-size:10px;
+    font-size:12px;
     margin-bottom: 15px;
 
 }
 
+.search-section .page-center  {
+	text-align:center;
+	margin-right: 55px;
+	
+}
 
+.search-section .page-center a {
+	color: #8a93c0;
+}
+
+
+.search-section #map {
+	width:100%;
+	height:600px;
+	border-radius : 5px;
+}
