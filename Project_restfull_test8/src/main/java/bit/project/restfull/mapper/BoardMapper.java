@@ -22,14 +22,15 @@ import bit.project.restfull.vo.TravelVO;
 @Mapper
 public interface BoardMapper{
 	
-	/* 게시글 목록 출력 (관리자와 불러오는 테이블 수가 다르므로 따로 정의) */
+	/* 일반게시글 목록 출력 (관리자와 불러오는 테이블 수가 다르므로 따로 정의) */
 	@ResultMap("BoardContents")
 	@Select("Select * from (SELECT ROWNUM RN, A.* FROM"
-			+ "(select b.*, d.* from board b, destination d"
+			+ "(select b.*,d.lat,d.lng, d.destination_name, f.name as filterName,l.name as boardName"
+			+ " from board b, destination d, filter f, boardlist l"
 			+ " where b.destination_numbers = d.destination_numbers"
 			+ "	and b.boardlist_numbers = #{boardlist_numbers}"
-			+ "	and (d.destination_name like '%'||#{searchWord}||'%' or d.jibunaddress like '%'||#{searchWord}||'%') A )"
-			+"WHERE RN BETWEEN #{start} AND #{end}")
+			+ "	and b.location like '%'||#{searchWord}||'%' ) A )"
+			+" WHERE RN BETWEEN #{start} AND #{end}")
 	List<BoardVO> getList(@Param("boardlist_numbers")int boardlist_numbers, @Param("searchWord") String searchWord, @Param("start")int start,  @Param("end")int end);
 	
 	/* 메인 게시글 출력(content_view) */
@@ -48,7 +49,7 @@ public interface BoardMapper{
 	
 	/* 글작성(첨부파일 테이블+게시판 테이블) */
 	@SelectKey(statement="select BOARD_SEQ.CURRVAL as board_numbers from dual", keyProperty="board_numbers", before=false, resultType=int.class)
-	@Insert("insert into board (board_numbers, title, contents, hit, dates, member_id,boardlist_numbers,filter_numbers,destination_numbers)"
+	@Insert("insert into board (board_numbers, title, contents, hit, dates, member_id,boardlist_numbers,filter_numbers, location)"
 			+ " values (BOARD_SEQ.NEXTVAL, #{title}, #{contents}, 0, sysdate, #{member_id},#{boardlist_numbers}, #{filter_numbers},#{location,jdbcType=VARCHAR})")
 	int insertBoardVO(BoardVO boardVO);
 	
@@ -128,9 +129,9 @@ public interface BoardMapper{
 	
 	// 메인 게시글 리스트 숫자세기
 	@Select("select count(*) from board b, destination d" 
-			+ "where b.destination_numbers = d.destination_numbers" 
-			+ "and b.boardlist_numbers = #{boardlist_numbers}"
+			+ " where b.destination_numbers = d.destination_numbers" 
+			+ " and b.boardlist_numbers = #{boardlist_numbers}"
 			+ " and (d.destination_name like '%'||#{searchWord}||'%' or d.jibunaddress like '%'||#{searchWord}||'%')")
-	public int countMainBoard(@Param("searchWord") String searchWord);
+	public int countMainBoard(@Param("boardlist_numbers")int boardlist_numbers, @Param("searchWord") String searchWord);
 		
 }

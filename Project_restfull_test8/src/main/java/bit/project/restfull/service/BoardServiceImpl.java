@@ -256,8 +256,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int countMainBoard(String searchWord) {
-		return boardMapper.countMainBoard(searchWord);
+	public int countMainBoard(int boardlist_numbers, String searchWord) {
+		return boardMapper.countMainBoard(boardlist_numbers,searchWord);
 	}
 
 }

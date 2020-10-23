@@ -48,9 +48,10 @@ public class HomeController {
 		public String search(PagingVO pagingVO, @RequestParam(value="boardlist_numbers") int boardlist_numbers, @RequestParam(value="searchWord") String searchWord, Model model
 				, @RequestParam(value="nowPage", required=false)String nowPage
 				, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+			log.info("boardlist_numbers : " + boardlist_numbers);
 			log.info("searchWord : " + searchWord);
 			
-			int total = boardService.countMainBoard(searchWord);
+			int total = boardService.countMainBoard(boardlist_numbers, searchWord);
 			if (nowPage == null && cntPerPage == null) {
 				nowPage = "1";
 				cntPerPage = "6";

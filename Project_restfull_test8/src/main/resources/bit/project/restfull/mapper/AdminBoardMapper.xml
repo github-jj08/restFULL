@@ -34,11 +34,12 @@
 		<result property="dates" column="dates"/>
 		<result property="member_id" column="member_id"/>
 		<result property="boardlist_numbers" column="boardlist_numbers"/>
-		<result property="boardName" column="boardName"/>
 		<result property="filter_numbers" column="filter_numbers"/>
-		<!-- name 컬럼명은 boardlist 테이블에 있는 name -->
-		<result property="filterName" column="filterName"/>
+		<result property="destination_numbers" column="destination_numbers"/>
+		<result property="filterName" column="name"/>
+		<result property="location" column="location"/>
 		<result property="thumbnail" column="thumbnail"/>
+		<association property="destinationVO" javaType="bit.project.restfull.vo.DestinationVO" resultMap="DestinationVO"></association>
 	</resultMap>
 	
 	<!-- 필터가 있을 경우 다음의 getList를 호출 -->

@@ -26,11 +26,11 @@
 		<result property="member_id" column="member_id"/>
 		<result property="boardlist_numbers" column="boardlist_numbers"/>
 		<result property="filter_numbers" column="filter_numbers"/>
+		<result property="destination_numbers" column="destination_numbers"/>
 		<result property="filterName" column="name"/>
 		<result property="location" column="location"/>
 		<result property="thumbnail" column="thumbnail"/>
 		<association property="destinationVO" javaType="bit.project.restfull.vo.DestinationVO" resultMap="DestinationVO"></association>
-		<!-- <collection property="attachmentVO" javaType="bit.project.restfull.vo.AttachmentVO" resultMap="AttachmentVO"></collection> -->
 	</resultMap>
 
 </mapper>
