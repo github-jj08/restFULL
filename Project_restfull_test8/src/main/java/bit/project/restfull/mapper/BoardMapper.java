@@ -26,9 +26,9 @@ public interface BoardMapper{
 	@ResultMap("BoardContents")
 	@Select("Select * from (SELECT ROWNUM RN, A.* FROM"
 			+ "(select b.*, d.* from board b, destination d"
-			+ " where b.location = d.destination_name"
+			+ " where b.destination_numbers = d.destination_numbers"
 			+ "	and b.boardlist_numbers = #{boardlist_numbers}"
-			+ "	and b.location like '%'||#{searchWord}||'%') A )"
+			+ "	and (d.destination_name like '%'||#{searchWord}||'%' or d.jibunaddress like '%'||#{searchWord}||'%') A )"
 			+"WHERE RN BETWEEN #{start} AND #{end}")
 	List<BoardVO> getList(@Param("boardlist_numbers")int boardlist_numbers, @Param("searchWord") String searchWord, @Param("start")int start,  @Param("end")int end);
 	
@@ -48,7 +48,7 @@ public interface BoardMapper{
 	
 	/* 글작성(첨부파일 테이블+게시판 테이블) */
 	@SelectKey(statement="select BOARD_SEQ.CURRVAL as board_numbers from dual", keyProperty="board_numbers", before=false, resultType=int.class)
-	@Insert("insert into board (board_numbers, title, contents, hit, dates, member_id,boardlist_numbers,filter_numbers,location)"
+	@Insert("insert into board (board_numbers, title, contents, hit, dates, member_id,boardlist_numbers,filter_numbers,destination_numbers)"
 			+ " values (BOARD_SEQ.NEXTVAL, #{title}, #{contents}, 0, sysdate, #{member_id},#{boardlist_numbers}, #{filter_numbers},#{location,jdbcType=VARCHAR})")
 	int insertBoardVO(BoardVO boardVO);
 	
@@ -62,7 +62,7 @@ public interface BoardMapper{
 	void updateBoardThumbImg(@Param("board_numbers") int board_numbers, @Param("thumbnail")String thumbnail);
 
 	/* 글수정(게시판 테이블) */
-	@Update("update board set title = #{title}, contents = #{contents}, location = #{location} where board_numbers = #{board_numbers}")
+	@Update("update board set title = #{title}, contents = #{contents}, location = #{destination_numbers} where board_numbers = #{board_numbers}")
 	void updateBoardVO(BoardVO boardVO);
 	
 	/* 글삭제(게시판테이블) */
@@ -87,9 +87,9 @@ public interface BoardMapper{
 
 	/* 관련 게시글 목록 불러오기 */
 	@Select("select * from board where boardlist_numbers = 1" 
-			+ " and location like '%'||#{location}||'%'" 
+			+ " and destination_numbers like '%'||#{destination_numbers}||'%'" 
 			+ " and not board_numbers in #{board_numbers}")
-	List<BoardVO> getOthers(@Param("board_numbers") int board_numbers, @Param("location") String location);
+	List<BoardVO> getOthers(@Param("board_numbers") int board_numbers, @Param("destination_numbers") String destination_numbers);
 
 	@Select("select count(*) from board where member_id = #{member_id}")
 	public int countBoard(String member_id);
@@ -127,9 +127,10 @@ public interface BoardMapper{
 	public int countComment(int board_numbers);
 	
 	// 메인 게시글 리스트 숫자세기
-		@Select("select count(*) from board b, destination d\n" + 
-				"			where b.location = d.destination_name\n" + 
-				"				and b.location like '%'||#{searchWord}||'%'")
-		public int countMainBoard(@Param("searchWord") String searchWord);
+	@Select("select count(*) from board b, destination d" 
+			+ "where b.destination_numbers = d.destination_numbers" 
+			+ "and b.boardlist_numbers = #{boardlist_numbers}"
+			+ " and (d.destination_name like '%'||#{searchWord}||'%' or d.jibunaddress like '%'||#{searchWord}||'%')")
+	public int countMainBoard(@Param("searchWord") String searchWord);
 		
 }

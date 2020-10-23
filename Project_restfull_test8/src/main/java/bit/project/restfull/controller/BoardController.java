@@ -47,8 +47,6 @@ public class BoardController {
 		return "user/write_view";
 	}
 	
-	
-	/////////////////////////////////////////////
 	@ResponseBody
 	@PostMapping("/writeMainPosting")
 	public String writeMainPosting(@RequestParam(value="file") MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException {
@@ -58,7 +56,6 @@ public class BoardController {
 		String bNum = Integer.toString(board_numbers);
 		return bNum;
 	}
-	//return "redirect:/content_view?board_numbers="+board_numbers;
 
 	@ResponseBody
 	@PostMapping("/writeMainPosting_dest")
@@ -69,8 +66,6 @@ public class BoardController {
 		log.info("writeDestVO;");
 		//return destinationVO.getDestination_name();
 	}
-	
-	//////////////////////////////////////////////
 	
 	@PostMapping("/write")
 	public String write(@RequestParam(value="file") MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException {

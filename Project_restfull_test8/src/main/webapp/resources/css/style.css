@@ -3669,22 +3669,23 @@ ol {
         background-color: black;
         width: 100%;
         height: 450px;
-        text-align:center;
-        justify-content:center;
+
      }
      
 .leftbox .photo-view #myCarousel .carousel-inner {
       height: 100%;
       width: auto;
       text-align: center;
+      
 }   
 
- .leftbox .photo-view #myCarousel .carousel-item,
  .leftbox .photo-view #myCarousel .carousel-inner img {
       height: 100%;
       width: auto;
       text-align: center;
 }
+
+
 
 
 /* 좋아요&드롭다운 부분 */
@@ -3832,33 +3833,33 @@ ol {
 
 /*제목,날짜,조회수, 내용 등 표시 css*/
 
-.leftbox .write-view .board-contents {
+.write-view .board-contents {
     margin: 40px 0;
     width:100%;
     border:none;
 }
 
-.leftbox .write-view .board-contents .view-hit {
+.write-view .board-contents .view-hit {
     float:left;
     font-size:13px;  
     border:none;
     
 }
 
-.leftbox .write-view .board-contents .view-dates {
+.write-view .board-contents .view-dates {
     float:right;
     font-size:15px;
     border:none;
  }
 
-.leftbox .write-view .board-contents .view-loc {
+.write-view .board-contents .view-loc {
     font-size:15px;  
     border:none;
     font-weight:600;
     
 }
 
-.leftbox .write-view .board-contents .view-title {
+.write-view .board-contents .view-title {
     padding:5px 0;
     font-size:20px;
     font-weight:800;
@@ -3866,7 +3867,7 @@ ol {
     width:100%;
 }
 
-.leftbox .write-view .board-contents .view-id {
+.write-view .board-contents .view-id {
     border:none; 
     width:100%;
     font-size:15px;
@@ -3874,7 +3875,7 @@ ol {
     font-weight:700;
 }
 
-.leftbox .write-view .board-contents .view-contents {
+.write-view .board-contents .view-contents {
     padding:10px 0;
     font-size:16px;
     border:none; 
@@ -4275,4 +4276,49 @@ ol {
 
 
 
+.search-section .main-postings.pi-pic img{
+    height:200px;
+    width:100%;
+    
+   
+}
+.search-section .main-postings .pi-text {
+    padding: 7px 0;
+}
 
+.search-section .main-postings .pi-text .caption-title {
+    font-weight:700;
+    font-size:17px;
+    margin-bottom: 8px;
+}
+
+.search-section .main-postings .pi-text .caption-loc {
+    font-size:14px;
+    font-weight: 600;
+    color: #41497a;
+    
+
+}
+
+.search-section .main-postings .pi-text .caption-destination {
+    font-size:12px;
+    margin-bottom: 15px;
+
+}
+
+.search-section .page-center  {
+	text-align:center;
+	margin-right: 55px;
+	
+}
+
+.search-section .page-center a {
+	color: #8a93c0;
+}
+
+
+.search-section #map {
+	width:100%;
+	height:600px;
+	border-radius : 5px;
+}

@@ -53,11 +53,11 @@ public class HomeController {
 			int total = boardService.countMainBoard(searchWord);
 			if (nowPage == null && cntPerPage == null) {
 				nowPage = "1";
-				cntPerPage = "5";
+				cntPerPage = "6";
 			} else if (nowPage == null) {
 				nowPage = "1";
 			} else if (cntPerPage == null) { 
-				cntPerPage = "5";
+				cntPerPage = "6";
 			}
 			
 			log.info(total);
@@ -128,10 +128,21 @@ public class HomeController {
 		log.info("boardlist_numbers : " + boardlist_numbers);
 		//boardlist_numbers에 해당하는 게시글들을 불러옴
 		List<AdminBoardVO> noticelist = adBoardService.getList(boardlist_numbers);
-		String boardListName = noticelist.get(0).getBoardlistName();
+		
+		String result = null;
+			
+		if(noticelist.size()!=0) {
+			noticelist.get(0).getBoardlistName();
+			return result;
+		}else {
+			log.info("notice에러");
+		}
+		String boardListName = result;
+		
 		log.info("boardListName = " + boardListName);
 		model.addAttribute("boardListName", boardListName);
 		model.addAttribute("noticelist", noticelist);
+		
 		return "Service/noticeList";
 	}
 	

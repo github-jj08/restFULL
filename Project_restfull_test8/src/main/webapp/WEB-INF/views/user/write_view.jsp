@@ -12,7 +12,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fawtmt0h7b&submodules=geocoder"></script>
-		
 
 </head>
 <body>
@@ -283,13 +282,13 @@
 								var x= $("#x").val();
 								var y= $("#y").val();
 																  	
-															document.getElementById("jibunAddr").value = jibunAddr;
-															document.getElementById("doroAddr").value = doroAddr;
+								document.getElementById("jibunAddr").value = jibunAddr;
+								document.getElementById("doroAddr").value = doroAddr;
 															
 															//가끔 x좌표와 y좌표가 뒤바뀌어서 저장됨. x에 125.~~~~ 처럼 30대가 아니고 120대 숫자가 찍히면 이부분의 x,y 위치를 바꿔주면 됨
-															document.getElementById("gps-x").value = y;
-															document.getElementById("gps-y").value = x;
-									                    };
+								document.getElementById("gps-x").value = y;
+								document.getElementById("gps-y").value = x;
+							};
 									
 							function initGeocoder() {
 								if (!map.isStyleMapReady) {
@@ -357,6 +356,12 @@
 							        success: function (result) {
 							            insertDest(JSON.parse(result));
 							      	},
+							      	beforeSend:function(){
+							      		FunLoadingBarStart();
+							      	},
+							    	complete:function(){
+							    		FunLoadingBarEnd();
+							    	},
 							      	error: function (e) {
 							          	console.log("ERROR : ", e);
 							           	alert("글을 등록하지 못했습니다. 다시 시도해주세요");

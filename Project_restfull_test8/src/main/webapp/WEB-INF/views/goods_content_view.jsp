@@ -16,7 +16,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/admin/dest/content_view?destination_name=${content_view.destination_name}">여행지정보로 돌아가기</a>
             
             <input type="hidden" name="goods_numbers" value="${content_view.goods_numbers}">
             <div class="container">
