@@ -2902,29 +2902,15 @@ ol {
     margin-top: 25px;
 }
 
-.join-form .footBtwrap>li{
-    float: left;
-    width: 100%;
-    height: 60px;
- 
-}
-
-.join-form .footBtwrap>li>button{
-    display: block; 
-    width: 100%;
-    height: 100%; 
-    font-size: 20px;
-    text-align: center;
-    line-height: 60px;
-}
-
-
 
 .join-form .fpmgBt2{
-    background-color: #8a93c0;
-    color: #fff;
-    font-weight:500;
-    border-style:none;
+	width: 49%;
+	letter-spacing: 2px;
+	margin-top: 35px;
+    background-color:#8a93c0;
+    border-color:#8a93c0;
+    margin-bottom: 50px;
+    
 }
 
 .join-form ul,li {
@@ -3051,6 +3037,7 @@ ol {
 .register-form .group-input .mbnum .con-mobilenum {
     width: 68%;
     margin-top:10px;
+    
 }
 .register-form .group-input .mbnum .con-btn {
     width:30%;
@@ -3061,7 +3048,7 @@ ol {
     padding: 5px 0;
     float: right;
     margin-top:10px;
-    font-size:13px;
+    font-size:15px;
 }
 
 /*성별*/
@@ -3834,33 +3821,33 @@ ol {
 
 /*제목,날짜,조회수, 내용 등 표시 css*/
 
-.leftbox .write-view .board-contents {
+.write-view .board-contents {
     margin: 40px 0;
     width:100%;
     border:none;
 }
 
-.leftbox .write-view .board-contents .view-hit {
+.write-view .board-contents .view-hit {
     float:left;
     font-size:13px;  
     border:none;
     
 }
 
-.leftbox .write-view .board-contents .view-dates {
+.write-view .board-contents .view-dates {
     float:right;
     font-size:15px;
     border:none;
  }
 
-.leftbox .write-view .board-contents .view-loc {
+.write-view .board-contents .view-loc {
     font-size:15px;  
     border:none;
     font-weight:600;
     
 }
 
-.leftbox .write-view .board-contents .view-title {
+.write-view .board-contents .view-title {
     padding:5px 0;
     font-size:20px;
     font-weight:800;
@@ -3868,7 +3855,7 @@ ol {
     width:100%;
 }
 
-.leftbox .write-view .board-contents .view-id {
+.write-view .board-contents .view-id {
     border:none; 
     width:100%;
     font-size:15px;
@@ -3876,7 +3863,7 @@ ol {
     font-weight:700;
 }
 
-.leftbox .write-view .board-contents .view-contents {
+.write-view .board-contents .view-contents {
     padding:10px 0;
     font-size:16px;
     border:none; 

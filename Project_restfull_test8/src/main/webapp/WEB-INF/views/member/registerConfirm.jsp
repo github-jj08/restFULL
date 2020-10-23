@@ -148,9 +148,10 @@
 
                                 </li>
                             </ul>
-                            <ul class="footBtwrap clearfix">
-                                <li><button type="submit" class="fpmgBt2" id="nextBtn">다음</button></li>
-                            </ul>
+                            
+                            <button type="button" onclick="history.go(-1);" class="site-btn fpmgBt2">취소</button></li>
+                            <button type="submit" class="site-btn fpmgBt2" id="nextBtn">다음</button></li>
+                            
                         </form>
                     </div>
                 </div>

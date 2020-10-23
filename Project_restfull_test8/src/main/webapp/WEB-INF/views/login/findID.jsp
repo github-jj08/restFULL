@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-lg-4 offset-lg-4">
                     <div class="login-form">
-                        <h2>ID 찾기</h2>
+                        <h2>아이디 찾기</h2>
                         
 						<form action="doFind_ID" method="post">
 							<div class="FindID">
