@@ -19,7 +19,7 @@
 	                <div class="col-sm-3 order-1">
 	                    <div class="blog-sidebar">
 							<div class="blog-catagory menu-background">
-						        <h4>고객센터</h4>
+						        <h4>마이페이지</h4>
 						        <ul>
 						            <li><p>[<a href="<c:url value="userModify" />">개인정보 수정</a>]</p></li>
 						            <li><p>[<a href="myList?member_id=<sec:authentication property="principal.user.member_id"/>">내 게시글 보기</a>]</p></li>
@@ -34,21 +34,22 @@
 				        </div>
 			        </div>
 			        <div class="col-sm-9 order-2">
-				        <h2>내 여행코스 목록</h2>
-						   <hr/>
-						   <table style="border:1px">   
-						      <tr>
-						         <td>여행코스명</td>
-						         <td>작성일</td>
-						      </tr>
+				    <hr/>
+					   <div class="notice-table">
+							<table id="list-table">
+								<tr class="firs-list">
+							         <td>여행코스명</td>
+							         <td>작성일</td>
+						     	 </tr>
+						      
 						      <c:forEach items="${list}" var="vo">
-						      <tr>
-						         <td><a href="course_view?member_id=<sec:authentication property="principal.user.member_id"/>&serialNum=${vo.serialNum}">${vo.tcAlias}</a></td>
-						         <td>${vo.dates}</td>
-						      </tr>
+							      <tr>
+							         <td><a href="course_view?member_id=<sec:authentication property="principal.user.member_id"/>&serialNum=${vo.serialNum}">${vo.tcAlias}</a></td>
+							         <td>${vo.dates}</td>
+							      </tr>
 						      </c:forEach>
 						   </table>
-				   	 </div>
+				   	 	</div>
 			        </div>
 		        </div>
 		</section>
