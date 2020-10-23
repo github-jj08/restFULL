@@ -46,7 +46,7 @@
                            <div class="card">
                            	<div class="card-heading active">
                                 <a class="active" data-toggle="collapse" data-target="#collapseOne">
-                                    Q.  회원가입은 어떻게 해야하나요??
+                                    Q. 회원가입은 어떻게 해야하나요??
                                 </a>
                             </div>
                             <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
@@ -66,7 +66,7 @@
                                 <div id="collapseTwo" class="collapse" data-parent="#accordionExample">
                                     <div class="card-body">
                                         <p>
-											가능합니다. 홈페이지 하단부의 대표전화(010-1234-5678)로 문의 바랍니다.
+											A. 가능합니다. 홈페이지 하단부의 대표전화(010-1234-5678)로 문의 바랍니다.
 										</p>
                                     </div>
                                 </div>
@@ -76,13 +76,13 @@
                             <div class="card">
                                 <div class="card-heading">
                                     <a data-toggle="collapse" data-target="#collapseThree">
-                                    	무통장 입금은 불가능 한가요??	
+                                    	Q. 무통장 입금은 불가능 한가요??	
                                     </a>
                                 </div>
                                 <div id="collapseThree" class="collapse" data-parent="#accordionExample">
                                     <div class="card-body">
                                         <p>
-											가능합니다. 홈페이지 하단부의 대표전화(010-1234-5678)로 문의 바랍니다.
+											A. 가능합니다. 홈페이지 하단부의 대표전화(010-1234-5678)로 문의 바랍니다.
 											
 										</p>
 

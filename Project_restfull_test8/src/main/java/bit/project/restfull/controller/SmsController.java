@@ -18,6 +18,13 @@ public class SmsController {
 	// 핸드폰 인증 컨트롤러 셋팅
 	String authNum;
 
+	@GetMapping("/send")
+	public String sendSMS() {
+		log.info("sendSMS 페이지 실행");
+		return "sendSMS";
+
+	}
+	
 	@ResponseBody
 	@PostMapping("/sendSms")
 	public String sendSms(String receiver) {
