@@ -12,7 +12,23 @@
 	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fawtmt0h7b"></script>
 	<script type="text/javascript" src="resources/js/MarkerClustering.js"></script>
 
-
+	<style>
+		.container contents {
+			background-color: white;
+		}
+		
+		.main-postings{
+			background-color: white;
+			display:inline-block;
+			border: 1px solid black;
+			width:300px;
+			height:350px;
+			text-align:center;
+			position:absolute;
+			padding: 30px  20px  30px  20px;
+			margin:10px 10px 10px 10px;
+		}
+	</style>
 							
 </head>
 <body>
@@ -20,67 +36,55 @@
 	<!-- 게시글 목록 -->
 	
 	
-<!-- 메인 컨텐츠  -->
-<section class="search-section spad">
-	<div class="container">
+	<div class="container contents">
 		<div class="row">
-			<div class="col-lg-5 order-lg-1 search">
-				<div class="row">
+		<!-- 게시물 list -->
+			<div style="width:50%; height:500px; float:left">
+				<h2>리스트 뽑기</h2>
 					<c:forEach items="${boardlist}" var="vo">
-						<div class="col-lg-6 col-sm-6 ">
-							<div class="main-postings">
-								<div class="pi-pic">
-									<a href="content_view?board_numbers=${vo.board_numbers}" class="thumbnail">
-										<img src="${vo.thumbnail }"/>
-									</a>           
-								</div>
-		                       
-								<div class="pi-text">
-									<div class="caption-title">${vo.title}</div>
-			                                
-									<div class="caption-loc">${vo.location}</div>
-			                                
-									<div class="caption-destination">${vo.destinationVO.jibunaddress}</div>
-									
-									<input type="hidden" name="lat" value="${vo.destinationVO.lat}"/>
-									<input type="hidden" name="lng" value="${vo.destinationVO.lng}"/>
-								</div>
-							</div>
+						<div class="col-xs-6 col-md-3 main-postings">
+						    <a href="content_view?board_numbers=${vo.board_numbers}" class="thumbnail">
+						      <img src="${vo.thumbnail }"/>
+						      <div class="caption">
+					                <h3>${vo.title}</h3>
+					                <p>${vo.location}</p>
+					                <p>${vo.destinationVO.jibunaddress}</p>
+					                <input type="hidden" name="lat" value="${vo.destinationVO.lat}"/>
+					                <input type="hidden" name="lng" value="${vo.destinationVO.lng}"/>
+					          </div>
+						    </a>
 						</div>
 					</c:forEach>
-				</div>
-				
-				<!-- 페이징 -->
-				<c:if test="${paging.startPage != 1 }">
-					<a href="search?boardlist_numbers=${boardlist_numbers}&searchWord=${searchWord}&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
-				</c:if>
-				<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
-					<c:choose>
-						<c:when test="${p == paging.nowPage }">
-							<b>${p }</b>
-						</c:when>
-						<c:when test="${p != paging.nowPage }">
-							<a href="search?boardlist_numbers=${boardlist_numbers}&searchWord=${searchWord}&nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
-						</c:when>
-					</c:choose>
-				</c:forEach>
-				<c:if test="${paging.endPage != paging.lastPage}">
-					<a href="search?boardlist_numbers=${boardlist_numbers}&searchWord=${searchWord}&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
-				</c:if>
-				
 			</div>
-		
-			
-			<div class="col-lg-7 order-lg-2">
-				<!-- 지도 -->
-				<div id="map" style="width:100%; height:500px;"></div>
-			</div>
+			<c:if test="${paging.startPage != 1 }">
+			<a href="search?boardlist_numbers=${boardlist_numbers}&searchWord=${searchWord}&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+		</c:if>
+		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+			<c:choose>
+				<c:when test="${p == paging.nowPage }">
+					<b>${p }</b>
+				</c:when>
+				<c:when test="${p != paging.nowPage }">
+					<a href="search?boardlist_numbers=${boardlist_numbers}&searchWord=${searchWord}&nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+				</c:when>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${paging.endPage != paging.lastPage}">
+			<a href="search?boardlist_numbers=${boardlist_numbers}&searchWord=${searchWord}&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+		</c:if>
 		</div>
 	</div>
 	
+	
+	
+	
+	<!-- 지도 -->
+	<div id="map" style="width:100%; height:500px;"></div>
+	
+	
 	<script>
 		$(document).ready(function(){
-			var divLength = $('.main-postings').val();
+			var divLength = $('div .main-postings').val();
 			
 			console.log("divLength" + divLength);
 				//1. 지도 세팅.임시로 지도의 센터를 첫 게시물의 좌표에 맞춰둠(검색했을 때 지도 중심을 어디로 놓아야 될지, 어떻게 해야될지 의논...)
@@ -185,10 +189,9 @@
 				
 			});
 	</script>
-</section>
 	
 
-
+<hr/>
 <%@ include file="/WEB-INF/include/js-footer.jsp"%>
 
 </body>
