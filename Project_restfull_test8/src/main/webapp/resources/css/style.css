@@ -3669,22 +3669,24 @@ ol {
         background-color: black;
         width: 100%;
         height: 450px;
-        text-align:center;
-        justify-content:center;
+
      }
      
 .leftbox .photo-view #myCarousel .carousel-inner {
       height: 100%;
       width: auto;
       text-align: center;
+      
 }   
 
- .leftbox .photo-view #myCarousel .carousel-item,
  .leftbox .photo-view #myCarousel .carousel-inner img {
       height: 100%;
       width: auto;
+      
       text-align: center;
 }
+
+
 
 
 /* 좋아요&드롭다운 부분 */
@@ -4103,18 +4105,13 @@ ol {
 	padding : 7px;
 	width:100%
 }
-
 .choosecourse .goods #goodsList table .td-choice {
 	width: 8%;
-
 }
-
 .choosecourse .goods #goodsList table .td {
 	width:23%;
 	text-aglin:center;
-
 }
-
 
 .choosecourse #goodsList #tp {
 	text-align:right;
@@ -4122,8 +4119,6 @@ ol {
 	margin: 10px 0;
 	
 }
-
-
 
 .choosecourse  #goodsList  #buy {
 	float:right;
@@ -4136,7 +4131,6 @@ ol {
     font-size:18px;
     border-radius:5px;
 }
-
 
 /*----------------------
 		공지사항 css
@@ -4186,5 +4180,44 @@ ol {
 	color: #41497a;
 }
 
+/* 검색결과 게시판 page CSS */
+
+.search-section .main-postings {
+	margin : 50px 10px;
+	border: #8a93c0 1px 
+}
+
+
+.search-section .main-postings .pi-pic {
+    padding: 5px;
+    
+   
+}
+.search-section .main-postings.pi-pic img{
+    height:150px;
+    width:100%;
+    
+   
+}
+.search-section .main-postings .pi-text {
+    padding: 7px 0;
+}
+
+.search-section .main-postings .pi-text .caption-title {
+    font-weight:700;
+    font-size:10px;
+    margin-bottom: 8px;
+}
+
+.search-section .main-postings .pi-text .caption-loc {
+    font-size:10px;
+
+}
+
+.search-section .main-postings .pi-text .caption-destination {
+    font-size:10px;
+    margin-bottom: 15px;
+
+}
 
 
