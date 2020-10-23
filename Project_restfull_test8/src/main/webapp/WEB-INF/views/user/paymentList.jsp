@@ -35,7 +35,7 @@
 			        <div class="col-sm-9 order-2">
 				       <div class="notice-table">
 							<table id="list-table">
-								<tr class="firs-list">
+								<tr class="first-list">
 									<td>결제 번호</td>
 									<td>주문 번호</td>
 									<td>주문자 id</td>

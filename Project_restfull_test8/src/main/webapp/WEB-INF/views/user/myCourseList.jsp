@@ -12,7 +12,6 @@
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
 	<h2 class="text-center">내 여행코스 페이지 입니다.</h2>
-	<hr>
 	    <section class="blog-section spad">
 	        <div class="container">
 	            <div class="row">
@@ -37,7 +36,7 @@
 				    <hr/>
 					   <div class="notice-table">
 							<table id="list-table">
-								<tr class="firs-list">
+								<tr class="first-list">
 							         <td>여행코스명</td>
 							         <td>작성일</td>
 						     	 </tr>

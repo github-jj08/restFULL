@@ -36,14 +36,14 @@
 			        	<div class="notice-table">
 							<table id="list-table">
 								<input type="hidden" name="member_id" value="${sessionScope.userId}"/>
-								<tr class="firs-list">
-									<td>글 번호</td>
-									<td>게시글 제목</td>
+								<tr class="first-list">
+									<td>신고글 번호</td>
+									<td>신고대상글 번호</td>
 									<td>게시 날짜</td>
 								</tr>
 							<c:forEach items="${userReports}" var="userBoard">
 							<tr>
-								<td>${userBoard.board_numbers}</td>
+								<td>${userBoard.title}</td>
 								<td><a href="content_view_rep?board_numbers=${userBoard.board_numbers}">${userBoard.title}</a></td>
 								<td>${userBoard.dates}</td>
 							</tr>

@@ -35,7 +35,7 @@
 			        <div class="col-sm-9 order-2">
 			        	<div class="notice-table">
 				        	<table id="list-table">
-								<tr>
+								<tr class="first-list">
 									<td>글 번호</td>
 									<td>게시글 제목</td>
 									<td>게시 날짜</td>
@@ -49,8 +49,8 @@
 								</c:forEach>
 							</table>
 			        </div>
-						
-						<h4>[<a href="ask">문의글 작성하기</a>]</h4>
+						<br>
+						<a href="ask"><button type="button" class="user-modify-btn">문의글 작성하기</button></a>
 				    </div>
 		        </div>
 	        </div>

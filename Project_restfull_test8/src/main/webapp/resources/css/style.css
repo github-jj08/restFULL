@@ -3083,7 +3083,7 @@ ol {
 .register-form .group-input #member_id {
     width: 68%;
 }
-.register-form .group-input .con-id {
+.register-form .group-input .con-id{
     width:30%;
     letter-spacing: 1px;
     background-color:#8a93c0;
@@ -4223,6 +4223,56 @@ ol {
 	font-weight:700;
 	color: #41497a;
 }
+
+.card .collapse .card-body p{
+	margin-left: 10px;
+	background-color: red;
+}
+
+.user-modify-btn {
+	width: auto;
+    letter-spacing: 1px;
+    background-color:#8a93c0;
+    border-color:#8a93c0;
+    color: white;
+    padding: 5px 0;   
+}
+
+.paging-font-size{
+	font-size: 8px;
+}
+
+.paging-center{
+	margin-top: 15px;
+	text-align: center;
+}
+
+.user-modify-line{
+	 background-color: #626eac;
+    color: white;
+    text-align:center;
+    border-bottom : 2px solid;
+    font-size: 18px;
+    font-weight:600;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
