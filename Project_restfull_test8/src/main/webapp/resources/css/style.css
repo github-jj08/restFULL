@@ -4129,20 +4129,26 @@ ol {
 
 .blog-section .notice-table #list-table tr {
     padding : px 0;
-     
-}
-.blog-section .notice-table #list-table td {
-   border : #8a93c0 2px solid;
-}
-
-.blog-section .notice-table #list-table .first-list {
     background-color: #626eac;
     color: white;
     text-align:center;
     border-bottom : #626eac 2px solid;
     font-size: 18px;
     font-weight:600;
+     
 }
+.blog-section .notice-table #list-table td {
+   border : #8a93c0 2px solid;
+}
+
+/* .blog-section .notice-table #list-table .first-list {
+    background-color: #626eac;
+    color: white;
+    text-align:center;
+    border-bottom : #626eac 2px solid;
+    font-size: 18px;
+    font-weight:600;
+} */
 .blog-section .notice-table #list-table .first-list td {
     padding: 6px 0;
 }
