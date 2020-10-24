@@ -307,5 +307,5 @@
 
 
 <%@ include file="/WEB-INF/include/js-footer.jsp"%>
-
+</body>
 </html>

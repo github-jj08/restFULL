@@ -15,24 +15,16 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")	//�긦 ���ؼ� dataSource�� �������°��̴ϱ� boardMapper�� �����������������
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")	
 @Log4j
 public class BoardMapperTest {
 
-	//@Autowired�� �ǰ� @Inject�� �ǰ�. �Ʒ��� �Һ��̸� Ȱ���Ѱ�. boardMapper�� ���� ���� �Լ��� �����Ѵ�.
 	@Setter(onMethod_ = @Autowired)
 	private BoardMapper boardMapper;
-	//DAO�� �׽�Ʈ�ϱ����ؼ��� Ŀ�ؼ�Ǯ���� ������ �ͼ� DB �����ؾߵǴϱ�...Ŀ�ؼ� Ǯ�� ���� ������ ������ �;��Ѵ�. �� ������ ����ֳĸ� --> root-context.xml�� dataSource. 
-	/* �̺κ��� ���Ѵ�.
-	 * <!-- HikariCP configuration --> <bean id="dataSource"
-	 * class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
-	 * <constructor-arg ref="hikariConfig" /> </bean>
-	 * �������� ���� @ContextConfiguration�� ���ذ���.
-	 */
 	
 	@Test
 	public void testBoardMapper() {
-		log.info(boardMapper);	//����� ���� �ȵǾ����� null�� ����
+		log.info(boardMapper);	
 	}
 	
 	@Test

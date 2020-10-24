@@ -107,6 +107,7 @@ public class LoginController {
 	public String adminHome() {
 		log.info("admin welcome");
 		return "admin/adminHome";
+		//return "admin/adminHome2";
 	}
 	
 	@GetMapping("/admin/userModify")

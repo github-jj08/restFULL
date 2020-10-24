@@ -25,18 +25,15 @@ import lombok.extern.log4j.Log4j;
 @WebAppConfiguration
 @ContextConfiguration({ "file:src/main/webapp/WEB-INF/spring/root-context.xml",
 "file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" })
-//@ContextConfiguration("root-context.xml","servlet-context.xml") --> ��Ʈ & ���� ���ؽ�Ʈ ����
 @Log4j
 public class BoardControllerTest {
 	
-	@Setter(onMethod_ = @Autowired)		//ctx�� ���� ���� �Լ��� ����
-	private WebApplicationContext ctx;	//context�� ��� autowired�ϴ���? WebApplicationContext�� ��� �������� �ɱ�? �����������ӿ�ũ�� ����� �� �ƴѰ�?
-	//root,servlet ���ؽ�Ʈ �Ѵ� ���� ���� 
+	@Setter(onMethod_ = @Autowired)		
+	private WebApplicationContext ctx;	
 	
 	private MockMvc mockMvc;
-	//�갡 ���� ������ �� �� �ִ� �Լ��� ������ �ִٴ� ���̴�.!!!!
 	
-	@Before//Test�ϱ� ���� �����ض�.
+	@Before
 	public void setup() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();//mock�� ���� = mock���� webAppContext ��Ʈ�� ������
 	}
