@@ -66,6 +66,6 @@ public interface BoardService {
 	//member_id와 serialNum을 가지고 특정 여행코스를 출력
 	List<TravelVO> getMyCourse(String member_id, String serialNum);
 	
-	int countMainBoard(String searchWord);
+	int countMainBoard(int boardlist_numbers, String searchWord);
 
 }

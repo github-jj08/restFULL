@@ -161,9 +161,43 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 
 	@Override
 	public void writeDestVO(DestinationVO destinationVO) {
-		adBoardMapper.insertDestVO(destinationVO);
+		int dNum = adBoardMapper.insertDestVO(destinationVO);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+	    resultMap.put("dNum", destinationVO.getDestination_numbers());
+		log.info("반환받은 번호 : " + resultMap.get("dNum"));
+		//adBoardMapper.updateBoardVO_DestNum(mydNum);
+		//return (int) resultMap.get("dNum");
 	}
 
+	
+
+	@Override
+	public void writeDestVO(Map<String, Object> paramData) {
+		int board_numbers = (int) paramData.get("board_numbers");
+		String destination_name = (String) paramData.get("destination_name");
+		String jibunaddress = (String) paramData.get("jibunaddress");
+		String doroaddress = (String) paramData.get("doroaddress");
+		String details = (String) paramData.get("details");
+		String lat = (String) paramData.get("lat");
+		String lng = (String) paramData.get("lng");
+		
+		DestinationVO vo = new DestinationVO();
+		vo.setDestination_name(destination_name);
+		vo.setJibunaddress(jibunaddress);
+		vo.setDoroaddress(doroaddress);
+		vo.setDetails(details);
+		vo.setLat(lat);
+		vo.setLng(lng);
+		
+		int dNum = adBoardMapper.insertDestVO(vo);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+	    resultMap.put("dNum", vo.getDestination_numbers());
+	    
+	    int mydNum =  vo.getDestination_numbers();
+		log.info("반환받은 번호 : " + resultMap.get("dNum"));
+		adBoardMapper.updateBoardVO_DestNum(mydNum, board_numbers);
+	}
+	
 	@Override
 	public void modifyDestVO(DestinationVO destinationVO) {
 		adBoardMapper.updateDestVO(destinationVO);
@@ -318,4 +352,5 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	public List<RequestVO> getRequestList() {
 		return adBoardMapper.getRequestListForAdmin();
 	}
+
 }

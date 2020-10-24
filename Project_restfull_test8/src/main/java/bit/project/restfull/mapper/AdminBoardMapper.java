@@ -26,7 +26,7 @@ public interface AdminBoardMapper{
 	 * 혹은 <foreach>를 사용하는 동적 쿼리문 생성은 xml에 위치 유지 ( <foreach>를 사용하는 메소드일 경우 메소드 옆에 <foreach>로 표기 ) 
 	 */
 	
-	/* 게시글 목록 출력 */
+	/* 공지사항 등의 게시글 목록 출력 */
 	@ResultMap("BoardContents")
 	@Select("select b.*, l.*, a.* from board b, boardlist l, attachment a"
 			+ " where b.board_numbers = a.board_numbers" 
@@ -78,9 +78,10 @@ public interface AdminBoardMapper{
 	DestinationVO getDestVO(int destination_numbers);
 	
 	/* 여행지 등록 */
+	@SelectKey(statement="select destination_seq.currval as destination_numbers from dual", keyProperty="destination_numbers", before=false, resultType=int.class)
 	@Insert("insert into destination (destination_numbers, destination_name, jibunaddress, doroaddress, details, lat, lng, sigungu_code)"
 			+ " values (destination_seq.nextval, #{destination_name}, #{jibunaddress}, #{doroaddress}, #{details}, #{lat}, #{lng}, #{sigungu_code})")
-	void insertDestVO(DestinationVO destinationVO);
+	int insertDestVO(DestinationVO destinationVO);
 	
 	/* 여행지 수정 */
 	@Update("update destination set jibunaddress = #{jibunaddress}, doroaddress = #{doroaddress}, details = #{details}, lat = #{lat}, lng = #{lng}, sigungu_code = #{sigungu_code} where destination_numbers = #{destination_numbers}")
@@ -155,5 +156,9 @@ public interface AdminBoardMapper{
 			+ " where r.goods_numbers = g.goods_numbers" 
 			+ " order by dates desc, merchant_uid desc")
 	List<RequestVO> getRequestListForAdmin();
+
+	/* 여행지번호 update */
+	@Update("update board set destination_numbers = #{mydNum} where board_numbers = #{board_numbers}")
+	void updateBoardVO_DestNum(@Param("mydNum")int mydNum,@Param("board_numbers")int board_numbers);
 
 }

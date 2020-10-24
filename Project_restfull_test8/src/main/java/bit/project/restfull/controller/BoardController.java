@@ -1,6 +1,8 @@
 package bit.project.restfull.controller;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,12 +61,11 @@ public class BoardController {
 
 	@ResponseBody
 	@PostMapping("/writeMainPosting_dest")
-	public void dest_Write(@RequestBody DestinationVO destinationVO) {
-		log.info("dest write");
-		log.info("넘어온 여행지명 : " + destinationVO.getDestination_name());
-		adBoardService.writeDestVO(destinationVO);
-		log.info("writeDestVO;");
-		//return destinationVO.getDestination_name();
+	public void dest_Write(@RequestBody Map<String,Object> paramData) {
+		log.info("paramData");
+		int board_numbers = (int) paramData.get("board_numbers");
+		log.info("board_numbers = " + board_numbers);
+		adBoardService.writeDestVO(paramData);
 	}
 	
 	@PostMapping("/write")

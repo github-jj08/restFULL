@@ -356,12 +356,6 @@
 							        success: function (result) {
 							            insertDest(JSON.parse(result));
 							      	},
-							      	beforeSend:function(){
-							      		FunLoadingBarStart();
-							      	},
-							    	complete:function(){
-							    		FunLoadingBarEnd();
-							    	},
 							      	error: function (e) {
 							          	console.log("ERROR : ", e);
 							           	alert("글을 등록하지 못했습니다. 다시 시도해주세요");
@@ -373,6 +367,7 @@
 								
 							function insertDest(result){
 								var addressForm = new Object();
+								addressForm.board_numbers = result;
 								addressForm.destination_name = $('input[name="destination_name"]').val();
 								addressForm.jibunaddress = $('input[name="jibunaddress"]').val();
 								addressForm.doroaddress = $('input[name="doroaddress"]').val();

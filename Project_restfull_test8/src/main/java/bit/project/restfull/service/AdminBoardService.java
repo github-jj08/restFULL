@@ -66,4 +66,7 @@ public interface AdminBoardService {
 
 	//모든 주문 상품 출력(관리자 기준)
 	List<RequestVO> getRequestList();
+
+	//사용자 글작성 ...
+	void writeDestVO(Map<String, Object> paramData);
 }
