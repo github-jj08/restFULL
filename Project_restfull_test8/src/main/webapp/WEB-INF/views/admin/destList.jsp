@@ -11,7 +11,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
-	<h2 class="text-center">관리자 페이지입니다.</h2>
+	<div class="text-center"><h2>여행지 및 상품 관리</h2></div>
 
  <!-- Blog Section Begin -->
     <section class="blog-section spad">
@@ -37,10 +37,6 @@
                     <div class="row">
                         <div class="col-lg-12 col-sm-12">
                             <div class="notice-table">
-								<select name="boardlist_numbers" id="boardlist_numbers">
-									<option value="2" selected>공지사항</option>
-									<option value="5">이벤트</option>
-								</select>
 								<div class="writebtn">
 									<a href="${pageContext.request.contextPath}/admin/dest/write_view">여행지 등록</a>
                                 </div>
@@ -55,7 +51,7 @@
 									<c:forEach items="${destlist}" var="vo">
 										<tr class="noticeable">
 											<td>${vo.sidoguVO.sidoName}</td>
-											<td><a href="/content_view?destination_numbers=${vo.destination_numbers}">${vo.destination_name}</a></td>
+											<td><a href="content_view?destination_numbers=${vo.destination_numbers}">${vo.destination_name}</a></td>
 											<td>${vo.jibunaddress}</td>
 											<td>${vo.doroaddress}</td>
 											<td>0</td>

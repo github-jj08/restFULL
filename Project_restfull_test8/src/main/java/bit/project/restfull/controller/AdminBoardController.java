@@ -121,7 +121,7 @@ public class AdminBoardController {
 		userService.adminModifyUser(userVO);
 		session.invalidate();
 		
-		return "admin/adminHome";
+		return "admin/userlist";
 	}
    
 	//5. 관리자 권한으로 회원 게시글 조회

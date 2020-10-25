@@ -130,15 +130,19 @@ public class HomeController {
 		//boardlist_numbers에 해당하는 게시글들을 불러옴
 		List<AdminBoardVO> noticelist = adBoardService.getList(boardlist_numbers);
 		
-		String result = null;
+		String boardListName = null;
 			
 		if(noticelist.size()!=0) {
-			noticelist.get(0).getBoardlistName();
-			return result;
+			boardListName = noticelist.get(0).getBoardlistName();
 		}else {
-			log.info("notice에러");
+			
+			log.info("게시글 목록이 없음");
+			if(boardlist_numbers == 2) {
+				boardListName = "notice";
+			}else if (boardlist_numbers == 5) {
+				boardListName = "event";
+			}
 		}
-		String boardListName = result;
 		
 		log.info("boardListName = " + boardListName);
 		model.addAttribute("boardListName", boardListName);

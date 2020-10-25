@@ -136,7 +136,7 @@
 									    </c:if>
 								            
 								        <c:if test="${principal.user.authority_name == 'ROLE_ADMIN'}">
-						            		<a href="<c:url value="/admin/adminHome" />">👾관리자 홈👾</a>
+						            		<a href="<c:url value="/admin/userList" />">👾관리자 홈👾</a>
 								        </c:if>
 								        
 										<form:form action="${pageContext.request.contextPath}/logout" method="POST">

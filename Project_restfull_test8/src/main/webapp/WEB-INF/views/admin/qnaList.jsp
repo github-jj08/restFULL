@@ -11,7 +11,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
-	<h2 class="text-center">관리자 페이지입니다.</h2>
+	<div class="text-center"><h2>문의 및 신고 답변</h2></div>
 
  <!-- Blog Section Begin -->
     <section class="blog-section spad">

@@ -15,7 +15,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
-	<h2 class="text-center">관리자 페이지입니다.</h2>
+	<div class="text-center"><h2>유저 관리</h2></div>
 
  <!-- Blog Section Begin -->
     <section class="blog-section spad">
@@ -90,7 +90,7 @@
 							<a href="userList?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
 						</c:if>
 						<div class="page-total">
-				        총 게시글 수 : ${paging.total } / 총 페이지 수 : ${paging.lastPage } / 현재 페이지 : ${paging.nowPage } / 페이지당 게시글수 : ${paging.cntPerPage }
+				        총 게시글 수 : ${paging.total }
 				        </div>
 			        </div>
                     

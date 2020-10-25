@@ -41,8 +41,6 @@
             <div class="single-hero-items set-bg" data-setbg="resources/img/KR_3.jpg">
             </div>
 
-            <div class="single-hero-items set-bg" data-setbg="resources/img/KR_2.jpg">
-            </div>
 
             <div class="single-hero-items set-bg" data-setbg="resources/img/KR_7.jpg">
             </div>

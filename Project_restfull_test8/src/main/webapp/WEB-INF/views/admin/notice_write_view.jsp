@@ -12,8 +12,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<%-- <script type="text/javascript" src="<%=request.getContextPath()%>/resources/ckeditor/ckeditor.js"></script>
 		 --%>
-		 <style>
-		</style>
 </head>
 <body>
 
@@ -59,8 +57,8 @@
 			                     		<!-- 첨부 버튼 -->
 										<div class="writepic">
 											<div id="attach">
-												<label for="uploadInputBox">📸사진첨부📸 👈🏻CLICK</label>
-												<input id="uploadInputBox" style="display:none" type="file" name="file" accept="image/*" multiple />
+												
+												<input id="uploadInputBox" type="file" name="file" accept="image/*" />
 			                          		</div>
 			                          	</div>
 			                        </div>

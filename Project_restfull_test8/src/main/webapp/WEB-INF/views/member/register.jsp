@@ -59,11 +59,7 @@
 				$("#gender").focus();
 				return false;
 			}
-			else if($("#phone").val()==""){
-				alert("전화번호를  입력해주세요.");
-				$("#phone").focus();
-				return false;
-			}
+
 			else if($("#email").val()==""){
 				alert("이메일을 입력해주세요.");
 				$("#email").focus();
@@ -170,16 +166,6 @@
                                 <small id="emailHelp" class="form-text text-muted">이메일 전체 입력해주세요.</small>
                             </div>
                             
-                            <!--휴대폰 번호 입력창-->
-                            <div class="group-input">
-                                <label for="mobilenum">휴대폰 번호</label>
-                                <div class="mbnum">
-                                    <input type="text" name="phone" id="phone" class="con-mobilenum" onkeypress="onlyNumber()" placeholder="휴대폰번호(숫자만 입력)" maxlength="11" required>
-                                    <input type="button" class="con-btn" value="인증요청">
-                                    <input type="text" name="phone" id="phone" class="con-mobilenum" onkeypress="onlyNumber()" required>
-                                    <input type="button" class="con-btn" value="확인">
-                                </div>  
-                            </div>
                             <input type="submit" class="site-btn register-btn" value="회원가입"/>
                         </form>
                     </div>
