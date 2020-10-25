@@ -4142,48 +4142,46 @@ ol {
 /*----------------------
 		공지사항 css
 ----------------------*/
+
 .blog-section .notice-table #list-table {
     width:100%;
+    text-align:center;
+    border : #8a93c0 2px solid;
    
 }
 
-.blog-section .notice-table #list-table tr {
-    padding : px 0;
-    background-color: #626eac;
-    color: white;
-    text-align:center;
-    border-bottom : #626eac 2px solid;
-    font-size: 18px;
-    font-weight:600;
-     
-}
-.blog-section .notice-table #list-table td {
-   border : #8a93c0 2px solid;
-}
-
-/* .blog-section .notice-table #list-table .first-list {
-    background-color: #626eac;
-    color: white;
-    text-align:center;
-    border-bottom : #626eac 2px solid;
-    font-size: 18px;
-    font-weight:600;
-} */
-.blog-section .notice-table #list-table .first-list td {
+.blog-section .notice-table .first-list td {
     padding: 6px 0;
-}
-
-.blog-section .notice-table #list-table .noticetable {
+    background-color: #626eac;
+    color: white;
     text-align:center;
+    border-bottom : #626eac 2px solid;
+    font-size: 18px;
+    font-weight:600;
 }
 
-.blog-section .notice-table #list-table .noticetable td {
+ .blog-section .notice-table tr {
+    text-align:center;
+    border : #8a93c0 2px solid;   
+}  
+
+.blog-section .notice-table td {
     padding: 4px 0;
+	text-align:center;
+	border : #8a93c0 2px solid;
 }
 
-.blog-section .notice-table #list-table .input{
+
+/* 
+.blog-section .notice-table .input{
 	width: 100%;
-	}
+}
+ */
+.blog-section .notice-table .writebtn {
+	float: right;
+	
+}
+
 /*----------------------
 		개인정보  css
 ----------------------*/
@@ -4312,19 +4310,85 @@ ol {
 
 }
 
-.search-section .page-center  {
+/* ---------------
+		페이징
+------------------ */
+.page-center  {
 	text-align:center;
-	margin-right: 55px;
+	
 	
 }
 
-.search-section .page-center a {
+.page-center a {
 	color: #8a93c0;
 }
 
+.page-center .page-total {
+	text-align:right;
+	display:block;
+	padding-top:20px;
+	font-size:12px;
+}
 
 .search-section #map {
 	width:100%;
 	height:600px;
 	border-radius : 5px;
+}
+
+
+
+/* -------------------------
+	관리자 공지사항 글작성 css
+---------------------------- */
+.notice_write .group-input .writepic #attach {
+	margin-top: 50px;
+}
+
+
+.notice_write .group-input {
+    margin : 20px 5px;
+}
+
+.notice_write .group-input label{
+    font-size:20px;
+    font-weight:800;
+    
+}
+ .notice_write .group-input .writetitle input {
+    height:30px;
+    width:50%;
+    border: #8a93c0 1px solid;
+    margin-left: 7px;
+    padding :0 7px;
+    border-radius: 5px;  
+}
+
+.notice_write .group-input .writecontentx textarea {
+    color: #252525;
+    border:#8a93c0 2px double;
+    width:100%;
+    height: 250px;
+    border-radius: 6px;
+    padding : 5px 12px;
+}
+/* 완료버튼 */
+.notice_write form button {
+	background-color:#8a93c0;
+	color: white;
+	font-size: 15px;
+	font-weight: 700;
+	border:#8a93c0 1px solid;
+	padding: 7px 20px;
+	border-radius:5px;
+	float:right;
+	cursor: pointer;
+}
+/* 뒤로 빠꾸 버튼 */
+
+.gobackbtn {
+	background-color:white;
+	border:white;
+	color: #8a93c0;
+	font-weight:600;
 }

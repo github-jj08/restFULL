@@ -20,7 +20,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1">
                     <div class="blog-sidebar">
                         <div class="blog-catagory">
-                            <h4>고객센터</h4>
+                            <h4>관리자페이지</h4>
                             <ul>
                                 <li><a href="<c:url value="/admin/userList" />">유저 관리</a></li>
                                 <li><a href="<c:url value="/admin/notice" />">공지사항 및 이벤트 관리</a></li>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
 
-                <!--관리자페이지 table start-->
+<%--                 <!--관리자페이지 table start-->
                 <div class="col-lg-9 order-1 order-lg-2">
                     <div class="row">
                         <div class="col-lg-12 col-sm-12">
@@ -58,7 +58,7 @@
                         
                     </div>
                 </div>
-                <!--관리자페이지 table end-->
+                <!--관리자페이지 table end--> --%>
             </div>
         </div>
     </section>
