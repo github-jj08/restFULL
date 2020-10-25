@@ -130,7 +130,7 @@
 				             			<c:if test="${principal.user.authority_name == 'ROLE_USER'}">
 				             				<div class="userlogin">
 												<strong>${principal.user.name}</strong>님
-									        	<a href="<c:url value="/user/userHome" />">🏠‍</a>
+									        	<a href="<c:url value="/user/userModify" />">🏠‍</a>
 									    	</div>
 									    </c:if>
 								            
