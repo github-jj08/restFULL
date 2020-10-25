@@ -21,7 +21,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1">
                     <div class="blog-sidebar">
                         <div class="blog-catagory">
-                            <h4>고객센터</h4>
+                            <h4>관리자페이지</h4>
                             <ul>
                                 <li><a href="<c:url value="/admin/userList" />">유저 관리</a></li>
                                 <li><a href="<c:url value="/admin/notice" />">공지사항 및 이벤트 관리</a></li>
@@ -43,7 +43,10 @@
 								<select name="boardlist_numbers" id="boardlist_numbers">
 									<option value="2" selected>공지사항</option>
 									<option value="5">이벤트</option>
-								</select>	
+								</select>
+								<div class="writebtn">
+									<a href="${pageContext.request.contextPath}/admin/notice/write_view">글 작성</a>
+                                </div>
                                 <table id="list-table">
 									<tr class="first-list">
 										<td>구분</td>
@@ -53,8 +56,7 @@
 										<td>조회수</td>
 									</tr>
 								</table>
-								<a href="${pageContext.request.contextPath}/admin/notice/write_view">글 작성</a>
-								<button onclick="history.go(-1);">돌아가기</button>
+								<!-- <button onclick="history.go(-1);">돌아가기</button> -->
                             </div>
                         </div>
                         
@@ -85,7 +87,7 @@
 						var htmls="";
 				    	$("#list-table").html("");	
 				
-						$("<tr>" , {
+						$("<tr class="first-list" >" , {
 							html : "<td>" + "구분" + "</td>"+  // 컬럼명들
 									"<td>" + "제목" + "</td>"+
 									"<td>" + "작성자" + "</td>"+
@@ -94,7 +96,10 @@
 						}).appendTo("#list-table") // 이것을 테이블에붙임
 						
 						if(result.length < 1){
-							htmls += "등록된 글이 없습니다.";
+							htmls += '<tr class="noticeable2">';
+							htmls += '<td>'+ "등록된 글이 없습니다."+'</td>';
+							htmls += '</tr>';
+							
 						} else {
 				                $(result).each(function(){			                    			                    
 				                    htmls += '<tr class="noticeable">';
@@ -123,10 +128,9 @@
 			</div>
 		</div>
 	</section>
+
+<!-- 	<h3><button onclick="history.go(-1);">돌아가기</button></h3> -->
 	
-	
-	
-	
-	
+<%@ include file="/WEB-INF/include/js-footer.jsp"%>
 </body>
 </html>
