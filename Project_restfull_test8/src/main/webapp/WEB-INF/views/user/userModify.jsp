@@ -118,36 +118,36 @@
 								 <table id="list-table">
 									  <tr>
 										   <td class=" user-modify-line">아이디</td>
-										   <td style="width: auto;"><input class="input" type="text"  id="member_id" name="member_id"  value="<sec:authentication property="principal.user.member_id"/>" readOnly/></td>
+										   <td><input style="width: 100%;" class="input" type="text"  id="member_id" name="member_id"  value="<sec:authentication property="principal.user.member_id"/>" readOnly/></td>
 									  </tr>
 									
 									  <tr>
 										   <td class="user-modify-line">패스워드</td>
 										   <td>
-										   	 	<input class="input" type="password"  id="pw" name="pw" placeholder="패스워드 입력(8자 이상)"/><br />
+										   	 	<input style="width: 100%;" class="input" type="password"  id="pw" name="pw" placeholder="패스워드 입력(8자 이상)"/><br />
 										   </td>
 									  </tr>
 									
 									  <tr>
 									   	   <td class="user-modify-line">패스워드 확인</td>
 										   <td>
-										    	<input class="input" type="password"  id="pw2" name="password_chk" placeholder="패스워드 확인(8자 이상)" /><br />
+										    	<input style="width: 100%;" class="input" type="password"  id="pw2" name="password_chk" placeholder="패스워드 확인(8자 이상)" /><br />
 										   </td>
 									  </tr>
 									
 									  <tr>
 										   <td class="user-modify-line">이름</td>
-										   <td><input class="input" type="text"  id="name" placeholder="이름" value="<sec:authentication property="principal.user.name"/>" readOnly/><br /></td>
+										   <td><input style="width: 100%;" class="input" type="text"  id="name" placeholder="이름" value="<sec:authentication property="principal.user.name"/>" readOnly/><br /></td>
 									  </tr>
 									  
 									  <tr>
 										   <td class="user-modify-line">휴대폰</td>
-										   <td><input class="input" type="text" id="phone" name="phone" placeholder="PHONE" value="<sec:authentication property="principal.user.phone"/>" required onkeypress="onlyNumber()"/></td>
+										   <td><input style="width: 100%;" class="input" type="text" id="phone" name="phone" placeholder="PHONE" value="<sec:authentication property="principal.user.phone"/>" required onkeypress="onlyNumber()"/></td>
 									  </tr>
 									  
 									  <tr>
 										   <td class="user-modify-line">이메일</td>
-										   <td><input class="input" type="email" id="email" placeholder="EMAIL" name="email" value="<sec:authentication property="principal.user.email"/>"/><br/>
+										   <td><input style="width: 100%;" class="input" type="email" id="email" placeholder="EMAIL" name="email" value="<sec:authentication property="principal.user.email"/>"/><br/>
 										   </td>
 									  </tr>
 									  <tr>
