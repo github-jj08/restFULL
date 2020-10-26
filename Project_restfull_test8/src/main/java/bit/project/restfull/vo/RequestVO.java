@@ -23,4 +23,5 @@ public class RequestVO {
 	private String merchant_uid; // MERCHANT_UID;
 	private String productName;
 	private int amount;
+	private String destination_name;
 }

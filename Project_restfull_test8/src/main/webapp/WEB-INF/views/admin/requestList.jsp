@@ -48,6 +48,6 @@
 		</c:forEach>
 	</table>
 	
-	<h3>[<a href="adminHome">돌아가기</a>]</h3>
+	<h3>[<a href="userList">돌아가기</a>]</h3>
 </body>
 </html>

@@ -10,6 +10,7 @@
 	
 </head>
 <body>
+
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
 	<div class="text-center"><h2>여행지 및 상품 관리</h2></div>
 
@@ -74,6 +75,7 @@
 <!-- 	<h3><button onclick="history.go(-1);">돌아가기</button></h3> -->
 	
 <%@ include file="/WEB-INF/include/js-footer.jsp"%>
+
 	
 </body>
 </html>

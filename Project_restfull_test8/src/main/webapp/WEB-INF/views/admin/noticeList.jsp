@@ -66,7 +66,7 @@
 	
 				<script>
 				$(function(){ 
-						
+					
 					function getList(){
 							
 						var boardlist = $("#boardlist_numbers option:selected").val();
@@ -81,14 +81,14 @@
 				            }
 						
 					    });
-					};
+					};//getList end
 			
 					function setTable(result){
 						var htmls="";
 						
 				    	$("#list-table").html("");	
 				
-						$("<tr class="first-list" >" , {
+						$('<tr class="first-list" >' , {
 							html : "<td>" + "구분" + "</td>"+  // 컬럼명들
 									"<td>" + "제목" + "</td>"+
 									"<td>" + "작성자" + "</td>"+
@@ -113,16 +113,17 @@
 				            	});	//each end
 				
 						}
-				
+						
 						$("#list-table").append(htmls);
 						
 					}
 					
 					getList();
 					
-					$('#boardlist_numbers').on('change', function(){
-						getList();
-					});
+				});
+	
+				$('#boardlist_numbers').on('change', function(){
+					getList();
 				});
 				</script>
 			</div>

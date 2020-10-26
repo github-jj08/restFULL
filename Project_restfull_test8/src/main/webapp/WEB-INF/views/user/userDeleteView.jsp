@@ -16,7 +16,7 @@ pageEncoding="UTF-8"%>
     $(function(){
 		// 취소
 		$("#cancel").on("click", function(){
-			location.href = "${pageContext.request.contextPath}/user/userHome";
+			location.href = "${pageContext.request.contextPath}/user/userModify";
 		});
 
 		$("#delete").on("click", function() {
@@ -38,7 +38,9 @@ pageEncoding="UTF-8"%>
 					const isSuccess = data.statusCode === 200;
 					if(isSuccess){
 						alert("회원 탈퇴 성공");
+
 						location.href = "${pageContext.request.contextPath}/";
+
 					}else{
 						alert("비밀번호를 다시 입력해 주세요");
 					}
@@ -51,6 +53,7 @@ pageEncoding="UTF-8"%>
 		})
 	});
 	</script>
+	
 		<div class="text-center"><h2>회원탈퇴</h2></div>
 		<hr>
 		    <section class="blog-section spad">
@@ -73,6 +76,7 @@ pageEncoding="UTF-8"%>
 						        </div>
 					        </div>
 				        </div>
+				        
 				        <div class="col-lg-9 order-1">
 				        	<div class="row">
                         		<div class="col-lg-12 col-sm-12">
@@ -100,17 +104,15 @@ pageEncoding="UTF-8"%>
 										</div>
 										
 										
-											<button class="out-btn" type="button" id="delete">회원탈퇴</button>
-											<button class="out-btn" type="button" id="cancel">취소</button>
-										
+										<button class="out-btn" type="button" id="delete">회원탈퇴</button>
+										<button class="out-btn" type="button" id="cancel">취소</button>	
 									</div>
-									
 								</div>
 							</div>
 					    </div>
 	                </div>
 	            </div>
 			</section>
-			<%@ include file="/WEB-INF/include/js-footer.jsp"%>
+		<%@ include file="/WEB-INF/include/js-footer.jsp"%>
 	</body>
 </html>
