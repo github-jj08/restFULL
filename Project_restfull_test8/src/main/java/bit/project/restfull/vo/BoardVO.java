@@ -17,15 +17,15 @@ public class BoardVO {
 	private String title;	
 	private String contents;
 	private String hit;
-	private Timestamp dates;
+	private String dates;
 	private String member_id;
 	private int boardlist_numbers;
 	private int filter_numbers;
 	private int destination_numbers;
 	private String filterName;
-	private String location;
-	private DestinationVO destinationVO;		
-	private String thumbnail;
-	
 	private String boardName;
+	private String location;
+	private String thumbnail;
+	private DestinationVO destinationVO;		
+	
 }
