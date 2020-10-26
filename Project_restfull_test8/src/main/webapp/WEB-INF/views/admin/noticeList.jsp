@@ -44,6 +44,7 @@
 									<option value="2" selected>공지사항</option>
 									<option value="5">이벤트</option>
 								</select>
+								
 								<div class="writebtn">
 									<a href="${pageContext.request.contextPath}/admin/notice/write_view">글 작성</a>
                                 </div>
@@ -56,7 +57,6 @@
 										<td>조회수</td>
 									</tr>
 								</table>
-								<!-- <button onclick="history.go(-1);">돌아가기</button> -->
                             </div>
                         </div>
                         
@@ -88,13 +88,13 @@
 						
 				    	$("#list-table").html("");	
 				
-						$('<tr class="first-list" >' , {
+ 						$('<tr class="first-list">' , {
 							html : "<td>" + "구분" + "</td>"+  // 컬럼명들
 									"<td>" + "제목" + "</td>"+
 									"<td>" + "작성자" + "</td>"+
 									"<td>" + "작성일" + "</td>"+
 									"<td>" + "조회수" + "</td>"			
-						}).appendTo("#list-table") // 이것을 테이블에붙임
+						}).appendTo("#list-table") // 이것을 테이블에붙임 
 						
 						if(result.length < 1){
 							htmls += '<tr class="noticeable2">';
