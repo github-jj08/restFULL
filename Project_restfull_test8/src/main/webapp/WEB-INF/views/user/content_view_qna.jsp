@@ -95,7 +95,7 @@
 								<tr style="height: auto;">
 									<td class="content-view-table-rep">문의내용</td>
 									
-									<td height = "0"><div style="height:100%; word-break:break-all">${content_view.contents}</div></td>
+									<td height = "0"><div style="padding:5px; height:100%; word-break:break-all">${content_view.contents}</div></td>
 								</tr>
 							</table>
 							
