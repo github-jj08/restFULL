@@ -38,14 +38,13 @@
 							    </c:if>  
 							<!-- id/pw 입력창 -->
                  			<div class="group-input">
-                                <label for="username">아이디</label>
+                                <label for="member_id">아이디</label>
                                 <input type="text" id="member_id" name="member_id">
                             </div>
                             <div class="group-input">
-                                <label for="pass">비밀번호</label>
+                                <label for="pw">비밀번호</label>
                                 <input type="password" id="pw" name="pw">
                             </div>
-                            
                             <div class="group-input gi-check">
                                 <div class="gi-more">
                                 	<a  href="${pageContext.request.contextPath}/findID" id="find_Id_btn" class="forget-pass">ID찾기</a> 
