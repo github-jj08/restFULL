@@ -138,6 +138,7 @@ public class BoardServiceImpl implements BoardService{
             }
             
 	    }
+        log.info("insert all completed. 글번호는 " + bNum);
         return bNum;
 	}
 	
