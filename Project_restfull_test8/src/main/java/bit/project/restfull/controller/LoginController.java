@@ -78,8 +78,8 @@ public class LoginController {
 	    return "member/register";
 	}
 
-	   
-	@PostMapping("/addUser") // 회원가입 데이터베이스 자료 올리기
+	// 회원가입 데이터베이스 자료 올리기
+	@PostMapping("/addUser") 
 	public String adduser(UserVO userVO) {
 		log.info("post resister");
 	      
@@ -89,6 +89,7 @@ public class LoginController {
 	      
 	}
 	
+	// 로그인 접근 거부 페이지 이동
 	@GetMapping("/login/accessDenied")
 	public String accessDenied() {
 		log.info("accessDenied...");
@@ -96,26 +97,21 @@ public class LoginController {
 		return "login/accessDenied";
 	}
 
-	
+	// 유저 마이 페이지
 	@GetMapping("/user/userHome")
 	public String userHome() {
 		log.info("user welcome");
 		return "user/userHome";
 	}
 	
-	@GetMapping("/admin/adminHome")
-	public String adminHome() {
-		log.info("admin welcome");
-		return "admin/adminHome";
-	}
-	
+	// 관리자 회원 개인정보 수정
 	@GetMapping("/admin/userModify")
 	public String modify() {
 		log.info("modify personal information");
 		return "user/userModify";
 	}
 	
-	
+	// 아이디 중복검사
 	@ResponseBody
 	@GetMapping("/idCheck")
 	public String idCheck(@RequestParam("id") String id) {
@@ -139,24 +135,28 @@ public class LoginController {
 	
 	}
 	
+	// 아이디 찾기 페이지 이동
 	@GetMapping("/findID")
 	public String findID() {
 		System.out.println("access to find id page");
 		return "login/findID";
 	}
 	
+	// 비밀번호 찾기 페이지 이동
 	@GetMapping("/findPW")
 	public String findPW() {
 		System.out.println("access to find pw page");
 		return "login/findPW";
 	}
 	
+	// 아이디 찾기, 이메일 대조
 	@PostMapping("/doFind_ID")
 	public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
 		md.addAttribute("id", userService.findID(response, email));
 		return "login/findIdResult";
 	}
 	
+	// 임시 비밀번호 이메일로 전송
 	@PostMapping("/doFind_PW")
 	public void find_PW(@ModelAttribute UserVO userVO, HttpServletResponse response) throws Exception{
 		System.out.println(userVO.getMember_id());
