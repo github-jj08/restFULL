@@ -92,14 +92,15 @@
 									<td class="content-view-table-rep">작성날짜</td>
 									<td> ${content_view.dates}</td>
 								</tr>								
-								<tr>
+								<tr style="height: auto;">
 									<td class="content-view-table-rep">문의내용</td>
+									
 									<td><div style="height:50px; overflow: auto;">${content_view.contents}</div></td>
 								</tr>
 							</table>
 							
 			        </div>
-						<button type="button" class="button3 user-modify-btn user-modify-btn-back" onClick="history.go(-1)">돌아가기</button></a>
+						<button type="button" onclick="history.go(-1);" class="gobackbtn">돌아가기</button>
 				    </div>
 		        </div>
 	        </div>

@@ -50,7 +50,7 @@
 								      <p>${vo.tcContents}</p>
 								    </c:forEach>
 						      	</div>
-						      	<button type="button" class="user-modify-btn" onClick="history.go(-1)">이전 페이지</button>
+						      	<button type="button" onclick="history.go(-1);" class="gobackbtn">돌아가기</button>
 				   	 	</div>
 			        </div>
 		        </div>

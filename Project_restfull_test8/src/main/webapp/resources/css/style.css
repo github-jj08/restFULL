@@ -4245,6 +4245,8 @@ ol {
     border-color:#8a93c0;
     color: white;
     padding: 5px 0;   
+    float: left;
+    margin-left: 3px;
 }
 
 .paging-font-size{

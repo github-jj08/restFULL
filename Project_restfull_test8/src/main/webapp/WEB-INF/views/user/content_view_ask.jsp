@@ -99,7 +99,7 @@
 								</tr>
 						</table>
 						
-						<button type="button" class="button3 user-modify-btn user-modify-btn-back" onClick="history.go(-1)">돌아가기</button></a>
+						<button type="button" onclick="history.go(-1);" class="gobackbtn">돌아가기</button>
 
 <%-- 									신고대상글 :<span>${content_view.title}</span><br />
               						신고자 : <span>${content_view.member_id}</span><br />
