@@ -1,6 +1,5 @@
 package bit.project.restfull.vo;
 
-import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +15,7 @@ public class AdminBoardVO {
 	private String title;	
 	private String contents;
 	private String hit;
-	private Timestamp dates;
+	private String dates;
 	private String member_id;
 	private int boardlist_numbers;
 	private String boardlistName;
