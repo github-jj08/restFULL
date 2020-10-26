@@ -85,7 +85,7 @@ pageEncoding="UTF-8"%>
 											<sec:authentication var="principal" property="principal"/>
 											<div class="USERID">
 												<label for="userId">아이디</label>
-												<input type="text" name="member_id" value="<sec:authentication property="principal.user.member_id"/>"/>
+												<input type="text" name="member_id" value="<sec:authentication property="principal.user.member_id"/>" readonly/>
 											</div>
 										</div>
 										
