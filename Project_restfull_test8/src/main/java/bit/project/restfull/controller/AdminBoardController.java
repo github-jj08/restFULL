@@ -84,12 +84,28 @@ public class AdminBoardController {
     //2. 특정 회원 정보 확인
     
 	@GetMapping("/user_content_view")
-	public String user_content_view(PagingVO pagingVO, UserVO userVO, BoardVO boardVO, Model model) {
+	public String user_content_view(PagingVO pagingVO, UserVO userVO
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, Model model) {
 		log.info("유저정보 확인");
 		String member_id = userVO.getMember_id();
 		log.info("확인할 user id" + member_id); // name
 		userVO = userService.getUserVO(member_id);
 		
+		int total = userService.countMember();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		pagingVO = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
+		model.addAttribute("paging", pagingVO);
+		model.addAttribute("member_id", member_id);
 		model.addAttribute("userDetail", userVO);
 		model.addAttribute("admin_board", boardService.boardList(member_id, pagingVO));
 		return "admin/userData";

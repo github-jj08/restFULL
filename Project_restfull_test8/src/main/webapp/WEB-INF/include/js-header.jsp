@@ -29,9 +29,6 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
 	
-	<!-- 소셜로그인 --> 
-    <script type="text/javascript" src="https://static.nid.naver.com/resources/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
-
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="resources/css/bootstrap.min.css" type="text/css">
