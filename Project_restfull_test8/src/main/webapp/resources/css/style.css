@@ -4378,10 +4378,11 @@ ol {
 	border:white;
 	color: #8a93c0;
 	font-weight:600;
+	margin-top : 15px;
 	
 }
 
-/* 위치(지도) 지정 */
+/* 이거 관리자 여행지 등록 작성 페이지 위치(지도) 지정 */
 .dest_register .group-input label {
 	font-size:20px;
     font-weight:800;
@@ -4440,8 +4441,52 @@ ol {
 	border: none;
 	border-bottom: #8a93c0 1px solid;
 	background-color:#dde1f5;
+}
+/* 관리자 모드 여행지 등록에 관한 content_view + 상품 등록 */
+
+.dest_info .link  {
+	float:right;
+	font-weight: 600;
+	
+}
+.dest_info .link a {
+	padding: 5px 8px;
+}
+
+.admin h4 {
+	font-weight:700;
+	padding-bottom: 20px;
+	padding-top:7px;
 	
 }
 
+.dest_info .board-contents .local,
+.dest_info .board-contents .name{
+	padding:3px 0;
+	
+}
+.related_goods  a {
+	float:right;
+	
+}
 
+/* 관리자 모드 상품 등록 */
 
+.notice_write .goods_register .name {
+	font-size:20px;
+	font-weight:700;
+}
+.notice_write .goodsform label {
+	font-weight:600;
+	font-size:16px;
+	margin:5px;
+}
+.notice_write .goodsform input {
+	margin:5px;
+	border-radius:4px;
+	border:#8a93c0 2px solid;
+}
+.notice_write .goodsform button {
+	float:right;
+	
+}

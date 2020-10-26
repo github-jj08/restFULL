@@ -90,7 +90,7 @@
 		</div>
 	</section>
 
-<!-- 	<h3><button onclick="history.go(-1);">돌아가기</button></h3> -->
+<!-- 	<button type="button" onclick="history.go(-1);" class="gobackbtn">돌아가기</button> -->
 	
 <%@ include file="/WEB-INF/include/js-footer.jsp"%>
                 
