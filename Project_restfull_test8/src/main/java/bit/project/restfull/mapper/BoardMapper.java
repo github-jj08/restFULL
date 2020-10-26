@@ -25,8 +25,8 @@ public interface BoardMapper{
 	/* 일반게시글 목록 출력 (관리자와 불러오는 테이블 수가 다르므로 따로 정의) */
 	@ResultMap("BoardContents")
 	@Select("Select * from (SELECT ROWNUM RN, A.* FROM"
-			+ "(select b.*,d.lat,d.lng, d.destination_name, f.name as filterName,l.name as boardName"
-			+ " from board b, destination d, filter f, boardlist l"
+			+ "(select b.*,d.lat,d.lng, d.destination_name"
+			+ " from board b, destination d"
 			+ " where b.destination_numbers = d.destination_numbers"
 			+ "	and b.boardlist_numbers = #{boardlist_numbers}"
 			+ "	and b.location like '%'||#{searchWord}||'%' ) A )"
