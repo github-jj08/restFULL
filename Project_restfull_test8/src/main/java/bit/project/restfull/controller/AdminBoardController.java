@@ -83,8 +83,9 @@ public class AdminBoardController {
 	}
    
     //2. 특정 회원 정보 확인
-	@GetMapping("/user_content_view") 
-	public String user_content_view(PagingVO pagingVO, @RequestBody UserVO userVO, BoardVO boardVO, Model model) {
+    
+	@GetMapping("/user_content_view")
+	public String user_content_view(PagingVO pagingVO, UserVO userVO, BoardVO boardVO, Model model) {
 		log.info("유저정보 확인");
 		String member_id = userVO.getMember_id();
 		log.info("확인할 user id" + member_id); // name
@@ -121,7 +122,8 @@ public class AdminBoardController {
 		userService.adminModifyUser(userVO);
 		session.invalidate();
 		
-		return "admin/userlist";
+		return "admin/userList";
+		
 	}
    
 	//5. 관리자 권한으로 회원 게시글 조회
