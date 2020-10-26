@@ -107,11 +107,11 @@
 										
 										<div class="group-input">
 											<label for="search"> 위치 검색</label>
-												<input id="address" type="text" >
-												<button type="submit" id="submit">검색</button>
+											<input id="address" type="text" >
+											<button type="submit" id="submit">검색</button>
 												
-									    		<div id="map">
-									    		</div>
+									    	<div id="map">
+									    	</div>
 									    </div>
 									    
 									    <!-- 맵 -->

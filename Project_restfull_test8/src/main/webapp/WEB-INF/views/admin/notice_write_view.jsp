@@ -77,6 +77,7 @@
 											<textarea rows="10" cols="50" name="contents" class="write_content" placeholder="최대 500자 까지 작성 가능합니다." maxlength="500" required></textarea>
 										</div>
 									</div>
+									
 									<button type="submit" id="submit">완료</button>
 									
 								</form>
@@ -85,7 +86,6 @@
                         </div>
                     </div>
                 </div>
-                
             </div>
 		</div>
 	</section>

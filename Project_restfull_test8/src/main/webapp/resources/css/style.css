@@ -3904,6 +3904,20 @@ ol {
     position:absolute;
 }
 
+.replyForm #list-table {
+	width:93%;
+}
+
+
+.replyForm #list-table  button  {
+	width:6%;
+    font-size:15px;
+    border:#8a93c0;
+    background-color:#eaedff;
+    top: -15px;
+    float:right;
+}
+
 
 /*--------------------
     아래쪽 관련게시글
@@ -4401,6 +4415,7 @@ ol {
 	position: relative; 
 	overflow: hidden;
 	margin: 15px 0;
+	border: #8a93c0 2px solid;
 }
 
 .dest-register .group-input .group-sido{
@@ -4490,3 +4505,23 @@ ol {
 	float:right;
 	
 }
+
+/* 회원탈퇴 CSS */
+.outUser .group-input {
+	width:100%;
+	height: 70px;	
+}
+
+
+.outUser  .out-btn {
+	width: 20%;
+	letter-spacing: 2px;
+	padding: 10px 5px;
+	margin-top: 15px;
+    background-color:#8a93c0;
+    border:none;
+    color: white;
+    font-size:15px;
+}
+
+

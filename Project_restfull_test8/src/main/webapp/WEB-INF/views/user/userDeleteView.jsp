@@ -6,16 +6,14 @@ pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <html>
 	<head>
-		<!-- 합쳐지고 최소화된 최신 CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-		<!-- 부가적인 테마 -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-	 	
-	 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<title>회원탈퇴</title>
+		
+	</head>
+	<body>
+	<%@ include file="/WEB-INF/include/js-header.jsp"%>
+	
     <script>
-    $(document).ready(function() {
+    $(function(){
 		// 취소
 		$("#cancel").on("click", function(){
 			location.href = "${pageContext.request.contextPath}/user/userHome";
@@ -50,21 +48,15 @@ pageEncoding="UTF-8"%>
 				}
 			})
 
-		});
-
-
-	})
+		})
+	});
 	</script>
-		
-	</head>
-	<body>
-		<%@ include file="/WEB-INF/include/js-header.jsp"%>
-		<h2 class="text-center">회원탈퇴 페이지 입니다.</h2>
+		<div class="text-center"><h2>회원탈퇴</h2></div>
 		<hr>
 		    <section class="blog-section spad">
 		        <div class="container">
 		            <div class="row">
-		                <div class="col-sm-3 order-1">
+		                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1">
 		                    <div class="blog-sidebar">
 								<div class="blog-catagory menu-background">
 							        <h4>마이페이지</h4>
@@ -81,26 +73,40 @@ pageEncoding="UTF-8"%>
 						        </div>
 					        </div>
 				        </div>
-				        <div class="col-sm-9 order-2">
-							<section id="container">
-								<div class="form-group has-feedback">
-								<sec:authentication var="principal" property="principal"/>
-									<label class="control-label" for="userId">아이디</label>
-									<input class="form-control" type="text" name="member_id" value="<sec:authentication property="principal.user.member_id"/>"/>
+				        <div class="col-lg-9 order-1">
+				        	<div class="row">
+                        		<div class="col-lg-12 col-sm-12">
+									<div class="outUser">
+										<div class="group-input">
+											<sec:authentication var="principal" property="principal"/>
+											<div class="USERID">
+												<label for="userId">아이디</label>
+												<input type="text" name="member_id" value="<sec:authentication property="principal.user.member_id"/>"/>
+											</div>
+										</div>
+										
+										<div class="group-input">
+											<div class="USERPW">
+												<label class="control-label" for="userPass">비밀번호</label>
+												<input class="l" type="password" id="pw" name="pw" placeholder="비밀번호를 입력해주세요"/>
+											</div>
+										</div>
+										
+										<div class="group-input">
+											<div class="USERNAME">
+												<label class="control-label" for="userName">이름</label>
+												<input class="" type="text" id="name" value="<sec:authentication property="principal.user.name"/>" readonly="readonly"/>
+											</div>
+										</div>
+										
+										
+											<button class="out-btn" type="button" id="delete">회원탈퇴</button>
+											<button class="out-btn" type="button" id="cancel">취소</button>
+										
+									</div>
+									
 								</div>
-								<div class="form-group has-feedback">
-									<label class="control-label" for="userPass">비밀번호</label>
-									<input class="form-control" type="password" id="pw" name="pw" placeholder="비밀번호를 입력해주세요"/>
-								</div>
-								<div class="form-group has-feedback">
-									<label class="control-label" for="userName">성명</label>
-									<input class="form-control" type="text" id="name" value="<sec:authentication property="principal.user.name"/>" readonly="readonly"/>
-								</div>
-								<div class="form-group has-feedback">
-									<button class="btn btn-success" type="delete" id="delete">회원탈퇴</button>
-									<button class="cencle btn btn-danger" type="button" id="cancel">취소</button>
-								</div>
-							</section>
+							</div>
 					    </div>
 	                </div>
 	            </div>
