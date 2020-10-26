@@ -40,7 +40,6 @@ public class BoardController {
 	@Autowired
 	private AdminBoardService adBoardService;
 	
-	//test
 	//write_view
 	@GetMapping("/write_view")
 	public String write_view() {
