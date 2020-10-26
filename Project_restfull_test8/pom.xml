@@ -326,8 +326,15 @@
 		<dependency>
 		     <groupId>org.springframework.security</groupId>
 		     <artifactId>spring-security-test</artifactId>
-		     <version>4.0.4.RELEASE</version>
+		     <version>${org.security-version}</version>
 		     <scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			 <groupId>org.hamcrest</groupId>
+			 <artifactId>hamcrest-library</artifactId>
+			 <version>1.3</version>
+			 <scope>test</scope>
 		</dependency>
 				
 	</dependencies>
