@@ -13,15 +13,16 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
-				<c:set var="boardListName" value="${boardListName}" />
-				<c:choose>
-				    <c:when test="${boardListName eq 'event'}">
-						<div class="text-center"><h2>이벤트</h2></div>
-					</c:when>
-				    <c:when test="${boardListName eq 'notice'}">
-				    	<div class="text-center"><h2>공지사항</h2></div>
-				    </c:when>
-				</c:choose>
+
+		<c:set var="boardListName" value="${boardListName}" />
+			<c:choose>
+				<c:when test="${boardListName eq 'event'}">
+					<div class="text-center"><h2>이벤트</h2></div>
+				</c:when>
+				<c:when test="${boardListName eq 'notice'}">
+				   	<div class="text-center"><h2>공지사항</h2></div>
+				</c:when>
+			</c:choose>
    <hr>
 
  <!-- Blog Section Begin -->

@@ -61,7 +61,7 @@ public class AdminBoardController {
    private AdminBoardService adBoardService;
 
    /* 회원 관리 */
-   //1. 회원 리스트 with paging
+   //1. 회원 리스트 페이징
    @GetMapping("/userList")
 	public String userlist(PagingVO pagingVO, Model model
 			, @RequestParam(value="nowPage", required=false)String nowPage
@@ -121,7 +121,7 @@ public class AdminBoardController {
 		userService.adminModifyUser(userVO);
 		session.invalidate();
 		
-		return "admin/adminHome";
+		return "admin/userlist";
 	}
    
 	//5. 관리자 권한으로 회원 게시글 조회

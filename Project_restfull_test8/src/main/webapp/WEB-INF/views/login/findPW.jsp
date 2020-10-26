@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-lg-4 offset-lg-4">
                     <div class="login-form">
-                        <h2>PW 찾기</h2>
+                        <h2>비밀번호 찾기</h2>
                       	<div class="FindPW">  
                         	<div class="group-input">
 			                    <label for="ID">ID</label>

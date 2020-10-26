@@ -156,7 +156,7 @@
 						         	//옵션 초기화
 						          	$('#travel-destinations').empty();
 						            $(result).each(function(){		
-						           		$('#travel-destinations').append('<div class="trav-btn travel" value="'+this.destination_numbers+'">'+this.destination_name+'</option>');
+						           		$('#travel-destinations').append('<div class="trav-btn travel" value="'+this.destination_numbers+'">'+this.destination_name+'</option>' );
 						      		})
 								}
 							});	//ajax end

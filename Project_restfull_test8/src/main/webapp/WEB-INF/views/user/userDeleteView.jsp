@@ -18,10 +18,10 @@ pageEncoding="UTF-8"%>
     $(document).ready(function() {
 		// 취소
 		$("#cancel").on("click", function(){
-			location.href = "${pageContext.request.contextPath}/user/userHome";
+			location.href = "${pageContext.request.contextPath}/user/userModify";
 		});
 
-		$("#submit").on("click", function(){
+		$("#delete").on("click", function() {
 			if($("#pw").val()==""){
 				alert("비밀번호를 입력해주세요.");
 				$("#pw").focus();
@@ -40,7 +40,9 @@ pageEncoding="UTF-8"%>
 					const isSuccess = data.statusCode === 200;
 					if(isSuccess){
 						alert("회원 탈퇴 성공");
-						location.href = "${pageContext.request.contextPath}/user/userHome";
+
+						location.href = "${pageContext.request.contextPath}/";
+
 					}else{
 						alert("비밀번호를 다시 입력해 주세요");
 					}
@@ -82,6 +84,37 @@ pageEncoding="UTF-8"%>
 					        </div>
 				        </div>
 				        <div class="col-sm-9 order-2">
+				                 <fieldset>
+							<form:form id="modifyForm" action="update" method="POST">
+								<div class="notice-table">
+								 <table id="list-table">
+									  <tr>
+									 		<td class=" user-modify-line">아이디</td>
+									 		<td>
+									 			<sec:authentication var="principal" property="principal"/>
+												<input class="form-control" type="text" name="member_id" value="<sec:authentication property="principal.user.member_id"/>" readOnly/>
+									 		</td>
+									 	
+									  </tr>
+									  <tr>
+										   <td class="user-modify-line">패스워드</td>
+										   <td>
+										   	 	<input class="input" type="password"  id="pw" name="pw" placeholder="패스워드 입력(8자 이상)"/><br />
+										   </td>
+									  </tr>
+									  <tr>
+										   <td class="user-modify-line">이름</td>
+										   <td><input class="input" type="text"  id="name" placeholder="이름" value="<sec:authentication property="principal.user.name"/>" readOnly/><br /></td>
+									  </tr>
+								 </table>
+									<div class="form-group has-feedback">
+										<button class="user-modify-btn" type="submit" id="submit">회원탈퇴</button>
+										<button class="user-modify-btn" type="button" id="cancel">취소</button>
+									</div>
+								</div>
+							 </form:form>
+						 </fieldset>
+						 <!-- ------------------------------------------------------ -->
 							<section id="container">
 								<div class="form-group has-feedback">
 								<sec:authentication var="principal" property="principal"/>
@@ -97,7 +130,7 @@ pageEncoding="UTF-8"%>
 									<input class="form-control" type="text" id="name" value="<sec:authentication property="principal.user.name"/>" readonly="readonly"/>
 								</div>
 								<div class="form-group has-feedback">
-									<button class="btn btn-success" type="submit" id="submit">회원탈퇴</button>
+									<button class="btn btn-success" type="delete" id="delete">회원탈퇴</button>
 									<button class="cencle btn btn-danger" type="button" id="cancel">취소</button>
 								</div>
 							</section>

@@ -26,7 +26,7 @@
 						        <ul>
 						            <li><p>[<a href="<c:url value="userModify" />">개인정보 수정</a>]</p></li>
 						            <li><p>[<a href="myList?member_id=<sec:authentication property="principal.user.member_id"/>">내 게시글 보기</a>]</p></li>
-						            <li  style="background-color: #8a93c0;"><p>[<a href="myLikeList?member_id=<sec:authentication property="principal.user.member_id"/>">좋아요 한 글 목록</a>]</p></li>
+						            <li style="background-color: #8a93c0;"><p>[<a href="myLikeList?member_id=<sec:authentication property="principal.user.member_id"/>">좋아요 한 글 목록</a>]</p></li>
 						            <li><p>[<a href="myCourseList?member_id=<sec:authentication property="principal.user.member_id"/>">내 여행코스 보기</a>]</p></li>
 						            <li><p>[<a href="paymentList?member_id=<sec:authentication property="principal.user.member_id"/>">내 결제내역 보기</a>]</p></li>
 						            <li><p>[<a href="reportList?member_id=<sec:authentication property="principal.user.member_id"/>">내 신고내역 보기</a>]</p></li>
@@ -39,43 +39,27 @@
 			        <div class="col-sm-9 order-2">
 			       		<div class="notice-table">
 							<table id="list-table">
-								<tr class="firs-list">
+								<tr class="first-list">
 									<td>대표사진</td>
 									<td>게시글 제목</td>
 									<td>위치</td>
 									<td>게시 날짜</td>
 								</tr>
-											<c:forEach items="${boardlist}" var="vo">
-											    <a href="${pageContext.request.contextPath}/content_view?board_numbers=${vo.board_numbers}" class="thumbnail">
-														<tr>
-													<div  class="caption">
-												      		<td> <img src="${vo.thumbnail }"/></td>
-											                <td> <a href="${pageContext.request.contextPath}/content_view?board_numbers=${vo.board_numbers}" class="thumbnail">${vo.title}</td>
-											                <td> ${vo.location}</td>
-											                <td> ${vo.destinationVO.jibunaddress}</td>
-													</div>
-														</tr>
-												</a>
-											</c:forEach>
+							        <!-- 게시글 목록 -->
+								<c:forEach items="${boardlist}" var="vo">
+								    <a href="${pageContext.request.contextPath}/content_view?board_numbers=${vo.board_numbers}" class="thumbnail">
+											<tr>
+										<div  class="caption">
+									      		<td> <img src="${vo.thumbnail }"/></td>
+								                <td> <a href="${pageContext.request.contextPath}/content_view?board_numbers=${vo.board_numbers}" class="thumbnail">${vo.title}</td>
+								                <td> ${vo.location}</td>
+								                <td> ${vo.destinationVO.jibunaddress}</td>
+										</div>
+											</tr>
+									</a>
+								</c:forEach>
 							</table>
 						</div>
-				        <!-- 게시글 목록 -->
-											<c:forEach items="${boardlist}" var="vo">
-												    <a href="${pageContext.request.contextPath}/content_view?board_numbers=${vo.board_numbers}" class="thumbnail">
-												      <div class="caption">
-												      	<tr>
-												      		<td><img src="${vo.thumbnail }"/></td>
-											                <td>${vo.title}</td>
-											                <td>${vo.location}</td>
-											                <td>${vo.destinationVO.jibunaddress}</td>
-										                </tr>
-											          </div>
-												    </a>
-											</c:forEach>
-							
-							
-							
-						<hr/>
 				    </div>
 		        </div>
 	        </div>
