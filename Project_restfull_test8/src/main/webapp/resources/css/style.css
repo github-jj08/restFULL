@@ -3659,14 +3659,14 @@ ol {
 }
      
  .photo-view #myCarousel .carousel-inner {
-      height: 100%;
+      height:450px;
       width: auto;
       text-align: center;
       
 }   
 
  .photo-view #myCarousel .carousel-inner img {
-      height: 90%;
+      height: 450px;
       width: auto;
       text-align: center;
 }
