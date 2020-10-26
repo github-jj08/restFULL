@@ -95,7 +95,7 @@
 								</tr>								
 								<tr>
 									<td class="content-view-table-rep">신고내용</td>
-									<td><div style="height:50px; overflow: auto;">${content_view.contents}</div></td>
+									<td height = "0"><div style="height:100%; word-break:break-all">${content_view.contents}</div></td>
 								</tr>
 						</table>
 						
