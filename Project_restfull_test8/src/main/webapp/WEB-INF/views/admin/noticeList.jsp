@@ -24,7 +24,7 @@
                             <h4>관리자페이지</h4>
                             <ul>
                                 <li><a href="<c:url value="/admin/userList" />">유저 관리</a></li>
-                                <li><a href="<c:url value="/admin/notice/2" />">공지사항 및 이벤트 관리</a></li>
+                                <li><a href="<c:url value="/admin/notice" />">공지사항 및 이벤트 관리</a></li>
                                 <li><a href="<c:url value="/admin/qnas" />">문의 및 신고 답변</a></li>
                                 <li><a href="<c:url value="/admin/dest" />">여행지 및 상품 관리</a></li>
                             	<li><a href="<c:url value="/admin/requestList" />">상품 주문내역 관리</a></li>
@@ -66,7 +66,7 @@
 	
 				<script>
 				$(function(){ 
-						
+					
 					function getList(){
 							
 						var boardlist = $("#boardlist_numbers option:selected").val();
@@ -81,13 +81,13 @@
 				            }
 						
 					    });
-					};
+					};//getList end
 			
 					function setTable(result){
 						var htmls="";
 				    	$("#list-table").html("");	
 				
-						$("<tr class="first-list" >" , {
+						$('<tr class="first-list" >' , {
 							html : "<td>" + "구분" + "</td>"+  // 컬럼명들
 									"<td>" + "제목" + "</td>"+
 									"<td>" + "작성자" + "</td>"+
@@ -112,16 +112,16 @@
 				            	});	//each end
 				
 						}
-						console.log("어디");
 						
 						$("#list-table").append(htmls);
 						}
 					
 					getList();
 					
-					$('#boardlist_numbers').on('change', function(){
-						getList();
-					});
+				});
+	
+				$('#boardlist_numbers').on('change', function(){
+					getList();
 				});
 				</script>
 			
