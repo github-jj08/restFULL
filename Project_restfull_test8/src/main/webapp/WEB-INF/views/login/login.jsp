@@ -23,7 +23,7 @@
     <div class="register-login-section spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 offset-lg-4">
+                <div class="col-lg-4 col-md-6 offset-lg-4 offset-md-3">
                     <div class="login-form">
                         <h2 style="color: #41497a">Login</h2>
                         <!-- 로그인 검사 -->

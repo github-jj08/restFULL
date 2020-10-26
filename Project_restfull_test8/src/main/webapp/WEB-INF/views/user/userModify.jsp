@@ -115,7 +115,7 @@
 						 <fieldset>
 							<form:form id="modifyForm" action="update" method="POST">
 								<div class="notice-table">
-								 <table id="list-table">
+								 	<table id="list-table">
 									  <tr>
 										   <td class=" user-modify-line">아이디</td>
 										   <td><input style="border:none; width: 100%;" class="input" type="text"  id="member_id" name="member_id"  value="<sec:authentication property="principal.user.member_id"/>" readOnly/></td>
@@ -151,13 +151,12 @@
 										   <td><input style="border:none; width: 100%;" class="input" type="email" id="email" placeholder="EMAIL" name="email" value="<sec:authentication property="principal.user.email"/>"/><br/>
 										   </td>
 									  </tr>
-								 </table>
-								 <br>
-										   <div>
-											    <button type="submit" class="button3 user-modify-btn " >수정완료</button>
-											    <button type="submit" style="margin-top: 7px;" onclick="history.go(-1);" class="gobackbtn">돌아가기</button>
-										   </div>
-									  
+								 	</table>
+								 
+								 	<br>
+								 
+									<button type="submit" class="button3 user-modify-btn " >수정완료</button>
+  
 								</div>
 							 </form:form>
 						 </fieldset>
