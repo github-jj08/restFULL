@@ -11,7 +11,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
-	<h2 class="text-center">내 여행코스 페이지 입니다.</h2>
+	<div class="text-center"><h2>여행코스</h2></div>
 	    <section class="blog-section spad">
 	        <div class="container">
 	            <div class="row">

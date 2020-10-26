@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-lg-4 offset-lg-4">
                     <div class="login-form">
-                        <h2>Login</h2>
+                        <h2 style="color: #41497a">Login</h2>
                         <!-- 로그인 검사 -->
                         <c:url value="/login" var="loginUrl" />
                         <form:form name="f" action="${loginUrl}" method="POST"> 
