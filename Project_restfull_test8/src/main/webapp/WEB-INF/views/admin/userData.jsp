@@ -90,7 +90,7 @@
     </script>
 </head>
 <body>
-	<h4><a href="${pageContext.request.contextPath}/admin/adminHome">관리자 메인으로 돌아가기</a></h4>
+	<h4><a href="${pageContext.request.contextPath}/admin/userList">관리자 메인으로 돌아가기</a></h4>
 	<table width="400" cellpadding="0" cellspacing="0" border="1">
 		<form method="POST" action="adminUpdate">
 			<tr>
