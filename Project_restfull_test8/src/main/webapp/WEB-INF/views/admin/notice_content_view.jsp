@@ -39,84 +39,95 @@
 						     </a>
 						</div>
 					</div>
+				
 						
-						<script>
-							$(function(){  
-								var filelist = new Array();
+						 <!--------------------------
+                        	 Carousel 스크립트 start
+                         ----------------------------->
+					<script>
+						$(function(){  
+							var filelist = new Array();
 								
-								<c:forEach items="${filelist}" var="file">
-									var json = new Object();
-									json.filedirectory = "${file.filedirectory}";
-									filelist.push(json);
-								</c:forEach>
+							<c:forEach items="${filelist}" var="file">
+								var json = new Object();
+								json.filedirectory = "${file.filedirectory}";
+								filelist.push(json);
+							</c:forEach>
 								
-								console.log("filelist : " + filelist);
+							console.log("filelist : " + filelist);
 								
-						    	for(var i=0 ; i< filelist.length ; i++) {
-							       $('<div class="carousel-item"><img src="'+filelist[i].filedirectory+'" width=\"460\" height=\"345\""></div>').appendTo('.carousel-inner');
-							       $('<li data-target="#myCarousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
-							     	}
-							     $('.carousel-item').first().addClass('active');
-							     $('.carousel-indicators>li').first().addClass('active');
-							     $('#myCarousel').carousel();
-							});
-						</script>
-						<div class="wrapper">
-							<div class="dropdown">
-							 	<button type="button" class="btn dropdown" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							  		...
-							 	</button>
-								<div class="dropdown-menu">
-								    <!-- 자신이 쓴 글일 때만 수정/삭제 버튼 노출 -->
-									   <a class="dropdown-item" id="modify" href="modify?board_numbers=${content_view.board_numbers}">수정</a>
-									   <a class="dropdown-item" id="delete">삭제</a>
-								 </div>
-							</div>
+						    for(var i=0 ; i< filelist.length ; i++) {
+							      $('<div class="carousel-item"><img src="'+filelist[i].filedirectory+'" style="height:600px; "></div>').appendTo('.carousel-inner');
+							      $('<li data-target="#myCarousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
+							}
+						    	
+							$('.carousel-item').first().addClass('active');
+							$('.carousel-indicators>li').first().addClass('active');
+							//$('#myCarousel').carousel();
+						});
+														
+					</script>
+					<!--------------------------
+                        Carousel 스크립트 end
+                   ----------------------------->
+						
+					<div class="wrapper">
+						<div class="dropdown">
+						 	<button type="button" class="btn dropdown" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					  		...
+						 	</button>
+							<div class="dropdown-menu">
+						    <!-- 자신이 쓴 글일 때만 수정/삭제 버튼 노출 -->
+							   <a class="dropdown-item" id="modify" href="modify?board_numbers=${content_view.board_numbers}">수정</a>
+							   <a class="dropdown-item" id="delete">삭제</a>
+							 </div>
 						</div>
+					</div>
+				</div>
 						    
-						<script>
-							$("#delete").on("click", function(){
-								var board_numbers = $('input[name=board_numbers]').val()
-								var boardlist_numbers = $('input[name=boardlist_numbers]').val();
-								var yn = confirm("게시글을 삭제하시겠습니까?");
-								if(yn){
-						    			
-									$.ajax({
-										url : "/restfull/admin/notice/delete",
-						 				async: true,
-						    			type : "GET",
-						    			data : {
-						    				"board_numbers" : board_numbers
-						    			},
-						    			success: function() {
-						    				alert("게시글이 삭제되었습니다.");
-						    				location.href = "/restfull/admin/notice";
-						    			},
-						    			error: function() {
-						    				alert("알수 없는 에러 발생");
-						 				}
-						  			})
-								}else{
-									alert("게시글 삭제가 취소되었습니다.");
-								}
-							});
-						</script>
+				<script>
+					$("#delete").on("click", function(){
+						var board_numbers = $('input[name=board_numbers]').val()
+						var boardlist_numbers = $('input[name=boardlist_numbers]').val();
+						var yn = confirm("게시글을 삭제하시겠습니까?");
+						if(yn){
+				    			
+							$.ajax({
+								url : "/restfull/admin/notice/delete",
+				 				async: true,
+				    			type : "GET",
+				    			data : {
+				    				"board_numbers" : board_numbers
+				    			},
+				    			success: function() {
+				    				alert("게시글이 삭제되었습니다.");
+				    				location.href = "/restfull/admin/notice";
+				    			},
+				    			error: function() {
+				    				alert("알수 없는 에러 발생");
+				 				}
+				  			})
+						}else{
+							alert("게시글 삭제가 취소되었습니다.");
+						}
+					});
+				</script>
+						
 
-						<div class="write-view">
-							<div class="board-contents">
-								<div class="view-hit">조회수 - ${content_view.hit} 회</div>
-									<div class="view-dates">${content_view.dates} </div>
-									<br/>
-									<div class="view-id">${content_view.member_id}</div>
-									<div class="view-title">${content_view.title}</div>
-		 							<div class="view-contents">${content_view.contents}</div>
-							</div>
-						</div>
+				<div class="write-view">
+					<div class="board-contents">
+						<div class="view-hit">조회수 - ${content_view.hit} 회</div>
+							<div class="view-dates">${content_view.dates} </div>
+							<br/>
+							<div class="view-id">${content_view.member_id}</div>
+							<div class="view-title">${content_view.title}</div>
+		 					<div class="view-contents">${content_view.contents}</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
+</section>
 					
 <%@ include file="/WEB-INF/include/js-footer.jsp"%>
 	

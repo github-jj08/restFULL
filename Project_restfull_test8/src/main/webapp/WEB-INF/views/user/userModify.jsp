@@ -117,7 +117,7 @@
 								<div class="notice-table">
 								 <table id="list-table">
 									  <tr>
-										   <td class=" user-modify-line">아이디</td>
+										   <td class=" user-modify-line ">아이디</td>
 										   <td><input style="width: 100%;" class="input" type="text"  id="member_id" name="member_id"  value="<sec:authentication property="principal.user.member_id"/>" readOnly/></td>
 									  </tr>
 									
