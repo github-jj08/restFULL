@@ -4353,6 +4353,7 @@ ol {
     border-radius: 5px;  
 }
 
+
 .notice_write .group-input .writecontentx textarea {
     color: #252525;
     border:#8a93c0 2px double;
@@ -4425,7 +4426,7 @@ ol {
 
 
 /* 완료버튼 */
-.notice_write form button {
+.notice_write form button[type=submit] {
 	background-color:#8a93c0;
 	color: white;
 	font-size: 15px;
@@ -4436,6 +4437,9 @@ ol {
 	float:right;
 	cursor: pointer;
 }
+
+
+
 /* 뒤로 빠꾸 버튼 */
 
 .gobackbtn {
