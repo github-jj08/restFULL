@@ -74,8 +74,7 @@
 					<div class="wrapper">
 						<div class="dropdown">
 						 	<button type="button" class="btn dropdown" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					  		...
-						 	</button>
+					  		▼					 	</button>
 							<div class="dropdown-menu">
 						    <!-- 자신이 쓴 글일 때만 수정/삭제 버튼 노출 -->
 							   <a class="dropdown-item" id="modify" href="modify?board_numbers=${content_view.board_numbers}">수정</a>

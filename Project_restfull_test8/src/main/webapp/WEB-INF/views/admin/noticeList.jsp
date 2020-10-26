@@ -66,7 +66,8 @@
 	
 				<script>
 				$(function(){ 
-					
+					getList();
+				});
 					function getList(){
 							
 						var boardlist = $("#boardlist_numbers option:selected").val();
@@ -118,9 +119,6 @@
 						
 					}
 					
-					getList();
-					
-				});
 	
 				$('#boardlist_numbers').on('change', function(){
 					getList();

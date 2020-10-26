@@ -23,16 +23,16 @@
     <section class="hero-section">
         <div class="hero-items owl-carousel">
             <div class="single-hero-items set-bg" data-setbg="resources/img/KR_15.jpg">
-                <div class="container">
+<!--                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
                             <h3>휴식 가득한 여행</h3>
                             <p></p>
                             
-                            <!--<a href="#" class="primary-btn"></a>-->
+                            <a href="#" class="primary-btn"></a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <div class="single-hero-items set-bg" data-setbg="resources/img/KR_1.jpg">
