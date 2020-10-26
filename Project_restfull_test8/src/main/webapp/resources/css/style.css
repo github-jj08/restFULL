@@ -4299,6 +4299,8 @@ media only screen and (max-width: 991px) {
     border-color:#8a93c0;
     color: white;
     padding: 5px 0;   
+    float: left;
+    margin-left: 3px;
 }
 
 .paging-font-size{
@@ -4316,6 +4318,7 @@ media only screen and (max-width: 991px) {
     border-bottom : 2px solid;
     font-size: 18px;
     font-weight:600;
+    color: white;
 }
 
 
@@ -4626,4 +4629,30 @@ media only screen and (max-width: 991px) {
     font-size:15px;
 }
 
+#list-table .first-list-rep{
+	padding: 6px 0;
+    background-color: #626eac;
+    color: white;
+    text-align:center;
+    border-bottom : #626eac 2px solid;
+    font-size: 18px;
+    font-weight:600;
+    overflow: auto;
+}
+#list-table .first-list-rep .first-list-rep-contents{
+	height: 500px;
+}
 
+.user-modify-btn-back{
+	margin-top: 5px;
+}
+
+.content-view-table-rep{
+   	padding: 6px 0;
+    background-color: #626eac;
+    color: white;
+    text-align:center;
+    border-bottom : #626eac 2px solid;
+    font-size: 18px;
+    font-weight:600;
+}

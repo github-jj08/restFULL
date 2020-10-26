@@ -10,7 +10,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
-	<h2 class="text-center">내 결제내역 페이지 입니다.</h2>
+	<div class="text-center"><h2>내 결제내역</h2></div>
 	<hr>
 	    <section class="blog-section spad">
 	        <div class="container">

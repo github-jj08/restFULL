@@ -84,21 +84,21 @@ pageEncoding="UTF-8"%>
 										<div class="group-input">
 											<sec:authentication var="principal" property="principal"/>
 											<div class="USERID">
-												<label for="userId">아이디</label>
+												<label for="userId">&nbsp;&nbsp;아이디 :&nbsp;&nbsp;</label>
 												<input type="text" name="member_id" value="<sec:authentication property="principal.user.member_id"/>"/>
 											</div>
 										</div>
 										
 										<div class="group-input">
 											<div class="USERPW">
-												<label class="control-label" for="userPass">비밀번호</label>
+												<label class="control-label" for="userPass">비밀번호 :</label>
 												<input class="l" type="password" id="pw" name="pw" placeholder="비밀번호를 입력해주세요"/>
 											</div>
 										</div>
 										
 										<div class="group-input">
 											<div class="USERNAME">
-												<label class="control-label" for="userName">이름</label>
+												<label class="control-label" for="userName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이름 :&nbsp;&nbsp;</label>
 												<input class="" type="text" id="name" value="<sec:authentication property="principal.user.name"/>" readonly="readonly"/>
 											</div>
 										</div>

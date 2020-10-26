@@ -18,7 +18,7 @@
 <body>
 	<%@ include file="/WEB-INF/include/js-header.jsp"%>
 	<sec:authentication var="principal" property="principal"/>
-	<h2 class="text-center">내 게시글 보기 페이지 입니다.</h2>
+	<div class="text-center"><h2>내 게시글 보기</h2></div>
 	<hr>
 	    <section class="blog-section spad">
 	        <div class="container">

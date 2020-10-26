@@ -57,10 +57,11 @@
                 <!--관리자페이지 table end-->
 	
 				<script>
-				
+
 	            $(function(){ 
 	               getList();
 	            });
+	            
 	               function getList(){
 	                     
 	                  var boardlist = $("#boardlist_numbers option:selected").val();
@@ -119,8 +120,9 @@
 	            $('#boardlist_numbers').on('change', function(){
 	               getList();
 	            });
-	           
+	          
 				</script>
+
 			</div>
 		</div>
 	</section>

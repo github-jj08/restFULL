@@ -40,7 +40,6 @@ public class BoardController {
 	@Autowired
 	private AdminBoardService adBoardService;
 	
-	//test
 	//write_view
 	@GetMapping("/write_view")
 	public String write_view() {
@@ -49,6 +48,7 @@ public class BoardController {
 		return "user/write_view";
 	}
 	
+	// 메인 게시글 작성
 	@ResponseBody
 	@PostMapping("/writeMainPosting")
 	public String writeMainPosting(@RequestParam(value="file") MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException {
@@ -58,7 +58,8 @@ public class BoardController {
 		String bNum = Integer.toString(board_numbers);
 		return bNum;
 	}
-
+	
+	// 메인 게시글 목적지 
 	@ResponseBody
 	@PostMapping("/writeMainPosting_dest")
 	public void dest_Write(@RequestBody Map<String,Object> paramData) {
@@ -68,6 +69,7 @@ public class BoardController {
 		adBoardService.writeDestVO(paramData);
 	}
 	
+	// 작성 함수
 	@PostMapping("/write")
 	public String write(@RequestParam(value="file") MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException {
 		log.info("write");

@@ -43,7 +43,7 @@ public class HomeController {
 		return "rs-mainpage";
 	}
 	
-	//검색 결과 페이지
+	//검색 결과 페이징
 		@GetMapping("/search")
 		public String search(PagingVO pagingVO, @RequestParam(value="boardlist_numbers") int boardlist_numbers, @RequestParam(value="searchWord") String searchWord, Model model
 				, @RequestParam(value="nowPage", required=false)String nowPage
@@ -76,6 +76,7 @@ public class HomeController {
 			return "searchResult";
 		}
 		
+		// 검색 단어 필터
 		@ResponseBody
 		@GetMapping("/search/{searchWord}")
 		public List<BoardVO> ajaxSearch(PagingVO pagingVO, @PathVariable(value="boardlist_numbers") int boardlist_numbers, @PathVariable(value="searchWord") String searchWord) throws UnsupportedEncodingException {
@@ -123,7 +124,8 @@ public class HomeController {
 		List<CommentVO> commentlist = boardService.commentList(board_numbers);
 		return commentlist;
 	}
-		
+	
+	// 공지사항, 이벤트 게시판
 	@GetMapping("/notice/{boardlist_numbers}")
 	public String ajaxNoticeList(@PathVariable(value="boardlist_numbers") int boardlist_numbers, Model model) {
 		log.info("boardlist_numbers : " + boardlist_numbers);
@@ -151,7 +153,7 @@ public class HomeController {
 		return "Service/noticeList";
 	}
 	
-
+	// 공지사항, 이벤트 상세보기
 	@GetMapping("/notice/content_view")
 	public String notice_view(String board_numbers, Model model) {
 		log.info("content_view");
