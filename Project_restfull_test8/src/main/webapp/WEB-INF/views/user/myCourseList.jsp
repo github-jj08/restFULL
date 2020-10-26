@@ -12,6 +12,7 @@
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
 	<div class="text-center"><h2>여행코스</h2></div>
+	<hr>
 	    <section class="blog-section spad">
 	        <div class="container">
 	            <div class="row">
@@ -33,7 +34,6 @@
 				        </div>
 			        </div>
 			        <div class="col-sm-9 order-2">
-				    <hr/>
 					   <div class="notice-table">
 							<table id="list-table">
 								<tr class="first-list">

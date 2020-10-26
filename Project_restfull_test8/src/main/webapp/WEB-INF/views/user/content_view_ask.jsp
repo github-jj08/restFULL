@@ -55,14 +55,82 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
+	
+	<div class="text-center"><h2>신고내역</h2></div>
+	<hr>
+	    <section class="blog-section spad">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-sm-3 order-1">
+	                    <div class="blog-sidebar">
+							<div class="blog-catagory menu-background">
+						        <h4>마이페이지</h4>
+						        <ul>
+						            <li><p><a href="<c:url value="userModify" />">개인정보 수정</a></p></li>
+						            <li><p><a href="myList?member_id=<sec:authentication property="principal.user.member_id"/>">내 게시글 보기</a></p></li>
+						            <li><p><a href="myLikeList?member_id=<sec:authentication property="principal.user.member_id"/>">좋아요 한 글 목록</a></p></li>
+						            <li><p><a href="myCourseList?member_id=<sec:authentication property="principal.user.member_id"/>">내 여행코스 보기</a></p></li>
+						            <li><p><a href="paymentList?member_id=<sec:authentication property="principal.user.member_id"/>">내 결제내역 보기</a></p></li>
+						            <li style="background-color: #8a93c0;"><p><a href="reportList?member_id=<sec:authentication property="principal.user.member_id"/>">내 신고내역 보기</a></p></li>
+						            <li><p><a href="qnaList?member_id=<sec:authentication property="principal.user.member_id"/>">내 문의내역 보기</a></p></li>
+						            <li><p><a href="<c:url value="userDeleteView" />">회원탈퇴</a></p></li>
+						        </ul>
+					        </div>
+				        </div>
+			        </div>
+			        <div class="col-sm-9 order-2">
+			        	<div class="notice-table">
+							<table id="list-table" class="" style="table-layout: fixed; text-overflow:ellipsis; border: 1px solid;">
+								<tr>
+									<td class="content-view-table-rep">신고대상글</td>
+									<td> ${content_view.title}</td>
+								</tr>
+								<tr>
+									<td class="content-view-table-rep">작성자</td>
+									<td> ${content_view.member_id}</td>
+								</tr>
+								<tr>
+									<td class="content-view-table-rep">신고날짜</td>
+									<td> ${content_view.dates}</td>
+								</tr>								
+								<tr>
+									<td class="content-view-table-rep">신고내용</td>
+									<td><div style="height:50px; overflow: auto;">${content_view.contents}</div></td>
+								</tr>
+						</table>
+						
+						<button type="button" class="button3 user-modify-btn user-modify-btn-back" onClick="history.go(-1)">돌아가기</button></a>
+
+<%-- 									신고대상글 :<span>${content_view.title}</span><br />
+              						신고자 : <span>${content_view.member_id}</span><br />
+               						신고날짜 : <span>${content_view.dates}</span><br />
+               						신고내용 : <span>${content_view.contents}</span>
+							
+							<c:forEach items="${userReports}" var="userBoard">
+							<tr>
+								<td>${userBoard.title}</td>
+								<td><a href="content_view_rep?board_numbers=${userBoard.board_numbers}">${userBoard.title}</a></td>
+								<td>${userBoard.dates}</td>
+							</tr>
+							</c:forEach> --%>
+						
+						
+						
+						
+				    </div>
+		        </div>
+	        </div>
+		</section>
+
+
+
+
          <!-- 메인 컨텐츠  -->
          <div class="contentswrapper">
             <input type="hidden" name="board_numbers" value="${content_view.board_numbers}">
-               <h2><p>${content_view.title}</p></h2>
-               <p>${content_view.member_id}</p>
-               <p>${content_view.dates}</p>
                
-               <div id="photo-view">
+               
+               <%-- <div id="photo-view">
                   <!-- 사진들 -->
                   <div id="pictures">
                      <c:forEach items="${filelist}" var="file">
@@ -73,21 +141,30 @@
                
                <div>
                   <p>${content_view.contents}</p>
-               </div>
+               </div> --%>
                
                         <!-- 답변 글 -->
             <div id="rightbox"style="float:right">            
                <div>
-                  <div id="commentlist">
-                     <div id="reply">
-                        <section class="replyForm">
-                           <table id="list-table">
-                           
-                           </table>
-                        </section>
-                     </div>
-                  </div>
-                  <script>
+                  	<div id="commentlist">
+                     	<div id="reply">
+	                        <section class="replyForm">
+	                           <table id="list-table">
+	                           
+	                           </table>
+	                        </section>
+                     	</div>
+                  	</div>
+                 
+               </div>
+            </div>
+         </div>
+            <%@ include file="/WEB-INF/include/js-footer.jsp"%>
+            
+            
+            
+				<!--              
+				<script>
                      $(function(){
                         var board_numbers = ${content_view.board_numbers};
                         var member_id = $('#myId').text();
@@ -107,10 +184,12 @@
                                   $("#list-table").html("");   
 
                                 $("<tr>" , {
-                                   html : "<td>" + "아이디" + "</td>"+  // 컬럼명들
-                                         "<td>" + "댓글내용" + "</td>"+
-                                         "<td>" + "작성일" + "</td>"+
-                                         "<td>" + "삭제버튼+댓글번호[히든]" + "</td>"         
+                                   html : "<td>" + "신고대상글" + "</td>"+  // 컬럼명들
+                                         "<td>" + "${content_view.title}" + "</td>"+
+                                         "<td>" + "신고자" + "</td>"+
+                                         "<td>" + "${content_view.member_id}" + "</td>"+
+                                         "<td>" + "신고날짜" + "</td>"         
+                                         "<td>" + "신고날짜" + "</td>"         
                                 }).appendTo("#list-table") // 이것을 테이블에붙임
 
                                 if(result.length < 1){
@@ -138,11 +217,8 @@
                                                  htmls += '<td>'+ item.comments_numbers + '<input type="hidden" value="'+ item.board_numbers + '"> 게시글번호숨김 </td>';   
                                                  htmls += '</tr>';
                                               }
-                                                                                                    
                                           });   //each end
-
                                 }
-
                                 $("#list-table").append(htmls);
                                 }
                            });
@@ -150,10 +226,6 @@
                             commentList(); // 처음 시작했을 때 실행되도록 해당 함수 호출
                      });
                   </script>
-               </div>
-            </div>
-            
-         </div>
-            <%@ include file="/WEB-INF/include/js-footer.jsp"%>
+                   -->
 </body>
 </html>
