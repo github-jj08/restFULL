@@ -44,93 +44,87 @@
 									<option value="2" selected>공지사항</option>
 									<option value="5">이벤트</option>
 								</select>
-								
 								<div class="writebtn">
 									<a href="${pageContext.request.contextPath}/admin/notice/write_view">글 작성</a>
                                 </div>
                                 <table id="list-table">
-									<tr class="first-list">
-										<td>구분</td>
-										<td>제목</td>
-										<td>작성자</td>
-										<td>작성일</td>
-										<td>조회수</td>
-									</tr>
+
 								</table>
                             </div>
-                        </div>
-                        
+                        </div>   
                     </div>
                 </div>
                 <!--관리자페이지 table end-->
 	
 				<script>
-				$(function(){ 
-					
-					function getList(){
-							
-						var boardlist = $("#boardlist_numbers option:selected").val();
-				        
-						$.ajax({
-							url: "${pageContext.request.contextPath}/admin/notice/" + boardlist,
-				            type: "GET",
-				            dataType:"json",
-				            success: function (result) {
-				             	console.log("성공");	
-				               	setTable(result);
-				            }
-						
-					    });
-					};//getList end
-			
-					function setTable(result){
-						var htmls="";
-						
-				    	$("#list-table").html("");	
 				
- 						$('<tr class="first-list">' , {
-							html : "<td>" + "구분" + "</td>"+  // 컬럼명들
-									"<td>" + "제목" + "</td>"+
-									"<td>" + "작성자" + "</td>"+
-									"<td>" + "작성일" + "</td>"+
-									"<td>" + "조회수" + "</td>"			
-						}).appendTo("#list-table") // 이것을 테이블에붙임 
-						
-						if(result.length < 1){
-							htmls += '<tr class="noticeable2">';
-							htmls += '<td>'+ "등록된 글이 없습니다."+'</td>';
-							htmls += '</tr>';
-							
-						} else {
-				                $(result).each(function(){			                    			                    
-				                    htmls += '<tr class="noticeable">';
-				                    htmls += '<td>'+ this.boardlistName + '</td>';
-				                    htmls += '<td><a href="${pageContext.request.contextPath}/admin/notice/content_view?board_numbers=' + this.board_numbers + '">' + this.title + '</a></td>';
-					                htmls += '<td>'+ this.member_id + '</td>';
-					                htmls += '<td>'+ this.dates + '</td>';
-				                    htmls += '<td>'+ this.hit + '</td>';	
-				                    htmls += '</tr>';	//여기까지가 결과물 출력
-				            	});	//each end
-				
-						}
-						
-						$("#list-table").append(htmls);
-						
-					}
-					
-					getList();
-					
-				});
-	
-				$('#boardlist_numbers').on('change', function(){
-					getList();
-				});
+	            $(function(){ 
+	               getList();
+	            });
+	               function getList(){
+	                     
+	                  var boardlist = $("#boardlist_numbers option:selected").val();
+	                    
+	                  $.ajax({
+	                     url: "${pageContext.request.contextPath}/admin/notice/" + boardlist,
+	                        type: "GET",
+	                        dataType:"json",
+	                        success: function (result) {
+	                            console.log("성공");   
+	                              setTable(result);
+	                        }
+	                  
+	                   });
+	               };//getList end
+	         
+	               function setTable(result){
+	                  var htmls="";
+				      $("#list-table").html("");
+				         
+				      var thead = $("<thead><tr class='first-list'>"
+							        +"<td>구분</td>"
+							        +"<td>제목</td>"
+							        +"<td>작성자</td>"
+							        +"<td>작성일</td>"
+							        +"<td>조회수</td>"
+							        +"</tr></thead>");
+				         
+				      $("#list-table").append(thead);
+	                  
+	                  
+	                  
+	                  if(result.length < 1){
+	                     htmls += '<tr class="noticeable2">';
+	                     htmls += '<td>'+ "등록된 글이 없습니다."+'</td>';
+	                     htmls += '</tr>';
+	                     
+	                  } else {
+	                            $(result).each(function(){                                                          
+	                                htmls += '<tr class="noticeable">';
+	                                htmls += '<td>'+ this.boardlistName + '</td>';
+	                                htmls += '<td><a href="${pageContext.request.contextPath}/admin/notice/content_view?board_numbers=' + this.board_numbers + '">' + this.title + '</a></td>';
+	                               	htmls += '<td>'+ this.member_id + '</td>';
+	                               	htmls += '<td>'+ this.dates + '</td>';
+	                                htmls += '<td>'+ this.hit + '</td>';   
+	                                htmls += '</tr>';   //여기까지가 결과물 출력
+	                           });   //each end
+	            
+	                  }
+	                  
+	                  $("#list-table").append(htmls);
+	                  
+	               }
+	               
+	   
+	            $('#boardlist_numbers').on('change', function(){
+	               getList();
+	            });
+	           
 				</script>
 			</div>
 		</div>
 	</section>
 
-<!-- 	<h3><button onclick="history.go(-1);">돌아가기</button></h3> -->
 	
 <%@ include file="/WEB-INF/include/js-footer.jsp"%>
 </body>

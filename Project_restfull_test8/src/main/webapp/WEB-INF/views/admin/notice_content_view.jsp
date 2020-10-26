@@ -125,6 +125,7 @@
 					</div>
 				</div>
 			</div>
+			<button type="button" onclick="history.go(-1);" class="gobackbtn">돌아가기</button>
 		</div>
 	</div>
 </section>
