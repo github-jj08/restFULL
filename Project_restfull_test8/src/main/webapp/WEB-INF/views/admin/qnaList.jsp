@@ -44,13 +44,6 @@
 							      <option value="4">문의사항</option>
 							   </select> 
                                 <table id="list-table">
-									<tr class="first-list">
-										<td>구분</td>
-										<td>제목</td>
-										<td>작성자</td>
-										<td>작성일</td>
-										<td>조회수</td>
-									</tr>
 								</table>
 								<!-- <button onclick="history.go(-1);">돌아가기</button> -->
                             </div>
@@ -64,7 +57,8 @@
    
 			   <script>
 			   $(function(){ 
-			         
+				   getList();
+			   });
 			      function getList(){
 			            
 			         var boardlist = $("#boardlist_numbers option:selected").val();
@@ -82,20 +76,24 @@
 			      };
 			
 			      function setTable(result){
+			    	  
 			         var htmls="";
-			          $("#list-table").html("");   
-			   
-			         $('<tr class="first-list" >' , {
-			            html : "<td>" + "구분" + "</td>"+  // 컬럼명들
-			                  "<td>" + "제목" + "</td>"+
-			                  "<td>" + "작성자" + "</td>"+
-			                  "<td>" + "작성일" + "</td>"      
-			         }).appendTo("#list-table") // 이것을 테이블에붙임
+			         $("#list-table").html("");
+			         
+			         var thead = $("<thead><tr class='first-list'>"
+						        	+"<td>구분</td>"
+						        	+"<td>신고대상글</td>"
+						        	+"<td>신고자</td>"
+						         	+"<td>신고날짜</td>"
+						         	+"</tr></thead>");
+			         
+			         $("#list-table").append(thead);
 			         
 			         if(result.length < 1){
 							htmls += '<tr class="noticeable2">';
 							htmls += '<td>'+ "등록된 글이 없습니다."+'</td>';
 							htmls += '</tr>';
+							
 			         } else {
 			                   $(result).each(function(){                                                          
 									htmls += '<tr class="noticeable">';
@@ -109,14 +107,12 @@
 			         }
 			   
 			         $("#list-table").append(htmls);
-			         }
+			      }
 			      
-			      getList();
-			      
+			     
 			      $('#boardlist_numbers').on('change', function(){
 			         getList();
 			      });
-			   });
 			   </script>
    
    			</div>

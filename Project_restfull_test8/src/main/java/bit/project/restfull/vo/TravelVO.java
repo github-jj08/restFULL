@@ -15,6 +15,6 @@ public class TravelVO {
 	private String member_id;	//MEMBER_ID	VARCHAR2(100 BYTE)
 	private String tcContents;	//TCCONTENTS	VARCHAR2(1000 BYTE)
 	private String tcAlias;		//TCALIAS	VARCHAR2(100 BYTE)
-	private Timestamp dates;	//DATES	DATE
+	private String dates;	//DATES	DATE
 	private String serialNum;	//SERIALNUM	VARCHAR2(20 BYTE)
 }

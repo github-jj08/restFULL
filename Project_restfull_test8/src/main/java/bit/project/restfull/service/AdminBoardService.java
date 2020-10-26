@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import bit.project.restfull.vo.AdminBoardVO;
 import bit.project.restfull.vo.AttachmentVO;
+import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.DestinationVO;
 import bit.project.restfull.vo.GoodsVO;
 import bit.project.restfull.vo.RequestVO;
@@ -47,7 +48,7 @@ public interface AdminBoardService {
 	List<GoodsVO> getRGoods(int[] destination_numbers);
 
 	//필터게시판뽑기
-	List<AdminBoardVO> getFilterList(int boardlist_numbers);
+	List<BoardVO> getFilterList(int boardlist_numbers);
 	
 	//구매할 상품목록 Read
 	List<GoodsVO> myGoods(String[] goodsList);

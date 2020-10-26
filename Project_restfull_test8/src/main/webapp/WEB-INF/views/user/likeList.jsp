@@ -53,7 +53,7 @@
 									      		<td> <img src="${vo.thumbnail }"/></td>
 								                <td> <a href="${pageContext.request.contextPath}/content_view?board_numbers=${vo.board_numbers}" class="thumbnail">${vo.title}</td>
 								                <td> ${vo.location}</td>
-								                <td> ${vo.destinationVO.jibunaddress}</td>
+								                <td> ${vo.dates}</td>
 										</div>
 											</tr>
 									</a>
