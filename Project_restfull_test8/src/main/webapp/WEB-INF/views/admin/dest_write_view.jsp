@@ -292,9 +292,8 @@
 
 										</div>
 
-									</div>
-
 									<button type="submit" id="submit">완료</button>
+									</div>
 								</form>
 		                        <button type="button" onclick="history.go(-1);" class="gobackbtn">돌아가기</button>					
 							</div>

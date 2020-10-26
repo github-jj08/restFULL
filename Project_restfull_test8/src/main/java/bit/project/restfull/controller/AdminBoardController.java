@@ -377,10 +377,10 @@ public class AdminBoardController {
    //2. 게시판 번호를 가지고 문의글 or 신고글 리스트 분류해서 출력
    @ResponseBody
    @GetMapping("/qnas/{boardlist_numbers}")
-   public List<AdminBoardVO> ajaxQnAsList(@PathVariable(value="boardlist_numbers") int boardlist_numbers, Model model) {
+   public List<BoardVO> ajaxQnAsList(@PathVariable(value="boardlist_numbers") int boardlist_numbers, Model model) {
       log.info("boardlist_numbers : " + boardlist_numbers);
       //boardlist_numbers에 해당하는 게시글들을 불러옴
-      List<AdminBoardVO> list = adBoardService.getFilterList(boardlist_numbers);
+      List<BoardVO> list = adBoardService.getFilterList(boardlist_numbers);
       model.addAttribute("list", list);
       return list;
    }

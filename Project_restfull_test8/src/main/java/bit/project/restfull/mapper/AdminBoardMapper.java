@@ -15,6 +15,7 @@ import org.apache.ibatis.annotations.Update;
 
 import bit.project.restfull.vo.AdminBoardVO;
 import bit.project.restfull.vo.AttachmentVO;
+import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.DestinationVO;
 import bit.project.restfull.vo.GoodsVO;
 import bit.project.restfull.vo.RequestVO;
@@ -130,7 +131,7 @@ public interface AdminBoardMapper{
 	List<GoodsVO> getRGoods(int[] destination_numbers);
 
 	/* 필터있는 게시판 리스트 뽑기 <쿼리문 길어서 xml에 위치 유지> */
-	List<AdminBoardVO> getFilterList(int boardlist_numbers);
+	List<BoardVO> getFilterList(int boardlist_numbers);
 	
 	/* 특정 상품정보출력 <foreach>*/
 	List<GoodsVO> myGoods(String[] goodsList);
