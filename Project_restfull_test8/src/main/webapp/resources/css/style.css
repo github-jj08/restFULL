@@ -3180,7 +3180,7 @@ ol {
 /* Medium Device: 1200px */
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-    inner-header .logo {
+    inner-header .logo img {
         width:150px;
         height:80px;
     }
@@ -3306,11 +3306,6 @@ media only screen and (max-width: 991px) {
 	.inner-header .ht-right .login-panel {
 		padding-left: 10px;
 	}
-
-	.inner-header .logo {
-        width:auto;
-        height:60px;
-    }
 
 	.inner-header .advanced-search .category-btn {
 		max-width: 40%;
