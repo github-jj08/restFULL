@@ -3660,15 +3660,19 @@ ol {
      
  .photo-view #myCarousel .carousel-inner {
       height: 100%;
-      width: auto;
       text-align: center;
       
 }   
 
- .photo-view #myCarousel .carousel-inner img {
-      height: 90%;
-      width: auto;
-      text-align: center;
+ .photo-view #myCarousel .carousel-inner .carousel-item {
+ 	width:100%;
+ 	text-align:center;
+ 	margin: 0px auto;
+ }
+
+ .photo-view #myCarousel .carousel-inner .carousel-item img {
+     line-height:450px;
+
 }
 
 
