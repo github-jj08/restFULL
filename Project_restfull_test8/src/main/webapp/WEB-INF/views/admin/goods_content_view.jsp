@@ -8,32 +8,67 @@
 <html>
 <head>
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-   <title>Insert title here</title>
+   <title>RestFuLL | 관리자</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
 <body>
-<a href="${pageContext.request.contextPath}/admin/dest/content_view?destination_numbers=${content_view.destination_numbers}">여행지정보로 돌아가기</a>
-            
-            <input type="hidden" name="goods_numbers" value="${content_view.goods_numbers}">
-            <div class="container">
-            <a class="dropdown-item" href="modify?goods_numbers=${content_view.goods_numbers}">수정</a>
-            <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/dest/${content_view.destination_numbers}/goods/delete?goods_numbers=${content_view.goods_numbers}">삭제</a>
-            
-               <h4>상품 정보</h4><hr/>
-               <div class="board-contents">
-                  판매업자 : <span>${content_view.seller}</span><br/>
-                  상품명 : <span>${content_view.name}</span><br/>
-                  상품 가격 : <span>${content_view.price}</span><br/>
-                  상품 재고수량: <span>${content_view.amount}</span><br/>
-                  상품 판매 상태 : <span>${content_view.status}</span><br/>
-                  상품 판매 시작일 : <span>${content_view.sellstart}</span><br/>
-                  상품 판매 종료일 : <span>${content_view.sellend}</span><br/>
-               <hr/>
-               </div>
+<%@ include file="/WEB-INF/include/js-header.jsp"%>
+	<div class="text-center"><h2>상품주문내역 관리</h2></div>
+
+ <!-- Blog Section Begin -->
+    <section class="blog-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1">
+                    <div class="blog-sidebar">
+                        <div class="blog-catagory">
+                            <h4>관리자페이지</h4>
+                            <ul>
+                                <li><a href="<c:url value="/admin/userList" />">유저 관리</a></li>
+                                <li><a href="<c:url value="/admin/notice" />">공지사항 및 이벤트 관리</a></li>
+                                <li><a href="<c:url value="/admin/qnas" />">문의 및 신고 답변</a></li>
+                                <li><a href="<c:url value="/admin/dest" />">여행지 및 상품 관리</a></li>
+                            	<li><a href="<c:url value="/admin/requestList" />">상품 주문내역 관리</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+				  
+                <!--관리자페이지 여행지등록table start-->
+                <div class="col-lg-9 order-1 order-lg-2">
+                    <div class="row">
+                        <div class="admin col-lg-12 col-sm-12">
+                        	<div class="notice_write">
+					         	<div class="dest_info">
+					         		<div class="link">
+										<a href="modify?goods_numbers=${content_view.goods_numbers}">수정</a>
+										<a href="${pageContext.request.contextPath}/admin/dest/${content_view.destination_numbers}/goods/delete?goods_numbers=${content_view.goods_numbers}">삭제</a>
+									</div>
+						            <h4>상품 정보</h4>
+						            <input type="hidden" name="goods_numbers" value="${content_view.goods_numbers}">
+						            <div class="board-contents">
+						            	<div class="goods">판매업자 : ${content_view.seller}</div>
+						            	<div class="goods">상품명 : ${content_view.name}</div>
+						            	<div class="goods">상품 가격 : ${content_view.price}</div>
+						            	<div class="goods">상품 재고수량: ${content_view.amount}</div>
+						            	<div class="goods">상품 판매 상태 : ${content_view.status}</div>
+						            	<div class="goods">상품 판매 시작일 : ${content_view.sellstart}</div>
+						            	<div class="goods">상품 판매 종료일 : ${content_view.sellend}</div>
+						            
+						            </div>
+					            </div>
+					         
+         					<button type="button" onclick="history.go(-1);" class="gobackbtn">돌아가기</button>
+         				</div>
+         			</div>
+         		</div>
+         	</div>
+         </div>
+	</div>
+</section>	
+
+
+<%@ include file="/WEB-INF/include/js-footer.jsp"%>
    
 </body>
 </html>

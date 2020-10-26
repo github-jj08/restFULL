@@ -9,7 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table width="500" cellpadding="0" cellspacing="0" border="1">
+
+	<table>
 		<tr>
 			<td>결제 번호</td>
 			<td>주문 번호</td>
@@ -21,29 +22,29 @@
 			<td>취소 여부</td>
 		</tr>
 		<c:forEach items="${list}" var="vo">
-		<tr>
-			<td>${vo.imp_uid}</td>
-			<td>${vo.request_numbers}</td>
-			<td>${vo.member_id}</td>
-			<td>${vo.destination_name}</td>
-			<td><a href="${pageContext.request.contextPath}/user/goods_view?goods_numbers=${vo.goods_numbers}">${vo.productName}</a></td>
-			<td>${vo.price}</td>
-			<td>${vo.dates}</td>
-			<td>
-				<c:set var="cancelyn" value="${vo.cancel}" />
-				<c:choose>
-				    <c:when test="${cancelyn == 0}">
-						공지사항
-					</c:when>
-				    <c:when test="${cancelyn == 1}">
-				    	이벤트
-				    </c:when>
-				    <c:otherwise>
-				    	못받아왓쟈냐
-				    </c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
+			<tr>
+				<td>${vo.imp_uid}</td>
+				<td>${vo.request_numbers}</td>
+				<td>${vo.member_id}</td>
+				<td>${vo.destination_name}</td>
+				<td><a href="${pageContext.request.contextPath}/user/goods_view?goods_numbers=${vo.goods_numbers}">${vo.productName}</a></td>
+				<td>${vo.price}</td>
+				<td>${vo.dates}</td>
+				<td>
+					<c:set var="cancelyn" value="${vo.cancel}" />
+					<c:choose>
+					    <c:when test="${cancelyn == 0}">
+							공지사항
+						</c:when>
+					    <c:when test="${cancelyn == 1}">
+					    	이벤트
+					    </c:when>
+					    <c:otherwise>
+					    	못받아왓쟈냐
+					    </c:otherwise>
+					</c:choose>
+				</td>
+			</tr>
 		</c:forEach>
 	</table>
 	

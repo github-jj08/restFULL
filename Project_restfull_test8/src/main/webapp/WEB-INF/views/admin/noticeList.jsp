@@ -85,6 +85,7 @@
 			
 					function setTable(result){
 						var htmls="";
+						
 				    	$("#list-table").html("");	
 				
 						$('<tr class="first-list" >' , {
@@ -114,7 +115,8 @@
 						}
 						
 						$("#list-table").append(htmls);
-						}
+						
+					}
 					
 					getList();
 					
@@ -124,8 +126,6 @@
 					getList();
 				});
 				</script>
-			
-	
 			</div>
 		</div>
 	</section>

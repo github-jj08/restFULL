@@ -52,7 +52,7 @@
 									<c:forEach items="${destlist}" var="vo">
 										<tr class="noticeable">
 											<td>${vo.sidoguVO.sidoName}</td>
-											<td><a href="content_view?destination_numbers=${vo.destination_numbers}">${vo.destination_name}</a></td>
+											<td><a href="${pageContext.request.contextPath}/admin/dest/content_view?destination_numbers=${vo.destination_numbers}">${vo.destination_name}</a></td>
 											<td>${vo.jibunaddress}</td>
 											<td>${vo.doroaddress}</td>
 											<td>0</td>
