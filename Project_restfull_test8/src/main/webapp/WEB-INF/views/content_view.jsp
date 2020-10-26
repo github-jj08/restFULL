@@ -362,17 +362,19 @@
                                                         //사용자와 작성자의 아이디가 같다면 삭제 버튼 생성
                                                         if(this.member_id == member_id){
                                                             htmls += '<tr class="comment">';
-                                                            htmls += '<td>'+ item.member_id + '</td>'+'<br/>';
+                                                            htmls += '<td>'+ item.member_id + '</td>'+' ';
                                                             htmls += '<td>'+ item.contents + '</td>';
-                                                            htmls += '<td>'+ item.dates + '</td>';
                                                             htmls += '<td><button type="button" name="delete" value="' + item.comments_numbers+'"> x </button>';
+                                                            htmls += '<tr>'
+                                                            htmls += '<td>'+ item.dates + '</td>';
                                                             htmls += '</tr>';
+                                                            htmls += '</tr>';                                                            
                                                         } else {
                                                             //아니라면 그냥 출력
                                                             htmls += '<tr>';
                                                             htmls += '<td>'+ item.member_id + '</td>'+'<br/>';
                                                             htmls += '<td>'+ item.contents + '</td>';
-                                                            htmls += '<td>'+ item.dates + '</td>';
+                                                            htmls += '<tr>'+ item.dates + '</tr>';
                                                             htmls += '<td>'+ item.comments_numbers + '<input type="hidden" value="'+ item.board_numbers + '"></td>';	
                                                             htmls += '</tr>';
                                                         }
