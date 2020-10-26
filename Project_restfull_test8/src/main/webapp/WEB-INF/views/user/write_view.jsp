@@ -73,8 +73,10 @@
             if (!((fileNameExtension === 'jpg')
                     || (fileNameExtension === 'gif') || (fileNameExtension === 'png'))) {
                 alert('jpg, gif, png 확장자만 업로드 가능합니다.');
+                
                 return true;
             } else {
+            	
                 return false;
             }
         }

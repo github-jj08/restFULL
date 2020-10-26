@@ -62,9 +62,9 @@
 							<input type="file" id="fileupload" name="file" multiple="multiple" /> 
 							<hr>
 							
-							제목 : <input type="text" name="title">
+							제목 : &nbsp;<input type="text" name="title">
 							<hr/>
-							내용 : <textarea rows="10" cols="50" name="contents" placeholder="최대 500자 까지 작성 가능합니다." maxlength="500">
+							<p style="float: left;">내용 : &nbsp; </p> <textarea style="float: ;" rows="10" cols="50" name="contents" placeholder="최대 500자 까지 작성 가능합니다." maxlength="500">
 							</textarea>
 							<hr/>
 							<input type="submit" id="submit" value="완료" style="position:absolute;"/>

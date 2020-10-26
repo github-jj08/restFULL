@@ -28,14 +28,14 @@
 							<div class="blog-catagory menu-background">
 						        <h4>마이페이지</h4>
 						        <ul>
-						            <li><p>[<a href="<c:url value="userModify" />">개인정보 수정</a>]</p></li>
-						            <li style="background-color: #8a93c0;"><p>[<a href="myList?member_id=<sec:authentication property="principal.user.member_id"/>">내 게시글 보기</a>]</p></li>
-						            <li><p>[<a href="myLikeList?member_id=<sec:authentication property="principal.user.member_id"/>">좋아요 한 글 목록</a>]</p></li>
-						            <li><p>[<a href="myCourseList?member_id=<sec:authentication property="principal.user.member_id"/>">내 여행코스 보기</a>]</p></li>
-						            <li><p>[<a href="paymentList?member_id=<sec:authentication property="principal.user.member_id"/>">내 결제내역 보기</a>]</p></li>
-						            <li><p>[<a href="reportList?member_id=<sec:authentication property="principal.user.member_id"/>">내 신고내역 보기</a>]</p></li>
-						            <li><p>[<a href="qnaList?member_id=<sec:authentication property="principal.user.member_id"/>">내 문의내역 보기</a>]</p></li>
-						            <li><p>[<a href="<c:url value="userDeleteView" />">회원탈퇴</a>]</p></li>
+						            <li><p><a href="<c:url value="userModify" />">개인정보 수정</a></p></li>
+						            <li style="background-color: #8a93c0;"><p><a href="myList?member_id=<sec:authentication property="principal.user.member_id"/>">내 게시글 보기</a></p></li>
+						            <li><p><a href="myLikeList?member_id=<sec:authentication property="principal.user.member_id"/>">좋아요 한 글 목록</a></p></li>
+						            <li><p><a href="myCourseList?member_id=<sec:authentication property="principal.user.member_id"/>">내 여행코스 보기</a></p></li>
+						            <li><p><a href="paymentList?member_id=<sec:authentication property="principal.user.member_id"/>">내 결제내역 보기</a></p></li>
+						            <li><p><a href="reportList?member_id=<sec:authentication property="principal.user.member_id"/>">내 신고내역 보기</a></p></li>
+						            <li><p><a href="qnaList?member_id=<sec:authentication property="principal.user.member_id"/>">내 문의내역 보기</a></p></li>
+						            <li><p><a href="<c:url value="userDeleteView" />">회원탈퇴</a></p></li>
 						        </ul>
 					        </div>
 				        </div>
@@ -55,10 +55,15 @@
 											<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄 보기</option>
 									</select>
 								</div>
+								<%-- 
+								<div class="paging-font-size">
+						                 	 총 게시글 수 : ${paging.total } / 총 페이지 수 : ${paging.lastPage } / 현재 페이지 : ${paging.nowPage } / 페이지당 게시글수 : ${paging.cntPerPage }
+						        </div>
+						         --%>
 								<!-- width="500" cellpadding="0" cellspacing="0" border="1" -->
 								<div class="notice-table">
 									<table id="list-table">
-										<tr class="firs-list">
+										<tr class="first-list">
 											<td>글 번호</td>
 											<td>게시글 제목</td>
 											<td>게시 날짜</td>
@@ -72,28 +77,26 @@
 										</c:forEach>
 									</table>
 								</div>
-							
-								<c:if test="${paging.startPage != 1}">
-									<a href="myList?member_id=${member_id}&nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage}">&lt;</a>
-								</c:if>
-								<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
-									<c:choose>
-										<c:when test="${p == paging.nowPage}">
-											<b>${p}</b>
-										</c:when>
-										<c:when test="${p != paging.nowPage }">
-											<a href="myList?member_id=${member_id}&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
-										</c:when>
-									</c:choose>
-								</c:forEach>
-							
+								<div class="paging-center">
+									<c:if test="${paging.startPage != 1}">
+										<a href="myList?member_id=${member_id}&nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage}">&lt;</a>
+									</c:if>
+									<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
+										<c:choose>
+											<c:when test="${p == paging.nowPage}">
+												<b>${p}</b>
+											</c:when>
+											<c:when test="${p != paging.nowPage }">
+												<a href="myList?member_id=${member_id}&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+											</c:when>
+										</c:choose>
+									</c:forEach>
+								</div>                            
 								<c:if test="${paging.endPage != paging.lastPage}">
 									<a href="myList?member_id=${member_id}&nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}">&gt;</a>
 								</c:if>
 								
-								<div>
-						                  총 게시글 수 : ${paging.total } / 총 페이지 수 : ${paging.lastPage } / 현재 페이지 : ${paging.nowPage } / 페이지당 게시글수 : ${paging.cntPerPage }
-						        </div>
+								
 							
 			        </div>
 		        </div>

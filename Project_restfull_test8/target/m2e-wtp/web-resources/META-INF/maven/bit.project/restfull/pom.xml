@@ -37,13 +37,6 @@
 		    <version>11.2.0.3</version>
 		</dependency>
 		
-		<!-- 메일 관련 api -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-email</artifactId>
-			<version>1.2</version>
-		</dependency>
-		
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -143,6 +136,7 @@
 			<version>2.1</version>
 			<scope>provided</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
@@ -328,6 +322,14 @@
 		    <version>2.9.1</version>
 		</dependency>
 		
+		<!-- 시큐리티 test -->
+		<dependency>
+		     <groupId>org.springframework.security</groupId>
+		     <artifactId>spring-security-test</artifactId>
+		     <version>4.0.4.RELEASE</version>
+		     <scope>test</scope>
+		</dependency>
+				
 	</dependencies>
 	
 	<build>

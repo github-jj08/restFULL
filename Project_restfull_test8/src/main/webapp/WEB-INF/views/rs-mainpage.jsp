@@ -26,8 +26,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
-                            <h1>휴식 가득한 여행</h1>
+                            <h3>휴식 가득한 여행</h3>
                             <p></p>
+                            
                             <!--<a href="#" class="primary-btn"></a>-->
                         </div>
                     </div>
@@ -40,10 +41,11 @@
             <div class="single-hero-items set-bg" data-setbg="resources/img/KR_3.jpg">
             </div>
 
-            <div class="single-hero-items set-bg" data-setbg="resources/img/KR_4.jpg">
-            </div>
 
-            <div class="single-hero-items set-bg" data-setbg="resources/img/KR_8.jpg">
+            <div class="single-hero-items set-bg" data-setbg="resources/img/KR_7.jpg">
+            </div>
+            
+           	<div class="single-hero-items set-bg" data-setbg="resources/img/KR_8.jpg">
             </div>
 
         </div>

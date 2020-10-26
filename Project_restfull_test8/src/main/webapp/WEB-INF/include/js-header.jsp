@@ -15,7 +15,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- 로고 -->
-	<link rel="shortcut icon" href="resources/img/favicon.ico"/>
+	<link rel="shortcut icon" href="resources/img/o_1.ico"/>
+	
     <title></title>
     
     <script src="resources/js/jquery-3.3.1.min.js"></script>
@@ -130,12 +131,12 @@
 				             			<c:if test="${principal.user.authority_name == 'ROLE_USER'}">
 				             				<div class="userlogin">
 												<strong>${principal.user.name}</strong>님
-									        	<a href="<c:url value="/user/userHome" />">🏠‍</a>
+									        	<a href="<c:url value="/user/userModify" />">🏠‍</a>
 									    	</div>
 									    </c:if>
 								            
 								        <c:if test="${principal.user.authority_name == 'ROLE_ADMIN'}">
-						            		<a href="<c:url value="/admin/adminHome" />">👾관리자 홈👾</a>
+						            		<a href="<c:url value="/admin/userList" />">👾관리자 홈👾</a>
 								        </c:if>
 								        
 										<form:form action="${pageContext.request.contextPath}/logout" method="POST">

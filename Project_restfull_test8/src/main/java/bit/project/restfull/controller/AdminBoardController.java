@@ -1,7 +1,6 @@
 package bit.project.restfull.controller;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,7 +60,7 @@ public class AdminBoardController {
    private AdminBoardService adBoardService;
 
    /* 회원 관리 */
-   //1. 회원 리스트 with paging
+   //1. 회원 리스트 페이징
    @GetMapping("/userList")
 	public String userlist(PagingVO pagingVO, Model model
 			, @RequestParam(value="nowPage", required=false)String nowPage
@@ -83,8 +82,9 @@ public class AdminBoardController {
 	}
    
     //2. 특정 회원 정보 확인
-	@GetMapping("/user_content_view") 
-	public String user_content_view(PagingVO pagingVO, @RequestBody UserVO userVO, BoardVO boardVO, Model model) {
+    
+	@GetMapping("/user_content_view")
+	public String user_content_view(PagingVO pagingVO, UserVO userVO, BoardVO boardVO, Model model) {
 		log.info("유저정보 확인");
 		String member_id = userVO.getMember_id();
 		log.info("확인할 user id" + member_id); // name
@@ -121,7 +121,8 @@ public class AdminBoardController {
 		userService.adminModifyUser(userVO);
 		session.invalidate();
 		
-		return "admin/adminHome";
+		return "admin/userList";
+		
 	}
    
 	//5. 관리자 권한으로 회원 게시글 조회

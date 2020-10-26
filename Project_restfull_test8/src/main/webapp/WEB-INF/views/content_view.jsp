@@ -57,7 +57,7 @@
 								console.log("filelist : " + filelist);
 								
 						    	for(var i=0 ; i< filelist.length ; i++) {
-							       $('<div class="carousel-item" style="width:100%; text-align:center; margin:0px auto;"><img src="'+filelist[i].filedirectory+'" style="height:100%; line-height:auto; "></div>').appendTo('.carousel-inner');
+							       $('<div class="carousel-item"><img src="'+filelist[i].filedirectory+'" style="height:450px; "></div>').appendTo('.carousel-inner');
 							       $('<li data-target="#myCarousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
 							    }
 						    	
@@ -299,7 +299,7 @@
                                 <div class="view-hit">조회수 - ${content_view.hit} 회</div>
                                 <div class="view-dates">${content_view.dates} </div>
                                 <br/>
-                                <div class="view-loc">${content_view.location}</div>                                <br>
+                                <div class="view-loc">${content_view.location}</div> <br>
                                 <div class="view-id">${content_view.member_id}</div>
                                 <div class="view-title">${content_view.title}</div>
                                 <div class="view-contents">${content_view.contents}</div>
@@ -361,8 +361,8 @@
                                                     $(result).each(function(index,item){
                                                         //사용자와 작성자의 아이디가 같다면 삭제 버튼 생성
                                                         if(this.member_id == member_id){
-                                                            htmls += '<tr>';
-                                                            htmls += '<td>'+ item.member_id + '</td>';
+                                                            htmls += '<tr class="comment">';
+                                                            htmls += '<td>'+ item.member_id + '</td>'+'<br/>';
                                                             htmls += '<td>'+ item.contents + '</td>';
                                                             htmls += '<td>'+ item.dates + '</td>';
                                                             htmls += '<td><button type="button" name="delete" value="' + item.comments_numbers+'"> x </button>';
@@ -370,7 +370,7 @@
                                                         } else {
                                                             //아니라면 그냥 출력
                                                             htmls += '<tr>';
-                                                            htmls += '<td>'+ item.member_id + '</td>';
+                                                            htmls += '<td>'+ item.member_id + '</td>'+'<br/>';
                                                             htmls += '<td>'+ item.contents + '</td>';
                                                             htmls += '<td>'+ item.dates + '</td>';
                                                             htmls += '<td>'+ item.comments_numbers + '<input type="hidden" value="'+ item.board_numbers + '"></td>';	

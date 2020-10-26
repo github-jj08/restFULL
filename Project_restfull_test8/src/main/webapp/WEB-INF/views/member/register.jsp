@@ -59,11 +59,7 @@
 				$("#gender").focus();
 				return false;
 			}
-			else if($("#phone").val()==""){
-				alert("전화번호를  입력해주세요.");
-				$("#phone").focus();
-				return false;
-			}
+
 			else if($("#email").val()==""){
 				alert("이메일을 입력해주세요.");
 				$("#email").focus();
@@ -167,18 +163,9 @@
                             <div class="group-input">
                                 <label for="email">이메일</label>
                                 <input type="text" id="email" name="email" aria-describedby="emailHelp" placeholder="이메일주소 입력" required>
-                                <small id="emailHelp" class="form-text text-muted">이메일 전체 입력해주세요.</small>
                             </div>
                             
-                            <!--휴대폰 번호 입력창-->
-                            <div class="group-input">
-                                <label for="mobilenum">핸드폰 번호('-'없이 입력해주세요)</label>
-                                <div class="mbnum">
-                                    <input type="text" name="phone" id="phone" required onkeypress="onlyNumber()">
-                                    <input type="text" name="phone" id="phone" class="con-mobilenum" required onkeypress="onlyNumber()">
-                                    <input type="button" class="con-btn" value="인증요청">
-                                </div>  
-                            </div>
+
                             <input type="submit" class="site-btn register-btn" value="회원가입"/>
                         </form>
                     </div>
@@ -216,6 +203,58 @@
 		});
 	}	
 	</script>
+	
+	<!-- 휴대폰 인증 js -->
+	<script> 
+		
+		function sendSms() { 
+					$.ajax({ 
+						url: "<%=request.getContextPath()%>/sendSms",
+						data: { 
+							receiver: $("#phone").val() 
+						},
+						type: "post",
+						success: function(success) {
+									
+									console.log("인증문자 전송 성공");
+									alert("인증문자 전송 성공");
+									/* if (result == "true") {
+										console.log("result11="+result)
+										console.log(result); 
+									} else { 
+										console.log("result22="+result)
+										alert("인증번호 전송 실패"); 
+									}  */
+						},
+						error: function(error){
+								console.log("인증문자 전송 실패");
+								alert("인증문자 전송 실패");
+							
+						}
+					}); 
+		} 
+		function phoneCheck() { 
+					$.ajax({ url: "<%=request.getContextPath()%>/smsCheck",
+						type : "post",
+						data : { 
+							code : $("#sms").val(),
+						},
+						success : function(result) {
+										console.log("result1="+result)
+										console.log("code="+$("#sms").val())
+									
+									if (result == "ok") {
+										console.log("resultOk="+result)
+										alert("번호 인증 성공");
+									} else {
+										console.log("resultFail="+result)
+										alert("번호 인증 실패");
+									}
+						}
+					});
+		}
+		</script>
+	
 	
 	<%@ include file="/WEB-INF/include/js-footer.jsp"%>
 	</body>

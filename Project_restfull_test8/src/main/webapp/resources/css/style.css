@@ -95,11 +95,13 @@ textarea:focus {
 }
 
 a:hover,
-a:focus {
+a:focus,
+a:active {
 	text-decoration: none;
 	outline: none;
-	color: #fff;
+	color: #8a93c0;
 }
+
 
 ul,
 ol {
@@ -2925,6 +2927,7 @@ ol {
     color: #fff;
     font-weight:500;
     border-style:none;
+    width:49%;
 }
 
 .join-form ul,li {
@@ -3047,23 +3050,6 @@ ol {
 }
 
 
-/*회원가입 핸드폰 인증 요청*/
-.register-form .group-input .mbnum .con-mobilenum {
-    width: 68%;
-    margin-top:10px;
-}
-.register-form .group-input .mbnum .con-btn {
-    width:30%;
-    letter-spacing: 1px;
-    background-color:#8a93c0;
-    border-color:#8a93c0;
-    color: white;
-    padding: 5px 0;
-    float: right;
-    margin-top:10px;
-    font-size:13px;
-}
-
 /*성별*/
 .register-form .gender  {
     display: block;
@@ -3083,7 +3069,7 @@ ol {
 .register-form .group-input #member_id {
     width: 68%;
 }
-.register-form .group-input .con-id {
+.register-form .group-input .con-id{
     width:30%;
     letter-spacing: 1px;
     background-color:#8a93c0;
@@ -3665,25 +3651,42 @@ ol {
 
 
  /* 사진 부분 */
-.leftbox .photo-view #myCarousel {
+ .photo-view #myCarousel {
         background-color: black;
         width: 100%;
         height: 450px;
 
-     }
+}
      
-.leftbox .photo-view #myCarousel .carousel-inner {
-      height: 100%;
+ .photo-view #myCarousel .carousel-inner {
+      height:450px;
       width: auto;
       text-align: center;
       
 }   
 
- .leftbox .photo-view #myCarousel .carousel-inner img {
-      height: 100%;
+ .photo-view #myCarousel .carousel-inner img {
+      height: 450px;
       width: auto;
-      
       text-align: center;
+ .photo-view #myCarousel .carousel-inner .carousel-item {
+ 	width:100%;
+ 	text-align:center;
+ 	margin: 0px auto;
+ }
+
+ .photo-view #myCarousel .carousel-inner .carousel-item img {
+     line-height:450px;
+
+ .photo-view #myCarousel .carousel-inner .carousel-item {
+ 	width:100%;
+ 	text-align:center;
+ 	margin: 0px auto;
+ }
+
+ .photo-view #myCarousel .carousel-inner .carousel-item img {
+     line-height:450px;
+
 }
 
 
@@ -3720,7 +3723,7 @@ ol {
 }
 
 /* 드롭다운 버튼 */
-.leftbox .photo-view .wrapper .dropdown {
+.photo-view .wrapper .dropdown {
     position: relative;
     display:inline-block;
     float:right;
@@ -3834,33 +3837,33 @@ ol {
 
 /*제목,날짜,조회수, 내용 등 표시 css*/
 
-.leftbox .write-view .board-contents {
+.write-view .board-contents {
     margin: 40px 0;
     width:100%;
     border:none;
 }
 
-.leftbox .write-view .board-contents .view-hit {
+.write-view .board-contents .view-hit {
     float:left;
     font-size:13px;  
     border:none;
     
 }
 
-.leftbox .write-view .board-contents .view-dates {
+.write-view .board-contents .view-dates {
     float:right;
     font-size:15px;
     border:none;
  }
 
-.leftbox .write-view .board-contents .view-loc {
+.write-view .board-contents .view-loc {
     font-size:15px;  
     border:none;
     font-weight:600;
     
 }
 
-.leftbox .write-view .board-contents .view-title {
+.write-view .board-contents .view-title {
     padding:5px 0;
     font-size:20px;
     font-weight:800;
@@ -3868,7 +3871,7 @@ ol {
     width:100%;
 }
 
-.leftbox .write-view .board-contents .view-id {
+.write-view .board-contents .view-id {
     border:none; 
     width:100%;
     font-size:15px;
@@ -3876,7 +3879,7 @@ ol {
     font-weight:700;
 }
 
-.leftbox .write-view .board-contents .view-contents {
+.write-view .board-contents .view-contents {
     padding:10px 0;
     font-size:16px;
     border:none; 
@@ -3917,6 +3920,20 @@ ol {
     border:#8a93c0;
     background-color:#eaedff;
     position:absolute;
+}
+
+.replyForm #list-table {
+	width:93%;
+}
+
+
+.replyForm #list-table  button  {
+	width:6%;
+    font-size:15px;
+    border:#8a93c0;
+    background-color:#eaedff;
+    top: -15px;
+    float:right;
 }
 
 
@@ -4105,13 +4122,18 @@ ol {
 	padding : 7px;
 	width:100%
 }
+
 .choosecourse .goods #goodsList table .td-choice {
 	width: 8%;
+
 }
+
 .choosecourse .goods #goodsList table .td {
 	width:23%;
 	text-aglin:center;
+
 }
+
 
 .choosecourse #goodsList #tp {
 	text-align:right;
@@ -4119,6 +4141,8 @@ ol {
 	margin: 10px 0;
 	
 }
+
+
 
 .choosecourse  #goodsList  #buy {
 	float:right;
@@ -4132,23 +4156,20 @@ ol {
     border-radius:5px;
 }
 
+
 /*----------------------
 		공지사항 css
 ----------------------*/
+
 .blog-section .notice-table #list-table {
     width:100%;
+    text-align:center;
+    border : #8a93c0 2px solid;
    
 }
 
-.blog-section .notice-table #list-table tr {
-    padding : px 0;
-     
-}
-.blog-section .notice-table #list-table td {
-   border : #8a93c0 2px solid;
-}
-
-.blog-section .notice-table #list-table .first-list {
+.blog-section .notice-table .first-list td {
+    padding: 6px 0;
     background-color: #626eac;
     color: white;
     text-align:center;
@@ -4156,21 +4177,29 @@ ol {
     font-size: 18px;
     font-weight:600;
 }
-.blog-section .notice-table #list-table .first-list td {
-    padding: 6px 0;
-}
 
-.blog-section .notice-table #list-table .noticetable {
+ .blog-section .notice-table tr {
     text-align:center;
-}
+    border : #8a93c0 2px solid;   
+}  
 
-.blog-section .notice-table #list-table .noticetable td {
+.blog-section .notice-table td {
     padding: 4px 0;
+	text-align:center;
+	border : #8a93c0 2px solid;
 }
 
-.blog-section .notice-table #list-table .input{
+
+/* 
+.blog-section .notice-table .input{
 	width: 100%;
-	}
+}
+ */
+.blog-section .notice-table .writebtn {
+	float: right;
+	
+}
+
 /*----------------------
 		개인정보  css
 ----------------------*/
@@ -4218,7 +4247,55 @@ ol {
 	color: #41497a;
 }
 
-/* 검색결과 게시판 page CSS */
+.card .collapse .card-body p{
+	margin-left: 10px;
+	background-color: red;
+}
+
+.user-modify-btn {
+	width: auto;
+    letter-spacing: 1px;
+    background-color:#8a93c0;
+    border-color:#8a93c0;
+    color: white;
+    padding: 5px 0;   
+}
+
+.paging-font-size{
+	font-size: 8px;
+}
+
+.paging-center{
+	margin-top: 15px;
+	text-align: center;
+}
+
+.user-modify-line{
+	 background-color: #626eac;
+    text-align:center;
+    border-bottom : 2px solid;
+    font-size: 18px;
+    font-weight:600;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .search-section .main-postings.pi-pic img{
     height:200px;
@@ -4250,19 +4327,277 @@ ol {
 
 }
 
-.search-section .page-center  {
+/* ---------------
+		페이징
+------------------ */
+.page-center  {
 	text-align:center;
-	margin-right: 55px;
+	
 	
 }
 
-.search-section .page-center a {
+.page-center a {
 	color: #8a93c0;
 }
 
+.page-center .page-total {
+	text-align:right;
+	display:block;
+	padding-top:20px;
+	font-size:12px;
+}
 
 .search-section #map {
 	width:100%;
 	height:600px;
 	border-radius : 5px;
 }
+
+
+
+/* -------------------------
+	관리자 공지사항 글작성 css
+---------------------------- */
+.notice_write .group-input .writepic #attach {
+	margin-top: 50px;
+}
+
+
+
+.notice_write .group-input {
+    margin : 20px 5px;
+}
+
+.notice_write .group-input label{
+    font-size:20px;
+    font-weight:800;
+    
+}
+ .notice_write .group-input .writetitle input {
+    height:30px;
+    width:50%;
+    border: #8a93c0 1px solid;
+    margin-left: 7px;
+    padding :0 7px;
+    border-radius: 5px;  
+}
+
+.notice_write .group-input .writecontentx textarea {
+    color: #252525;
+    border:#8a93c0 2px double;
+    width:100%;
+    height: 250px;
+    border-radius: 6px;
+    padding : 5px 12px;
+}
+
+ /* 사진 부분 */
+ .photo-view .notice_view #myCarousel {
+        background-color: black;
+        width: 100%;
+        height: 600px;
+
+}
+     
+ .photo-view .notice_view #myCarousel .carousel-inner {
+      height: 100%;
+      width: auto;
+      text-align: center;
+      
+}   
+
+ .photo-view .notice_view #myCarousel .carousel-inner img {
+      height: 100%;
+      width: auto;
+      text-align: center;
+}
+
+/* 좋아요&드롭다운 부분 */
+.photo-view .wrapper {
+    width:100%;
+    height:50px;
+    background-color:#8a93c0;
+}
+
+
+/* 드롭다운 버튼 */
+.photo-view .wrapper .dropdown {
+    position: relative;
+    display:inline-block;
+    float:right;
+    font-size:25px;
+    font-weight:500;
+    margin-top:-30px;
+    color:white;
+}
+
+
+.photo-view .dropdown .dropdown-menu {
+    position: absolute;
+    background: #dfe4ff;
+    z-index: 1;
+    border: 2px #8a93c0;
+    opacity: 0.88;
+  
+}
+.photo-view .dropdown .dropdown-menu a.dropdown-item {
+    color: #546396;
+    padding:10px 0;
+    text-align:center;
+    font-size:15px;
+    font-weight:600;
+    }
+
+
+/* 완료버튼 */
+.notice_write form button {
+	background-color:#8a93c0;
+	color: white;
+	font-size: 15px;
+	font-weight: 700;
+	border:#8a93c0 1px solid;
+	padding: 7px 20px;
+	border-radius:5px;
+	float:right;
+	cursor: pointer;
+}
+/* 뒤로 빠꾸 버튼 */
+
+.gobackbtn {
+	background-color:white;
+	border:white;
+	color: #8a93c0;
+	font-weight:600;
+	margin-top : 15px;
+	
+}
+
+/* 이거 관리자 여행지 등록 작성 페이지 위치(지도) 지정 */
+.dest_register .group-input label {
+	font-size:20px;
+    font-weight:800;
+	
+}
+.dest_register .group-input input {
+	width: 50%;
+	border-radius:5px;
+	border : #8a93c0 2px solid;
+}
+
+
+.dest_register .group-input #map {
+	width: 100%; 
+	height:400px; 
+	position: relative; 
+	overflow: hidden;
+	margin: 15px 0;
+	border: #8a93c0 2px solid;
+}
+
+.dest-register .group-input .group-sido{
+	width:70%;
+
+}
+
+.dest_register .maploc {
+	width:100%;
+	height:210px;
+	margin: 30px 5px;
+	padding : 10px;
+	background-color:#dde1f5;
+	border-radius: 5px;	
+}
+
+
+.dest_register  .maploc label {
+	font-size: 17px;
+	color:#4c5686;
+	font-weight: 600;
+}
+
+.dest_register  .maploc .addform{
+	margin: 5px;
+	padding-left:10px;
+	width: 60%;
+	border: none;
+	border-bottom: #8a93c0 1px solid;
+	background-color:#dde1f5;
+}
+
+.dest_register  .maploc .addform2 {
+	margin: 5px;
+	padding-left:10px;
+	width: 40%;
+	text-align: center;
+	border: none;
+	border-bottom: #8a93c0 1px solid;
+	background-color:#dde1f5;
+}
+/* 관리자 모드 여행지 등록에 관한 content_view + 상품 등록 */
+
+.dest_info .link  {
+	float:right;
+	font-weight: 600;
+	
+}
+.dest_info .link a {
+	padding: 5px 8px;
+}
+
+.admin h4 {
+	font-weight:700;
+	padding-bottom: 20px;
+	padding-top:7px;
+	
+}
+
+.dest_info .board-contents .local,
+.dest_info .board-contents .name{
+	padding:3px 0;
+	
+}
+.related_goods  a {
+	float:right;
+	
+}
+
+/* 관리자 모드 상품 등록 */
+
+.notice_write .goods_register .name {
+	font-size:20px;
+	font-weight:700;
+}
+.notice_write .goodsform label {
+	font-weight:600;
+	font-size:16px;
+	margin:5px;
+}
+.notice_write .goodsform input {
+	margin:5px;
+	border-radius:4px;
+	border:#8a93c0 2px solid;
+}
+.notice_write .goodsform button {
+	float:right;
+	
+}
+
+/* 회원탈퇴 CSS */
+.outUser .group-input {
+	width:100%;
+	height: 70px;	
+}
+
+
+.outUser  .out-btn {
+	width: 20%;
+	letter-spacing: 2px;
+	padding: 10px 5px;
+	margin-top: 15px;
+    background-color:#8a93c0;
+    border:none;
+    color: white;
+    font-size:15px;
+}
+
+

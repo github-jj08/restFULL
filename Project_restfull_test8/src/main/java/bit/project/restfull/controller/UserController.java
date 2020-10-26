@@ -235,6 +235,7 @@ public class UserController {
 		log.info("board_view");
 		int board_numbers = boardVO.getBoard_numbers();
 		log.info(board_numbers); // name
+		
 		boardVO = boardService.getBoardVO(board_numbers);
 		log.info(boardVO);
 		
