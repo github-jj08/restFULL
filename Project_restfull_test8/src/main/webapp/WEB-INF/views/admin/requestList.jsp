@@ -23,7 +23,7 @@
 		</tr>
 		<c:forEach items="${list}" var="vo">
 			<tr>
-				<td>${vo.imp_uid}</td>
+				<td>${content_view.imp_uid}</td>
 				<td>${vo.request_numbers}</td>
 				<td>${vo.member_id}</td>
 				<td>${vo.destination_name}</td>

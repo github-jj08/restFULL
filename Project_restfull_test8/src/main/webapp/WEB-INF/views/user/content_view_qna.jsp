@@ -54,7 +54,60 @@
   </style>
 </head>
 <body>
-         <!-- 메인 컨텐츠  -->
+<%@ include file="/WEB-INF/include/js-header.jsp"%>
+	<div class="text-center"><h2>내 문의내역</h2></div>
+	<hr>
+	    <section class="blog-section spad">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-sm-3 order-1">
+	                    <div class="blog-sidebar">
+							<div class="blog-catagory menu-background">
+						        <h4>마이페이지</h4>
+						        <ul>
+						            <li><p><a href="<c:url value="userModify" />">개인정보 수정</a></p></li>
+						            <li><p><a href="myList?member_id=<sec:authentication property="principal.user.member_id"/>">내 게시글 보기</a></p></li>
+						            <li><p><a href="myLikeList?member_id=<sec:authentication property="principal.user.member_id"/>">좋아요 한 글 목록</a></p></li>
+						            <li><p><a href="myCourseList?member_id=<sec:authentication property="principal.user.member_id"/>">내 여행코스 보기</a></p></li>
+						            <li><p><a href="paymentList?member_id=<sec:authentication property="principal.user.member_id"/>">내 결제내역 보기</a></p></li>
+						            <li><p><a href="reportList?member_id=<sec:authentication property="principal.user.member_id"/>">내 신고내역 보기</a></p></li>
+						            <li style="background-color: #8a93c0;"><p><a href="qnaList?member_id=<sec:authentication property="principal.user.member_id"/>">내 문의내역 보기</a></p></li>
+						            <li><p><a href="<c:url value="userDeleteView" />">회원탈퇴</a></p></li>
+						        </ul>
+					        </div>
+				        </div>
+			        </div>
+			        <div class="col-sm-9 order-2">
+			        	<div class="notice-table">
+				        	<table id="list-table" class="" style="table-layout: fixed; text-overflow:ellipsis; border: 1px solid;">
+								<tr>
+									<td class="content-view-table-rep">제목</td>
+									<td>${content_view.title}</td>
+								</tr>
+								<tr>
+									<td class="content-view-table-rep">작성자</td>
+									<td>${content_view.member_id}</td>
+								</tr>
+								<tr>
+									<td class="content-view-table-rep">작성날짜</td>
+									<td> ${content_view.dates}</td>
+								</tr>								
+								<tr style="height: auto;">
+									<td class="content-view-table-rep">문의내용</td>
+									
+									<td height = "0"><div style="padding:5px; height:100%; word-break:break-all">${content_view.contents}</div></td>
+								</tr>
+							</table>
+							
+			        </div>
+						<button type="button" onclick="history.go(-1);" class="gobackbtn">돌아가기</button>
+				    </div>
+		        </div>
+	        </div>
+		</section>
+		
+		
+<%--          <!-- 메인 컨텐츠  -->
          <div class="contentswrapper">
             <input type="hidden" name="board_numbers" value="${content_view.board_numbers}">
                <h2><p>${content_view.title}</p></h2>
@@ -72,7 +125,7 @@
                
                <div>
                   <p>${content_view.contents}</p>
-               </div>
+               </div> --%>
                
             <!-- 답변 글 -->
             <div id="rightbox"style="float:right">            
@@ -81,12 +134,17 @@
                      <div id="reply">
                         <section class="replyForm">
                            <table id="list-table">
-                           
                            </table>
                         </section>
                      </div>
                   </div>
-                  <script>
+               </div>
+            </div>
+         </div>
+         
+         
+<%@ include file="/WEB-INF/include/js-footer.jsp"%>
+<!--                   <script>
                      $(function(){
                         var board_numbers = ${content_view.board_numbers};
                         var member_id = $('#myId').text();
@@ -139,20 +197,13 @@
                                               }
                                                                                                     
                                           });   //each end
-
                                 }
-
                                 $("#list-table").append(htmls);
                                 }
                            });
                         };
                             commentList(); // 처음 시작했을 때 실행되도록 해당 함수 호출
                      });
-                  </script>
-               </div>
-            </div>
-            
-         </div>
-            
+                  </script> -->
 </body>
 </html>

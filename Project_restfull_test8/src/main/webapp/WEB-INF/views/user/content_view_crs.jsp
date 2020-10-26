@@ -11,7 +11,8 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
-	<h2 class="text-center">내 여행코스 페이지 입니다.</h2>
+	<div class="text-center"><h2>내 여행코스</h2></div>
+	<hr>
 	    <section class="blog-section spad">
 	        <div class="container">
 	            <div class="row">
@@ -49,7 +50,7 @@
 								      <p>${vo.tcContents}</p>
 								    </c:forEach>
 						      	</div>
-						      	<button type="button" class="user-modify-btn" onClick="history.go(-1)">이전 페이지</button>
+						      	<button type="button" onclick="history.go(-1);" class="gobackbtn">돌아가기</button>
 				   	 	</div>
 			        </div>
 		        </div>

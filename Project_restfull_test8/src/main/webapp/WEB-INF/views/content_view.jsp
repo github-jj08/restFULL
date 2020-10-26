@@ -378,6 +378,7 @@
 	                                            }
 	                                            $("#list-table").append(htmls);
 	                                        }
+
                                         });
                                     };
                                     $(document).on("click", "button[name='delete']",function(){
