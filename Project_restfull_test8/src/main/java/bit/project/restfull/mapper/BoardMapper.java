@@ -88,9 +88,9 @@ public interface BoardMapper{
 
 	/* 관련 게시글 목록 불러오기 */
 	@Select("select * from board where boardlist_numbers = 1" 
-			+ " and destination_numbers like '%'||#{destination_numbers}||'%'" 
+			+ " and location like '%'||#{location}||'%'" 
 			+ " and not board_numbers in #{board_numbers}")
-	List<BoardVO> getOthers(@Param("board_numbers") int board_numbers, @Param("destination_numbers") String destination_numbers);
+	List<BoardVO> getOthers(@Param("board_numbers") int board_numbers, @Param("location") String location);
 
 	@Select("select count(*) from board where member_id = #{member_id}")
 	public int countBoard(String member_id);
