@@ -3916,7 +3916,7 @@ media only screen and (max-width: 991px) {
     background-color:#eaedff;  
 }
 
-.replyForm .replycomment #reply #list-table {
+.replyForm .replycomment #reply #list-table  {
 	width:95%;	
 }
 .replycomment #reply .comment .id {
@@ -4167,7 +4167,7 @@ media only screen and (max-width: 991px) {
 		공지사항 css
 ----------------------*/
 
-.blog-section .notice-table #list-table {
+.blog-section .notice-table #list-table,.blog-section .notice-table #list-table-admin {
     width:100%;
     text-align:center;
     border : #8a93c0 2px solid;
@@ -4647,6 +4647,7 @@ media only screen and (max-width: 991px) {
 }
 
 .content-view-table-rep{
+	width: 22%;
    	padding: 6px 0;
     background-color: #626eac;
     color: white;
@@ -4696,4 +4697,39 @@ media only screen and (max-width: 991px) {
       color:white;
    }
    
+   .list-table-admin-rep {
+   	width: 30%;
+   	padding: 6px 0;
+    background-color: #626eac;
+    color: white;
+    text-align:center;
+    border-bottom : #626eac 2px solid;
+    font-size: 18px;
+    font-weight:600;
+   }
+
+	.content_view_crs_mytravel_content{
+	width: 350px;
+    height: 300px;
+    display: inline-block;
+    cursor: pointer;
+    margin: 5px;
+    text-align: center;
+    overflow: auto;
+    background: #f0f2ff;
+	}
+	
+	.content_view_crs_mytravel_title{
+	background:#959dc6;
+	width: 350px;
+	padding: 3px;
+	text-align: center;
+	margin: 5px;
+	}
+	
+   .content_view_crs_mytravel_content div{
+   border: 1px solid #c5c5c5;
+   background: white; 
+   margin:5px;
+   }
 

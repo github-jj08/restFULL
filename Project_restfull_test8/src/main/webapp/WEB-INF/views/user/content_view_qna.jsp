@@ -39,7 +39,7 @@
 			        </div>
 			        <div class="col-sm-9 order-2">
 			        	<div class="notice-table">
-							<table id="list-table-admin">
+							<table id="list-table">
 								<tr>
 									<td class="content-view-table-rep">제목</td>
 									<td>${content_view.title}</td>
@@ -57,6 +57,10 @@
 									
 									<td height = "0"><div style="padding:5px; height:100%; word-break:break-all">${content_view.contents}</div></td>
 								</tr>
+							</table>
+							<br>
+							<table id="list-table-admin" >
+							
 							</table>
 			        </div>
 						<button type="button" onclick="history.go(-1);" class="gobackbtn">돌아가기</button>
@@ -125,13 +129,11 @@
                                success: function (result) {
                                   //html삽입 : 표시될 데이터 - 아이디,댓글내용,작성일,삭제버튼,[히든]댓글번호
                                   var htmls="";
-                                  $("#list-table").html("");   
+                                  $("#list-table-admin").html("");   
 
                                 $("<tr>" , {
-                                   html : "<td>" + "아이디" + "</td>"+  // 컬럼명들
-                                         "<td>" + "댓글내용" + "</td>"+
-                                         "<td>" + "작성일" + "</td>"+
-                                         "<td>" + "삭제버튼+댓글번호[히든]" + "</td>"         
+                                   html : "<td class=\"content-view-table-rep\">" + "답변자" + "</td>"+  // 컬럼명들
+                                         "<td class=\"content-view-table-rep\">" + "답변 내용" + "</td>"
                                 }).appendTo("#list-table-admin") // 이것을 테이블에붙임
 
                                 if(result.length < 1){
@@ -143,10 +145,8 @@
                                                  
                                                  htmls += '<tr>';
                                                  htmls += '<td>'+ item.member_id + '</td>';
-                                                htmls += '<td>'+ item.contents + '</td>';
-                                                htmls += '<td>'+ item.dates + '</td>';
-                                                 htmls += '<td><button type="button" name="delete" value="' + item.comments_numbers+'">삭제</button>';
-                                                   htmls += '<button type="button" name="comment-modify" value="'+item.comments_numbers+'">수정</button></td>';
+                                                htmls += '<td style="padding: 5px;">'+ item.contents + '</td>';
+                                               /*  htmls += '<td>'+ item.dates + '</td>'; */
                                                    htmls += '</tr>';
                                                  
 
@@ -154,9 +154,7 @@
                                                  //아니라면 그냥 출력
                                                  htmls += '<tr>';
                                                  htmls += '<td>'+ item.member_id + '</td>';
-                                                htmls += '<td>'+ item.contents + '</td>';
-                                                htmls += '<td>'+ item.dates + '</td>';
-                                                 htmls += '<td>'+ item.comments_numbers + '<input type="hidden" value="'+ item.board_numbers + '"> 게시글번호숨김 </td>';   
+                                                 htmls += '<td style="padding: 5px;">'+ item.contents + '</td>';
                                                  htmls += '</tr>';
                                               }
                                                                                                     
