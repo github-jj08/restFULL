@@ -4660,3 +4660,30 @@ media only screen and (max-width: 991px) {
 	font-weight: 800;
 }
 
+
+/* 상품정보 css(goods_content_view) */
+.goods_info {
+    margin-top: 200px;
+    padding: 15px;
+    border: #8a93c0 double;
+
+}
+.goods_info h3 {
+    text-align:center;
+    font-weight:700;
+	color: #41497a;
+    padding-top:20px;
+    padding-bottom: 50px;
+    
+}
+.goods_info .board-name {
+    font-weight:600;
+    font-size:20px;
+}
+
+.goods_info .board-contents {
+    font-size: 15px;
+    
+}
+
+
