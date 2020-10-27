@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 
-import bit.project.restfull.security.CustomUserDetailsService;
+import bit.project.restfull.security.RestFullUserDetailsService;
 import bit.project.restfull.service.KakaoService;
 import bit.project.restfull.service.UserService;
 import bit.project.restfull.vo.KakaoProfile;
@@ -42,13 +42,10 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class KakaoController {
 	
-	@Autowired
 	private KakaoService kakaoService;
 	
-	@Autowired
-	private CustomUserDetailsService customUserDetailsService;
+	private RestFullUserDetailsService restFullUserDetailsService;
 	   
-	@Autowired
 	private UserService userService;
 	   
 	
@@ -155,7 +152,7 @@ public class KakaoController {
     	}
     	
     	// 시큐리티 제공하는 유저 정보 조회 서비스를 통한 유저 정보 조회
-    	UserDetails userDetails = customUserDetailsService.loadUserByUsername(socialUserId);
+    	UserDetails userDetails = restFullUserDetailsService.loadUserByUsername(socialUserId);
     	
     	log.info(" 로그인처리 직전 	:" +gson.toJson(loginUserInfo));
     	// 여기서 로그인 처리

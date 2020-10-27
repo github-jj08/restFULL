@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.gson.Gson;
 
-import bit.project.restfull.security.CustomUserDetailsService;
+import bit.project.restfull.security.RestFullUserDetailsService;
 import bit.project.restfull.service.UserService;
 import bit.project.restfull.vo.UserVO;
 import lombok.AllArgsConstructor;
@@ -34,14 +34,10 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class NaverController {
    
-	/* NaverLoginBO */
-	@Autowired
 	private NaverLoginBO naverLoginBO;
    
-	@Autowired
-	private CustomUserDetailsService customUserDetailsService;
+	private RestFullUserDetailsService restFullUserDetailsService;
    
-	@Autowired
 	private UserService userService;
    
 	private String apiResult = null;
@@ -110,7 +106,7 @@ public class NaverController {
 		}
        
 		// 시큐리티 제공하는 유저 정보 조회 서비스를 통한 유저 정보 조회
-		UserDetails userDetails = customUserDetailsService.loadUserByUsername(naverId);
+		UserDetails userDetails = restFullUserDetailsService.loadUserByUsername(naverId);
 		
 		// 여기서 로그인 처리
 		// 유저정보 + 비밀번호(2번쨰 파라미터) 를 통한 로그인 권한정보 생성

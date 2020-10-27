@@ -8,13 +8,7 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
-    
-    <http pattern="/**/*.css" security="none"/>
-    <http pattern="/fonts/**" security="none"/>
-    <http pattern="/img/**" security="none"/>
-    <http pattern="/**/*.js" security="none"/>
-    <http pattern="/**/*.ico" security="none"/>
-    
+
     <http auto-config="true" use-expressions="true">
         <intercept-url pattern="/user/**" access="hasAnyRole('USER, ADMIN')" />
         <intercept-url pattern="/travel/**" access="hasRole('USER')" />
@@ -43,16 +37,16 @@
         <beans:property name="dataSource" ref="dataSource"/> <!-- 여기서 dateaSource는 공식이며 히카리 커넥션풀이다. -->
     </beans:bean>
     
-    <beans:bean id="customNoOpPasswordEncoder" class="bit.project.restfull.security.customNoOpPasswordEncoder"/>
+    <beans:bean id="customNoOpPasswordEncoder" class="bit.project.restfull.security.CustomNoOpPasswordEncoder"/>
     <beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
     
-    <beans:bean id="customUserDetailsService" class="bit.project.restfull.security.CustomUserDetailsService"/>
+    <beans:bean id="restFullUserDetailsService" class="bit.project.restfull.security.RestFullUserDetailsService"/>
     
 	
     <!--  provider  -->
     <authentication-manager> 
     
-    	<authentication-provider user-service-ref="customUserDetailsService">
+    	<authentication-provider user-service-ref="restFullUserDetailsService">
         <password-encoder ref="bcryptPasswordEncoder"/>
         </authentication-provider>
         

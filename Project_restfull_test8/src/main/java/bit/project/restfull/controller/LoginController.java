@@ -29,9 +29,7 @@ import lombok.extern.log4j.Log4j;
 //로그인 관련 기능
 public class LoginController {
 	
-	@Autowired
     private NaverLoginBO naverLoginBO;
-	@Autowired
 	private UserService userService;
 	
 	//로그인

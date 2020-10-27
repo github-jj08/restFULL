@@ -43,16 +43,12 @@ import lombok.extern.log4j.Log4j;
 //회원가입한 사용자 -> 마이페이지
 public class UserController {
 	
-	@Autowired
     private UserService userService;
 	
-	@Autowired
     private BoardService boardService;
 	
-	@Autowired
     private BCryptPasswordEncoder passEncoder;
 	
-	@Autowired
 	private AdminBoardService adBoardService;
 	
 	//1. 마이페이지 - 회원 탈퇴 페이지

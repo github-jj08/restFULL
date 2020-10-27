@@ -29,9 +29,6 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class TravelCourseController {
 
-	//여행지 관련 메소드가 adminBoardService에 이미 존재하므로 admin서비스에 있는 거 갖다씀
-
-	@Autowired
 	private AdminBoardService adBoardService;
    
 	@GetMapping("/travel")

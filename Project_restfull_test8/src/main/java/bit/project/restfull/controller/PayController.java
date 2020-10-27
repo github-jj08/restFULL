@@ -27,10 +27,8 @@ import lombok.extern.log4j.Log4j;
 //아임포트 - 결제 기능 정의
 public class PayController {
 
-	@Autowired
 	private AdminBoardService adBoardService;
 	
-	@Autowired
 	private PaymentService paymentService;
 
 	/*

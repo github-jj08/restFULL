@@ -34,10 +34,8 @@ import lombok.extern.log4j.Log4j;
 //회원가입 및 로그인이 필요한 사용자 기능들
 public class BoardController {
 
-	@Autowired
 	private BoardService boardService;
 
-	@Autowired
 	private AdminBoardService adBoardService;
 	
 	//writeView
