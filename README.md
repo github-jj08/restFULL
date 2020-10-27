@@ -1,9 +1,8 @@
 # Project_restFULL
 
-### 1. 간략한 description
-
+## 1. 프로젝트 소개
   
-레스트풀(restFULL)은 간단한 여행후기를 공유하고, 여행코스와 여행지 상품을 좀더 직관적이고 빠르게 조회할 수 있도록 하는 **여행 테마**의 서비스입니다. 
+레스트풀(restFULL)은 간단한 여행후기를 공유하고, 여행코스와 여행지 상품을 좀더 직관적이고 빠르게 조회할 수 있도록 하는 **여행 테마**의 웹 서비스입니다. 
 
 
 
@@ -12,16 +11,24 @@
 
 
 
+---
+### 프로젝트 목표
 
-사용자는 특정 여행지에 대한 여행 후기와 위치를 공유할 수 있으며, 좋아요를 받아 인기 게시글로 더 자주 노출될 수 있습니다. 또한 여행코스 작성 메뉴를 통해 특정 지역구와 관련된 여행지 목록에서 여러 여행지를 선택하여 여행코스를 구성할 수 있습니다. 여행코스가 등록되면 작성한 여행코스 내 여행지와 관련된 상품 목록이 보여지고 그 중 사용하려는 특정 상품만 골라 결제할 수 있습니다.
++ 여행 후기를 공유할 수 있다.
++ 여행 코스를 직접 생성하고 관련된 상품을 한눈에 확인 및 결제할 수 있다.
 
 
-관리자는 여행지 목록을 구성할 수 있으며, 특정 인기 게시글의 위치를 여행코스에 등록될 수 있도록 여행지 목록에 등록할 수 있습니다. 여행지 관련 상품(입장권 등)들을 직접 매수하여 저렴하게 제공한다는 컨셉이므로, 관리자가 특정 여행지에 대한 상품을 직접 등록하고 수정할 수 있습니다. 
-      
+**사용자**는 특정 여행지에 대한 여행 후기와 위치를 공유할 수 있으며, 좋아요를 받아 인기 게시글로 더 자주 노출될 수 있습니다. 또한 여행코스 작성 메뉴를 통해 특정 지역구와 관련된 여행지 목록에서 여러 여행지를 선택하여 여행코스를 구성할 수 있습니다. 여행코스가 등록되면 작성한 여행코스 내 여행지와 관련된 상품 목록이 보여지고 그 중 사용하려는 특정 상품만 골라 결제할 수 있습니다. 단, 비회원은 여행 후기조회만 가능합니다.
+
+
+**관리자**는 여행지 목록을 구성할 수 있으며, 특정 인기 게시글의 위치를 여행코스에 등록될 수 있도록 여행지 목록에 등록할 수 있습니다. 여행지 관련 상품(입장권 등)들을 직접 매수하여 저렴하게 제공한다는 컨셉이므로, 관리자가 특정 여행지에 대한 상품을 직접 등록하고 수정할 수 있습니다. 
+
+
+
 >  "_**당신의 여행코스 작성을 도와드립니다.**_"    
    
       
----------------------------------
+---
 
 ## Table of Contents
 * [How to use]
@@ -42,15 +49,23 @@
     - [JAVAjre & JDK Compiler 1.8](https://www.oracle.com/java/technologies/javase-downloads.html)   
 
 ## 개발 환경 (Develop Environment)
-  - JSP & Servlet MVC 모델   
-  - Mybatis, Hibernate를 적용한 Spring 전자정부 프레임 워크     
-  - OPEN API를 활용한 기능 구현   
-  - [JQuery](https://jquery.com/)   
-  - [oracle SQL](https://www.oracle.com/database/technologies/appdev/sqldeveloper-landing.html)   
-  - [Spring Security](https://spring.io/projects/spring-security)   
-  
-## 나중에 추가
-  + 미구현
+  + 프로젝트 구현 핵심
+    - JSP & Servlet MVC 모델   
+    - Mybatis, Hibernate를 적용한 Spring 전자정부 프레임 워크     
+    - OPEN API를 활용한 기능 구현 
+    
+    
+  + 활용 Tool 
+    - FRONT: HTML5, CSS, JavaScript, Bootstrap4, jQuery, jQuery-ui, Ajax, nodeJS, font-awesome, Visual Studio Code, Brackets
+    - BACK: Java, Spring Framework, 5.1.1 RELEASE, Spring Security, mybatis, NaverMapAPI, REST API, Oauth2.0, LoginAPI(Kakao,Naver), Apachicommons-email, Log4j
+    - Server: Apache Tomcat 9.0
+    - DB: Oracle 
+    - 형상관리: GitHub 
+    - Tool: exERD, Sourcetree, STS, sqldeveloper, kakaoOven
+
+  + [JQuery](https://jquery.com/)   
+  + [oracle SQL](https://www.oracle.com/database/technologies/appdev/sqldeveloper-landing.html)   
+  + [Spring Security](https://spring.io/projects/spring-security)   
     
 ---------------------------------
 
