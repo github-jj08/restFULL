@@ -44,13 +44,11 @@
 ## 개발 환경 (Develop Environment)
   - JSP & Servlet MVC 모델   
   - Mybatis, Hibernate를 적용한 Spring 전자정부 프레임 워크     
-  - OPEN API를 활용한 기능 구현   
+  - OPEN API를 활용한 기능 구현 
+  - 추가 활용 Tool : kakaoOven, exERD, Sourcetree, Visual Studio Code, Brackets
   - [JQuery](https://jquery.com/)   
   - [oracle SQL](https://www.oracle.com/database/technologies/appdev/sqldeveloper-landing.html)   
   - [Spring Security](https://spring.io/projects/spring-security)   
-  
-## 나중에 추가
-  + 미구현
     
 ---------------------------------
 
