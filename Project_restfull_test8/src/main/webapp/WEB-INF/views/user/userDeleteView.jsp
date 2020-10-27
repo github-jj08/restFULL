@@ -84,8 +84,13 @@ pageEncoding="UTF-8"%>
 										<div class="group-input">
 											<sec:authentication var="principal" property="principal"/>
 											<div class="USERID">
+<<<<<<< HEAD
 												<label for="userId">&nbsp;&nbsp;아이디 :&nbsp;&nbsp;</label>
 												<input type="text" name="member_id" value="<sec:authentication property="principal.user.member_id"/>"/>
+=======
+												<label for="userId">아이디</label>
+												<input type="text" name="member_id" value="<sec:authentication property="principal.user.member_id"/>" readonly/>
+>>>>>>> refs/heads/cyh
 											</div>
 										</div>
 										
