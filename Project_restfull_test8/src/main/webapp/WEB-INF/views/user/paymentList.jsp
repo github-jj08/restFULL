@@ -38,7 +38,7 @@
 								<tr class="first-list">
 									<td>결제 번호</td>
 									<td>주문 번호</td>
-									<td>주문자 id</td>
+									<td>주문자 ID</td>
 									<td>여행지명</td>
 									<td>상품명</td>
 									<td>상품가격</td>
@@ -51,7 +51,7 @@
 								<td>${vo.request_numbers}</td>
 								<td>${vo.member_id}</td>
 								<td>${vo.destination_name}</td>
-								<td><a href="goods_view?goods_numbers=${vo.goods_numbers}">${vo.productName}</a></td>
+								<td><a href="goods_view?goods_numbers=${vo.goods_numbers}" target="_blank">${vo.productName}</a></td>
 								<td>${vo.price}</td>
 								<td>${vo.dates}</td>
 								<td>
