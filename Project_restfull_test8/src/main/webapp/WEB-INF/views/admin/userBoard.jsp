@@ -583,7 +583,7 @@
 						<h2>리스트 뽑기</h2>
 							<c:forEach items="${others}" var="vo">
 								<div class="col-xs-6 col-md-3 main-postings">
-								    <a href="content_view?board_numbers=${vo.board_numbers}" class="thumbnail">
+								    <a href="contentView?board_numbers=${vo.board_numbers}" class="thumbnail">
 								      <img src="${vo.thumbnail }"/>
 								      <div class="caption">
 							                <h3>${vo.title}</h3>

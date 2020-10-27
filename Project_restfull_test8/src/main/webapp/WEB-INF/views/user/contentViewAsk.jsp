@@ -95,22 +95,6 @@
 						</table>
 						
 						<button type="button" onclick="history.go(-1);" class="gobackbtn">돌아가기</button>
-
-<%-- 									신고대상글 :<span>${content_view.title}</span><br />
-              						신고자 : <span>${content_view.member_id}</span><br />
-               						신고날짜 : <span>${content_view.dates}</span><br />
-               						신고내용 : <span>${content_view.contents}</span>
-							
-							<c:forEach items="${userReports}" var="userBoard">
-							<tr>
-								<td>${userBoard.title}</td>
-								<td><a href="content_view_rep?board_numbers=${userBoard.board_numbers}">${userBoard.title}</a></td>
-								<td>${userBoard.dates}</td>
-							</tr>
-							</c:forEach> --%>
-						
-						
-						
 						
 				    </div>
 		        </div>

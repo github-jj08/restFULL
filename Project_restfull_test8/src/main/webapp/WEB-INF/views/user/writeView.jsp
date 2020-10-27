@@ -385,7 +385,7 @@
 							        data: JSON.stringify(addressForm),
 							        contentType:"application/json",
 							        success: function () {
-							        	location.href = "${pageContext.request.contextPath}/content_view?board_numbers=" + result;
+							        	location.href = "${pageContext.request.contextPath}/contentView?board_numbers=" + result;
 							        },
 							        error: function (xhr, status) {
 							           alert(xhr + " : " + status);

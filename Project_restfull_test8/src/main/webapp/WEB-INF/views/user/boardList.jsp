@@ -71,7 +71,7 @@
 										<c:forEach items="${userBoard}" var="userBoard">
 										<tr class="noticetable">
 											<td>${userBoard.board_numbers}</td>
-											<td><a href="${pageContext.request.contextPath}/content_view?board_numbers=${userBoard.board_numbers}">${userBoard.title}</a></td>
+											<td><a href="${pageContext.request.contextPath}/contentView?board_numbers=${userBoard.board_numbers}">${userBoard.title}</a></td>
 											<td>${userBoard.dates}</td>
 										</tr>
 										</c:forEach>

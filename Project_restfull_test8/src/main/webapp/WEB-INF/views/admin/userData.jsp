@@ -216,7 +216,7 @@
 								<c:forEach items="${admin_board}" var="admin_board">
 								<tr>
 									<td>${admin_board.board_numbers}</td>
-									<td><a href="${pageContext.request.contextPath}/content_view?board_numbers=${admin_board.board_numbers}">${admin_board.title}</a></td>
+									<td><a href="${pageContext.request.contextPath}/contentView?board_numbers=${admin_board.board_numbers}">${admin_board.title}</a></td>
 									<td>${admin_board.member_id}</td>
 									<td>${admin_board.dates}</td>
 								</tr>
