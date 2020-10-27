@@ -4201,6 +4201,7 @@ media only screen and (max-width: 991px) {
 }
 
 /* 관리자 부분 신고 댓글 css */
+
 .notice-table .singo_id {
 	font-size: 20px;
 	color: #8a93c0;
@@ -4216,6 +4217,9 @@ media only screen and (max-width: 991px) {
 .notice-table .singo_content{
 	margin-top: 5px;
 	padding-bottom: 40px;
+	word-break:break-all;
+	
+	
 }
 
 .comment_table #reply {
