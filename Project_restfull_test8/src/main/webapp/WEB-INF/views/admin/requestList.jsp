@@ -9,45 +9,88 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<table>
-		<tr>
-			<td>결제 번호</td>
-			<td>주문 번호</td>
-			<td>주문자 id</td>
-			<td>여행지명</td>
-			<td>상품명</td>
-			<td>상품가격</td>
-			<td>결제 날짜</td>
-			<td>취소 여부</td>
-		</tr>
-		<c:forEach items="${list}" var="vo">
-			<tr>
-				<td>${content_view.imp_uid}</td>
-				<td>${vo.request_numbers}</td>
-				<td>${vo.member_id}</td>
-				<td>${vo.destination_name}</td>
-				<td><a href="${pageContext.request.contextPath}/user/goods_view?goods_numbers=${vo.goods_numbers}">${vo.productName}</a></td>
-				<td>${vo.price}</td>
-				<td>${vo.dates}</td>
-				<td>
-					<c:set var="cancelyn" value="${vo.cancel}" />
-					<c:choose>
-					    <c:when test="${cancelyn == 0}">
-							공지사항
-						</c:when>
-					    <c:when test="${cancelyn == 1}">
-					    	이벤트
-					    </c:when>
-					    <c:otherwise>
-					    	못받아왓쟈냐
-					    </c:otherwise>
-					</c:choose>
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
+<%@ include file="/WEB-INF/include/js-header.jsp"%>
 	
-	<h3>[<a href="userList">돌아가기</a>]</h3>
+	<div class="text-center"><h2>여행지 및 상품 관리</h2></div>
+
+ <!-- Blog Section Begin -->
+    <section class="blog-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1">
+                    <div class="blog-sidebar">
+                        <div class="blog-catagory">
+                            <h4>관리자페이지</h4>
+                            <ul>
+                                <li><a href="<c:url value="/admin/userList" />">유저 관리</a></li>
+                                <li><a href="<c:url value="/admin/notice" />">공지사항 및 이벤트 관리</a></li>
+                                <li><a href="<c:url value="/admin/qnas" />">문의 및 신고 답변</a></li>
+                                <li><a href="<c:url value="/admin/dest" />">여행지 및 상품 관리</a></li>
+                            	<li><a href="<c:url value="/admin/requestList" />">상품 주문내역 관리</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!--관리자페이지 table start-->
+                <div class="col-lg-9 order-2">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12">
+                            <div class="notice-table">
+								
+                                <table>
+									<tr>
+		                                <td>결제 번호</td>
+										<td>주문 번호</td>
+										<td>주문자 id</td>
+										<td>여행지명</td>
+										<td>상품명</td>
+										<td>상품가격</td>
+										<td>결제 날짜</td>
+										<td>취소 여부</td>
+									</tr>
+									<c:forEach items="${list}" var="vo">
+									<tr>
+										<td>${content_view.imp_uid}</td>
+										<td>${vo.request_numbers}</td>
+										<td>${vo.member_id}</td>
+										<td>${vo.destination_name}</td>
+										<td><a href="${pageContext.request.contextPath}/user/goods_view?goods_numbers=${vo.goods_numbers}">${vo.productName}</a></td>
+										<td>${vo.price}</td>
+										<td>${vo.dates}</td>
+										<td>
+											<c:set var="cancelyn" value="${vo.cancel}" />
+											<c:choose>
+											    <c:when test="${cancelyn == 0}">
+													공지사항
+												</c:when>
+											    <c:when test="${cancelyn == 1}">
+											    	이벤트
+											    </c:when>
+											    <c:otherwise>
+											    	못받아왓쟈냐
+											    </c:otherwise>
+											</c:choose>
+										</td>
+									</tr>
+							</c:forEach>
+						</table>
+								<div class="writebtn">
+									<a href="${pageContext.request.contextPath}/admin/dest/write_view">여행지 등록</a>
+                                </div>
+							<button type="button" onclick="history.go(-1);" class="gobackbtn">돌아가기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--관리자페이지 table end-->
+			</div>
+		</div>
+	</section>
+	
+	
+	
+	
+	<%@ include file="/WEB-INF/include/js-footer.jsp"%>
 </body>
 </html>

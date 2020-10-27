@@ -6,7 +6,7 @@ pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <html>
 	<head>
-		<title>회원탈퇴</title>
+		<title>RestFuLL | 마이페이지</title>
 		
 	</head>
 	<body>
@@ -71,7 +71,7 @@ pageEncoding="UTF-8"%>
 							            <li><p><a href="paymentList?member_id=<sec:authentication property="principal.user.member_id"/>">내 결제내역 보기</a></p></li>
 							            <li><p><a href="reportList?member_id=<sec:authentication property="principal.user.member_id"/>">내 신고내역 보기</a></p></li>
 							            <li><p><a href="qnaList?member_id=<sec:authentication property="principal.user.member_id"/>">내 문의내역 보기</a></p></li>
-							            <li style="background-color: #8a93c0;"><p><a href="<c:url value="userDeleteView" />">회원탈퇴</a></p></li>
+							            <li style="background-color: #dde1f5;"><p><a href="<c:url value="userDeleteView" />">회원탈퇴</a></p></li>
 							        </ul>
 						        </div>
 					        </div>

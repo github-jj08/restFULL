@@ -3887,7 +3887,7 @@ media only screen and (max-width: 991px) {
     opacity: 0.8;
     width: 100%;
     border-radius: 12px;
-    overflow:scroll;
+    overflow:auto;
     
 }
 
@@ -4317,7 +4317,7 @@ media only screen and (max-width: 991px) {
 
 
 
-/* 서치 부분 */
+/* 검색 부분 */
 
 .search-section .main-postings.pi-pic img{
     height:200px;
@@ -4442,7 +4442,7 @@ media only screen and (max-width: 991px) {
 }
 
 
-/* /* 드롭다운 버튼 */
+ /* 드롭다운 버튼 */
 .photo-view .wrapper .dropdown {
     position: relative;
     display:inline-block;
@@ -4481,6 +4481,8 @@ media only screen and (max-width: 991px) {
 	border-radius:5px;
 	float:right;
 }
+
+
 
 
 
@@ -4650,3 +4652,11 @@ media only screen and (max-width: 991px) {
     font-size: 18px;
     font-weight:600;
 }
+
+.mypage-font-color-white{
+	color: white;
+}
+.menu-background li a:focus {
+	font-weight: 800;
+}
+

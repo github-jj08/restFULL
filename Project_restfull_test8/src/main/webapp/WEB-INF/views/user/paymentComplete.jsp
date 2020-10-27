@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>RestFuLL | 구매완료</title>
 </head>
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>

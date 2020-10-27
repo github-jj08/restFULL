@@ -8,7 +8,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>RestFuLL | 공지사항</title>
+	<title>RestFuLL | 고객센터</title>
  	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
