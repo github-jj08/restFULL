@@ -179,8 +179,7 @@
 							 		</button>
 								    <div class="dropdown-menu">
 								    	<!-- 자신이 쓴 글일 때만 수정/삭제 버튼 노출 -->
-
-									    <c:if test="${principal.user.member_id eq content_view.member_id}">
+									    <c:if test="${principal.user.member_id eq content_view.member_id || principal.user.authority_name == 'ROLE_ADMIN' }">
 									      <a class="dropdown-item" href="${pageContext.request.contextPath}/user/modify?board_numbers=${content_view.board_numbers}">수정</a>
 									      <a class="dropdown-item" href="${pageContext.request.contextPath}/user/delete?board_numbers=${content_view.board_numbers}">삭제</a>
 									    </c:if>

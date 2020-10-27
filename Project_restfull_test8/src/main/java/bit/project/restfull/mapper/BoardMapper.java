@@ -109,7 +109,7 @@ public interface BoardMapper{
 	public List<BoardVO> askList(String member_id);
 
 	/* 유저 > 결제내역 확인(by여진) */
-	@Select("select r.*, g.name as productName from request r, goods g where r.goods_numbers = g.goods_numbers and r.member_id = #{member_id} order by dates desc, merchant_uid desc")
+	@Select("select r.*, g.destination_name as destination_name, g.name as productName from request r, goods g where r.goods_numbers = g.goods_numbers and r.member_id = #{member_id} order by dates desc, merchant_uid desc")
 	List<RequestVO> paymentList(String member_id);
 
 	/* 유저 > 내가 좋아요 누른 글들을 확인(by여진) */
@@ -117,7 +117,7 @@ public interface BoardMapper{
 	List<BoardVO> getLikeList(String member_id);
 
 	/* 여행코스 목록 가져오기(by여진) */
-	@Select("select distinct tcAlias, dates, serialNum from travel where member_id = #{member_id} group by tcAlias, dates, serialNum")
+	@Select("select distinct tcAlias, dates, serialNum from travel where member_id = #{member_id} group by tcAlias, dates, serialNum order by dates desc")
 	List<TravelVO> getMyCourseList(String member_id);
 
 	/* 특정 여행코스 가져오기 */

@@ -48,7 +48,7 @@
 								<div class="singo_title">${content_view.title}</div><br/>
 								<div class="singo_id">${content_view.member_id}</div><br/>
 								<div class="singo_date">${content_view.dates}</div><br/>
-								<div class="singo_content">${content_view.contents}</div><br/>
+								<div class="singo_content">${content_view.contents}</div>
 							</div>
 							<hr/>
 							<div class="comment_table">

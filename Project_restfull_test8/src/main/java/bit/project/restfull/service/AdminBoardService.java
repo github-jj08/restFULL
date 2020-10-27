@@ -58,7 +58,7 @@ public interface AdminBoardService {
 	List<RequestVO> getRequests(String merchant_uid);
 
 	//주문정보 update
-	void updateRequest(String imp_uid, String merchant_uid);
+	void updateRequest(String imp_uid, String merchant_uid, String totalPrice);
 
 	//합계금액 가져오기
 	int sumPrice(List<Map<String, Object>> paramData);

@@ -4216,6 +4216,9 @@ media only screen and (max-width: 991px) {
 .notice-table .singo_content{
 	margin-top: 5px;
 	padding-bottom: 40px;
+	word-break:break-all;
+	
+	
 }
 
 .comment_table #reply {

@@ -108,7 +108,7 @@
 										<div class="group-input">
 											<label for="search"> 위치 검색</label>
 												<input id="address" type="text" >
-												<button type="submit" id="submit">검색</button>
+												<button type="submit" id="searchAddress">검색</button>
 												
 									    		<div id="map">
 									    		</div>
@@ -261,7 +261,7 @@
 						                        }
 						                    });
 						
-						                    $('#submit').on('click', function(e) {
+						                    $('#searchAddress').on('click', function(e) {
 						                        e.preventDefault();
 						
 						                        searchAddressToCoordinate($('#address').val());
