@@ -479,7 +479,7 @@
 				                                buyer_email : buyer_email,
 				                                buyer_name : buyer_name,
 				                                buyer_tel : buyer_tel,
-				                                m_redirect_url : 'http://localhost:8282/restfull/',
+				                                m_redirect_url : 'http://192.168.6.7:8282/restfull/',
 				                                // get 방식으로 짜야함(쿼리스트링으로 전달)
 				                            }, function(rsp) {
 				                                if ( rsp.success ) {

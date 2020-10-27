@@ -66,7 +66,7 @@
                         <div class="social_login">
                         	<!-- 카카오로그인 버튼 -->
                         	<div class="kakaobtn">
-	                            <a href="https://kauth.kakao.com/oauth/authorize?client_id=8c8d010971d8629ec3188f9ed097f73b&redirect_uri=http://localhost:8282/restfull/kakaologin&response_type=code">
+	                            <a href="https://kauth.kakao.com/oauth/authorize?client_id=8c8d010971d8629ec3188f9ed097f73b&redirect_uri=http://192.168.6.7:8282/restfull/kakaologin&response_type=code">
 	                              	<img src="resources/img/kakao_login_medium_wide.png">
 	                            </a>
                         	</div>

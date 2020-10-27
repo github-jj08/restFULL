@@ -52,7 +52,7 @@ public class KakaoController {
 	private UserService userService;
 	   
 	
-	private static String KAKAO_LOGIN_URL = "http://localhost:8282/restfull/kakaologin";
+	private static String KAKAO_LOGIN_URL = "http://192.168.6.7:8282/restfull/kakaologin";	//서비스할 서버 컴퓨터
 	private static String KAKAO_TOKEN_URL = "https://kauth.kakao.com/oauth/token";
 	private static String KAKAO_USER_URL= "https://kapi.kakao.com/v2/user/me";
 	
