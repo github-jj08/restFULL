@@ -4654,3 +4654,7 @@ media only screen and (max-width: 991px) {
 .mypage-font-color-white{
 	color: white;
 }
+.menu-background li a:focus {
+	font-weight: 800;
+}
+
