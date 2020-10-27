@@ -504,6 +504,7 @@
 						                                		data: {
 						                            	    		"imp_uid" : rsp.imp_uid,
 						                            	    		"merchant_uid" : merchant_id,
+						                            	    		"totalPrice" : totalPrice
 						                                		}
 						                                	});
 						                                    

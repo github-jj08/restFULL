@@ -51,7 +51,7 @@
 									</tr>
 									<c:forEach items="${list}" var="vo">
 									<tr>
-										<td>${content_view.imp_uid}</td>
+										<td>${vo.imp_uid}</td>
 										<td>${vo.request_numbers}</td>
 										<td>${vo.member_id}</td>
 										<td>${vo.destination_name}</td>
@@ -62,22 +62,16 @@
 											<c:set var="cancelyn" value="${vo.cancel}" />
 											<c:choose>
 											    <c:when test="${cancelyn == 0}">
-													공지사항
+													취소미신청
 												</c:when>
 											    <c:when test="${cancelyn == 1}">
-											    	이벤트
+											    	취소처리중
 											    </c:when>
-											    <c:otherwise>
-											    	못받아왓쟈냐
-											    </c:otherwise>
 											</c:choose>
 										</td>
 									</tr>
 							</c:forEach>
 						</table>
-								<div class="writebtn">
-									<a href="${pageContext.request.contextPath}/admin/dest/write_view">여행지 등록</a>
-                                </div>
 							<button type="button" onclick="history.go(-1);" class="gobackbtn">돌아가기</button>
                             </div>
                         </div>
