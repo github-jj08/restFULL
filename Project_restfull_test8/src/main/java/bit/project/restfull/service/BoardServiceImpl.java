@@ -243,7 +243,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public int countBoard(String member_id) {
-		return boardMapper.countBoard(member_id);
+		return boardMapper.countMyBoard(member_id);
 	}
 
 	@Override

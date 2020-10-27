@@ -95,6 +95,9 @@ public interface BoardMapper{
 	@Select("select count(*) from board where member_id = #{member_id}")
 	public int countBoard(String member_id);
 	
+	@Select("select count(*) from board where member_id = #{member_id} and boardlist_numbers ='1'")
+	public int countMyBoard(String member_id);
+	
 	@Select("Select * from (SELECT ROWNUM RN, A.* FROM "
 			+ "(select * from board b where boardlist_numbers = '1' and member_id = #{member_id} order by board_numbers) A ) "
 			+ "WHERE RN BETWEEN #{start} AND #{end}")

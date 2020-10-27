@@ -237,10 +237,10 @@
 									</c:when>
 								</c:choose>
 							</c:forEach>
+							<c:if test="${paging.endPage != paging.lastPage}">
+								<a href="myList?member_id=${member_id}&nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}">&gt;</a>
+							</c:if>
 						</div>                            
-						<c:if test="${paging.endPage != paging.lastPage}">
-							<a href="myList?member_id=${member_id}&nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}">&gt;</a>
-						</c:if>
 								
 					</div>
                 <!--관리자페이지 table end-->

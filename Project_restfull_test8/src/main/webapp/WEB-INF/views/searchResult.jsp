@@ -65,10 +65,10 @@
 							</c:when>
 						</c:choose>
 					</c:forEach>
-				</div>
 					<c:if test="${paging.endPage != paging.lastPage}">
 						<a href="search?boardlist_numbers=${boardlist_numbers}&searchWord=${searchWord}&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
 					</c:if>
+				</div>
 			</div>
 		
 			
