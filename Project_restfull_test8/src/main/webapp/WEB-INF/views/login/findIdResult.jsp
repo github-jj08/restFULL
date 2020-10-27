@@ -12,7 +12,7 @@
 		})
 	})
 </script>
-<title>아이디 찾기 검색결과</title>
+<title>RestFuLL | 아이디 검색결과</title>
 </head>
 <body>
 
