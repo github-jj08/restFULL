@@ -304,8 +304,8 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	}
 
 	@Override
-	public void updateRequest(String imp_uid, String merchant_uid) {
-		adBoardMapper.updateRequests(imp_uid,merchant_uid);
+	public void updateRequest(String imp_uid, String merchant_uid,String totalPrice) {
+		adBoardMapper.updateRequests(imp_uid,merchant_uid,totalPrice);
 	}
 
 	@Override

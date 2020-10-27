@@ -75,11 +75,14 @@
 										</tr>
 										<c:forEach items="${goodsList}" var="vo">
 											<tr class="noticeable">
-						                        <td><a href="goods/content_view?goods_numbers=${vo.goods_numbers}">${vo.name}</a></td>
+						                        <td><a href="${pageContext.request.contextPath}/admin/goods/content_view?goods_numbers=${vo.goods_numbers}">${vo.name}</a></td>
 						                        <td>${vo.seller}</td>
 						                        <td>${vo.price}</td>
 						                        <td>${vo.amount}</td>
-						                        <td>${vo.status}</td>
+						                        <td>
+						                        	<c:if test="${vo.status == 1}">판매중</c:if>
+						                        	<c:if test="${vo.status == 0}">판매중단</c:if>
+						                        </td>
 						                        <td>${vo.sellstart}</td>
 						                        <td>${vo.sellend}</td>
 											</tr>
