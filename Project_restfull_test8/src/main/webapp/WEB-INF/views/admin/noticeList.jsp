@@ -45,7 +45,7 @@
 									<option value="5">이벤트</option>
 								</select>
 								<div class="writebtn">
-									<a href="${pageContext.request.contextPath}/admin/notice/write_view">글 작성</a>
+									<a href="${pageContext.request.contextPath}/admin/notice/writeView">글 작성</a>
                                 </div>
                                 <table id="list-table">
 
@@ -103,7 +103,7 @@
 	                            $(result).each(function(){                                                          
 	                                htmls += '<tr class="noticeable">';
 	                                htmls += '<td>'+ this.boardlistName + '</td>';
-	                                htmls += '<td><a href="${pageContext.request.contextPath}/admin/notice/content_view?board_numbers=' + this.board_numbers + '">' + this.title + '</a></td>';
+	                                htmls += '<td><a href="${pageContext.request.contextPath}/admin/notice/contentView?board_numbers=' + this.board_numbers + '">' + this.title + '</a></td>';
 	                               	htmls += '<td>'+ this.member_id + '</td>';
 	                               	htmls += '<td>'+ this.dates + '</td>';
 	                                htmls += '<td>'+ this.hit + '</td>';   

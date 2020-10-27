@@ -421,7 +421,7 @@
 		                  
 		                  //먼저 주문 정보에 등록함
 			              $.ajax({
-			                     url: "${pageContext.request.contextPath}/travel/getgoods",
+			                     url: "${pageContext.request.contextPath}/travel/getGoods",
 			                        type: "POST",
 			                        data: JSON.stringify(goodsArray),
 			                        contentType: "application/json; charset=utf-8",

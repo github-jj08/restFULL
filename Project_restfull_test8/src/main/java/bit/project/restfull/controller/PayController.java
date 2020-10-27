@@ -93,7 +93,7 @@ public class PayController {
 		String merchant_uid = req.getParameter("merchant_uid");
 		
 		String totalPrice = req.getParameter("totalPrice");
-		adBoardService.updateRequest(imp_uid,merchant_uid,totalPrice);
+		adBoardService.updateRequest(imp_uid, merchant_uid, totalPrice);
 	}
 	
 	@GetMapping("/payments/comfirm")

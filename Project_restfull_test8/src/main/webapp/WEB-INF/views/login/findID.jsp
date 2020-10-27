@@ -17,7 +17,7 @@
                     <div class="login-form">
                         <h2>아이디 찾기</h2>
                         
-						<form action="doFind_ID" method="post">
+						<form action="doFindID" method="post">
 							<div class="FindID">
 								<div class="group-input">
 	                                <label for="Email">Email</label>

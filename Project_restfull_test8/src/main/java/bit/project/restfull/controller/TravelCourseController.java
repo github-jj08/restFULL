@@ -36,7 +36,7 @@ public class TravelCourseController {
    
 	@GetMapping("/travel")
 	public String travelCourse() {
-		return "travelcourse";
+		return "travelCourse";
 	}
    
    
@@ -95,12 +95,12 @@ public class TravelCourseController {
 	}	
    
 	//결제 기능페이지에서 상품 view로 이동(관리자가 보는 상품 view와 다름)
-	@GetMapping("travel/goods/content_view")
-	public String goodsContent_view(String goods_numbers, Model model) {
-		log.info("content_view");
+	@GetMapping("travel/goods/contentView")
+	public String goodsContentView(String goods_numbers, Model model) {
+		log.info("contentView");
 		int goodsNum = Integer.parseInt(goods_numbers);
 		model.addAttribute("content_view",adBoardService.getGoodsVO(goodsNum));
-		return "goods_content_view";
+		return "goodsContentView";
 	}	
 	
 	//구매를 위한 상품정보 get (여행지 이름을 보내서 여행지 관련 상품을 가져오는 것과 다름)
@@ -109,9 +109,9 @@ public class TravelCourseController {
 	 * myGoodsArray[{"member_id":"test1","goods_numbers":"8","count":"4"},{"member_id":"test1","goods_numbers":"9","count":"1"}]
 	 */
 	@ResponseBody
-	@PostMapping("travel/getgoods")
+	@PostMapping("travel/getGoods")
 	public List<RequestVO> getGoods(HttpServletRequest req, @RequestBody List<Map<String,Object>> paramData) {
-		log.info("getgoods");
+		log.info("getGoods");
 		String member_id =null;
 		for (Map<String, Object> map : paramData) {
 			member_id = (String) map.get("member_id");

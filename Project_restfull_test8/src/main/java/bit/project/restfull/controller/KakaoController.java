@@ -58,7 +58,7 @@ public class KakaoController {
 	
 	// 카카오 소셜 로그인
 	@GetMapping("/kakaologin")
-	public String kakaologin(String code, HttpServletRequest request) throws Exception{
+	public String kakaoLogin(String code, HttpServletRequest request) throws Exception{
 
     	Gson gson = new Gson();
     	RestTemplate rt = new RestTemplate();
@@ -170,11 +170,11 @@ public class KakaoController {
         // 시큐리티 로그인 세션을 생성
         session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
 
-        return "redirect:/";  // 여기서 홈으로 리다리엑트 하면 됨
+        return "redirect:/"; 
     }
 	
 	@GetMapping("/kakaologout") 
-	public String kakaologout(HttpSession session) {
+	public String kakaoLogout(HttpSession session) {
 		kakaoService.kakaoLogout((String)session.getAttribute("access_Token"));
 	  
 		session.removeAttribute("access_Token"); 

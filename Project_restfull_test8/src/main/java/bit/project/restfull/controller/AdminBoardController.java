@@ -83,8 +83,8 @@ public class AdminBoardController {
    
     //2. 특정 회원 정보 확인
     
-	@GetMapping("/user_content_view")
-	public String user_content_view(PagingVO pagingVO, UserVO userVO
+	@GetMapping("/userContentView")
+	public String userContentView(PagingVO pagingVO, UserVO userVO
 			, @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, Model model) {
 		log.info("유저정보 확인");
@@ -182,9 +182,9 @@ public class AdminBoardController {
    }
    
    //3. 공지사항 및 이벤트 글 조회
-   @GetMapping("/notice/content_view")
-   public String content_view(String board_numbers, Model model) {
-      log.info("content_view");
+   @GetMapping("/notice/contentView")
+   public String contentView(String board_numbers, Model model) {
+      log.info("contentView");
       int board_no = Integer.parseInt(board_numbers);
       log.info("게시글 view 호출; 게시글 번호 = " + board_no);
       model.addAttribute("content_view",adBoardService.getBoardVO(board_no));
@@ -193,11 +193,11 @@ public class AdminBoardController {
    }
    
    //4. 공지사항 및 이벤트 글 작성 페이지 출력
-   @GetMapping("/notice/write_view")
-   public String write_view() {
-      log.info("write_view ");
+   @GetMapping("/notice/writeView")
+   public String writeView() {
+      log.info("writeView ");
       
-      return "admin/notice_write_view";
+      return "admin/noticeWriteView";
    }
    
    //4-2. 공지사항 및 이벤트 글 작성
@@ -215,7 +215,7 @@ public class AdminBoardController {
       model.addAttribute("modify_view", adBoardService.getBoardVO(board_numbers));
       model.addAttribute("filelist", adBoardService.getBoardAttachmentVO(board_numbers));
       
-      return "admin/notice_modify_view";
+      return "admin/noticeModifyView";
    }
    
    //5-2. 공지사항 및 이벤트 글 수정 기능 수행
@@ -224,7 +224,7 @@ public class AdminBoardController {
       log.info("modify()");
       adBoardService.modifyBoardVO(boardVO);
       log.info("글번호 - " + boardVO.getBoard_numbers());
-      return "redirect:/admin/notice/content_view?board_numbers="+ boardVO.getBoard_numbers();
+      return "redirect:/admin/notice/contentView?board_numbers="+ boardVO.getBoard_numbers();
    }
    
    //6. 공지사항 및 이벤트 글 삭제
@@ -246,20 +246,20 @@ public class AdminBoardController {
    }
    
    //2. 여행지 조회
-   @GetMapping("/dest/content_view")
-   public String destContent_view(int destination_numbers, Model model) {
-      log.info("content_view");
+   @GetMapping("/dest/contentView")
+   public String destcontentView(int destination_numbers, Model model) {
+      log.info("contentView");
       model.addAttribute("content_view",adBoardService.getDestVO(destination_numbers));
       model.addAttribute("goodsList",adBoardService.getGoodsList(destination_numbers));
-      return "admin/dest_content_view";
+      return "admin/destcontentView";
    }
    
    //3. 여행지 등록 페이지 출력
-   @GetMapping("/dest/write_view")
-   public String destWrite_view() {
-      log.info("dest_write_view");
+   @GetMapping("/dest/writeView")
+   public String destWriteView() {
+      log.info("destWriteView");
       
-      return "admin/dest_write_view";
+      return "admin/destWriteView";
    }
    
    
@@ -282,11 +282,11 @@ public class AdminBoardController {
       return optionList;
    }
    
-   //4. 여행지 수정 기능 modify_view 페이지 호출
+   //4. 여행지 수정 기능 modifyView 페이지 호출
    @GetMapping("/dest/modify")
    public String destModify(int destination_numbers, Model model) {
       model.addAttribute("modify_view", adBoardService.getDestVO(destination_numbers));
-      return "admin/dest_modify_view";
+      return "admin/destModifyView";
    }
    
    //4-2. 여행지 수정 기능 수행
@@ -310,21 +310,21 @@ public class AdminBoardController {
    
    /* 상품 관리 (기본 url = /dest/goods) */
    //1. 상품 조회
-   @GetMapping("/dest/goods/content_view")
-   public String goodsContent_view(String goods_numbers, Model model) {
-      log.info("content_view");
+   @GetMapping("/dest/goods/contentView")
+   public String goodsContentView(String goods_numbers, Model model) {
+      log.info("contentView");
       int goodsNum = Integer.parseInt(goods_numbers);
       model.addAttribute("content_view",adBoardService.getGoodsVO(goodsNum));
-      return "admin/goods_content_view";
+      return "admin/goodsContentView";
    }
 
    //2. 상품 등록 페이지
-   @GetMapping("/dest/{destination_numbers}/goods/write_view")
-   public String goodsWrite_view(@PathVariable(name="destination_numbers") int destination_numbers, Model model) {
-      log.info("dest_write_view");
+   @GetMapping("/dest/{destination_numbers}/goods/writeView")
+   public String goodsWriteView(@PathVariable(name="destination_numbers") int destination_numbers, Model model) {
+      log.info("goodsWriteView");
       log.info(destination_numbers);
       model.addAttribute("destVO",adBoardService.getDestVO(destination_numbers));
-      return "admin/goods_write_view";
+      return "admin/goodsWriteView";
    }
    
    //3. 상품 등록
@@ -335,14 +335,14 @@ public class AdminBoardController {
       adBoardService.writeGoodsVO(goodsVO);
       //상품 등록 후 등록한 상품의 view로 이동
       int goodsNum = goodsVO.getDestination_numbers();
-      return "redirect:/admin/dest/content_view?destination_numbers="+ goodsNum;
+      return "redirect:/admin/dest/contentView?destination_numbers="+ goodsNum;
    }             
    
    //4. 수정 기능 modify_view 페이지 호출
    @GetMapping("/dest/goods/modify")
    public String goodsModify(int goods_numbers, Model model) {
       model.addAttribute("modify_view", adBoardService.getGoodsVO(goods_numbers));
-      return "admin/goods_modify_view";
+      return "admin/goodsModifyView";
    }
    
    //4-2. 수정 기능 수행
@@ -353,7 +353,7 @@ public class AdminBoardController {
       log.info("상품번호 - " + goodsVO.getGoods_numbers());
       log.info("상품번호 - " + goodsVO.getName());
       adBoardService.modifyGoodsVO(goodsVO);
-      return "redirect:/admin/dest/goods/content_view?goods_numbers="+ goodsVO.getGoods_numbers();
+      return "redirect:/admin/dest/goods/contentView?goods_numbers="+ goodsVO.getGoods_numbers();
    }         
    
    //5. 상품 삭제
@@ -362,7 +362,7 @@ public class AdminBoardController {
       adBoardService.deleteGoodsVO(goods_numbers);
       log.info("삭제 성공");
       //상품 삭제 후 처리 필요함(수정예정)
-      return "redirect:/admin/dest/content_view?destination_numbers="+ goods_numbers;
+      return "redirect:/admin/dest/contentView?destination_numbers="+ goods_numbers;
    }
    
    /* 문의글 관리 (url:admin/qnas) */
@@ -391,14 +391,14 @@ public class AdminBoardController {
     * 댓글기능은 BoardController에 작성함.
     * addComments 등
     */
-   @GetMapping("/qnas/content_view")
+   @GetMapping("/qnas/contentView")
    public String adminqna_view(String board_numbers, Model model) {
       log.info("content_view");
       int board_no = Integer.parseInt(board_numbers);
       log.info("게시글 view 호출; 게시글 번호 = " + board_no);
       model.addAttribute("content_view",adBoardService.getBoardVO(board_no));
       model.addAttribute("filelist", adBoardService.getBoardAttachmentVO(board_no));
-      return "admin/qna_content_view";
+      return "admin/qnaContentView";
    }
 
    /* 상품 주문내역 관리 */

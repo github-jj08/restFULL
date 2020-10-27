@@ -39,7 +39,7 @@
                         <div class="col-lg-12 col-sm-12">
                             <div class="notice-table">
 								<div class="writebtn">
-									<a href="${pageContext.request.contextPath}/admin/dest/write_view">여행지 등록</a>
+									<a href="${pageContext.request.contextPath}/admin/dest/writeView">여행지 등록</a>
                                 </div>
                                 <table id="list-table">
 									<tr class="first-list">
@@ -51,7 +51,7 @@
 									<c:forEach items="${destlist}" var="vo">
 										<tr class="noticeable">
 											<td>${vo.sidoguVO.sidoName}</td>
-											<td><a href="${pageContext.request.contextPath}/admin/dest/content_view?destination_numbers=${vo.destination_numbers}">${vo.destination_name}</a></td>
+											<td><a href="${pageContext.request.contextPath}/admin/dest/contentView?destination_numbers=${vo.destination_numbers}">${vo.destination_name}</a></td>
 											<td>${vo.jibunaddress}</td>
 											<td>${vo.doroaddress}</td>
 										</tr>

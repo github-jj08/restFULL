@@ -103,7 +103,7 @@
                                 <div class="advanced-search">
                                     <div class="input-group">
 	                                    <input type="hidden" name="boardlist_numbers" value="<c:out value='1'/>">
-                                        <input type="text" name="searchWord" id="searchWord" placeholder="어느 지역으로 여행을 가시나요?">
+                                        <input type="text" name="searchWord" id="searchWord" placeholder="어느 지역으로 여행을 가시나요?" value="${searchWord}">
                                         <button type="submit" id="submit" value="검색"><i class="ti-search"></i></button>
                                     </div>
                                 </div>

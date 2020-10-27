@@ -381,7 +381,7 @@
 					            console.log(addressForm.jibunaddress);
 								$.ajax({
 							        type: "POST",
-							        url: "${pageContext.request.contextPath}/user/writeMainPosting_dest",
+							        url: "${pageContext.request.contextPath}/user/writeMainPostingDest",
 							        data: JSON.stringify(addressForm),
 							        contentType:"application/json",
 							        success: function () {

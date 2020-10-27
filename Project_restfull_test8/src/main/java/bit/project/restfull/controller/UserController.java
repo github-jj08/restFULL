@@ -150,8 +150,8 @@ public class UserController {
 	}
 	
 	//5. 내 게시글 조회
-	@GetMapping("/content_view") 
-	public String content_view_detail(UserVO userVO, BoardVO boardVO, Model model) {
+	@GetMapping("/contentView") 
+	public String contentViewDetail(UserVO userVO, BoardVO boardVO, Model model) {
 		log.info("board_view");
 		int board_numbers = boardVO.getBoard_numbers();
 		log.info(board_numbers); // name
@@ -159,7 +159,7 @@ public class UserController {
 		log.info(boardVO);
 		
 		model.addAttribute("content_view", boardVO);
-		return "content_view";
+		return "contentView";
 	}
 
 	//6. 내 게시글 - 유저 본인 게시글 삭제
@@ -188,8 +188,8 @@ public class UserController {
 	}
 	
 	//8. 내 문의글 조회
-	@GetMapping("/content_view_qna") 
-	public String content_view_qna(UserVO userVO,BoardVO boardVO, Model model) {
+	@GetMapping("/contentViewQna") 
+	public String contentViewQna(UserVO userVO,BoardVO boardVO, Model model) {
 		log.info("board_view");
 		int board_numbers = boardVO.getBoard_numbers();
 		log.info(board_numbers); // name
@@ -197,17 +197,17 @@ public class UserController {
 		log.info(boardVO);
 		
 		model.addAttribute("content_view", boardVO);
-		return "user/content_view_qna";
+		return "user/contentViewQna";
 	}
 	
 	//9. 문의글 작성 페이지로 이동
 	@GetMapping("/ask") 
-	public String userQnAWrite_view() {
-		return "user/write_view_qna";
+	public String userQnAWriteView() {
+		return "user/writeViewQna";
 	}
 	
 	//10. 문의글 작성
-	@PostMapping("/ask_write") 
+	@PostMapping("/askWrite") 
 	public String userQnaWrite(UserVO userVO, @RequestParam(value="file") MultipartFile[] uploadfiles, BoardVO boardVO) throws IllegalStateException, IOException {
 		String member_id = userVO.getMember_id();
 		log.info("user member_id : "+member_id); // name
@@ -230,8 +230,8 @@ public class UserController {
 	}
 	
 	//12. 신고내역 - 신고글 자세히 보기
-	@GetMapping("/content_view_rep") 
-	public String content_view_ask(UserVO userVO,BoardVO boardVO, Model model) {
+	@GetMapping("/contentViewRep") 
+	public String contentViewAsk(UserVO userVO,BoardVO boardVO, Model model) {
 		log.info("board_view");
 		int board_numbers = boardVO.getBoard_numbers();
 		log.info(board_numbers); // name
@@ -240,7 +240,7 @@ public class UserController {
 		log.info(boardVO);
 		
 		model.addAttribute("content_view", boardVO);
-		return "user/content_view_ask";
+		return "user/contentViewAsk";
 	}
 	
 	
@@ -257,12 +257,12 @@ public class UserController {
 	}
 	
 	//14. 결제내역 list --> 상품 view(사용자는 수정이 불가능-관리자만 수정기능 보유)
-	@GetMapping("/goods_view") 
+	@GetMapping("/goodsView") 
 	public String user_goodsView(String goods_numbers, Model model) {
-	      log.info("content_view");
+	      log.info("goodsView");
 	      int goodsNum = Integer.parseInt(goods_numbers);
 	      model.addAttribute("content_view",adBoardService.getGoodsVO(goodsNum));
-		return "goods_content_view";
+		return "goodsContentView";
 	}
 	
 	//15. 내 좋아요 글 list
@@ -290,7 +290,7 @@ public class UserController {
 	}
 	
 	//16. 내 여행코스 보기
-	@GetMapping("/course_view") 
+	@GetMapping("/courseView") 
 	public String course_view(HttpServletRequest req, Model model) {
 		String member_id = req.getParameter("member_id");
 		String serialNum = req.getParameter("serialNum");
@@ -306,7 +306,7 @@ public class UserController {
 		model.addAttribute("dates", dates);
 		model.addAttribute("list", list);
 		
-		return "user/content_view_crs";
+		return "user/contentViewCrs";
 	}
 	
 }
