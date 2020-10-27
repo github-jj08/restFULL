@@ -6,12 +6,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>RestFuLL | 마이페이지</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
-	<h2 class="text-center">내 여행코스 페이지 입니다.</h2>
+	<div class="text-center"><h2>내 여행코스</h2></div>
+	<hr>
 	    <section class="blog-section spad">
 	        <div class="container">
 	            <div class="row">
@@ -32,24 +33,28 @@
 					        </div>
 				        </div>
 			        </div>
-			        <div class="col-sm-9 order-2">
-					   <div class="notice-table">
-							<table id="list-table">
-								<tr class="firs-list">
-							         <td>여행코스명</td>
-							         <td>작성일</td>
-						     	 </tr>
-						      	<tr>
-						      		<td>여행 코스명 | ${alias}</td>
-						      		<td>작성일 | ${dates}</td>
-						      	</tr>
-						   </table>
-						      	<div>
-							      	<c:forEach items="${list}" var="vo">
-								      <p>${vo.tcContents}</p>
-								    </c:forEach>
-						      	</div>
-						      	<button type="button" class="user-modify-btn" onClick="history.go(-1)">이전 페이지</button>
+			        <div class="col-sm-3 order-2"></div>
+			        <div class="col-sm-3 order-3">
+			        	<div>
+					   		<div class="content_view_crs_mytravel_title">
+			                  <h4><b>${alias}  <h6>${dates}</h6></b></h4>
+			                  <div id="myCourse">
+			                     <div class="course">
+			                        <div id="day1" class="course-1day">
+			                           <ol class="sortable">
+			   
+			                           </ol>
+			                        </div>
+			                     </div>
+			                  </div>
+			               </div>
+					      	<div class="content_view_crs_mytravel_content">
+						      	<c:forEach items="${list}" var="vo">
+							      <div>${vo.tcContents}</div>
+							    </c:forEach>
+					      	</div>
+						 </div>     	
+						      	<button type="button" onclick="history.go(-1);" class="gobackbtn">돌아가기</button>
 				   	 	</div>
 			        </div>
 		        </div>

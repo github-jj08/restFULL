@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <title>공지사항 글작성</title>
+        <title>RestFuLL | 공지사항 글작성</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<%-- <script type="text/javascript" src="<%=request.getContextPath()%>/resources/ckeditor/ckeditor.js"></script>
@@ -77,6 +77,7 @@
 											<textarea rows="10" cols="50" name="contents" class="write_content" placeholder="최대 500자 까지 작성 가능합니다." maxlength="500" required></textarea>
 										</div>
 									</div>
+									
 									<button type="submit" id="submit">완료</button>
 									
 								</form>
@@ -85,12 +86,11 @@
                         </div>
                     </div>
                 </div>
-                
             </div>
 		</div>
 	</section>
 
-<!-- 	<h3><button onclick="history.go(-1);">돌아가기</button></h3> -->
+<!-- 	<button type="button" onclick="history.go(-1);" class="gobackbtn">돌아가기</button> -->
 	
 <%@ include file="/WEB-INF/include/js-footer.jsp"%>
                 

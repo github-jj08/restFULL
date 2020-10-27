@@ -26,7 +26,7 @@
 		<collection property="attachmentVO" javaType="bit.project.restfull.vo.AttachmentVO" resultMap="AttachmentVO"></collection>
 	</resultMap>
 
-	<resultMap id="BoardVO" type="bit.project.restfull.vo.BoardVO">
+	<resultMap id="FilterBoard" type="bit.project.restfull.vo.BoardVO">
 		<id property="board_numbers" column="board_numbers"/>	
 		<result property="title" column="title"/>
 		<result property="contents" column="contents"/>
@@ -36,19 +36,18 @@
 		<result property="boardlist_numbers" column="boardlist_numbers"/>
 		<result property="filter_numbers" column="filter_numbers"/>
 		<result property="destination_numbers" column="destination_numbers"/>
-		<result property="filterName" column="name"/>
+		<result property="filterName" column="filterName"/>
+		<result property="boardName" column="boardName"/>
 		<result property="location" column="location"/>
 		<result property="thumbnail" column="thumbnail"/>
-		<association property="destinationVO" javaType="bit.project.restfull.vo.DestinationVO" resultMap="DestinationVO"></association>
+		<association property="destinationVO" javaType="bit.project.restfull.vo.DestinationVO" resultMap="DestinationContents"></association>
 	</resultMap>
 	
 	<!-- 필터가 있을 경우 다음의 getList를 호출 -->
-  	<select id="getFilterList" resultMap="BoardVO">
+  	<select id="getFilterList" resultMap="FilterBoard">
 	<![CDATA[
 		select b.*,
-		l.boardlist_numbers as boardlist_numbers,
 		l.name as boardName,
-		f.filter_numbers as filter_numbers,
 		f.name as filterName
 		from board b, boardlist l, filter f
 			where b.boardlist_numbers = l.boardlist_numbers

@@ -8,7 +8,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>RestFuLL | 공지사항</title>
+	<title>RestFuLL | 고객센터</title>
  	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -22,6 +22,7 @@
 				<input type="hidden" name="board_numbers" value="${content_view.board_numbers}">
 				<input type="hidden" name="boardlist_numbers" value="${content_view.boardlist_numbers}">
 				<div id="photo-view">
+					<div class="notice_view">
 						<!-- 사진들 -->
 						<div id="myCarousel" class="carousel slide" data-ride="carousel">
 						     <!-- Indicators -->
@@ -39,27 +40,36 @@
 						     </a>
 						</div>
 						
-						<script>
-							$(function(){  
-								var filelist = new Array();
+				<!--------------------------
+                       Carousel 스크립트 start
+              ----------------------------->
+					<script>
+						$(function(){  
+							var filelist = new Array();
+							
+							<c:forEach items="${filelist}" var="file">
+								var json = new Object();
+								json.filedirectory = "${file.filedirectory}";
+								filelist.push(json);
+							</c:forEach>
 								
-								<c:forEach items="${filelist}" var="file">
-									var json = new Object();
-									json.filedirectory = "${file.filedirectory}";
-									filelist.push(json);
-								</c:forEach>
-								
-								console.log("filelist : " + filelist);
-								
-						    	for(var i=0 ; i< filelist.length ; i++) {
-							       $('<div class="carousel-item"><img src="'+filelist[i].filedirectory+'" width=\"460\" height=\"345\""></div>').appendTo('.carousel-inner');
-							       $('<li data-target="#myCarousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
-							     	}
-							     $('.carousel-item').first().addClass('active');
-							     $('.carousel-indicators>li').first().addClass('active');
-							     $('#myCarousel').carousel();
-							});
-						</script>
+							console.log("filelist : " + filelist);
+							
+						   	for(var i=0 ; i< filelist.length ; i++) {
+						       $('<div class="carousel-item"><img src="'+filelist[i].filedirectory+'" style="height:600px; "></div>').appendTo('.carousel-inner');
+						       $('<li data-target="#myCarousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
+						    }
+						   	
+						    $('.carousel-item').first().addClass('active');
+						    $('.carousel-indicators>li').first().addClass('active');
+						     //$('#myCarousel').carousel();
+						});
+														
+					</script>
+				<!--------------------------
+                      Carousel 스크립트 end
+                 ----------------------------->
+					</div>
 
 
 				</div>

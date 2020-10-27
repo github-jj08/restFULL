@@ -88,12 +88,15 @@ public interface BoardMapper{
 
 	/* 관련 게시글 목록 불러오기 */
 	@Select("select * from board where boardlist_numbers = 1" 
-			+ " and destination_numbers like '%'||#{destination_numbers}||'%'" 
+			+ " and location like '%'||#{location}||'%'" 
 			+ " and not board_numbers in #{board_numbers}")
-	List<BoardVO> getOthers(@Param("board_numbers") int board_numbers, @Param("destination_numbers") String destination_numbers);
+	List<BoardVO> getOthers(@Param("board_numbers") int board_numbers, @Param("location") String location);
 
 	@Select("select count(*) from board where member_id = #{member_id}")
 	public int countBoard(String member_id);
+	
+	@Select("select count(*) from board where member_id = #{member_id} and boardlist_numbers ='1'")
+	public int countMyBoard(String member_id);
 	
 	@Select("Select * from (SELECT ROWNUM RN, A.* FROM "
 			+ "(select * from board b where boardlist_numbers = '1' and member_id = #{member_id} order by board_numbers) A ) "
@@ -109,7 +112,7 @@ public interface BoardMapper{
 	public List<BoardVO> askList(String member_id);
 
 	/* 유저 > 결제내역 확인(by여진) */
-	@Select("select r.*, g.name as productName from request r, goods g where r.goods_numbers = g.goods_numbers and r.member_id = #{member_id} order by dates desc, merchant_uid desc")
+	@Select("select r.*, g.destination_name as destination_name, g.name as productName from request r, goods g where r.goods_numbers = g.goods_numbers and r.member_id = #{member_id} order by dates desc, merchant_uid desc")
 	List<RequestVO> paymentList(String member_id);
 
 	/* 유저 > 내가 좋아요 누른 글들을 확인(by여진) */
@@ -117,7 +120,7 @@ public interface BoardMapper{
 	List<BoardVO> getLikeList(String member_id);
 
 	/* 여행코스 목록 가져오기(by여진) */
-	@Select("select distinct tcAlias, dates, serialNum from travel where member_id = #{member_id} group by tcAlias, dates, serialNum")
+	@Select("select distinct tcAlias, dates, serialNum from travel where member_id = #{member_id} group by tcAlias, dates, serialNum order by dates desc")
 	List<TravelVO> getMyCourseList(String member_id);
 
 	/* 특정 여행코스 가져오기 */

@@ -23,9 +23,9 @@
     <div class="register-login-section spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 offset-lg-4">
+                <div class="col-lg-4 col-md-6 offset-lg-4 offset-md-3">
                     <div class="login-form">
-                        <h2>Login</h2>
+                        <h2 style="color: #41497a">Login</h2>
                         <!-- 로그인 검사 -->
                         <c:url value="/login" var="loginUrl" />
                         <form:form name="f" action="${loginUrl}" method="POST"> 
@@ -38,14 +38,13 @@
 							    </c:if>  
 							<!-- id/pw 입력창 -->
                  			<div class="group-input">
-                                <label for="username">아이디</label>
+                                <label for="member_id">아이디</label>
                                 <input type="text" id="member_id" name="member_id">
                             </div>
                             <div class="group-input">
-                                <label for="pass">비밀번호</label>
+                                <label for="pw">비밀번호</label>
                                 <input type="password" id="pw" name="pw">
                             </div>
-                            
                             <div class="group-input gi-check">
                                 <div class="gi-more">
                                 	<a  href="${pageContext.request.contextPath}/findID" id="find_Id_btn" class="forget-pass">ID찾기</a> 
@@ -67,7 +66,7 @@
                         <div class="social_login">
                         	<!-- 카카오로그인 버튼 -->
                         	<div class="kakaobtn">
-	                            <a href="https://kauth.kakao.com/oauth/authorize?client_id=8c8d010971d8629ec3188f9ed097f73b&redirect_uri=http://localhost:8282/restfull/kakaologin&response_type=code">
+	                            <a href="https://kauth.kakao.com/oauth/authorize?client_id=8c8d010971d8629ec3188f9ed097f73b&redirect_uri=http://192.168.6.7:8282/restfull/kakaologin&response_type=code">
 	                              	<img src="resources/img/kakao_login_medium_wide.png">
 	                            </a>
                         	</div>

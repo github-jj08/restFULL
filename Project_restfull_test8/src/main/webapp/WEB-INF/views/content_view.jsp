@@ -57,7 +57,7 @@
 								console.log("filelist : " + filelist);
 								
 						    	for(var i=0 ; i< filelist.length ; i++) {
-							       $('<div class="carousel-item" style="width:100%; text-align:center; margin:0px auto;"><img src="'+filelist[i].filedirectory+'" style="height:100%; line-height:auto; "></div>').appendTo('.carousel-inner');
+							       $('<div class="carousel-item"><img src="'+filelist[i].filedirectory+'" style="height:450px; "></div>').appendTo('.carousel-inner');
 							       $('<li data-target="#myCarousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
 							    }
 						    	
@@ -179,9 +179,9 @@
 							 		</button>
 								    <div class="dropdown-menu">
 								    	<!-- 자신이 쓴 글일 때만 수정/삭제 버튼 노출 -->
-									    <c:if test="${principal.user.member_id eq content_view.member_id}">
-									      <a class="dropdown-item" href="user/modify?board_numbers=${content_view.board_numbers}">수정</a>
-									      <a class="dropdown-item" href="user/delete?board_numbers=${content_view.board_numbers}">삭제</a>
+									    <c:if test="${principal.user.member_id eq content_view.member_id || principal.user.authority_name == 'ROLE_ADMIN' }">
+									      <a class="dropdown-item" href="${pageContext.request.contextPath}/user/modify?board_numbers=${content_view.board_numbers}">수정</a>
+									      <a class="dropdown-item" href="${pageContext.request.contextPath}/user/delete?board_numbers=${content_view.board_numbers}">삭제</a>
 									    </c:if>
 								      <a class="dropdown-item" href="#DecModal" data-toggle="modal">신고</a>
 								    </div>
@@ -299,7 +299,7 @@
                                 <div class="view-hit">조회수 - ${content_view.hit} 회</div>
                                 <div class="view-dates">${content_view.dates} </div>
                                 <br/>
-                                <div class="view-loc">${content_view.location}</div>                                <br>
+                                <div class="view-loc">${content_view.location}</div> <br>
                                 <div class="view-id">${content_view.member_id}</div>
                                 <div class="view-title">${content_view.title}</div>
                                 <div class="view-contents">${content_view.contents}</div>
@@ -316,10 +316,8 @@
                             <!-- 댓글 작성칸 -->
                             <div id="addMyComment">
                                 <span id="myId">${principal.user.member_id}</span>
-                                <div class="comment-reg">
                                     <input type="text" placeholder="댓글을 입력하세요" id="reply" name="reply"/>
                                     <input id="addComment" type="button" value="✔"/>
-                                </div>
                             </div>
 
                             <!-- 댓글 list -->
@@ -332,9 +330,9 @@
                                 <!-- 댓글 -->
                                 <div id="reply">
                                     <section class="replyForm">
-                                        <table id="list-table">
+                                        <div id="list-table">
 
-                                        </table>
+                                        </div>
                                     </section>
                                 </div>
                             </div>
@@ -348,38 +346,39 @@
                                     //댓글 목록 출력(문서 로딩되자마자 실행)
                                     function commentList(){ 
                                         $.ajax({
-                                        url: "${pageContext.request.contextPath}/getComments/" + board_numbers,
-                                        type: "POST",
-                                        dataType:"json",
-                                        success: function (result) {
-                                            //html삽입 : 표시될 데이터 - 아이디,댓글내용,작성일,삭제버튼,[히든]댓글번호
-                                            var htmls="";
-                                            $("#list-table").html("");	
-                                            if(result.length < 1){
-                                                htmls += "등록된 댓글이 없습니다.";
-                                            } else {
-                                                    $(result).each(function(index,item){
-                                                        //사용자와 작성자의 아이디가 같다면 삭제 버튼 생성
-                                                        if(this.member_id == member_id){
-                                                            htmls += '<tr>';
-                                                            htmls += '<td>'+ item.member_id + '</td>';
-                                                            htmls += '<td>'+ item.contents + '</td>';
-                                                            htmls += '<td>'+ item.dates + '</td>';
-                                                            htmls += '<td><button type="button" name="delete" value="' + item.comments_numbers+'"> x </button>';
-                                                            htmls += '</tr>';
-                                                        } else {
-                                                            //아니라면 그냥 출력
-                                                            htmls += '<tr>';
-                                                            htmls += '<td>'+ item.member_id + '</td>';
-                                                            htmls += '<td>'+ item.contents + '</td>';
-                                                            htmls += '<td>'+ item.dates + '</td>';
-                                                            htmls += '<td>'+ item.comments_numbers + '<input type="hidden" value="'+ item.board_numbers + '"></td>';	
-                                                            htmls += '</tr>';
-                                                        }
-                                                    });	//each end
-                                            }
-                                            $("#list-table").append(htmls);
-                                            }
+	                                        url: "${pageContext.request.contextPath}/getComments/" + board_numbers,
+	                                        type: "POST",
+	                                        dataType:"json",
+	                                        success: function (result) {
+	                                            //html삽입 : 표시될 데이터 - 아이디,댓글내용,작성일,삭제버튼,[히든]댓글번호
+	                                            var htmls="";
+	                                            $("#list-table").html("");	
+	                                            if(result.length < 1){
+	                                                htmls += "등록된 댓글이 없습니다.";
+	                                            } else {
+	                                                    $(result).each(function(index,item){
+	                                                        //사용자와 작성자의 아이디가 같다면 삭제 버튼 생성
+	                                                        if(this.member_id == member_id){
+	                                                            htmls += '<div class="comment">';
+	                                                            htmls += '<button type="button" name="delete" value="' + item.comments_numbers+'"> x </button>';
+	                                                            htmls += '<div class="id">'+ item.member_id + '</div>';
+	                                                            htmls += '<div class="content">'+ item.contents + '</div>';
+	                                                            htmls += '<div class="date">'+ item.dates + '</div>';
+	                                                            htmls += '</div>'+'<hr/>';
+	                                                        } else {
+	                                                            //아니라면 그냥 출력
+	                                                            htmls += '<div class="comment">';
+	                                                            htmls += '<div class="id">'+ item.member_id + '</div>';
+	                                                            htmls += '<div class="content">'+ item.contents + '</div>';
+	                                                            htmls += '<div class="date">'+ item.dates + '</div>';
+	                                                            htmls += '<input type="hidden" value="'+ item.board_numbers + '">';	
+	                                                            htmls += '</div>'+'<hr/>';
+	                                                        }
+	                                                    });	//each end
+	                                            }
+	                                            $("#list-table").append(htmls);
+	                                        }
+
                                         });
                                     };
                                     $(document).on("click", "button[name='delete']",function(){

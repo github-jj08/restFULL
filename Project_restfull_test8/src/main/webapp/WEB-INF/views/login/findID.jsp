@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>아이디 찾기</title>
+<title>RestFuLL | 아이디 찾기</title>
 </head>
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>

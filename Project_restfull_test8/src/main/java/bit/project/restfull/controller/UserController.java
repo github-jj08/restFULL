@@ -262,7 +262,7 @@ public class UserController {
 	      log.info("content_view");
 	      int goodsNum = Integer.parseInt(goods_numbers);
 	      model.addAttribute("content_view",adBoardService.getGoodsVO(goodsNum));
-		return "user/goods_content_view";
+		return "goods_content_view";
 	}
 	
 	//15. 내 좋아요 글 list

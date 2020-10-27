@@ -22,7 +22,7 @@
 		});
 	})
 </script>
-<title>비밀번호 찾기</title>
+<title>RestFuLL | 비밀번호 찾기</title>
 </head>
 <body>
 

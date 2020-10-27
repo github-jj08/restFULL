@@ -8,26 +8,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <title>RestFull indexPage</title>
+        <title>RestFuLL | 마이페이지</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<!-- 제이쿼리  -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         
-        <!-- 부트 스트랩  -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fawtmt0h7b&submodules=geocoder"></script>
 		<%-- <script type="text/javascript" src="<%=request.getContextPath()%>/resources/ckeditor/ckeditor.js"></script>
 		 --%>
-		 <style>
-		</style>
+
 </head>
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
-	<h2 class="text-center">사용자 페이지 입니다.</h2>
+	<h2 class="text-center">문의내역</h2>
 	<hr>
 	    <section class="blog-section spad">
 	        <div class="container">
@@ -50,29 +43,56 @@
 				        </div>
 			        </div>
 			        <div class="col-sm-9 order-2">
-				        	<!-- 문의글 작성 -->
-						<form action="<%=request.getContextPath() %>/user/ask_write" method="post" enctype="multipart/form-data">
-							<!-- hidden -->
-							<sec:authentication var="principal" property="principal" />
-							<input type="hidden" name="member_id" value="${principal.user.member_id}"/>
-							<input type="hidden" name="boardlist_numbers" value="<c:out value='4'/>">
-							<input type="hidden" name="filter_numbers" value="<c:out value='0'/>">
-							
-							<!-- write Data -->
-							<input type="file" id="fileupload" name="file" multiple="multiple" /> 
-							<hr>
-							
-							제목 : &nbsp;<input type="text" name="title">
-							<hr/>
-							<p style="float: left;">내용 : &nbsp; </p> <textarea style="float: ;" rows="10" cols="50" name="contents" placeholder="최대 500자 까지 작성 가능합니다." maxlength="500">
-							</textarea>
-							<hr/>
-							<input type="submit" id="submit" value="완료" style="position:absolute;"/>
-						</form>
-				    </div>
-                </div>
-            </div>
+			        	<div class="row">
+			        		<div class="col-sm-12">
+	                        	<div class="notice_write">
+									<!-- 문의글 작성 -->
+									<form action="<%=request.getContextPath() %>/user/ask_write" method="post" enctype="multipart/form-data">
+										<!-- hidden -->
+										<sec:authentication var="principal" property="principal" />
+										<input type="hidden" name="member_id" value="${principal.user.member_id}"/>
+										<input type="hidden" name="boardlist_numbers" value="<c:out value='4'/>">
+										<input type="hidden" name="filter_numbers" value="<c:out value='0'/>">
+										
+										<!-- write Data -->
+										<div class="group-input">
+				                     		<!-- 첨부 버튼 -->
+											<div class="writepic">
+												<div id="attach">
+													<input id="uploadInputBox" type="file" name="file" accept="image/*" />
+				                          		</div>
+				                          	</div>
+				                        </div>
+										
+										<!-- 제목,내용 -->		
+										<div class="group-input">
+											<div class="writetitle">
+				 								<label for="title">제목 </label>
+												<input type="text" name="title" class="write_tilte" maxlength="20" required>
+											</div>
+										</div>
+								
+										<div class="group-input">
+											<label for="contents">내용 </label>
+											<div class="writecontentx">
+												<textarea rows="10" cols="50" name="contents" class="write_content" placeholder="최대 500자 까지 작성 가능합니다." maxlength="500" required></textarea>
+											</div>
+										</div>
+										
+										<button type="submit" id="submit">완료</button>
+										
+									</form>
+	                        	</div>
+	                        	<button type="button" onclick="history.go(-1);" class="gobackbtn">돌아가기</button>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+			</div>
 		</section>
+			        
+			        
+			       
 <%@ include file="/WEB-INF/include/js-footer.jsp"%>
 
 </body>

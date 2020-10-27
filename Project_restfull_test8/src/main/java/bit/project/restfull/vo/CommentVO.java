@@ -15,6 +15,6 @@ public class CommentVO {
 	private int comments_numbers;
 	private int board_numbers;
 	private String contents;
-	private Timestamp dates;
+	private String dates;
 	private String member_id;
 }

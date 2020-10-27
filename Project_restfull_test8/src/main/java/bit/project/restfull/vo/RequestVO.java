@@ -13,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class RequestVO {
 	private String request_numbers;//	REQUEST_NUMBERS	NUMBER(10,0)
-	private Timestamp dates;		//	DATES	DATE
+	private String dates;		//	DATES	DATE
 	private String imp_uid;		//	IMP_UID	VARCHAR2(100 BYTE)
 	private String member_id;		//	MEMBER_ID	VARCHAR2(100 BYTE)
 	private int goods_numbers;		//	GOODS_NUMBERS	NUMBER(10,0)
@@ -23,4 +23,5 @@ public class RequestVO {
 	private String merchant_uid; // MERCHANT_UID;
 	private String productName;
 	private int amount;
+	private String destination_name;
 }

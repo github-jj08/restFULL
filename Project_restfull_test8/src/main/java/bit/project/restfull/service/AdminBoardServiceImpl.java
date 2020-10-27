@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import bit.project.restfull.mapper.AdminBoardMapper;
 import bit.project.restfull.vo.AdminBoardVO;
 import bit.project.restfull.vo.AttachmentVO;
+import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.DestinationVO;
 import bit.project.restfull.vo.GoodsVO;
 import bit.project.restfull.vo.RequestVO;
@@ -246,7 +247,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	}
 
 	@Override
-	public List<AdminBoardVO> getFilterList(int boardlist_numbers) {
+	public List<BoardVO> getFilterList(int boardlist_numbers) {
 		return adBoardMapper.getFilterList(boardlist_numbers);
 	}
 
@@ -303,8 +304,8 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	}
 
 	@Override
-	public void updateRequest(String imp_uid, String merchant_uid) {
-		adBoardMapper.updateRequests(imp_uid,merchant_uid);
+	public void updateRequest(String imp_uid, String merchant_uid,String totalPrice) {
+		adBoardMapper.updateRequests(imp_uid,merchant_uid,totalPrice);
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package bit.project.restfull.controller;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -83,13 +82,30 @@ public class AdminBoardController {
 	}
    
     //2. 특정 회원 정보 확인
-	@GetMapping("/user_content_view") 
-	public String user_content_view(PagingVO pagingVO, @RequestBody UserVO userVO, BoardVO boardVO, Model model) {
+    
+	@GetMapping("/user_content_view")
+	public String user_content_view(PagingVO pagingVO, UserVO userVO
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, Model model) {
 		log.info("유저정보 확인");
 		String member_id = userVO.getMember_id();
 		log.info("확인할 user id" + member_id); // name
 		userVO = userService.getUserVO(member_id);
 		
+		int total = userService.countMember();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		pagingVO = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
+		model.addAttribute("paging", pagingVO);
+		model.addAttribute("member_id", member_id);
 		model.addAttribute("userDetail", userVO);
 		model.addAttribute("admin_board", boardService.boardList(member_id, pagingVO));
 		return "admin/userData";
@@ -121,7 +137,8 @@ public class AdminBoardController {
 		userService.adminModifyUser(userVO);
 		session.invalidate();
 		
-		return "admin/userlist";
+		return "admin/userList";
+		
 	}
    
 	//5. 관리자 권한으로 회원 게시글 조회
@@ -360,10 +377,10 @@ public class AdminBoardController {
    //2. 게시판 번호를 가지고 문의글 or 신고글 리스트 분류해서 출력
    @ResponseBody
    @GetMapping("/qnas/{boardlist_numbers}")
-   public List<AdminBoardVO> ajaxQnAsList(@PathVariable(value="boardlist_numbers") int boardlist_numbers, Model model) {
+   public List<BoardVO> ajaxQnAsList(@PathVariable(value="boardlist_numbers") int boardlist_numbers, Model model) {
       log.info("boardlist_numbers : " + boardlist_numbers);
       //boardlist_numbers에 해당하는 게시글들을 불러옴
-      List<AdminBoardVO> list = adBoardService.getFilterList(boardlist_numbers);
+      List<BoardVO> list = adBoardService.getFilterList(boardlist_numbers);
       model.addAttribute("list", list);
       return list;
    }

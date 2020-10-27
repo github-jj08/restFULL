@@ -106,7 +106,7 @@
     <div class="register-login-section spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 offset-lg-4">
+                <div class="col-lg-4 col-md-6 offset-lg-4 offset-md-3">
                     <div class="register-form">
                         <h2>회원가입</h2>
                         <form action="addUser" name="userInfo" method="post" id ="pwForm">

@@ -88,11 +88,12 @@ public class PayController {
 	@ResponseBody
 	@PostMapping("/payments/confirmation")
 	public void paymentConfirmation(HttpServletRequest req) {
-		//결제가 완료되면 발급받는 imp_uid를 기존 주문 정보에 업데이트한다.
+		//결제가 완료되면 발급받는 imp_uid와 결제금액을 기존 주문 정보에 업데이트한다.
 		String imp_uid = req.getParameter("imp_uid");
 		String merchant_uid = req.getParameter("merchant_uid");
 		
-		adBoardService.updateRequest(imp_uid,merchant_uid);
+		String totalPrice = req.getParameter("totalPrice");
+		adBoardService.updateRequest(imp_uid,merchant_uid,totalPrice);
 	}
 	
 	@GetMapping("/payments/comfirm")

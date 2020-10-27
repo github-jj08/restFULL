@@ -16,7 +16,7 @@
 
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
-	<h2 class="text-center">관리자 페이지입니다.</h2>
+	<div class="text-center"><h2>여행지 등록</h2></div>
 
  <!-- Blog Section Begin -->
     <section class="blog-section spad">
@@ -108,7 +108,7 @@
 										<div class="group-input">
 											<label for="search"> 위치 검색</label>
 												<input id="address" type="text" >
-												<button type="submit" id="submit">검색</button>
+												<button type="submit" id="searchAddress">검색</button>
 												
 									    		<div id="map">
 									    		</div>
@@ -261,7 +261,7 @@
 						                        }
 						                    });
 						
-						                    $('#submit').on('click', function(e) {
+						                    $('#searchAddress').on('click', function(e) {
 						                        e.preventDefault();
 						
 						                        searchAddressToCoordinate($('#address').val());
@@ -292,9 +292,8 @@
 
 										</div>
 
-									</div>
-
 									<button type="submit" id="submit">완료</button>
+									</div>
 								</form>
 		                        <button type="button" onclick="history.go(-1);" class="gobackbtn">돌아가기</button>					
 							</div>

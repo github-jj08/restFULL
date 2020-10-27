@@ -10,59 +10,102 @@
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    <title>Insert title here</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/admin/dest">여행지 목록으로 돌아가기</a>
+<%@ include file="/WEB-INF/include/js-header.jsp"%>
+	<div class="text-center"><h2>여행지 상세정보</h2></div>
 
-            <div class="container">
-            <a class="dropdown-item" href="modify?destination_numbers=${content_view.destination_numbers}">수정</a>
-            <a class="dropdown-item active" href="delete?destination_numbers=${content_view.destination_numbers}">삭제</a>
-               <h4>여행지 정보</h4><hr/>
-               <div class="board-contents">
-                  여행지명 : ${content_view.destination_name}<hr/>
-        <input type="hidden" name="destination_numbers" value="${content_view.destination_numbers}" />
-                  ------위치정보----------------------------------------<br/>
-                  지역 구분 : <span>${content_view.sidoguVO.sidoName}</span><br/>
-                  지번 주소 : <span>${content_view.jibunaddress}</span><br/>
-                  도로명 주소 : <span>${content_view.doroaddress}</span><br/>
-                  GPS-X : <span>${content_view.lat}</span><br/>
-                  GPS-Y : <span>${content_view.lng}</span><br/>
-               </div>
-               <hr/>
-               <h4>관련 상품</h4>
-               <div>
-                  <a href="${content_view.destination_numbers}/goods/write_view">상품등록</a>
-                  <table border="1px">
-                     <tr>
-                        <td>상품명</td>
-                        <td>판매업자</td>
-                        <td>가격</td>
-                        <td>재고수량</td>
-                        <td>판매상태</td>
-                        <td>판매 시작일</td>
-                        <td>판매 종료일</td>
-                     </tr>
-                     
-                     <c:forEach items="${goodsList}" var="vo">
-                     <tr>
-                        <td><a href="goods/content_view?goods_numbers=${vo.goods_numbers}">${vo.name}</td>
-                        <td>${vo.seller}</td>
-                        <td>${vo.price}</td>
-                        <td>${vo.amount}</td>
-                        <td>${vo.status}</td>
-                        <td>${vo.sellstart}</td>
-                        <td>${vo.sellend}</td>
-                     </tr>
-                     </c:forEach>
-                  </table>
-                  
-               </div>
-               
-            </div>
+ <!-- Blog Section Begin -->
+    <section class="blog-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1">
+                    <div class="blog-sidebar">
+                        <div class="blog-catagory">
+                            <h4>관리자페이지</h4>
+                            <ul>
+                                <li><a href="<c:url value="/admin/userList" />">유저 관리</a></li>
+                                <li><a href="<c:url value="/admin/notice" />">공지사항 및 이벤트 관리</a></li>
+                                <li><a href="<c:url value="/admin/qnas" />">문의 및 신고 답변</a></li>
+                                <li><a href="<c:url value="/admin/dest" />">여행지 및 상품 관리</a></li>
+                            	<li><a href="<c:url value="/admin/requestList" />">상품 주문내역 관리</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                
+               <!--관리자페이지 table start-->
+                <div class="col-lg-9 order-1 order-lg-2">
+                    <div class="row">
+                        <div class="admin col-lg-12 col-sm-12">
+                        	<div class="dest_info">
+                        		<div class="link">
+									<a href="modify?destination_numbers=${content_view.destination_numbers}">수정</a>
+									<a href="delete?destination_numbers=${content_view.destination_numbers}">삭제</a>
+								</div>
+								
+                        		<h4>여행지정보</h4>
+                        		<div class="board-contents">
+                        			<div class="name">여행지명 : ${content_view.destination_name}</div><br/>
+									<input type="hidden" name="destination_numbers" value="${content_view.destination_numbers}" />
+									<div class="local">지역 구분 : ${content_view.sidoguVO.sidoName}</div><br/>
+									<div class="local">지번 주소 : ${content_view.jibunaddress}</div><br/>
+									<div class="local">도로명 주소 : ${content_view.doroaddress}</div><br/>
+									<div class="local">GPS-X : ${content_view.lat}</div><br/>
+									<div class="local">GPS-Y : ${content_view.lng}</div><br/>
+								</div>
+                        	</div>
+                        	
+                        	<hr/>
+	                        
+	                        <div class="related_goods">
+	                            <h4>관련상품</h4>
+								<a href="${content_view.destination_numbers}/goods/write_view">상품등록</a>
+	                            <div class="notice-table">
+	                                <table id="list-table">
+										<tr class="first-list">
+					                        <td>상품명</td>
+					                        <td>판매업자</td>
+					                        <td>가격</td>
+					                        <td>재고수량</td>
+					                        <td>판매상태</td>
+					                        <td>판매 시작일</td>
+					                        <td>판매 종료일</td>
+										</tr>
+										<c:forEach items="${goodsList}" var="vo">
+											<tr class="noticeable">
+						                        <td><a href="${pageContext.request.contextPath}/admin/goods/content_view?goods_numbers=${vo.goods_numbers}">${vo.name}</a></td>
+						                        <td>${vo.seller}</td>
+						                        <td>${vo.price}</td>
+						                        <td>${vo.amount}</td>
+						                        <td>
+						                        	<c:if test="${vo.status == 1}">판매중</c:if>
+						                        	<c:if test="${vo.status == 0}">판매중단</c:if>
+						                        </td>
+						                        <td>${vo.sellstart}</td>
+						                        <td>${vo.sellend}</td>
+											</tr>
+										</c:forEach>	
+									</table>
+									<button type="button" onclick="history.go(-1);" class="gobackbtn">돌아가기</button>
+	                            </div>
+	                         </div>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+                <!--관리자페이지 table end-->
+
+			</div>
+		</div>
+	</section>
+	
+	
+<!-- 	<h3><button onclick="history.go(-1);">돌아가기</button></h3> -->
+	
+<%@ include file="/WEB-INF/include/js-footer.jsp"%>
    
 </body>
 </html>

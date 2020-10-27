@@ -15,6 +15,7 @@ import org.apache.ibatis.annotations.Update;
 
 import bit.project.restfull.vo.AdminBoardVO;
 import bit.project.restfull.vo.AttachmentVO;
+import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.DestinationVO;
 import bit.project.restfull.vo.GoodsVO;
 import bit.project.restfull.vo.RequestVO;
@@ -130,7 +131,7 @@ public interface AdminBoardMapper{
 	List<GoodsVO> getRGoods(int[] destination_numbers);
 
 	/* 필터있는 게시판 리스트 뽑기 <쿼리문 길어서 xml에 위치 유지> */
-	List<AdminBoardVO> getFilterList(int boardlist_numbers);
+	List<BoardVO> getFilterList(int boardlist_numbers);
 	
 	/* 특정 상품정보출력 <foreach>*/
 	List<GoodsVO> myGoods(String[] goodsList);
@@ -145,14 +146,14 @@ public interface AdminBoardMapper{
 	List<RequestVO> getRequests(String request_numbers);
 
 	/* 상품 결제 후 주문 정보를 결제된 상태로 업데이트 */
-	@Update("update request set imp_uid = #{imp_uid} where merchant_uid = #{merchant_uid}")
-	void updateRequests(@Param("imp_uid")String imp_uid,@Param("merchant_uid")String merchant_uid);
+	@Update("update request set imp_uid = #{imp_uid}, price = #{totalPrice} where merchant_uid = #{merchant_uid}")
+	void updateRequests(@Param("imp_uid")String imp_uid,@Param("merchant_uid")String merchant_uid, String totalPrice);
 
 	/* 여행코스 등록 <foreach>*/
 	void insertTravelCourse(List<TravelVO> myCourse);
 
 	/* 관리자 권한 : 모든 주문 내역 출력 */
-	@Select("select r.*, g.name as productName from request r, goods g"
+	@Select("select r.*, g.destination_name as destination_name, g.name as productName from request r, goods g"
 			+ " where r.goods_numbers = g.goods_numbers" 
 			+ " order by dates desc, merchant_uid desc")
 	List<RequestVO> getRequestListForAdmin();

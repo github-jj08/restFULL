@@ -2353,6 +2353,7 @@ ol {
     height: 250px;
     border-radius: 6px;
     padding : 5px 12px;
+    word-break:break-all;
 }
 
 /* 위치(지도) 지정 */
@@ -3180,7 +3181,7 @@ ol {
 /* Medium Device: 1200px */
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-    inner-header .logo {
+    inner-header .logo img {
         width:150px;
         height:80px;
     }
@@ -3246,7 +3247,7 @@ ol {
 	}
 }
 
-@media only screen and (max-width: 991px) {
+media only screen and (max-width: 991px) {
 	.banner-section {
 		padding: 80px 0 50px;
 	}
@@ -3307,11 +3308,6 @@ ol {
 		padding-left: 10px;
 	}
 
-	.inner-header .logo {
-        width:auto;
-        height:60px;
-    }
-
 	.inner-header .advanced-search .category-btn {
 		max-width: 40%;
 		padding-right: 25px;
@@ -3350,13 +3346,21 @@ ol {
 	.checkout-content input {
 		margin-top: 50px;
 	}
-/* 	.choosecourse .course .course-1day .sortable li {
-		padding-left:3px;
-		margin-right:2px;
-		font-size:13px;
-		list-style: none;
-		max-width:74%;
-	} */
+	.rightbox .replycomment #addMyComment{
+		width:100%;
+	}
+
+	.rightbox .replycomment #addMyComment #reply {
+	    width:93%;
+	    font-size:15px;
+	}
+	
+	.rightbox .replycomment #addMyComment #addComment {
+	    width:5%;
+	    font-size:15px;
+
+	}
+
 }
 
 /* Large Device: 480px */
@@ -3651,26 +3655,30 @@ ol {
 
 
  /* 사진 부분 */
-.leftbox .photo-view #myCarousel {
-        background-color: black;
-        width: 100%;
-        height: 450px;
+ .photo-view #myCarousel {
+      background-color: black;
+      width: 100%;
+      height: 450px;
 
-     }
+}
      
-.leftbox .photo-view #myCarousel .carousel-inner {
-      height: 100%;
+ .photo-view #myCarousel .carousel-inner {
+      height:450px;
       width: auto;
       text-align: center;
       
 }   
 
- .leftbox .photo-view #myCarousel .carousel-inner img {
-      height: 100%;
-      width: auto;
-      text-align: center;
-}
+ .photo-view #myCarousel .carousel-inner .carousel-item {
+ 	width:100%;
+ 	text-align:center;
+ 	margin: 0px auto;
+ }
 
+ .photo-view #myCarousel .carousel-inner .carousel-item img {
+     line-height:450px;
+ }
+ 
 
 
 
@@ -3705,7 +3713,7 @@ ol {
 }
 
 /* 드롭다운 버튼 */
-.leftbox .photo-view .wrapper .dropdown {
+.photo-view .wrapper .dropdown {
     position: relative;
     display:inline-block;
     float:right;
@@ -3867,6 +3875,7 @@ ol {
     border:none; 
     width:100%;
     height: 150px;
+    word-break:break-all
     
     
 }
@@ -3874,21 +3883,27 @@ ol {
 /*댓글부분*/
 .rightbox {
     border:#8a93c0 2px solid;
-    height: 500px;
-    padding:5px 10px;
+    height: 700px;
+    padding:5px;
     background-color:#eaedff;
     opacity: 0.8;
     width: 100%;
     border-radius: 12px;
+    overflow:auto;
     
 }
 
 .rightbox #addMyComment #myId {
     font-size:13px;
+    font-weight:700;
 }
 
-.rightbox .replycomment #addMyComment .comment-reg #reply {
-    width:93%;
+.rightbox .replycomment {
+	width:100%;
+}
+
+.rightbox .replycomment #reply {
+    width:90%;
     font-size:14px;
     height:33px;
     border-radius: 10px;
@@ -3896,12 +3911,37 @@ ol {
     
 }
 
-.rightbox .replycomment .comment-reg #addComment {
+.rightbox .replycomment #addComment {
     width:6%;
-    font-size:18px;
+    font-size:14px;
+    border:#8a93c0;
+    background-color:#eaedff;  
+}
+
+.replyForm .replycomment #reply #list-table  {
+	width:95%;	
+}
+.replycomment #reply .comment .id {
+	padding-top:4px;
+	font-weight:800;
+	font-size:15px;
+	
+}
+.replycomment #reply .comment .content {
+	padding:4px 0;
+	
+}
+.replycomment #reply .comment .date {
+	font-size:7px;
+}
+
+
+.replyForm #list-table  button  {
+	width:5%;
+    font-size:15px;
     border:#8a93c0;
     background-color:#eaedff;
-    position:absolute;
+    float:right;
 }
 
 
@@ -4129,7 +4169,7 @@ ol {
 		공지사항 css
 ----------------------*/
 
-.blog-section .notice-table #list-table {
+.blog-section .notice-table #list-table,.blog-section .notice-table #list-table-admin {
     width:100%;
     text-align:center;
     border : #8a93c0 2px solid;
@@ -4157,14 +4197,46 @@ ol {
 	border : #8a93c0 2px solid;
 }
 
-
-/* 
-.blog-section .notice-table .input{
-	width: 100%;
-}
- */
+ 
 .blog-section .notice-table .writebtn {
-	float: right;
+	float: right;	
+}
+
+/* 관리자 부분 신고 댓글 css */
+.notice-table .singo_id {
+	font-size: 20px;
+	color: #8a93c0;
+	font-weight:700;
+	padding: 5px 0;
+}
+
+.notice-table .singo_date {
+	font-size: 11px;
+	
+}
+
+.notice-table .singo_content{
+	margin-top: 5px;
+	padding-bottom: 40px;
+	word-break:break-all;
+	
+	
+}
+
+.comment_table #reply {
+	width: 70%;
+}
+
+.comment_table #addComment {
+	border:none;
+	color:white;
+	background-color: #8a93c0;
+	padding: 3px 5px;
+}
+.comment_table #list-table button  {
+	background-color: white;
+	font-size: 20px;
+	float:right;
 	
 }
 
@@ -4217,7 +4289,6 @@ ol {
 
 .card .collapse .card-body p{
 	margin-left: 10px;
-	background-color: red;
 }
 
 .user-modify-btn {
@@ -4227,6 +4298,8 @@ ol {
     border-color:#8a93c0;
     color: white;
     padding: 5px 0;   
+    float: left;
+    margin-left: 3px;
 }
 
 .paging-font-size{
@@ -4244,26 +4317,12 @@ ol {
     border-bottom : 2px solid;
     font-size: 18px;
     font-weight:600;
+    color: white;
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* 검색 부분 */
 
 .search-section .main-postings.pi-pic img{
     height:200px;
@@ -4317,7 +4376,7 @@ ol {
 
 .search-section #map {
 	width:100%;
-	height:600px;
+	height:800px;
 	border-radius : 5px;
 }
 
@@ -4329,8 +4388,6 @@ ol {
 .notice_write .group-input .writepic #attach {
 	margin-top: 50px;
 }
-
-
 
 .notice_write .group-input {
     margin : 20px 5px;
@@ -4358,8 +4415,68 @@ ol {
     border-radius: 6px;
     padding : 5px 12px;
 }
+
+ /* 사진 부분 */
+ .photo-view .notice_view #myCarousel {
+      background-color: black;
+      width: 100%;
+      height: 600px;
+}
+    
+ .photo-view .notice_view #myCarousel .carousel-inner {
+      height:600px;
+      width: auto;
+      text-align: center;      
+}   
+
+ .photo-view .notice_view #myCarousel .carousel-inner .carousel-item {
+ 	width:100%;
+ 	text-align:center;
+ 	margin: 0px auto;
+ }
+
+ .photo-view .notice_view #myCarousel .carousel-inner .carousel-item img {
+     line-height:600px;
+ }
+
+/* 좋아요&드롭다운 부분 */
+.photo-view .wrapper {
+    width:100%;
+    height:50px;
+    background-color:#8a93c0;
+}
+
+
+ /* 드롭다운 버튼 */
+.photo-view .wrapper .dropdown {
+    position: relative;
+    display:inline-block;
+    float:right;
+    font-size:25px;
+    font-weight:500;
+    margin-top:-30px;
+    color:white;
+}
+
+
+.photo-view .dropdown .dropdown-menu {
+    position: absolute;
+    background: #dfe4ff;
+    z-index: 1;
+    border: 2px #8a93c0;
+    opacity: 0.88;  
+}
+.photo-view .dropdown .dropdown-menu a.dropdown-item {
+    color: #546396;
+    padding:10px 0;
+    text-align:center;
+    font-size:15px;
+    font-weight:600;
+} 
+
+
 /* 완료버튼 */
-.notice_write form button {
+.notice_write button[type=submit] {
 	background-color:#8a93c0;
 	color: white;
 	font-size: 15px;
@@ -4368,8 +4485,12 @@ ol {
 	padding: 7px 20px;
 	border-radius:5px;
 	float:right;
-	cursor: pointer;
 }
+
+
+
+
+
 /* 뒤로 빠꾸 버튼 */
 
 .gobackbtn {
@@ -4377,10 +4498,11 @@ ol {
 	border:white;
 	color: #8a93c0;
 	font-weight:600;
+	margin-top : 15px;
 	
 }
 
-/* 위치(지도) 지정 */
+/* 이거 관리자 여행지 등록 작성 페이지 위치(지도) 지정 */
 .dest_register .group-input label {
 	font-size:20px;
     font-weight:800;
@@ -4399,6 +4521,7 @@ ol {
 	position: relative; 
 	overflow: hidden;
 	margin: 15px 0;
+	border: #8a93c0 2px solid;
 }
 
 .dest-register .group-input .group-sido{
@@ -4439,8 +4562,176 @@ ol {
 	border: none;
 	border-bottom: #8a93c0 1px solid;
 	background-color:#dde1f5;
+}
+/* 관리자 모드 여행지 등록에 관한 content_view + 상품 등록 */
+
+.dest_info .link  {
+	float:right;
+	font-weight: 600;
+	
+}
+.dest_info .link a {
+	padding: 5px 8px;
+}
+
+.admin h4 {
+	font-weight:700;
+	padding-bottom: 20px;
+	padding-top:7px;
 	
 }
 
+.dest_info .board-contents .local,
+.dest_info .board-contents .name{
+	padding:3px 0;
+	
+}
+.related_goods  a {
+	float:right;
+	
+}
 
+/* 관리자 모드 상품 등록 */
+
+.notice_write .goods_register .name {
+	font-size:20px;
+	font-weight:700;
+}
+.notice_write .goodsform label {
+	font-weight:600;
+	font-size:16px;
+	margin:5px;
+}
+.notice_write .goodsform input {
+	margin:5px;
+	border-radius:4px;
+	border:#8a93c0 2px solid;
+}
+.notice_write .goodsform button {
+	float:right;
+	
+}
+
+/* 회원탈퇴 CSS */
+.outUser .group-input {
+	width:100%;
+	height: 70px;	
+}
+
+
+.outUser .out-btn {
+	width: 20%;
+	letter-spacing: 2px;
+	padding: 10px 5px;
+	margin-top: 15px;
+    background-color:#8a93c0;
+    border:none;
+    color: white;
+    font-size:15px;
+}
+
+#list-table .first-list-rep{
+	padding: 6px 0;
+    background-color: #626eac;
+    color: white;
+    text-align:center;
+    border-bottom : #626eac 2px solid;
+    font-size: 18px;
+    font-weight:600;
+    overflow: auto;
+}
+#list-table .first-list-rep .first-list-rep-contents{
+	height: 500px;
+}
+
+.user-modify-btn-back{
+	margin-top: 5px;
+}
+
+.content-view-table-rep{
+	width: 22%;
+   	padding: 6px 0;
+    background-color: #626eac;
+    color: white;
+    text-align:center;
+    border-bottom : #626eac 2px solid;
+    font-size: 18px;
+    font-weight:600;
+}
+
+.mypage-font-color-white{
+	color: white;
+}
+.menu-background li a:focus {
+	font-weight: 800;
+}
+
+     #photo-view{
+        background-color: #8A93C0;
+        border : 1px;
+        width:100%;
+        height:50%;
+     }
+  
+     #myCarousel {
+        background-color: black;
+        width: 100%;
+        height: 500px;
+        text-align:center;
+        justify-content:center;
+     }
+   
+     .carousel-item,
+     .carousel-inner,
+   .carousel-inner img {
+      height: 100%;
+      width: auto;
+      text-align: center;
+   }
+   
+   .carousel-inner {
+      text-align: center;
+   }
+   
+   .likebutton, 
+   .btn dropdown-toggle {
+      background-color:#8A93C0;
+      color:white;
+   }
+   
+   .list-table-admin-rep {
+   	width: 30%;
+   	padding: 6px 0;
+    background-color: #626eac;
+    color: white;
+    text-align:center;
+    border-bottom : #626eac 2px solid;
+    font-size: 18px;
+    font-weight:600;
+   }
+
+	.content_view_crs_mytravel_content{
+	width: 350px;
+    height: 300px;
+    display: inline-block;
+    cursor: pointer;
+    margin: 5px;
+    text-align: center;
+    overflow: auto;
+    background: #f0f2ff;
+	}
+	
+	.content_view_crs_mytravel_title{
+	background:#959dc6;
+	width: 350px;
+	padding: 3px;
+	text-align: center;
+	margin: 5px;
+	}
+	
+   .content_view_crs_mytravel_content div{
+   border: 1px solid #c5c5c5;
+   background: white; 
+   margin:5px;
+   }
 

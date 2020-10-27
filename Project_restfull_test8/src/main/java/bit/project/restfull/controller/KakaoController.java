@@ -52,10 +52,11 @@ public class KakaoController {
 	private UserService userService;
 	   
 	
-	private static String KAKAO_LOGIN_URL = "http://localhost:8282/restfull/kakaologin";
+	private static String KAKAO_LOGIN_URL = "http://192.168.6.7:8282/restfull/kakaologin";	//서비스할 서버 컴퓨터
 	private static String KAKAO_TOKEN_URL = "https://kauth.kakao.com/oauth/token";
 	private static String KAKAO_USER_URL= "https://kapi.kakao.com/v2/user/me";
 	
+	// 카카오 소셜 로그인
 	@GetMapping("/kakaologin")
 	public String kakaologin(String code, HttpServletRequest request) throws Exception{
 
@@ -97,6 +98,7 @@ public class KakaoController {
     	//HttpHeaders 
     	HttpHeaders headers2 = new HttpHeaders();
     	headers2.add("Authorization", "Bearer " + oauthToken.getAccess_token());
+    	// 토큰 받아오는 함수
 	    headers2.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
     	
     	//HttpHeader HttpBody
@@ -130,13 +132,13 @@ public class KakaoController {
     	// 카카오톡 고유 아이디값
     	String socialUserId = kakaoProfile.getId().toString();
     	// 우리서비스 회원가입 여부 판단
-    	// 이제 로그인 타입까지 추가로 비교를 해야해 (카카오만의 아이디 검증을 해야하니(
+    	// 이제 로그인 타입까지 추가로 비교를 해야해 (카카오만의 아이디 검증을 해야하니)
     	UserVO loginUserInfo = userService.getUserByIdandAutho(socialUserId,"kakao");
     	
     	if(loginUserInfo == null) {
     		// 여기도 카카오 로그인 타입을 추가해야지
     		UserVO socialRegisterUser = UserVO.builder()
-	    			.member_id(socialUserId)
+	    			.member_id(socialUserId) // 카카오 유저 아이디를 멤터테이블 멤버 아이디 칼럼에 '빌드'
 	    			.pw(kakaoProfile.getId() + "kakao")
 	    			.name(kakaoProfile.getProperties().getNickname())
 	    			.birth("")
@@ -147,16 +149,15 @@ public class KakaoController {
 	    			.grade_name("뚜벅이")
 	    			.authority_name("ROLE_USER")
 	    			.login_type("kakao")
-	    			//여권대조
 	    			.build();
-    		log.info("  여기까지 왔낭  	;" +gson.toJson(socialRegisterUser));
+    		log.info("  마무리 단계 	: " +gson.toJson(socialRegisterUser));
     		userService.addUser(socialRegisterUser);
     	}
     	
     	// 시큐리티 제공하는 유저 정보 조회 서비스를 통한 유저 정보 조회
     	UserDetails userDetails = customUserDetailsService.loadUserByUsername(socialUserId);
     	
-    	log.info(" 로그인처리 직전 	;" +gson.toJson(loginUserInfo));
+    	log.info(" 로그인처리 직전 	:" +gson.toJson(loginUserInfo));
     	// 여기서 로그인 처리
     
     	// 유저정보 + 비밀번호(2번쨰 파라미터) 를 통한 로그인 권한정보 생성

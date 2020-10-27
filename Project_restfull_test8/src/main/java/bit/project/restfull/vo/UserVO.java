@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
+// 소셜로그인시에 필요 
 @Builder
 public class UserVO {
 
@@ -23,10 +24,12 @@ public class UserVO {
 	private String authority_name;
 	private String login_type;
 	
+	// 초기 생성자
 	public UserVO() {
 		this("member_id", "pw", "name", "birth", "gender", "phone", "email", 1, "뚜벅이", "ROLE_USER","Normal");
 	}	
 	
+	// 가입시 권한부여
 	public String getAuthorities() {
 		String authorities = "ROLE_USER";
 		
