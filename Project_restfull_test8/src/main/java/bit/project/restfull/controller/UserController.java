@@ -258,7 +258,7 @@ public class UserController {
 	
 	//14. 결제내역 list --> 상품 view(사용자는 수정이 불가능-관리자만 수정기능 보유)
 	@GetMapping("/goodsView") 
-	public String user_goodsView(String goods_numbers, Model model) {
+	public String userGoodsView(String goods_numbers, Model model) {
 	      log.info("goodsView");
 	      int goodsNum = Integer.parseInt(goods_numbers);
 	      model.addAttribute("content_view",adBoardService.getGoodsVO(goodsNum));
@@ -291,7 +291,7 @@ public class UserController {
 	
 	//16. 내 여행코스 보기
 	@GetMapping("/courseView") 
-	public String course_view(HttpServletRequest req, Model model) {
+	public String courseView(HttpServletRequest req, Model model) {
 		String member_id = req.getParameter("member_id");
 		String serialNum = req.getParameter("serialNum");
 		log.info("user member_id : "+member_id); // name

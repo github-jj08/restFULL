@@ -71,7 +71,7 @@ public class BoardControllerTest {
     
     /* 회원의 후기목록 중 하나의 여행후기를 읽어온다. */
     @Test
-    public void testCContent_view_detail() throws Exception {
+    public void testCContentViewDetail() throws Exception {
     	log.info("get : " + BOARD_NUMBERS);
     	
     	boardService.getBoardVO(BOARD_NUMBERS);

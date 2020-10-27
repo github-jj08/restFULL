@@ -189,7 +189,7 @@ public class AdminBoardController {
       log.info("게시글 view 호출; 게시글 번호 = " + board_no);
       model.addAttribute("content_view",adBoardService.getBoardVO(board_no));
       model.addAttribute("filelist", adBoardService.getBoardAttachmentVO(board_no));
-      return "admin/notice_content_view";
+      return "admin/noticeContentView";
    }
    
    //4. 공지사항 및 이벤트 글 작성 페이지 출력
@@ -296,7 +296,7 @@ public class AdminBoardController {
       int destNum = destinationVO.getDestination_numbers();
       log.info("여행지번호 : " + destNum);
       adBoardService.modifyDestVO(destinationVO);
-      return "redirect:/admin/dest/content_view?destination_numbers="+ destNum;
+      return "redirect:/admin/dest/contentView?destination_numbers="+ destNum;
    }
    
    //5. 여행지 삭제
@@ -392,7 +392,7 @@ public class AdminBoardController {
     * addComments 등
     */
    @GetMapping("/qnas/contentView")
-   public String adminqna_view(String board_numbers, Model model) {
+   public String adminQnaView(String board_numbers, Model model) {
       log.info("content_view");
       int board_no = Integer.parseInt(board_numbers);
       log.info("게시글 view 호출; 게시글 번호 = " + board_no);

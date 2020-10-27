@@ -144,6 +144,7 @@
 		<result property="goods_numbers" column="goods_numbers"/>
 		<result property="destination_name" column="destination_name"/>
 		<result property="cancel" column="cancel"/>
+		<result property="totalPrice" column="totalPrice"/>
 		<result property="price" column="price"/>
 		<result property="merchant_uid" column="merchant_uid"/>
 		<result property="productName" column="productName"/>

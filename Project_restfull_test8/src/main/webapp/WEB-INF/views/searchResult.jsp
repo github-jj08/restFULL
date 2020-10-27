@@ -30,7 +30,7 @@
 						<div class="col-lg-6 col-sm-6 ">
 							<div class="main-postings">
 								<div class="pi-pic">
-									<a href="content_view?board_numbers=${vo.board_numbers}" class="thumbnail">
+									<a href="contentView?board_numbers=${vo.board_numbers}" class="thumbnail">
 										<img src="${vo.thumbnail }"/>
 									</a>           
 								</div>

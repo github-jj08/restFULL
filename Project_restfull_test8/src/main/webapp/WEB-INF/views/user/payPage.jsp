@@ -27,10 +27,6 @@
 			<td>${goodsPay.name}</a></td>
 			<td>${goodsPay.price}</td>
 			<td>${goodsPay.destination_name}</td>
-			<%-- <td>
-				<c:forEach begin="1" end="${dto.bIndent}">-</c:forEach>
-				<c:forEach begin="1" end="12">-</c:forEach>
-				<a href="content_view?board_count=${restful.board_count}">${restful.title}</a></td> --%>
 		</tr>
 		</c:forEach>
 	</table>

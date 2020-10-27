@@ -45,7 +45,7 @@
 							<c:forEach items="${userReports}" var="userBoard">
 							<tr>
 								<td>${userBoard.board_numbers}</td>
-								<td><a href="content_view_rep?board_numbers=${userBoard.board_numbers}">${userBoard.title}</a></td>
+								<td><a href="contentViewRep?board_numbers=${userBoard.board_numbers}">${userBoard.title}</a></td>
 								<td>${userBoard.dates}</td>
 							</tr>
 							</c:forEach>
