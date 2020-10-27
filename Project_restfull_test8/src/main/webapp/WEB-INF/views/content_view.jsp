@@ -302,7 +302,7 @@
                                 <div class="view-loc">${content_view.location}</div> <br>
                                 <div class="view-id">${content_view.member_id}</div>
                                 <div class="view-title">${content_view.title}</div>
-                                <div class="view-contents">${content_view.contents}</div>
+                                <textarea rows="10" cols="50" class="view-contents">${content_view.contents}</textarea>
                             </div>
                         </div>
 					</div>
