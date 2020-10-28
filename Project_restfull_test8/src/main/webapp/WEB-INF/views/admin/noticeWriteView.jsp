@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <title>RestFuLL | 공지사항 글작성</title>
+        <title>RestFuLL | 공지사항 및 이벤트 관리</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<%-- <script type="text/javascript" src="<%=request.getContextPath()%>/resources/ckeditor/ckeditor.js"></script>
@@ -16,7 +16,9 @@
 <body>
 
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
-	<h2 class="text-center">관리자 페이지입니다.</h2>
+	<div class="text-center"><h2>공지사항 작성</h2></div>
+
+<hr/>
 
  <!-- Blog Section Begin -->
     <section class="blog-section spad">

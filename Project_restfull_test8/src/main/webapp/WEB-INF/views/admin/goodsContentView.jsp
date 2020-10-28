@@ -8,11 +8,12 @@
 <html>
 <head>
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-   <title>RestFuLL | 관리자</title>
+   <title>RestFuLL | 상품주문내역 관리</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
 	<div class="text-center"><h2>상품주문내역 관리</h2></div>
+	<hr/>
 
  <!-- Blog Section Begin -->
     <section class="blog-section spad">

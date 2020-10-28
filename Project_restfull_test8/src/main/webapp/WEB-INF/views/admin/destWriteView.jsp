@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <title>RestFuLL | 여행지등록</title>
+        <title>RestFuLL | 여행지 및 상품관리</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
@@ -17,6 +17,7 @@
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
 	<div class="text-center"><h2>여행지 등록</h2></div>
+	<hr/>
 
  <!-- Blog Section Begin -->
     <section class="blog-section spad">

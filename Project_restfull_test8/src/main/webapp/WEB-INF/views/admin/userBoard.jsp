@@ -8,18 +8,10 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
+	<title>RestFuLL | 유저 관리</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <!-- 하트아이콘,,, -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
   <style>
-  
-  
 		.container contents {
 			background-color: white;
 		}
@@ -68,67 +60,6 @@
 		background-color:#8A93C0;
 		color:white;
 	}
-	/*신고 모달창*/
-#DecModal .modal-content .modal-header {
-    background-color:#8a93c0;
- 
-}
-
-#DecModal .modal-content .modal-header h4{
-    font-weight:800;
-    color: white;
-    text-align: center;
-}
-
-#DecModal .modal-content .modal-header button {
-    color: white;
-}
-
-#DecModal .modal-body {
-    float:left;
-    height: 300px;
-    width:100%;
-}
-
-#DecModal .modal-body .mb-title {
-    margin-bottom:10px;
-    
-}
-#DecModal .modal-body .mb-title b {
-    font-size: 17px;
-}
-
-#DecModal .modal-body .mb-title #title {
-    margin-left:10px;  
-    
-}
-#DecModal .modal-body .mb-reason {
-    margin: 5px 0;
-}
-
-#DecModal .modal-body .mb-reason b {
-    font-size: 17px;   
-}
-
-#DecModal .modal-body .mb-reason input{ 
-    margin-right: 4px;
-}
-
-#DecModal .modal-body .mb-reason label {
-    margin-right:15px;   
-}
-
-#DecModal .modal-body .other-reason #reasontext{
-    width:100%;
-    height: 150px;
-}
-
-#DecModal .modal-footer button{
-    font-size:20px;
-    font-weight:900;
-    text-align:center;
-    float:right;
-}
 
 	
   </style>
@@ -169,7 +100,7 @@
 								console.log("filelist : " + filelist);
 								
 						    	for(var i=0 ; i< filelist.length ; i++) {
-							       $('<div class="carousel-item"><img src="'+filelist[i].filedirectory+'" width=\"460\" height=\"345\""></div>').appendTo('.carousel-inner');
+							       $('<div class="carousel-item"><img src="'+filelist[i].filedirectory+'" style="height:450px;"></div>').appendTo('.carousel-inner');
 							       $('<li data-target="#myCarousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
 							     	}
 							     $('.carousel-item').first().addClass('active');

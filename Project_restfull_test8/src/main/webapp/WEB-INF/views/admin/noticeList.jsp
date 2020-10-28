@@ -6,13 +6,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title></title>
+<title>RestFuLL | 공지사항 및 이벤트 관리</title>
 	
 </head>
 <body>
 
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
 	<div class="text-center"><h2>공지사항 및 이벤트 관리</h2></div>
+	<hr/>
 
  <!-- Blog Section Begin -->
     <section class="blog-section spad">

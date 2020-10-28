@@ -13,6 +13,7 @@
 	
 	<div class="text-center"><h2>여행지 및 상품 관리</h2></div>
 
+<hr/>
  <!-- Blog Section Begin -->
     <section class="blog-section spad">
         <div class="container">

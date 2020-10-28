@@ -13,6 +13,7 @@
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
 	<div class="text-center"><h2>문의 및 신고 답변</h2></div>
 
+<hr/>
  <!-- Blog Section Begin -->
     <section class="blog-section spad">
         <div class="container">

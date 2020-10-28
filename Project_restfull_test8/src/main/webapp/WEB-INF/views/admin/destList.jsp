@@ -6,13 +6,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>RestFuLL | 여행지 및 상품관리</title>
 	
 </head>
 <body>
 
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
 	<div class="text-center"><h2>여행지 및 상품 관리</h2></div>
+	<hr/>
 
  <!-- Blog Section Begin -->
     <section class="blog-section spad">

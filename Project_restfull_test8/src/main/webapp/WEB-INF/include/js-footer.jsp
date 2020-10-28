@@ -22,7 +22,7 @@
                 <div class="col-lg-3">
                     <div class="footer-left">
                         <div class="footer-logo">
-                            <a href="#"><img src="resources/img/LOGOsmall.png" alt=""></a>
+                            <a href="${pageContext.request.contextPath}/"><img src="resources/img/LOGOsmall.png" alt=""></a>
                         </div>
                         <ul>
                             <li>Address:서울 마포구 백범로 23 구프라자 B1</li>
@@ -35,7 +35,7 @@
                     <div class="footer-widget">
                         <h5>Information</h5>
                         <ul>
-                          	<li><a href="./rs-comapnyinfo.jsp">회사소개</a></li>
+                          	<li><a href="#">회사소개</a></li>
                             <li><a href="#">이용약관</a></li>
                             <li><a href="#">여행지등록</a></li>
                             <li><a href="${pageContext.request.contextPath}/notice/<c:out value='2'/>">고객센터</a></li>
