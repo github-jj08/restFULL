@@ -64,29 +64,31 @@
 										     </a>
 										</div>
 										
+									
+										<script>
+											$(function(){  
+												var filelist = new Array();
+													
+												<c:forEach items="${filelist}" var="file">
+													var json = new Object();
+													json.filedirectory = "${file.filedirectory}";
+													filelist.push(json);
+												</c:forEach>
+													
+												console.log("filelist : " + filelist);
+													
+											    for(var i=0 ; i< filelist.length ; i++) {
+													  $('<div class="carousel-item"><img src="'+filelist[i].filedirectory+'" style="height:600px; "></div>').appendTo('.carousel-inner');
+												    $('<li data-target="#myCarousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
+												 }
+												 $('.carousel-item').first().addClass('active');
+												 $('.carousel-indicators>li').first().addClass('active');
+												 $('#myCarousel').carousel();
+											});
+												
+										</script>
+									
 									</div>
-									<script>
-										$(function(){  
-											var filelist = new Array();
-												
-											<c:forEach items="${filelist}" var="file">
-												var json = new Object();
-												json.filedirectory = "${file.filedirectory}";
-												filelist.push(json);
-											</c:forEach>
-												
-											console.log("filelist : " + filelist);
-												
-										    for(var i=0 ; i< filelist.length ; i++) {
-												  $('<div class="carousel-item"><img src="'+filelist[i].filedirectory+'" style="height:600px; "></div>').appendTo('.carousel-inner');
-											    $('<li data-target="#myCarousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
-											 }
-											 $('.carousel-item').first().addClass('active');
-											 $('.carousel-indicators>li').first().addClass('active');
-											 $('#myCarousel').carousel();
-										});
-											
-									</script>
 									<hr/>
 									<!-- 제목,내용 -->		
 									<div class="group-input">
@@ -121,6 +123,6 @@
 	
 <%@ include file="/WEB-INF/include/js-footer.jsp"%>	
 	
-</form>
+
 </body>
 </html>

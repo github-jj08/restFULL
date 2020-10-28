@@ -17,7 +17,7 @@
                 <div class="col-lg-4 offset-lg-4">
                     <div class="register-form">
                         <h2>구매해주셔서 감사합니다.</h2>
-							<button type="submit" class="site-btn home-btn">
+							<button type="submit" class="site-btn">
 							<a href="${pageContext.request.contextPath}/user/myCourseList?member_id=<sec:authentication property="principal.user.member_id"/>">내가 짠 여행코스보러가기</a>
 							</button>
                    </div>

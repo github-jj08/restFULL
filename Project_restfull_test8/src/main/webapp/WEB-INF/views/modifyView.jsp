@@ -31,43 +31,54 @@
 
 							<!-- write Data -->
 							사진 데이터 및 위치정보는 수정이 불가능합니다.
-		 					<div id="photo-view">
+							<div class="photo-view">
+					
+								<!-- 사진들 -->
 								<div id="myCarousel" class="carousel slide" data-ride="carousel">
-								     <ul class="carousel-indicators"> </ul>
+									<!-- Indicators -->
+								    <ul class="carousel-indicators"> </ul>
 								     
-								     <div class="carousel-inner"> </div>
+								    <!-- Wrapper for slides -->
+								    <div class="carousel-inner"> </div>
 								     
-								     <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+								    <!-- Controls -->
+								    <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
 								       <span class="carousel-control-prev-icon"></span>
-								     </a>
-								     <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+								    </a>
+								    <a class="carousel-control-next" href="#myCarousel" data-slide="next">
 								       <span class="carousel-control-next-icon"></span>
-								     </a>
+								    </a>
 								</div>
-							</div>
-						
-							<script>
-								$(function(){  
-									var filelist = new Array();
-									
-									<c:forEach items="${filelist}" var="file">
-										var json = new Object();
-										json.filedirectory = "${file.filedirectory}";
-										filelist.push(json);
-									</c:forEach>
-									
-									console.log("filelist : " + filelist);
-									
-							    	for(var i=0 ; i< filelist.length ; i++) {
-								       $('<div class="carousel-item"><img src="'+filelist[i].filedirectory+'" style="height:450px; "></div>').appendTo('.carousel-inner');
-								       $('<li data-target="#myCarousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
-								     	}
-								     $('.carousel-item').first().addClass('active');
-								     $('.carousel-indicators>li').first().addClass('active');
-								     $('#myCarousel').carousel();
-								});
-								
-							</script>
+								 <!--------------------------
+		                        	 Carousel 스크립트 start
+		                         ----------------------------->
+								<script>
+									$(function(){  
+										var filelist = new Array();
+										
+										<c:forEach items="${filelist}" var="file">
+											var json = new Object();
+											json.filedirectory = "${file.filedirectory}";
+											filelist.push(json);
+										</c:forEach>
+										
+										console.log("filelist : " + filelist);
+										
+								    	for(var i=0 ; i< filelist.length ; i++) {
+									       $('<div class="carousel-item"><img src="'+filelist[i].filedirectory+'" style="height:450px; "></div>').appendTo('.carousel-inner');
+									       $('<li data-target="#myCarousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
+									    }
+								    	
+									    $('.carousel-item').first().addClass('active');
+									    $('.carousel-indicators>li').first().addClass('active');
+									     //$('#myCarousel').carousel();
+									});
+																
+								</script>
+								 <!--------------------------
+		                        	 Carousel 스크립트 end
+		                         ----------------------------->
+		                    </div>
 		
 							<hr/>
 							

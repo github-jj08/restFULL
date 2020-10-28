@@ -96,13 +96,11 @@
 	                  
 	                  
 	                  if(result.length < 1){
-	                     htmls += '<tr class="noticeable2">';
-	                     htmls += '<td>'+ "등록된 글이 없습니다."+'</td>';
-	                     htmls += '</tr>';
-	                     
+	                     htmls += "등록된 글이 없습니다.";
+
 	                  } else {
 	                            $(result).each(function(){                                                          
-	                                htmls += '<tr class="noticeable">';
+	                                htmls += '<tr>';
 	                                htmls += '<td>'+ this.boardlistName + '</td>';
 	                                htmls += '<td><a href="${pageContext.request.contextPath}/admin/notice/contentView?board_numbers=' + this.board_numbers + '">' + this.title + '</a></td>';
 	                               	htmls += '<td>'+ this.member_id + '</td>';

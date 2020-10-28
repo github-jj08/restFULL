@@ -47,7 +47,7 @@
 			        		<div class="col-sm-12">
 	                        	<div class="notice_write">
 									<!-- 문의글 작성 -->
-									<form action="<%=request.getContextPath() %>/user/ask_write" method="post" enctype="multipart/form-data">
+									<form action="<%=request.getContextPath() %>/user/askWrite" method="post" enctype="multipart/form-data">
 										<!-- hidden -->
 										<sec:authentication var="principal" property="principal" />
 										<input type="hidden" name="member_id" value="${principal.user.member_id}"/>

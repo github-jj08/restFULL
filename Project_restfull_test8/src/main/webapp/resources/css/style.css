@@ -192,8 +192,8 @@ ol {
 
 .site-btn {
 	color: #ffffff;
-	background: #e7ab3c;
-	border: 1px solid #e7ab3c;
+	background: #8a93c0;
+	border: 1px solid #8a93c0;
 	font-size: 14px;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -4197,7 +4197,6 @@ media only screen and (max-width: 991px) {
 	border : #8a93c0 2px solid;
 }
 
- 
 .blog-section .notice-table .writebtn {
 	float: right;	
 }
@@ -4734,4 +4733,30 @@ media only screen and (max-width: 991px) {
    background: white; 
    margin:5px;
    }
+
+
+
+.goods_info {
+    margin-top: 200px;
+    padding: 15px;
+    border: #8a93c0 double;
+
+}
+.goods_info h3 {
+    text-align:center;
+    font-weight:700;
+	color: #41497a;
+    padding-top:20px;
+    padding-bottom: 50px;
+    
+}
+.goods_info .board-name {
+    font-weight:600;
+    font-size:20px;
+}
+
+.goods_info .board-contents {
+    font-size: 15px;
+    
+}
 
