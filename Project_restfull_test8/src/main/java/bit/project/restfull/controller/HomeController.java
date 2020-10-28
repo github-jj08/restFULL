@@ -30,8 +30,10 @@ import lombok.extern.log4j.Log4j;
 //회원가입 하지 않아도 사용가능한 사용자 기능들
 public class HomeController {
 
+	@Autowired
 	private BoardService boardService;
 	
+	@Autowired
 	private AdminBoardService adBoardService;
 	
 	//인덱스 페이지
@@ -69,7 +71,6 @@ public class HomeController {
 		model.addAttribute("searchWord", searchWord);
 		model.addAttribute("boardlist_numbers", boardlist_numbers);
 		model.addAttribute("paging", pagingVO);
-		
 		model.addAttribute("boardlist", boardlist);
 		
 		log.info(searchWord + " 에 대한 검색결과 return 수 : " + total);
@@ -161,6 +162,6 @@ public class HomeController {
 	@GetMapping("/personal")
 	public String personal() {
 		log.info("personal");
-		return "Service/personal_policy";
+		return "Service/personalPolicy";
 	}
 }

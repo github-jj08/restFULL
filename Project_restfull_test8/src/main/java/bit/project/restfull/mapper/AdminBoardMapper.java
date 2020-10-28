@@ -70,7 +70,7 @@ public interface AdminBoardMapper{
 	@ResultMap("DestinationContents")
 	@Select("select * from destination d, sidogu s" 
 			+ " where d.sigungu_code = s.sigungu_code" 
-			+ " order by s.sidocode asc, s.sigunguname asc, d.destination_name asc")
+			+ " order by s.sidocode desc, s.sigunguname desc, d.destination_name desc")
 	List<DestinationVO> getDestList();
 	
 	/* 특정 여행지 보기 */

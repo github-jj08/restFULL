@@ -29,13 +29,17 @@ import lombok.extern.log4j.Log4j;
 //로그인 관련 기능
 public class LoginController {
 	
-    private NaverLoginBO naverLoginBO;
+	@Autowired
+	NaverLoginBO naverLoginBO;
+	
+	@Autowired
 	private UserService userService;
 	
 	//로그인
 	@GetMapping("/login")
 	public String loginForm(Model model, HttpSession session) {
 		//세션을 통한 네이버 로그인 api url 생성
+		log.info(session);
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 	    log.info("네이버 url:" + naverAuthUrl);
 	    
@@ -133,14 +137,14 @@ public class LoginController {
 	// 아이디 찾기 페이지 이동
 	@GetMapping("/findID")
 	public String findID() {
-		System.out.println("access to find id page");
+		log.info("access to find id page");
 		return "login/findID";
 	}
 	
 	// 비밀번호 찾기 페이지 이동
 	@GetMapping("/findPW")
 	public String findPW() {
-		System.out.println("access to find pw page");
+		log.info("access to find pw page");
 		return "login/findPW";
 	}
 	
@@ -154,7 +158,7 @@ public class LoginController {
 	// 임시 비밀번호 이메일로 전송
 	@PostMapping("/doFindPW")
 	public void findPw(@ModelAttribute UserVO userVO, HttpServletResponse response) throws Exception{
-		System.out.println(userVO.getMember_id());
+		log.info(userVO.getMember_id());
 		userService.findPW(response, userVO);
 	}
 	

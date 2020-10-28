@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-     
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
@@ -10,6 +9,8 @@
         <title>RestFuLL | 여행지 및 상품관리</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fawtmt0h7b"></script>
+	
 </head>
 <body>
 <%@ include file="/WEB-INF/include/js-header.jsp"%>
@@ -77,10 +78,11 @@
                         		<form action="modify" method="post" class="dest_register">
 									<div class="dest">
 										<div class="group-input">
-											여행지이름 변경은 불가능합니다.
+											여행지이름과 좌표 변경은 불가능합니다.
 											<br/>		
 											<label for="destination"> 여행지 이름 : ${modify_view.destination_name}</label>
 											<input type="hidden" name="destination_name" value="${modify_view.destination_name}"/>
+											<input type="hidden" name="destination_numbers" value="${modify_view.destination_numbers}"/>
 							
 										</div>
 										
@@ -278,18 +280,18 @@
 									   <!-- 입력할 주소 출력 -->
 										<div class="maploc">	
 											<label>지번주소</label>
-											<input id="jibunAddr" class="addform" name="jibunaddress" type="text" readonly="readonly" >
+											<input id="jibunAddr" class="addform" name="jibunaddress" type="text" readonly="readonly" value="${modify_view.jibunaddress}">
 											<br/>
 											<label>도로명 주소 </label> 
-											<input id="doroAddr" class="addform" name="doroaddress" type="text">
+											<input id="doroAddr" class="addform" name="doroaddress" type="text" value="${modify_view.doroaddress}">
 											<br/>
 											<label>추가 주소 </label>
-											<input id="detailAddr" class="addform" name="details" type="text">
+											<input id="detailAddr" class="addform" name="details" type="text" value="${modify_view.details}">
 											<br/>
 											<label>x 좌표</label>
-											<input id="gps-x" class="addform2" name="lat" type="text" readonly="readonly">
+											<input id="gps-x" class="addform2" name="lat" type="text" readonly="readonly" value="${modify_view.lat}">
 											<label>y 좌표</label>
-											<input id="gps-y" class="addform2" name="lng" type="text"  readonly="readonly">
+											<input id="gps-y" class="addform2" name="lng" type="text"  readonly="readonly" value="${modify_view.lng}">
 
 										</div>
 

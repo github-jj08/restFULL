@@ -63,7 +63,7 @@ public interface BoardMapper{
 	void updateBoardThumbImg(@Param("board_numbers") int board_numbers, @Param("thumbnail")String thumbnail);
 
 	/* 글수정(게시판 테이블) */
-	@Update("update board set title = #{title}, contents = #{contents}, location = #{destination_numbers} where board_numbers = #{board_numbers}")
+	@Update("update board set title = #{title}, contents = #{contents} where board_numbers = #{board_numbers}")
 	void updateBoardVO(BoardVO boardVO);
 	
 	/* 글삭제(게시판테이블) */
@@ -134,7 +134,7 @@ public interface BoardMapper{
 	@Select("select count(*) from board b, destination d" 
 			+ " where b.destination_numbers = d.destination_numbers" 
 			+ " and b.boardlist_numbers = #{boardlist_numbers}"
-			+ " and (d.destination_name like '%'||#{searchWord}||'%' or d.jibunaddress like '%'||#{searchWord}||'%')")
+			+ " and b.location like '%'||#{searchWord}||'%'")
 	public int countMainBoard(@Param("boardlist_numbers")int boardlist_numbers, @Param("searchWord") String searchWord);
 		
 }

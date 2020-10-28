@@ -98,7 +98,7 @@
 			                                  	var htmls="";
 			                                  	$("#list-table").html("");
 				                                if(result.length < 1){
-				                                   htmls.push("등록된 댓글이 없습니다.");
+				                                   htmls+="등록된 댓글이 없습니다.";
 				                                } else {
 			                                           $(result).each(function(index,item){
 			                                              //사용자와 작성자의 아이디가 같다면 삭제 버튼 생성

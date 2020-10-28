@@ -112,7 +112,7 @@ public class BoardServiceImpl implements BoardService{
 	       		    fileMap.put("fileDirectory", fileDirectory);
 	                fileMap.put("fileName", fileName);
 	                fileMap.put("fileSize", fileSize);
-	                System.out.println("fileMap :"+fileMap);
+	                log.info("fileMap :"+fileMap);
 	                uploadfiles[i].transferTo(image);
 	                
 	                boardMapper.insertAttachmentVO(fileMap);
@@ -129,7 +129,7 @@ public class BoardServiceImpl implements BoardService{
 	                fileMap.put("fileDirectory", fileDirectory);
 	                fileMap.put("fileName", fileName);
 	                fileMap.put("fileSize", fileSize);
-	                System.out.println("fileMap :"+fileMap);
+	                log.info("fileMap :"+fileMap);
 	                uploadfiles[i].transferTo(saveFile);
 	                boardMapper.insertAttachmentVO(fileMap);
 	            }

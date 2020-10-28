@@ -64,4 +64,7 @@ public interface LoginMapper {
 	
 	@Select("select * from member where member_id = #{member_id} and login_type = #{login_type}")
 	public UserVO KreadUserByIdandAutho(@Param("member_id")String member_id,@Param("login_type")String login_type);
+	
+	@Select("select count(*) from board where member_id =#{member_id} and boardlist_numbers='1'")
+	public int countMemberBoard(String member_id);
 }

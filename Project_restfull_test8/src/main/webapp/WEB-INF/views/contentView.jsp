@@ -85,8 +85,8 @@
 										<script>
 										$(document).on("click", "button[name='loginNeed']",function(){
 											
-											console.log("loginNeed");
-											
+											alert("로그인이 필요한 기능입니다.");
+											location.href="${pageContext.request.contextPath}/login";
 										});
 										</script>				
 									</sec:authorize>
@@ -230,9 +230,14 @@
 								                    $("textarea[name=report_reason]").attr("disabled",false);
 								                    // radio 버튼의 value 값이 13(기타)이라면 활성화
 								
+								                }else if($("input[name=report_reason]:checked").val() == "11"){
+								                    // radio 버튼의 value 값이 그 외라면 비활성화
+								                	$("textarea[name=report_reason]").attr("disabled",true);
+								                	$("textarea[name=report_reason]").val("음란성글 신고");
 								                }else{
 								                    // radio 버튼의 value 값이 그 외라면 비활성화
 								                	$("textarea[name=report_reason]").attr("disabled",true);
+								                	$("textarea[name=report_reason]").val("홍보 및 허위글 신고");
 								                }
 											}
 								        	  

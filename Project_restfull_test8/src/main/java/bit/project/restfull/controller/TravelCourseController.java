@@ -29,6 +29,7 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class TravelCourseController {
 
+	@Autowired
 	private AdminBoardService adBoardService;
    
 	@GetMapping("/travel")
@@ -112,8 +113,8 @@ public class TravelCourseController {
 		String member_id =null;
 		for (Map<String, Object> map : paramData) {
 			member_id = (String) map.get("member_id");
-			System.out.println("member_id : "+member_id);
-			System.out.println(map.get("goods_numbers") + " : " + map.get("count"));
+			log.info("member_id : "+member_id);
+			log.info(map.get("goods_numbers") + " : " + map.get("count"));
 		}		
 
 		log.info(paramData.size());

@@ -34,10 +34,13 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class NaverController {
    
+	@Autowired
 	private NaverLoginBO naverLoginBO;
    
+	@Autowired
 	private RestFullUserDetailsService restFullUserDetailsService;
    
+	@Autowired
 	private UserService userService;
    
 	private String apiResult = null;
@@ -47,7 +50,7 @@ public class NaverController {
 	public String callback( HttpServletRequest request, @RequestParam String code, @RequestParam String state, HttpSession session)
 			throws IOException, ParseException {
        
-		System.out.println("여기는 callback");
+		log.info("여기는 callback");
 		Gson gson = new Gson();
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverLoginBO.getAccessToken(session, code, state);
@@ -67,11 +70,11 @@ public class NaverController {
 		JSONObject response_obj = (JSONObject) jsonObj.get("response");
 		//response의 nickname값 파싱
 		String id = (String) response_obj.get("id");
-		System.out.println("id : "+id);
+		log.info("id : "+id);
 		String name = (String) response_obj.get("name");
-		System.out.println("name : "+name);
+		log.info("name : "+name);
 		//4.파싱 닉네임 세션으로 저장
-		System.out.println("apiResult : "+apiResult);
+		log.info("apiResult : "+apiResult);
 		
 		//id+"@n" 아이디 만들어서 있는지 중복체크 
 		String naverId = id+"@n";

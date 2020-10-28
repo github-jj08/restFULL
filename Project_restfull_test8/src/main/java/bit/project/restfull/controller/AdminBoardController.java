@@ -49,11 +49,14 @@ import lombok.extern.log4j.Log4j;
 //관리자 페이지 기능들
 public class AdminBoardController {
 
-   private BoardService boardService;
+	@Autowired
+	private BoardService boardService;
 
-   private UserService userService;
+	@Autowired
+	private UserService userService;
 
-   private AdminBoardService adBoardService;
+	@Autowired
+	private AdminBoardService adBoardService;
 
    /* 회원 관리 */
    //1. 회원 리스트 페이징
@@ -88,7 +91,7 @@ public class AdminBoardController {
 		log.info("확인할 user id" + member_id); // name
 		userVO = userService.getUserVO(member_id);
 		
-		int total = userService.countMember();
+		int total = userService.countMemberBoard(member_id);
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
 			cntPerPage = "5";
@@ -137,18 +140,6 @@ public class AdminBoardController {
 		
 	}
    
-	//5. 관리자 권한으로 회원 게시글 조회
-	@GetMapping("/boardView") 
-	public String boardView(String board_numbers, Model model) throws Exception{
-		log.info("content_view");
-	    int board_no = Integer.parseInt(board_numbers);
-	    log.info("게시글 view 호출; 게시글 번호 = " + board_no);
-
-	    model.addAttribute("content_view",adBoardService.getBoardVO(board_no));
-	    model.addAttribute("filelist", adBoardService.getBoardAttachmentVO(board_no));
-		return "admin/userBoard";
-	}
-	
 	//6. 관리자 권한으로 회원 게시글 삭제
 	@ResponseBody
 	@GetMapping("/boardDeleteAdmin") 
@@ -265,7 +256,7 @@ public class AdminBoardController {
       log.info("write");
       adBoardService.writeDestVO(destinationVO);
       log.info("writeDestVO;");
-      return "redirect:/admin/dest/";
+      return "redirect:/";
    }
    
    //3-3. 여행지 등록 시 지역코드 가져오기

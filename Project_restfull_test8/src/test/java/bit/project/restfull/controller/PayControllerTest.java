@@ -66,7 +66,7 @@ public class PayControllerTest {
 			assertNotNull(payment_response.getResponse());
 			assertEquals(test_imp_uid, payment_response.getResponse().getImpUid());
 		} catch (IamportResponseException e) {
-			System.out.println(e.getMessage());
+			log.info(e.getMessage());
 			
 			switch(e.getHttpStatusCode()) {
 			case 401 :

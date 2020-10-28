@@ -36,4 +36,6 @@ public interface UserService {
 	public void findPW(HttpServletResponse response, UserVO userVO) throws Exception;
 
 	public UserVO getUserByIdandAutho(String id, String login_type);
+	
+	public int countMemberBoard(String member_id);
 }

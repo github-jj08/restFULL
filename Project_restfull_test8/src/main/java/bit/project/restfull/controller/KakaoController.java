@@ -42,10 +42,13 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class KakaoController {
 	
+	@Autowired
 	private KakaoService kakaoService;
 	
+	@Autowired
 	private RestFullUserDetailsService restFullUserDetailsService;
 	   
+	@Autowired
 	private UserService userService;
 	   
 	
@@ -110,7 +113,7 @@ public class KakaoController {
     			);
 	
     	
-    	System.out.println(response2.getBody());
+    	log.info(response2.getBody());
     	
     	ObjectMapper objectMapper2 = new ObjectMapper();	    	
     	KakaoProfile kakaoProfile = null;    	
@@ -127,7 +130,7 @@ public class KakaoController {
 		}
     	
     	// 카카오톡 고유 아이디값
-    	String socialUserId = kakaoProfile.getId().toString();
+    	String socialUserId = kakaoProfile.getId().toString() + "@k";
     	// 우리서비스 회원가입 여부 판단
     	// 이제 로그인 타입까지 추가로 비교를 해야해 (카카오만의 아이디 검증을 해야하니)
     	UserVO loginUserInfo = userService.getUserByIdandAutho(socialUserId,"kakao");

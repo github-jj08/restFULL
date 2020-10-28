@@ -61,7 +61,7 @@ public class BoardControllerTest {
     	boardVO.setLocation("");
     	
     	boardService.writeBoardVO(boardVO);
-    	System.out.println("boardVO... " + boardVO.getTitle());
+    	log.info("boardVO... " + boardVO.getTitle());
 		int boardNum = boardVO.getBoard_numbers();
 		
 		log.info("success insert : " + boardNum);

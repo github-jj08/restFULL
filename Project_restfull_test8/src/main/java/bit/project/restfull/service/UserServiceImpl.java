@@ -136,7 +136,7 @@ public class UserServiceImpl implements UserService {
 			}
 			
 			userVO.setPw(pw);
-			System.out.println(pw);
+			log.info(pw);
 			sendMail(userVO, "findPW");
 			// 비밀번호 변경
 			
@@ -193,7 +193,7 @@ public class UserServiceImpl implements UserService {
 			email.setHtmlMsg(msg);
 			email.send();
 		} catch (Exception e) {
-			System.out.println("메일발송 실패 : " + e);
+			log.info("메일발송 실패 : " + e);
 		}
 	}
 
@@ -205,5 +205,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO getUserByIdandAutho(String id, String login_type) {
 		return loginMapper.KreadUserByIdandAutho(id, login_type);
+	}
+
+	@Override
+	public int countMemberBoard(String member_id) {
+		return loginMapper.countMemberBoard(member_id);
 	}
 }

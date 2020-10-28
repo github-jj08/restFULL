@@ -101,7 +101,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
  	       		    fileMap.put("fileDirectory", fileDirectory);
  	                fileMap.put("fileName", fileName);
  	                fileMap.put("fileSize", fileSize);
- 	                System.out.println("fileMap :"+fileMap);
+ 	                log.info("fileMap :"+fileMap);
  	                uploadfiles[i].transferTo(image);
  	                
  	                adBoardMapper.insertAttachmentVO(fileMap);
@@ -118,7 +118,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
  	                fileMap.put("fileDirectory", fileDirectory);
  	                fileMap.put("fileName", fileName);
  	                fileMap.put("fileSize", fileSize);
- 	                System.out.println("fileMap :"+fileMap);
+ 	                log.info("fileMap :"+fileMap);
  	                uploadfiles[i].transferTo(saveFile);
  	                adBoardMapper.insertAttachmentVO(fileMap);
  	            }
@@ -162,12 +162,13 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 
 	@Override
 	public void writeDestVO(DestinationVO destinationVO) {
+		int before = destinationVO.getDestination_numbers();
 		int dNum = adBoardMapper.insertDestVO(destinationVO);
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-	    resultMap.put("dNum", destinationVO.getDestination_numbers());
-		log.info("반환받은 번호 : " + resultMap.get("dNum"));
-		//adBoardMapper.updateBoardVO_DestNum(mydNum);
-		//return (int) resultMap.get("dNum");
+		
+		log.info("before = " + before);
+		log.info("dNum = " + dNum);
+		
+		log.info("반환받은 번호 : " + destinationVO.getDestination_numbers());
 	}
 
 	

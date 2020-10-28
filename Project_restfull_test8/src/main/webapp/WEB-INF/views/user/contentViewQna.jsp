@@ -68,47 +68,6 @@
 		        </div>
 	        </div>
 		</section>
-		
-		
-<%--           <!-- 메인 컨텐츠  -->
-         <div class="contentswrapper">
-            <input type="hidden" name="board_numbers" value="${content_view.board_numbers}">
-			        	<div class="notice-table">
-				        	<table id="list-table" class="" style="table-layout: fixed; text-overflow:ellipsis; border: 1px solid;">
-								<tr>
-									<td class="content-view-table-rep">제목</td>
-									<td>${content_view.title}</td>
-								</tr>
-								<tr>
-									<td class="content-view-table-rep">작성자</td>
-									<td>${content_view.member_id}</td>
-								</tr>
-								<tr>
-									<td class="content-view-table-rep">작성날짜</td>
-									<td> ${content_view.dates}</td>
-								</tr>								
-								<tr style="height: auto;">
-									<td class="content-view-table-rep">문의내용</td>
-									
-									<td height = "0"><div style="padding:5px; height:100%; word-break:break-all">${content_view.contents}</div></td>
-								</tr>
-							</table>
-						</div> --%>
-               
-            <%-- <!-- 답변 글 -->
-            <div id="rightbox"style="float:right">            
-               <div>
-                  <div id="commentlist">
-                     <div id="reply">
-                        <section class="replyForm">
-                           <table id="list-table">
-                           </table>
-                        </section>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div> --%>
          
          
 <%@ include file="/WEB-INF/include/js-footer.jsp"%>
@@ -137,7 +96,7 @@
                                 }).appendTo("#list-table-admin") // 이것을 테이블에붙임
 
                                 if(result.length < 1){
-                                   htmls.push("등록된 댓글이 없습니다.");
+                                   htmls += "등록된 댓글이 없습니다.";
                                 } else {
                                            $(result).each(function(index,item){
                                               //사용자와 작성자의 아이디가 같다면 삭제 버튼 생성
