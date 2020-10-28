@@ -83,8 +83,26 @@
 										<span class="like_count"></span>	
 										
 										<script>
-										$(document).on("click", "button[name='loginNeed']",function(){
+										$(function(){
+											var board_numbers = $('input[name=board_numbers]').val();
 											
+											function likeCount() {
+												$.ajax({
+													url: "${pageContext.request.contextPath}/board/likeCount",
+									                type: "GET",
+									                data: {
+									                    "board_numbers": board_numbers
+									                },
+									                dataType:"json",
+									                success: function (count) {
+									                	console.log(JSON.parse(count));
+									                	$(".like_count").text(JSON.parse(count));
+									                },
+												})
+										    };
+										    likeCount();
+										});
+										$(document).on("click", "button[name='loginNeed']",function(){
 											alert("로그인이 필요한 기능입니다.");
 											location.href="${pageContext.request.contextPath}/login";
 										});
@@ -106,24 +124,25 @@
 												var member_id = $('input[name=member_id]').val();
 												console.log("board_numbers : " + board_numbers);
 												console.log("member_id : " + member_id);
+												
 												function likeCheck(){ 
 													$.ajax({
-													url: "${pageContext.request.contextPath}/user/board/likeCheck",
-									                type: "GET",
-									                dataType:"json",
-									                data: {
-									                    "board_numbers": board_numbers,
-									                    "member_id": member_id
-									                },
-									                success: function (result) {
-									                	//좋아요 체크를 했을 때, 좋아요 된 상태(1)일 경우 하트의 상태를 바꿈(빈하트 -> 꽉찬 하트)
-									                	if(JSON.parse(result == 1)){
-										                	$("#like-button").attr('class','fa fa-heart');
-									                	}else{
-									                		$("#like-button").attr('class','fa fa-heart-o');
-									                	}
-									                }
-												});
+														url: "${pageContext.request.contextPath}/user/board/likeCheck",
+										                type: "GET",
+										                dataType:"json",
+										                data: {
+										                    "board_numbers": board_numbers,
+										                    "member_id": member_id
+										                },
+										                success: function (result) {
+										                	//좋아요 체크를 했을 때, 좋아요 된 상태(1)일 경우 하트의 상태를 바꿈(빈하트 -> 꽉찬 하트)
+										                	if(JSON.parse(result == 1)){
+											                	$("#like-button").attr('class','fa fa-heart');
+										                	}else{
+										                		$("#like-button").attr('class','fa fa-heart-o');
+										                	}
+										                }
+													});
 												};
 												
 												// 추천버튼 클릭시(추천 추가 또는 추천 제거)
@@ -157,8 +176,8 @@
 										                },
 													})
 											    };
-											likeCheck();
-											likeCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
+												likeCheck();
+												likeCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
 											});
 											</script>
 									</sec:authorize>

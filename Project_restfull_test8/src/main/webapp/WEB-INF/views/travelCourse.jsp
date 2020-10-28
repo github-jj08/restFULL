@@ -101,7 +101,7 @@
             <!-- 여행지역 상품 결제 ajax로 번쩎 뜩ㅁ -->
             <div class="goods">
 	            <div class="row">
-	               <div class="col-lg-12">
+	               <div id="pay-box" class="col-lg-12">
 	                  <div id="goodsList">
 	                  
 	                  </div>
@@ -176,7 +176,7 @@
 	                $(function(){
 		               	$("#blank-btn").click(function(){
 		                        console.log("blank");
-		                  		$(".sortable").append('<li class="ui-state-default"><div><input type="text" class="course_blank" name="course" maxlength="300"/><input type="button" class="delete-btn" value="x"></div></li>');
+		                  		$(".sortable").append('<li class="ui-state-default"><div><input type="text" class="course_blank" name="course" maxlength="300"/><span><input type="button" class="delete-btn" value="x"></span></div></li>');
 		                 	});
 	           		});
 
@@ -272,6 +272,9 @@
 	                  }//if-else end
 	                  
 	                  function setGoodsTBLHead(){
+	                	  var member_id = $('input[name="member_id"]').val();
+	                	  
+	                	  console.log("member_id" + member_id);
 	                	  
 		                  complete_cnt++;
 		                  console.log("여행 코스 등록 시 관련상품목록 한번만찍기" + complete_cnt);
@@ -290,11 +293,11 @@
 			    	                           		+'<tbody id="goods-box"> </tbody>'
 			                  						+'</table>');
 			                  $("#goodsList").append('<div id="tp"><b>총 구매금액</b><br><div id="totalPrice"><span>0</span>원</div></div><br>');
-		                      $("#goodsList").append('<input type="button" id="buy" name="buy" value="구매하기"/>');
+		                      $("#pay-box").append('<input type="button"  class="do-btn" value="🌴여행코스 보기🌴"  onclick="location.href=' + "'${pageContext.request.contextPath}/user/myCourseList?member_id=" + member_id + "'" + '"/> ');
+		                      $("#pay-box").append('<input type="button" id="buy" name="buy" class="do-btn" value="🚗선택상품 구매🚗"/>');
 		                  }
 	 	                  
 	                  }//setGoodsTBLHead function end
-	                   	              
 	                  
 	                  function setGoodsTBLBody(){
 	                	  
@@ -313,7 +316,8 @@
 		                       		var htmls="";
 		                        if(result.length < 1){
 		                            $("#goods-box").empty();
-		                           	htmls += '<tr><td colspan="5" style="100%">관련상품이 없습니다.</td></tr>';
+		                           	htmls += '<tr><td colspan="5" style="100%">관련상품이 없습니다.</td></tr>';                        	
+		                           	;
 		                        } else {
 		                           	$(result).each(function(){        
 		                           		$("#goods-box").empty();

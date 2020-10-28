@@ -154,7 +154,7 @@
                 <nav class="nav-menu mobile-menu">
                     <ul>
                         <li><a href="${pageContext.request.contextPath}/">Home</a></li>
-                        <li><a href="${pageContext.request.contextPath}/user/writeView">글작성</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/writeView">여행일기작성</a></li>
                         <li><a href="${pageContext.request.contextPath}/travel/">여행코스작성</a></li>
                         <li><a href="${pageContext.request.contextPath}/notice/<c:out value='2'/>">공지사항</a></li>
                         <li><a href="${pageContext.request.contextPath}/notice/<c:out value='5'/>">이벤트</a></li>
