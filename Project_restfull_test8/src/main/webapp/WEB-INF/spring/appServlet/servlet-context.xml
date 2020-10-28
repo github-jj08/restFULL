@@ -19,6 +19,7 @@
 	<resources mapping="admin/notice/resources/**" location="/resources/" />
 	<resources mapping="admin/dest/resources/**" location="/resources/" />
 	<resources mapping="admin/qnas/resources/**" location="/resources/" />
+	<resources mapping="admin/dest/goods/resources/**" location="/resources/" />
 	<resources mapping="admin/dest/{destination_numbers}/goods/resources/**" location="/resources/" />
 	<resources mapping="user/resources/**" location="/resources/" />
 	<resources mapping="travel/resources/**" location="/resources/" />

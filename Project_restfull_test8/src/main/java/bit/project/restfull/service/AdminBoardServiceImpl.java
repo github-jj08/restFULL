@@ -67,7 +67,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		String root_path = "C:/Users/bit/Desktop";
 		String attach_path = "/resources/upload/";
 
-		Map<String,Object>fileMap = new HashMap<String,Object>();
+		Map<String,Object> fileMap = new HashMap<String,Object>();
         
 		for(int i = 0; i<uploadfiles.length; i++) {
 	        	 try {
