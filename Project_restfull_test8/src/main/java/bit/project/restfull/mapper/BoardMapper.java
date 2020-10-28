@@ -30,7 +30,7 @@ public interface BoardMapper{
 			+ " where b.destination_numbers = d.destination_numbers"
 			+ "	and b.boardlist_numbers = #{boardlist_numbers}"
 			+ "	and b.location like '%'||#{searchWord}||'%' ) A )"
-			+" WHERE RN BETWEEN #{start} AND #{end}")
+			+" WHERE RN BETWEEN #{start} AND #{end} order by hit desc")
 	List<BoardVO> getList(@Param("boardlist_numbers")int boardlist_numbers, @Param("searchWord") String searchWord, @Param("start")int start,  @Param("end")int end);
 	
 	/* 메인 게시글 출력(content_view) */
