@@ -43,7 +43,7 @@
 						      
 						      <c:forEach items="${list}" var="vo">
 							      <tr>
-							         <td><a href="course_view?member_id=<sec:authentication property="principal.user.member_id"/>&serialNum=${vo.serialNum}">${vo.tcAlias}</a></td>
+							         <td><a href="courseView?member_id=<sec:authentication property="principal.user.member_id"/>&serialNum=${vo.serialNum}">${vo.tcAlias}</a></td>
 							         <td>${vo.dates}</td>
 							      </tr>
 						      </c:forEach>

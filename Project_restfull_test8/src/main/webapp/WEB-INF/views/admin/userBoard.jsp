@@ -299,7 +299,7 @@
 						    					},
 						    					success: function() {
 						    							alert("게시글이 삭제되었습니다.");
-						    							location.href = "/restfull/admin/user_content_view?member_id="+member_id;
+						    							location.href = "/restfull/admin/userContentView?member_id="+member_id;
 						    					},
 						    					error: function() {
 						    						alert("알수 없는 에러 발생");
@@ -583,7 +583,7 @@
 						<h2>리스트 뽑기</h2>
 							<c:forEach items="${others}" var="vo">
 								<div class="col-xs-6 col-md-3 main-postings">
-								    <a href="content_view?board_numbers=${vo.board_numbers}" class="thumbnail">
+								    <a href="contentView?board_numbers=${vo.board_numbers}" class="thumbnail">
 								      <img src="${vo.thumbnail }"/>
 								      <div class="caption">
 							                <h3>${vo.title}</h3>

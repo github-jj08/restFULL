@@ -43,7 +43,7 @@
 								<c:forEach items="${userQna}" var="userBoard">
 								<tr>
 									<td>${userBoard.board_numbers}</td>
-									<td><a href="content_view_qna?board_numbers=${userBoard.board_numbers}">${userBoard.title}</a></td>
+									<td><a href="contentViewQna?board_numbers=${userBoard.board_numbers}">${userBoard.title}</a></td>
 									<td>${userBoard.dates}</td>
 								</tr>
 								</c:forEach>

@@ -47,11 +47,11 @@
 								</tr>
 							        <!-- 게시글 목록 -->
 								<c:forEach items="${boardlist}" var="vo">
-								    <a href="${pageContext.request.contextPath}/content_view?board_numbers=${vo.board_numbers}" class="thumbnail">
+								    <a href="${pageContext.request.contextPath}/contentView?board_numbers=${vo.board_numbers}" class="thumbnail">
 											<tr>
 										<div  class="caption">
 									      		<td> <img src="${vo.thumbnail }"/></td>
-								                <td> <a href="${pageContext.request.contextPath}/content_view?board_numbers=${vo.board_numbers}" class="thumbnail">${vo.title}</td>
+								                <td> <a href="${pageContext.request.contextPath}/contentView?board_numbers=${vo.board_numbers}" class="thumbnail">${vo.title}</td>
 								                <td> ${vo.location}</td>
 								                <td> ${vo.dates}</td>
 										</div>

@@ -34,18 +34,16 @@ import lombok.extern.log4j.Log4j;
 //회원가입 및 로그인이 필요한 사용자 기능들
 public class BoardController {
 
-	@Autowired
 	private BoardService boardService;
 
-	@Autowired
 	private AdminBoardService adBoardService;
 	
-	//write_view
-	@GetMapping("/write_view")
-	public String write_view() {
-		log.info("write_view ");
+	//writeView
+	@GetMapping("/writeView")
+	public String writeView() {
+		log.info("writeView ");
 		
-		return "user/write_view";
+		return "user/writeView";
 	}
 	
 	// 메인 게시글 작성
@@ -61,7 +59,7 @@ public class BoardController {
 	
 	// 메인 게시글 목적지 
 	@ResponseBody
-	@PostMapping("/writeMainPosting_dest")
+	@PostMapping("/writeMainPostingDest")
 	public void dest_Write(@RequestBody Map<String,Object> paramData) {
 		log.info("paramData");
 		int board_numbers = (int) paramData.get("board_numbers");
@@ -75,7 +73,7 @@ public class BoardController {
 		log.info("write");
 		int board_numbers = boardService.writeBoardVO(uploadfiles, boardVO);
 		log.info("service.uploadFile(uploadFiles);");
-		return "redirect:/content_view?board_numbers="+board_numbers;
+		return "redirect:/contentView?board_numbers="+board_numbers;
 	}
 	
 	//좋아요 기능
@@ -104,7 +102,7 @@ public class BoardController {
 		model.addAttribute("modify_view", boardService.getBoardVO(board_numbers));
 		model.addAttribute("filelist", boardService.getBoardAttachmentVO(board_numbers));
 		
-		return "modify_view";
+		return "modifyView";
 	}
 	
 	//수정 기능 수행
@@ -113,7 +111,7 @@ public class BoardController {
 		log.info("modify()");
 		boardService.modifyBoardVO(boardVO);
 		log.info("글번호  - " + boardVO.getBoard_numbers());
-		return "redirect:/content_view?board_numbers="+ boardVO.getBoard_numbers();
+		return "redirect:/contentView?board_numbers="+ boardVO.getBoard_numbers();
 	}
 	
 	//delete?bId=${content_view.bId}

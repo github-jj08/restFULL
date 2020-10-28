@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 
-import bit.project.restfull.security.CustomUserDetailsService;
+import bit.project.restfull.security.RestFullUserDetailsService;
 import bit.project.restfull.service.KakaoService;
 import bit.project.restfull.service.UserService;
 import bit.project.restfull.vo.KakaoProfile;
@@ -42,13 +42,10 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class KakaoController {
 	
-	@Autowired
 	private KakaoService kakaoService;
 	
-	@Autowired
-	private CustomUserDetailsService customUserDetailsService;
+	private RestFullUserDetailsService restFullUserDetailsService;
 	   
-	@Autowired
 	private UserService userService;
 	   
 	
@@ -58,7 +55,7 @@ public class KakaoController {
 	
 	// 카카오 소셜 로그인
 	@GetMapping("/kakaologin")
-	public String kakaologin(String code, HttpServletRequest request) throws Exception{
+	public String kakaoLogin(String code, HttpServletRequest request) throws Exception{
 
     	Gson gson = new Gson();
     	RestTemplate rt = new RestTemplate();
@@ -155,7 +152,7 @@ public class KakaoController {
     	}
     	
     	// 시큐리티 제공하는 유저 정보 조회 서비스를 통한 유저 정보 조회
-    	UserDetails userDetails = customUserDetailsService.loadUserByUsername(socialUserId);
+    	UserDetails userDetails = restFullUserDetailsService.loadUserByUsername(socialUserId);
     	
     	log.info(" 로그인처리 직전 	:" +gson.toJson(loginUserInfo));
     	// 여기서 로그인 처리
@@ -170,11 +167,11 @@ public class KakaoController {
         // 시큐리티 로그인 세션을 생성
         session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
 
-        return "redirect:/";  // 여기서 홈으로 리다리엑트 하면 됨
+        return "redirect:/"; 
     }
 	
 	@GetMapping("/kakaologout") 
-	public String kakaologout(HttpSession session) {
+	public String kakaoLogout(HttpSession session) {
 		kakaoService.kakaoLogout((String)session.getAttribute("access_Token"));
 	  
 		session.removeAttribute("access_Token"); 

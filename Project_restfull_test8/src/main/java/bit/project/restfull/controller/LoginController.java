@@ -29,19 +29,14 @@ import lombok.extern.log4j.Log4j;
 //로그인 관련 기능
 public class LoginController {
 	
-	@Autowired
     private NaverLoginBO naverLoginBO;
-	@Autowired
 	private UserService userService;
 	
 	//로그인
 	@GetMapping("/login")
 	public String loginForm(Model model, HttpSession session) {
-		log.info("session : " + session);
-		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+		//세션을 통한 네이버 로그인 api url 생성
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-		//https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
-		//redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
 	    log.info("네이버 url:" + naverAuthUrl);
 	    
 	    //네이버
@@ -150,15 +145,15 @@ public class LoginController {
 	}
 	
 	// 아이디 찾기, 이메일 대조
-	@PostMapping("/doFind_ID")
-	public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
+	@PostMapping("/doFindID")
+	public String findId(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
 		md.addAttribute("id", userService.findID(response, email));
 		return "login/findIdResult";
 	}
 	
 	// 임시 비밀번호 이메일로 전송
-	@PostMapping("/doFind_PW")
-	public void find_PW(@ModelAttribute UserVO userVO, HttpServletResponse response) throws Exception{
+	@PostMapping("/doFindPW")
+	public void findPw(@ModelAttribute UserVO userVO, HttpServletResponse response) throws Exception{
 		System.out.println(userVO.getMember_id());
 		userService.findPW(response, userVO);
 	}

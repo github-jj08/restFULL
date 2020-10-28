@@ -61,7 +61,7 @@
 									</tr>
 									<c:forEach items="${restful_user}" var="restful_user">
 									<tr class="noticeable">
-										<td><a href="user_content_view?member_id=${restful_user.member_id}">${restful_user.member_id}</a></td>
+										<td><a href="userContentView?member_id=${restful_user.member_id}">${restful_user.member_id}</a></td>
 										<td>${restful_user.name}</td>
 										<td>${restful_user.birth}</td>
 									</tr>

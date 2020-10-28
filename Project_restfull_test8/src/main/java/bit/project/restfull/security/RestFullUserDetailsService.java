@@ -16,7 +16,7 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class RestFullUserDetailsService implements UserDetailsService {
 	
 	@Inject
 	private LoginMapper loginmapper;

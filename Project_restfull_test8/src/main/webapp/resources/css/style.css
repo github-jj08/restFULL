@@ -3875,7 +3875,7 @@ media only screen and (max-width: 991px) {
     border:none; 
     width:100%;
     height: 150px;
-    word-break:break-all
+    word-break:break-all;
     
     
 }

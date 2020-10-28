@@ -320,7 +320,7 @@
 		                           		htmls += '<tr><td class="td-choice"><input type="checkbox" name="chk_goods" value="'+this.goods_numbers+'"></td>';
 		                             	htmls += '<td class="td">'+ this.destination_name + '<input type="hidden" name="g_destination_name" value="'+this.destination_name+'"/>';
 		                             	htmls += '<input type="hidden" name="g_destination_numbers" value="'+this.destination_numbers+'"/> </td>';
-		                                htmls += '<td class="td"><a href="${pageContext.request.contextPath}/travel/goods/content_view?goods_numbers=' + this.goods_numbers + '" target="_blank">' + this.name + '</a></td>';
+		                                htmls += '<td class="td"><a href="${pageContext.request.contextPath}/travel/goods/contentView?goods_numbers=' + this.goods_numbers + '" target="_blank">' + this.name + '</a></td>';
 		                                htmls += '<td class="td">'+ this.price + '</td>';
 		                                htmls += '<td class="td">'
 		                                		 + '<select name="count">'
@@ -421,7 +421,7 @@
 		                  
 		                  //먼저 주문 정보에 등록함
 			              $.ajax({
-			                     url: "${pageContext.request.contextPath}/travel/getgoods",
+			                     url: "${pageContext.request.contextPath}/travel/getGoods",
 			                        type: "POST",
 			                        data: JSON.stringify(goodsArray),
 			                        contentType: "application/json; charset=utf-8",

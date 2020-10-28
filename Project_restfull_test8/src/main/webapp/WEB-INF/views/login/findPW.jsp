@@ -5,23 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script>
-	$(function(){
-		$("#findBtn").click(function(){
-			$.ajax({
-				url : "doFind_PW",
-				type : "POST",
-				data : {
-					member_id : $("#member_id").val(),
-					email : $("#email").val()
-				},
-				success : function(result) {
-					alert(result);
-				},
-			})
-		});
-	})
-</script>
+
 <title>RestFuLL | 비밀번호 찾기</title>
 </head>
 <body>
@@ -57,4 +41,21 @@
 	
 <%@ include file="/WEB-INF/include/js-footer.jsp"%>
 </body>
+<script>
+	$(function(){
+		$("#findBtn").click(function(){
+			$.ajax({
+				url : "doFindPW",
+				type : "POST",
+				data : {
+					member_id : $("#member_id").val(),
+					email : $("#email").val()
+				},
+				success : function(result) {
+					alert(result);
+				},
+			})
+		});
+	})
+</script>
 </html>

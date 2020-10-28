@@ -5,8 +5,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.extern.log4j.Log4j;
 @Log4j
-public class customNoOpPasswordEncoder implements PasswordEncoder{
-      // ¾ÏÈ£È­ ¾È ÇßÀ¸´Ï ³¯°Í ±×·¡µµÁý¾î³ÖÀ½..
+public class CustomNoOpPasswordEncoder implements PasswordEncoder{
+      // ï¿½ï¿½È£È­ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..
    
    @Override
    public String encode(CharSequence rawPassword) {

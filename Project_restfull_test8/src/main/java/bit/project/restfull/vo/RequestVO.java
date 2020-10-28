@@ -19,6 +19,7 @@ public class RequestVO {
 	private int goods_numbers;		//	GOODS_NUMBERS	NUMBER(10,0)
 	private String destination_numbers;		//	DESTINATION_NAME	VARCHAR2(255 BYTE)
 	private int cancel;		//	CANCELYN	NUMBER
+	private int totalPrice;
 	private int price;
 	private String merchant_uid; // MERCHANT_UID;
 	private String productName;

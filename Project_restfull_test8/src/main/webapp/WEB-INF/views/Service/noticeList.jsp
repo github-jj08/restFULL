@@ -62,7 +62,7 @@
 									<c:forEach items="${noticelist}" var="vo">
 									<tr class="noticetable">
 										<td>${vo.boardlistName}</td>
-										<td><a href="${pageContext.request.contextPath}/notice/content_view?board_numbers=${vo.board_numbers}">${vo.title}</a></td>
+										<td><a href="${pageContext.request.contextPath}/notice/contentView?board_numbers=${vo.board_numbers}">${vo.title}</a></td>
 										<td>${vo.dates}</td>
 										<td>${vo.hit}</td>
 									</tr>

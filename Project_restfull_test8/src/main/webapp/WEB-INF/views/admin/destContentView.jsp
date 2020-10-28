@@ -61,7 +61,7 @@
 	                        
 	                        <div class="related_goods">
 	                            <h4>관련상품</h4>
-								<a href="${content_view.destination_numbers}/goods/write_view">상품등록</a>
+								<a href="${content_view.destination_numbers}/goods/writeView">상품등록</a>
 	                            <div class="notice-table">
 	                                <table id="list-table">
 										<tr class="first-list">
@@ -75,7 +75,7 @@
 										</tr>
 										<c:forEach items="${goodsList}" var="vo">
 											<tr class="noticeable">
-						                        <td><a href="${pageContext.request.contextPath}/admin/goods/content_view?goods_numbers=${vo.goods_numbers}">${vo.name}</a></td>
+						                        <td><a href="${pageContext.request.contextPath}/admin/goods/contentView?goods_numbers=${vo.goods_numbers}">${vo.name}</a></td>
 						                        <td>${vo.seller}</td>
 						                        <td>${vo.price}</td>
 						                        <td>${vo.amount}</td>

@@ -381,11 +381,11 @@
 					            console.log(addressForm.jibunaddress);
 								$.ajax({
 							        type: "POST",
-							        url: "${pageContext.request.contextPath}/user/writeMainPosting_dest",
+							        url: "${pageContext.request.contextPath}/user/writeMainPostingDest",
 							        data: JSON.stringify(addressForm),
 							        contentType:"application/json",
 							        success: function () {
-							        	location.href = "${pageContext.request.contextPath}/content_view?board_numbers=" + result;
+							        	location.href = "${pageContext.request.contextPath}/contentView?board_numbers=" + result;
 							        },
 							        error: function (xhr, status) {
 							           alert(xhr + " : " + status);

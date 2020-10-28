@@ -13,12 +13,12 @@
 		<property name="password" value="test3"></property> 
 	</bean>
 	
-	<!-- HikariCP configuration. 얘가 커넥션풀!!!!!!!!!!-->
+	<!-- HikariCP configuration. 커넥션풀 -->
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 		<constructor-arg ref="hikariConfig" />
 	</bean>
 	
-	<!-- 얘가 마이바티스!!!!!!!!! -->
+	<!-- 마이바티스 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>

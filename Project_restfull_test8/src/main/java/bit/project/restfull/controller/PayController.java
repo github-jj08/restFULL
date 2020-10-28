@@ -27,10 +27,8 @@ import lombok.extern.log4j.Log4j;
 //아임포트 - 결제 기능 정의
 public class PayController {
 
-	@Autowired
 	private AdminBoardService adBoardService;
 	
-	@Autowired
 	private PaymentService paymentService;
 
 	/*
@@ -93,7 +91,7 @@ public class PayController {
 		String merchant_uid = req.getParameter("merchant_uid");
 		
 		String totalPrice = req.getParameter("totalPrice");
-		adBoardService.updateRequest(imp_uid,merchant_uid,totalPrice);
+		adBoardService.updateRequest(imp_uid, merchant_uid, totalPrice);
 	}
 	
 	@GetMapping("/payments/comfirm")

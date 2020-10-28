@@ -30,10 +30,8 @@ import lombok.extern.log4j.Log4j;
 //회원가입 하지 않아도 사용가능한 사용자 기능들
 public class HomeController {
 
-	@Autowired
 	private BoardService boardService;
 	
-	@Autowired
 	private AdminBoardService adBoardService;
 	
 	//인덱스 페이지
@@ -44,56 +42,44 @@ public class HomeController {
 	}
 	
 	//검색 결과 페이징
-		@GetMapping("/search")
-		public String search(PagingVO pagingVO, @RequestParam(value="boardlist_numbers") int boardlist_numbers, @RequestParam(value="searchWord") String searchWord, Model model
-				, @RequestParam(value="nowPage", required=false)String nowPage
-				, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
-			log.info("boardlist_numbers : " + boardlist_numbers);
-			log.info("searchWord : " + searchWord);
-			
-			int total = boardService.countMainBoard(boardlist_numbers, searchWord);
-			if (nowPage == null && cntPerPage == null) {
-				nowPage = "1";
-				cntPerPage = "6";
-			} else if (nowPage == null) {
-				nowPage = "1";
-			} else if (cntPerPage == null) { 
-				cntPerPage = "6";
-			}
-			
-			log.info(total);
-			pagingVO = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-			
-			//검색어에 해당하는 게시글들을 불러옴
-			List<BoardVO> boardlist = boardService.getList(pagingVO, boardlist_numbers, searchWord);
-			model.addAttribute("searchWord", searchWord);
-			model.addAttribute("boardlist_numbers", boardlist_numbers);
-			model.addAttribute("paging", pagingVO);
-			
-			model.addAttribute("boardlist", boardlist);
-			
-			log.info(searchWord + " 에 대한 검색결과 return 수 : " + total);
-			return "searchResult";
+	@GetMapping("/search")
+	public String search(PagingVO pagingVO, int boardlist_numbers, String searchWord, Model model
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		
+		log.info("boardlist_numbers : " + boardlist_numbers);
+		log.info("searchWord : " + searchWord);
+		
+		int total = boardService.countMainBoard(boardlist_numbers, searchWord);
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "6";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "6";
 		}
 		
-		// 검색 단어 필터
-		@ResponseBody
-		@GetMapping("/search/{searchWord}")
-		public List<BoardVO> ajaxSearch(PagingVO pagingVO, @PathVariable(value="boardlist_numbers") int boardlist_numbers, @PathVariable(value="searchWord") String searchWord) throws UnsupportedEncodingException {
-			log.info("searchWord : " + searchWord);
-			//검색어를 url에 포함시켰으니 ASCII로 한글이 인코딩되서 넘어오므로, 검색어를 다시 디코딩해줌
-			searchWord = URLDecoder.decode(searchWord, "UTF-8");
-			
-			//검색어에 해당하는 게시글들을 불러옴
-			List<BoardVO> boardlist = boardService.getList(pagingVO, boardlist_numbers, searchWord);
-			log.info(searchWord + " 에 대한 검색결과 return 수 : " + boardlist.size());
-			return boardlist;
-		}
-	
+		log.info(total);
+		pagingVO = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
+		//검색어에 해당하는 게시글들을 불러옴
+		List<BoardVO> boardlist = boardService.getList(pagingVO, boardlist_numbers, searchWord);
+		
+		model.addAttribute("searchWord", searchWord);
+		model.addAttribute("boardlist_numbers", boardlist_numbers);
+		model.addAttribute("paging", pagingVO);
+		
+		model.addAttribute("boardlist", boardlist);
+		
+		log.info(searchWord + " 에 대한 검색결과 return 수 : " + total);
+		return "searchResult";
+	}
+		
 	//content_view
-	@GetMapping("/content_view")
-	public String content_view(String board_numbers, Model model) {
-		log.info("content_view");
+	@GetMapping("/contentView")
+	public String contentView(String board_numbers, Model model) {
+		log.info("contentView");
 		int board_no = Integer.parseInt(board_numbers);
 		log.info("게시글 view 호출; 게시글 번호 = " + board_no);
 		BoardVO vo = boardService.getBoardVO(board_no);
@@ -103,7 +89,7 @@ public class HomeController {
 		model.addAttribute("filelist", boardService.getBoardAttachmentVO(board_no));
 		model.addAttribute("others", boardService.getOtherBoardVO(board_no, location));
 		
-		return "content_view";
+		return "contentView";
 	}
 	
 	
@@ -154,14 +140,14 @@ public class HomeController {
 	}
 	
 	// 공지사항, 이벤트 상세보기
-	@GetMapping("/notice/content_view")
+	@GetMapping("/notice/contentView")
 	public String notice_view(String board_numbers, Model model) {
-		log.info("content_view");
+		log.info("contentView");
 		int board_no = Integer.parseInt(board_numbers);
 		log.info("게시글 view 호출; 게시글 번호 = " + board_no);
 		model.addAttribute("content_view",adBoardService.getBoardVO(board_no));
 		model.addAttribute("filelist", adBoardService.getBoardAttachmentVO(board_no));
-		return "Service/notice_content_view";
+		return "Service/noticeContentView";
 	}  
 	
 	//자주하는질문
