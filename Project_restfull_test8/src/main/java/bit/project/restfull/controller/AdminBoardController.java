@@ -247,7 +247,7 @@ public class AdminBoardController {
       log.info("contentView");
       model.addAttribute("content_view",adBoardService.getDestVO(destination_numbers));
       model.addAttribute("goodsList",adBoardService.getGoodsList(destination_numbers));
-      return "admin/destcontentView";
+      return "admin/destContentView";
    }
    
    //3. 여행지 등록 페이지 출력

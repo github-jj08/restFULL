@@ -76,7 +76,7 @@
 										</tr>
 										<c:forEach items="${goodsList}" var="vo">
 											<tr class="noticeable">
-						                        <td><a href="${pageContext.request.contextPath}/admin/goods/contentView?goods_numbers=${vo.goods_numbers}">${vo.name}</a></td>
+						                        <td><a href="${pageContext.request.contextPath}/admin/dest/goods/contentView?goods_numbers=${vo.goods_numbers}">${vo.name}</a></td>
 						                        <td>${vo.seller}</td>
 						                        <td>${vo.price}</td>
 						                        <td>${vo.amount}</td>
