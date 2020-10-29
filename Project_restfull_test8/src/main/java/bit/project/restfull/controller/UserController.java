@@ -45,10 +45,13 @@ public class UserController {
 	
 	@Autowired
     private UserService userService;
+	
     @Autowired
     private BoardService boardService;
+    
     @Autowired
     private BCryptPasswordEncoder passEncoder;
+    
     @Autowired
 	private AdminBoardService adBoardService;
 	
