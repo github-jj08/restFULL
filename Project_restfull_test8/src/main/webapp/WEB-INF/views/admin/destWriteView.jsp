@@ -170,14 +170,13 @@
 						                        '<h4 style="margin-top:5px;">검색 좌표</h4>',
 						                        '<button type="button" onclick="setAddressIntoBox()">입력</button><br />',
 						                        htmlAddresses.join('<br />'),
-						        	          	'<input id="x" type="hidden" value="'+ latlng.x + '"> ',
-						        	          	'<input id="y" type="hidden" value="'+ latlng.y + '"> ',
+						        	          	'<input id="x" type="hidden" value="'+ latlng.y + '"> ',
+						        	          	'<input id="y" type="hidden" value="'+ latlng.x + '"> ',
 						        	          	'<input id="jibunAddress" type="hidden" value="'+ address.jibunAddress + '"> ',
 						        	          	'<input id="roadAddress" type="hidden" value="'+ address.roadAddress + '"> ',
 						                        '</div>'
 						                        ].join('\n'));
 						                        
-						                        console.log(" 좌표 검색  latlngs " + latlng.x + ", " + latlng.y);
 						                        
 						                        infoWindow.open(map, latlng);
 						                    });
@@ -219,8 +218,8 @@
 						                        '<h4 style="margin-top:5px;">검색 주소 : '+ address +'</h4>',
 						                        '<button type="button" onclick="setAddressIntoBox()">입력</button><br />',
 						                        htmlAddresses.join('<br />'),
-						        	          	'<input id="x" type="hidden" value="'+ item.x + '"> ',
-						        	          	'<input id="y" type="hidden" value="'+ item.y + '"> ',
+						        	          	'<input id="x" type="hidden" value="'+ item.y + '"> ',
+						        	          	'<input id="y" type="hidden" value="'+ item.x + '"> ',
 						        	          	'<input id="jibunAddress" type="hidden" value="'+ item.jibunAddress + '"> ',
 						        	          	'<input id="roadAddress" type="hidden" value="'+ item.roadAddress + '"> ',
 						                        '</div>'

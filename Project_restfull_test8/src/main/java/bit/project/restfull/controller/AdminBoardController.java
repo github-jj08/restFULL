@@ -256,7 +256,7 @@ public class AdminBoardController {
       log.info("write");
       adBoardService.writeDestVO(destinationVO);
       log.info("writeDestVO;");
-      return "redirect:/";
+      return "redirect:/admin/dest";
    }
    
    //3-3. 여행지 등록 시 지역코드 가져오기
