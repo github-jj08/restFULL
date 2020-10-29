@@ -90,7 +90,7 @@
 							<a href="userList?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
 						</c:if>
 						<div class="page-total">
-				        총 게시글 수 : ${paging.total }
+				        총 회원 수 : ${paging.total }
 				        </div>
 			        </div>
                     

@@ -4738,13 +4738,18 @@ media only screen and (max-width: 991px) {
 }
 
 .do-btn {
+	width:100%;
 	float:right;
 	color:white;
     border-radius:5px;
     background-color:#8a93c0;
 	letter-spacing: 2px;
-	margin-top: 15px;
 	padding:5px 10px;
     border:white 10px solid;
     font-size:18px;
+}
+
+div .payComplete-btn{
+	margin: auto;
+	width: 60%;
 }
