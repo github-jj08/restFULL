@@ -15,7 +15,6 @@ import org.apache.ibatis.annotations.Update;
 import bit.project.restfull.vo.AttachmentVO;
 import bit.project.restfull.vo.BoardVO;
 import bit.project.restfull.vo.LikesVO;
-import bit.project.restfull.vo.PagingVO;
 import bit.project.restfull.vo.RequestVO;
 import bit.project.restfull.vo.TravelVO;
 

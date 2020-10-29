@@ -116,7 +116,6 @@ public class UserController {
 		log.info(userVO.getGrade_name());
 		
 		userService.modifyUser(userVO);
-		session.invalidate();
 		
 		return "redirect:/";
 		
@@ -168,7 +167,6 @@ public class UserController {
 		
 		boardService.deleteBoardVO(boardVO.getBoard_numbers());
 		
-		session.invalidate(); 
 		return "user/userHome";
 	}
 	

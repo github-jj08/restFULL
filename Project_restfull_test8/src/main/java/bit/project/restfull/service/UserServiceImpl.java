@@ -159,7 +159,7 @@ public class UserServiceImpl implements UserService {
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.gmail.com";
 		String hostSMTPid = "justicia0310@gmail.com";
-		String hostSMTPpwd = ""; //여기만 채우고 돌리자 (비번 넣어주는곳)
+		String hostSMTPpwd = "rtljzoobjqikxndd"; //여기만 채우고 돌리자 (비번 넣어주는곳)
 
 		// 보내는 사람 EMail, 제목, 내용
 		String fromEmail = "restFullAdmin@gmail.com";

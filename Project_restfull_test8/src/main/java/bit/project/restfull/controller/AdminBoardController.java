@@ -115,8 +115,7 @@ public class AdminBoardController {
 			
 		userService.userDelete(userVO);
 	           
-	    	request.getSession().invalidate();  
-	        return gson.toJson(new ResponseVO<>(200, "success"));
+	   return gson.toJson(new ResponseVO<>(200, "success"));
 	}
 
 	//4. 관리자 권한으로 회원 정보 변경
@@ -131,9 +130,8 @@ public class AdminBoardController {
 		log.info(userVO.getGrade_name());
 		
 		userService.adminModifyUser(userVO);
-		session.invalidate();
 		
-		return "admin/userList";
+		return "redirect:/admin/userList";
 		
 	}
    
@@ -144,7 +142,6 @@ public class AdminBoardController {
 		log.info("adController delete : " + Integer.parseInt(board_numbers));
 		//기존에 있던 delete와 똑같아서 파라미터 수정
 		boardService.deleteBoardVO(Integer.parseInt(board_numbers));
-		session.invalidate(); 
 	}
 	
    /* 공지사항 및 이벤트 관리  (기본 url : /notice) */
